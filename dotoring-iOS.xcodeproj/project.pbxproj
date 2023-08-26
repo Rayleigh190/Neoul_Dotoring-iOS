@@ -9,28 +9,45 @@
 /* Begin PBXBuildFile section */
 		F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */; };
 		F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560602A949E6800FD2E91 /* SceneDelegate.swift */; };
-		F1A560632A949E6800FD2E91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560622A949E6800FD2E91 /* ViewController.swift */; };
+		F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560622A949E6800FD2E91 /* MainTapBarController.swift */; };
 		F1A560682A949E6900FD2E91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A560672A949E6900FD2E91 /* Assets.xcassets */; };
 		F1A5606B2A949E6900FD2E91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */; };
 		F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F1A560732A94A42B00FD2E91 /* Kingfisher */; };
+		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
+		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
+		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
+		F1DD2C9B2A95F82C00EE9711 /* NanumSquareOTF_acL.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */; };
+		F1DD2C9C2A95F82C00EE9711 /* NanumSquareL.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C942A95F82C00EE9711 /* NanumSquareL.otf */; };
+		F1DD2C9D2A95F82C00EE9711 /* NanumSquareB.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C952A95F82C00EE9711 /* NanumSquareB.otf */; };
+		F1DD2C9E2A95F82C00EE9711 /* NanumSquareOTF_acR.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C962A95F82C00EE9711 /* NanumSquareOTF_acR.otf */; };
+		F1DD2C9F2A95F82C00EE9711 /* NanumSquareR.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C972A95F82C00EE9711 /* NanumSquareR.otf */; };
+		F1DD2CA02A95F82C00EE9711 /* NanumSquareOTF_acB.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C982A95F82C00EE9711 /* NanumSquareOTF_acB.otf */; };
+		F1DD2CA12A95F82C00EE9711 /* NanumSquareOTF_acEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C992A95F82C00EE9711 /* NanumSquareOTF_acEB.otf */; };
+		F1DD2CA22A95F82C00EE9711 /* NanumSquareEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD2C9A2A95F82C00EE9711 /* NanumSquareEB.otf */; };
+		F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CA52A96FACD00EE9711 /* HomeCollectionHeaderView.swift */; };
+		F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CA72A98896300EE9711 /* ExpandableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dotoring-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A560602A949E6800FD2E91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F1A560622A949E6800FD2E91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F1A560622A949E6800FD2E91 /* MainTapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTapBarController.swift; sourceTree = "<group>"; };
 		F1A560672A949E6900FD2E91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1A5606A2A949E6900FD2E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1A5606C2A949E6900FD2E91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1A560772A94AE4F00FD2E91 /* NanumSquareOTF_acEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acEB.otf; sourceTree = "<group>"; };
-		F1A560782A94AE5000FD2E91 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
-		F1A560792A94AE5000FD2E91 /* NanumSquareL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareL.otf; sourceTree = "<group>"; };
-		F1A5607A2A94AE5000FD2E91 /* NanumSquareOTF_acR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acR.otf; sourceTree = "<group>"; };
-		F1A5607B2A94AE5000FD2E91 /* NanumSquareR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.otf; sourceTree = "<group>"; };
-		F1A5607C2A94AE5000FD2E91 /* NanumSquareOTF_acB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acB.otf; sourceTree = "<group>"; };
-		F1A5607D2A94AE5000FD2E91 /* NanumSquareB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.otf; sourceTree = "<group>"; };
-		F1A5607E2A94AE5000FD2E91 /* NanumSquareEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareEB.otf; sourceTree = "<group>"; };
+		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
+		F1DD2C942A95F82C00EE9711 /* NanumSquareL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareL.otf; sourceTree = "<group>"; };
+		F1DD2C952A95F82C00EE9711 /* NanumSquareB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.otf; sourceTree = "<group>"; };
+		F1DD2C962A95F82C00EE9711 /* NanumSquareOTF_acR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acR.otf; sourceTree = "<group>"; };
+		F1DD2C972A95F82C00EE9711 /* NanumSquareR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.otf; sourceTree = "<group>"; };
+		F1DD2C982A95F82C00EE9711 /* NanumSquareOTF_acB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acB.otf; sourceTree = "<group>"; };
+		F1DD2C992A95F82C00EE9711 /* NanumSquareOTF_acEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acEB.otf; sourceTree = "<group>"; };
+		F1DD2C9A2A95F82C00EE9711 /* NanumSquareEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareEB.otf; sourceTree = "<group>"; };
+		F1DD2CA52A96FACD00EE9711 /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
+		F1DD2CA72A98896300EE9711 /* ExpandableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +56,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */,
+				F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +85,7 @@
 				F1A560762A94ADEF00FD2E91 /* Fonts */,
 				F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */,
 				F1A560602A949E6800FD2E91 /* SceneDelegate.swift */,
-				F1A560622A949E6800FD2E91 /* ViewController.swift */,
+				F1DD2C8A2A95DDD500EE9711 /* Scenes */,
 				F1A560672A949E6900FD2E91 /* Assets.xcassets */,
 				F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */,
 				F1A5606C2A949E6900FD2E91 /* Info.plist */,
@@ -86,16 +104,36 @@
 		F1A5607F2A94AE5900FD2E91 /* NanumSquare */ = {
 			isa = PBXGroup;
 			children = (
-				F1A5607D2A94AE5000FD2E91 /* NanumSquareB.otf */,
-				F1A5607E2A94AE5000FD2E91 /* NanumSquareEB.otf */,
-				F1A560792A94AE5000FD2E91 /* NanumSquareL.otf */,
-				F1A5607C2A94AE5000FD2E91 /* NanumSquareOTF_acB.otf */,
-				F1A560772A94AE4F00FD2E91 /* NanumSquareOTF_acEB.otf */,
-				F1A560782A94AE5000FD2E91 /* NanumSquareOTF_acL.otf */,
-				F1A5607A2A94AE5000FD2E91 /* NanumSquareOTF_acR.otf */,
-				F1A5607B2A94AE5000FD2E91 /* NanumSquareR.otf */,
+				F1DD2C952A95F82C00EE9711 /* NanumSquareB.otf */,
+				F1DD2C9A2A95F82C00EE9711 /* NanumSquareEB.otf */,
+				F1DD2C942A95F82C00EE9711 /* NanumSquareL.otf */,
+				F1DD2C982A95F82C00EE9711 /* NanumSquareOTF_acB.otf */,
+				F1DD2C992A95F82C00EE9711 /* NanumSquareOTF_acEB.otf */,
+				F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */,
+				F1DD2C962A95F82C00EE9711 /* NanumSquareOTF_acR.otf */,
+				F1DD2C972A95F82C00EE9711 /* NanumSquareR.otf */,
 			);
 			path = NanumSquare;
+			sourceTree = "<group>";
+		};
+		F1DD2C8A2A95DDD500EE9711 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD2C8B2A95DDF600EE9711 /* Home */,
+				F1A560622A949E6800FD2E91 /* MainTapBarController.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		F1DD2C8B2A95DDF600EE9711 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */,
+				F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */,
+				F1DD2CA52A96FACD00EE9711 /* HomeCollectionHeaderView.swift */,
+				F1DD2CA72A98896300EE9711 /* ExpandableView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -116,6 +154,7 @@
 			name = "dotoring-iOS";
 			packageProductDependencies = (
 				F1A560732A94A42B00FD2E91 /* Kingfisher */,
+				F1DD2C8F2A95E26600EE9711 /* SnapKit */,
 			);
 			productName = "dotoring-iOS";
 			productReference = F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */;
@@ -147,7 +186,7 @@
 			mainGroup = F1A560522A949E6800FD2E91;
 			packageReferences = (
 				F1A560722A94A42B00FD2E91 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				F1A560752A94A46600FD2E91 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = F1A5605C2A949E6800FD2E91 /* Products */;
 			projectDirPath = "";
@@ -163,8 +202,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1DD2C9B2A95F82C00EE9711 /* NanumSquareOTF_acL.otf in Resources */,
+				F1DD2C9F2A95F82C00EE9711 /* NanumSquareR.otf in Resources */,
+				F1DD2CA12A95F82C00EE9711 /* NanumSquareOTF_acEB.otf in Resources */,
+				F1DD2CA22A95F82C00EE9711 /* NanumSquareEB.otf in Resources */,
 				F1A5606B2A949E6900FD2E91 /* LaunchScreen.storyboard in Resources */,
+				F1DD2CA02A95F82C00EE9711 /* NanumSquareOTF_acB.otf in Resources */,
+				F1DD2C9D2A95F82C00EE9711 /* NanumSquareB.otf in Resources */,
+				F1DD2C9E2A95F82C00EE9711 /* NanumSquareOTF_acR.otf in Resources */,
 				F1A560682A949E6900FD2E91 /* Assets.xcassets in Resources */,
+				F1DD2C9C2A95F82C00EE9711 /* NanumSquareL.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,9 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1A560632A949E6800FD2E91 /* ViewController.swift in Sources */,
+				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
+				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
+				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
+				F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */,
+				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +296,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_CFBundleDisplayName = "도토링";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -299,7 +351,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				INFOPLIST_KEY_CFBundleDisplayName = "도토링";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -395,9 +448,9 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		F1A560752A94A46600FD2E91 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
@@ -410,6 +463,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F1A560722A94A42B00FD2E91 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		F1DD2C8F2A95E26600EE9711 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
