@@ -10,26 +10,23 @@ import UIKit
 
 class HomeCollectionHeaderView: UICollectionReusableView {
 
-    private lazy var nicknameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "NanumSquareOTFR", size: 20)
+    private lazy var nicknameLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = UIColor(named: "BaseGreen")
 
         return label
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
+    private lazy var titleLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
         label.text = "님을 위한"
-        label.font = UIFont(name: "NanumSquareOTFR", size: 20)
         label.textColor = .label
 
         return label
     }()
     
-    private lazy var subTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "NanumSquareOTFEB", size: 40)
+    private lazy var subTitleLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .EB, size: 40)
         label.textColor = .label
 
         return label

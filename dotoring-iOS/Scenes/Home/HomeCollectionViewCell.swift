@@ -12,33 +12,29 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     private var shadowView: UIView!
 
-    private lazy var nicknameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "NanumSquareOTFEB", size: 15)
+    private lazy var nicknameLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .EB, size: 15)
         label.textColor = .label
 
         return label
     }()
 
-    private lazy var departmentLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "NanumSquareOTFR", size: 10)
+    private lazy var departmentLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 10)
         label.textColor = .label
 
         return label
     }()
 
-    private lazy var jobFieldLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "NanumSquareOTFR", size: 10)
+    private lazy var jobFieldLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 10)
         label.textColor = .label
 
         return label
     }()
     
-    private lazy var introductionLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "NanumSquareOTFL", size: 8)
+    private lazy var introductionLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .L, size: 8)
         label.textColor = .label
 
         return label

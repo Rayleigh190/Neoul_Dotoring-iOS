@@ -76,7 +76,7 @@ private extension MainTapBarController {
         self.tabBar.standardAppearance = appearance
 //        self.tabBar.scrollEdgeAppearance = appearance  // 생략 가능 (만약 스크롤 기능 따라 Bar설정 안해줘도 된다면)
         
-        tabBar.tintColor = UIColor(named: "BaseGreen")
+        tabBar.tintColor = .BaseGreen
         tabBar.backgroundColor = .white
 
         // Add a radius to the tab bar to create rounded corners

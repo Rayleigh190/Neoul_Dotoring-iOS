@@ -95,7 +95,7 @@ private extension HomeViewController {
         
         backgroundImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(00.0)
-            $0.bottom.equalToSuperview().inset(0.0)
+            $0.bottom.equalToSuperview().inset(29.66)
         }
         
         // UITapGestureRecognizer를 추가하여 배경 터치 시 키보드를 내릴 수 있도록 함
