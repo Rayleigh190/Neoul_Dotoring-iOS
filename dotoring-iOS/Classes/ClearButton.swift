@@ -25,7 +25,7 @@ private extension ClearButton {
     func setupButton() {
         layer.borderWidth = 1.0
         layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = 20.0
+//        layer.cornerRadius = 20.0
         backgroundColor = UIColor.clear
         setTitleColor(UIColor.black, for: .normal)
     }

@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.hideKeyboardWhenTappedAround()
         self.setKeyboardObserver()
     }
@@ -22,7 +23,18 @@ class LoginViewController: UIViewController {
         super.loadView()
         
         loginView = LoginView(frame: self.view.frame)
+        
+        // Set the login button action handler
+        loginView.findIdButtonActionHandler = { [weak self] in
+            self?.handleLoginButtonTapped()
+        }
+        
         self.view = loginView
+    }
+    
+    func handleLoginButtonTapped() {
+        let vc = FindIdViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

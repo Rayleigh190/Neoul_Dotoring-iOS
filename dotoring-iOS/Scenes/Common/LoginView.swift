@@ -9,6 +9,9 @@ import UIKit
 
 final class LoginView: UIView {
     
+    // Add a closure property
+    var findIdButtonActionHandler: (() -> Void)?
+    
     private lazy var smallLogoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -71,6 +74,7 @@ final class LoginView: UIView {
     private lazy var loginButton: ClearButton = {
         let button = ClearButton()
         button.setTitle("로그인", for: .normal)
+        button.layer.cornerRadius = 20
         
         return button
     }()
@@ -112,6 +116,7 @@ final class LoginView: UIView {
         button.setTitle("아이디 찾기", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        button.addTarget(self, action: #selector(findIdButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -247,5 +252,14 @@ private extension LoginView {
         
     }
     
+    
+}
+
+extension LoginView {
+    
+    @objc func findIdButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        findIdButtonActionHandler?()
+      }
     
 }

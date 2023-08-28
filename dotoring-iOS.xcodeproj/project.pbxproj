@@ -35,6 +35,7 @@
 		F1DD2CBC2A9A53AC00EE9711 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CBB2A9A53AC00EE9711 /* UIFont.swift */; };
 		F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */; };
 		F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CBF2A9AEDDC00EE9711 /* UIViewController.swift */; };
+		F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		F1DD2CBB2A9A53AC00EE9711 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F1DD2CBF2A9AEDDC00EE9711 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				F1DD2CAA2A99CD0B00EE9711 /* LoginViewController.swift */,
 				F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */,
+				F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
+				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
