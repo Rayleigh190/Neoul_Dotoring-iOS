@@ -27,9 +27,8 @@ class LineTextField: UIView {
     }()
     
     lazy var button: UIButton = {
-        let button = ClearButton()
+        let button = BaseButton(style: .clear)
         button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 10)
-        button.layer.cornerRadius = 12
         
         return button
     }()

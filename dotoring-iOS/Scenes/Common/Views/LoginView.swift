@@ -71,10 +71,9 @@ final class LoginView: UIView {
         return lineTextField
     }()
     
-    private lazy var loginButton: ClearButton = {
-        let button = ClearButton()
+    private lazy var loginButton: BaseButton = {
+        let button = BaseButton(style: .clear)
         button.setTitle("로그인", for: .normal)
-        button.layer.cornerRadius = 20
         
         return button
     }()
@@ -163,13 +162,13 @@ final class LoginView: UIView {
         setup()
     }
     
-}
-
-private extension LoginView {
-    
     func setup() {
         setupSubViews()
     }
+    
+}
+
+private extension LoginView {
     
     func setupSubViews() {
         [navTitle, smallLogoImageView, backgroundImageView, titleLabel, subTitleLabel, idTextField, pwTextField, autoLoginCheckBox, autoLoginLabel, warningLabel, loginButton, accountStack].forEach { addSubview($0) }
@@ -260,6 +259,6 @@ extension LoginView {
     @objc func findIdButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         findIdButtonActionHandler?()
-      }
+    }
     
 }

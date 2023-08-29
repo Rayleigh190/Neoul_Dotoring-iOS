@@ -28,7 +28,7 @@
 		F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CA72A98896300EE9711 /* ExpandableView.swift */; };
 		F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CAA2A99CD0B00EE9711 /* LoginViewController.swift */; };
 		F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CAE2A99E57C00EE9711 /* LineTextField.swift */; };
-		F1DD2CB22A99EE9C00EE9711 /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CB12A99EE9C00EE9711 /* ClearButton.swift */; };
+		F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CB12A99EE9C00EE9711 /* BaseButton.swift */; };
 		F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CB32A99FA9B00EE9711 /* NanumLabel.swift */; };
 		F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CB62A9A05D900EE9711 /* UIColor.swift */; };
 		F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CB92A9A0F0D00EE9711 /* CheckBox.swift */; };
@@ -36,6 +36,9 @@
 		F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */; };
 		F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CBF2A9AEDDC00EE9711 /* UIViewController.swift */; };
 		F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */; };
+		F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */; };
+		F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CC82A9D7B4B00EE9711 /* FindIdView.swift */; };
+		F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,7 +63,7 @@
 		F1DD2CA72A98896300EE9711 /* ExpandableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 		F1DD2CAA2A99CD0B00EE9711 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F1DD2CAE2A99E57C00EE9711 /* LineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineTextField.swift; sourceTree = "<group>"; };
-		F1DD2CB12A99EE9C00EE9711 /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
+		F1DD2CB12A99EE9C00EE9711 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		F1DD2CB32A99FA9B00EE9711 /* NanumLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanumLabel.swift; sourceTree = "<group>"; };
 		F1DD2CB62A9A05D900EE9711 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F1DD2CB92A9A0F0D00EE9711 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
@@ -68,6 +71,9 @@
 		F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F1DD2CBF2A9AEDDC00EE9711 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdViewController.swift; sourceTree = "<group>"; };
+		F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdCheckViewController.swift; sourceTree = "<group>"; };
+		F1DD2CC82A9D7B4B00EE9711 /* FindIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdView.swift; sourceTree = "<group>"; };
+		F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdCheckView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,9 +168,10 @@
 		F1DD2CA92A99CCDD00EE9711 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F1DD2CC72A9D7B2100EE9711 /* Views */,
 				F1DD2CAA2A99CD0B00EE9711 /* LoginViewController.swift */,
-				F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */,
 				F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */,
+				F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -183,11 +190,21 @@
 			isa = PBXGroup;
 			children = (
 				F1DD2CAE2A99E57C00EE9711 /* LineTextField.swift */,
-				F1DD2CB12A99EE9C00EE9711 /* ClearButton.swift */,
+				F1DD2CB12A99EE9C00EE9711 /* BaseButton.swift */,
 				F1DD2CB32A99FA9B00EE9711 /* NanumLabel.swift */,
 				F1DD2CB92A9A0F0D00EE9711 /* CheckBox.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		F1DD2CC72A9D7B2100EE9711 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */,
+				F1DD2CC82A9D7B4B00EE9711 /* FindIdView.swift */,
+				F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,15 +298,18 @@
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */,
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
+				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
+				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
+				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
 				F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */,
 				F1DD2CBC2A9A53AC00EE9711 /* UIFont.swift in Sources */,
-				F1DD2CB22A99EE9C00EE9711 /* ClearButton.swift in Sources */,
+				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,
