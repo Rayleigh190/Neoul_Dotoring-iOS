@@ -26,14 +26,22 @@ class LoginViewController: UIViewController {
         
         // Set the login button action handler
         loginView.findIdButtonActionHandler = { [weak self] in
-            self?.handleLoginButtonTapped()
+            self?.handleFindIdButtonTapped()
+        }
+        loginView.findPwButtonActionHandler = { [weak self] in
+            self?.handleFindPwButtonTapped()
         }
         
         self.view = loginView
     }
     
-    func handleLoginButtonTapped() {
+    func handleFindIdButtonTapped() {
         let vc = FindIdViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleFindPwButtonTapped() {
+        let vc = FindPwViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

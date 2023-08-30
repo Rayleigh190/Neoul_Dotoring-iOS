@@ -39,6 +39,8 @@
 		F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */; };
 		F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CC82A9D7B4B00EE9711 /* FindIdView.swift */; };
 		F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */; };
+		F1DD2CD02A9F616D00EE9711 /* FindPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */; };
+		F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CD12A9F635900EE9711 /* FindPwView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdCheckViewController.swift; sourceTree = "<group>"; };
 		F1DD2CC82A9D7B4B00EE9711 /* FindIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdView.swift; sourceTree = "<group>"; };
 		F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdCheckView.swift; sourceTree = "<group>"; };
+		F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwViewController.swift; sourceTree = "<group>"; };
+		F1DD2CD12A9F635900EE9711 /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 				F1DD2CAA2A99CD0B00EE9711 /* LoginViewController.swift */,
 				F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */,
 				F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */,
+				F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				F1DD2CBD2A9AE68500EE9711 /* LoginView.swift */,
 				F1DD2CC82A9D7B4B00EE9711 /* FindIdView.swift */,
 				F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */,
+				F1DD2CD12A9F635900EE9711 /* FindPwView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 				F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */,
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
+				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
@@ -307,6 +314,7 @@
 				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
+				F1DD2CD02A9F616D00EE9711 /* FindPwViewController.swift in Sources */,
 				F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */,
 				F1DD2CBC2A9A53AC00EE9711 /* UIFont.swift in Sources */,
 				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,

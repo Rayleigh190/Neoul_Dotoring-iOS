@@ -11,6 +11,7 @@ final class LoginView: UIView {
     
     // Add a closure property
     var findIdButtonActionHandler: (() -> Void)?
+    var findPwButtonActionHandler: (() -> Void)?
     
     private lazy var smallLogoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -41,7 +42,7 @@ final class LoginView: UIView {
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 24)
         label.textColor = .label
-        label.text = "<전남대학교> 선배와 후배를 한 공간에서 만나 보세요."
+        label.text = "<전남대학교> 선배와 후배를\n한 공간에서 만나 보세요."
         label.numberOfLines = 0
         
         return label
@@ -125,6 +126,7 @@ final class LoginView: UIView {
         button.setTitle("비밀번호 찾기", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        button.addTarget(self, action: #selector(findPwButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -194,7 +196,6 @@ private extension LoginView {
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(35.0)
             $0.top.equalToSuperview().offset(218.0)
-            $0.trailing.equalToSuperview().inset(92.0)
         }
         
         subTitleLabel.snp.makeConstraints {
@@ -259,6 +260,11 @@ extension LoginView {
     @objc func findIdButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         findIdButtonActionHandler?()
+    }
+    
+    @objc func findPwButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        findPwButtonActionHandler?()
     }
     
 }
