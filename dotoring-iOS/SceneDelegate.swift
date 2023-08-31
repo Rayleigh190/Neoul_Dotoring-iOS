@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.backgroundColor = .systemBackground
         window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
 //        window?.rootViewController = MainTapBarController()
+//        window?.rootViewController = UINavigationController(rootViewController: IntroViewController())
         
         window?.makeKeyAndVisible()
     }

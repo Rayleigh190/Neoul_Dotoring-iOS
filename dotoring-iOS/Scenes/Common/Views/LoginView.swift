@@ -12,6 +12,7 @@ final class LoginView: UIView {
     // Add a closure property
     var findIdButtonActionHandler: (() -> Void)?
     var findPwButtonActionHandler: (() -> Void)?
+    var signupButtonActionHandler: (() -> Void)?
     
     private lazy var smallLogoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -136,6 +137,7 @@ final class LoginView: UIView {
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        button.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -265,6 +267,11 @@ extension LoginView {
     @objc func findPwButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         findPwButtonActionHandler?()
+    }
+    
+    @objc func signupButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        signupButtonActionHandler?()
     }
     
 }

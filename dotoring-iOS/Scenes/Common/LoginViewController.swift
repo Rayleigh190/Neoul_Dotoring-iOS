@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         
         self.hideKeyboardWhenTappedAround()
         self.setKeyboardObserver()
@@ -31,6 +32,9 @@ class LoginViewController: UIViewController {
         loginView.findPwButtonActionHandler = { [weak self] in
             self?.handleFindPwButtonTapped()
         }
+        loginView.signupButtonActionHandler = { [weak self] in
+            self?.handleSignupButtonTapped()
+        }
         
         self.view = loginView
     }
@@ -42,6 +46,11 @@ class LoginViewController: UIViewController {
     
     func handleFindPwButtonTapped() {
         let vc = FindPwViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleSignupButtonTapped() {
+        let vc = IntroViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

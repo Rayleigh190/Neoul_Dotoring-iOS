@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1C42AA0AFB60035E499 /* IntroViewController.swift */; };
 		F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */; };
 		F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560602A949E6800FD2E91 /* SceneDelegate.swift */; };
 		F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560622A949E6800FD2E91 /* MainTapBarController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F126B1C42AA0AFB60035E499 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dotoring-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A560602A949E6800FD2E91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				F1DD2CC32A9C851300EE9711 /* FindIdViewController.swift */,
 				F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */,
 				F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */,
+				F126B1C42AA0AFB60035E499 /* IntroViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
