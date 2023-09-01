@@ -26,6 +26,9 @@ class LoginViewController: UIViewController {
         loginView = LoginView(frame: self.view.frame)
         
         // Set the login button action handler
+        loginView.loginButtonActionHandler = { [weak self] in
+            self?.handleLoginButtonTapped()
+        }
         loginView.findIdButtonActionHandler = { [weak self] in
             self?.handleFindIdButtonTapped()
         }
@@ -37,6 +40,13 @@ class LoginViewController: UIViewController {
         }
         
         self.view = loginView
+    }
+    
+    func handleLoginButtonTapped() {
+        let vc = MainTapBarController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     func handleFindIdButtonTapped() {

@@ -10,6 +10,7 @@ import UIKit
 final class LoginView: UIView {
     
     // Add a closure property
+    var loginButtonActionHandler: (() -> Void)?
     var findIdButtonActionHandler: (() -> Void)?
     var findPwButtonActionHandler: (() -> Void)?
     var signupButtonActionHandler: (() -> Void)?
@@ -76,6 +77,7 @@ final class LoginView: UIView {
     private lazy var loginButton: BaseButton = {
         let button = BaseButton(style: .clear)
         button.setTitle("로그인", for: .normal)
+        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -258,6 +260,11 @@ private extension LoginView {
 }
 
 extension LoginView {
+    
+    @objc func loginButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        loginButtonActionHandler?()
+    }
     
     @objc func findIdButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
