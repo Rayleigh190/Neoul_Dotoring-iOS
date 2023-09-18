@@ -14,8 +14,8 @@ class MainTapBarController: UITabBarController {
         let viewController = HomeViewController()
         let tabBarItem = UITabBarItem(
             title: "홈",
-            image: UIImage(systemName: "house"),
-            tag: 0
+            image: UIImage(named: "MainTapBarItemHomeUnclickedImg"),
+            selectedImage: UIImage(named: "MainTapBarItemHomeClickedImg")
         )
         viewController.tabBarItem = tabBarItem
 
@@ -26,8 +26,8 @@ class MainTapBarController: UITabBarController {
         let viewController = UIViewController()
         let tabBarItem = UITabBarItem(
             title: "매칭",
-            image: UIImage(systemName: "person.2"),
-            tag: 1
+            image: UIImage(named: "MainTapBarItemMatchUnclickedImg"),
+            selectedImage: UIImage(named: "MainTapBarItemMatchClickedImg")
         )
         viewController.tabBarItem = tabBarItem
 
@@ -38,8 +38,8 @@ class MainTapBarController: UITabBarController {
         let viewController = UIViewController()
         let tabBarItem = UITabBarItem(
             title: "채팅",
-            image: UIImage(systemName: "message"),
-            tag: 2
+            image: UIImage(named: "MainTapBarItemChatUnclickedImg"),
+            selectedImage: UIImage(named: "MainTapBarItemChatClickedImg")
         )
         viewController.tabBarItem = tabBarItem
 
@@ -50,8 +50,8 @@ class MainTapBarController: UITabBarController {
         let viewController = UIViewController()
         let tabBarItem = UITabBarItem(
             title: "마이페이지",
-            image: UIImage(systemName: "person.crop.rectangle"),
-            tag: 3
+            image: UIImage(named: "MainTapBarItemMypageClickedImg"),
+            selectedImage: UIImage(named: "MainTapBarItemMypageUnclickedImg")
         )
         viewController.tabBarItem = tabBarItem
 
