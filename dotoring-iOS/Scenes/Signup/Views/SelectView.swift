@@ -10,7 +10,7 @@ import UIKit
 class SelectView: UIView {
     
     var elements: [String] = ["선택항목 1", "선택항목 2", "선택항목 3", "선택항목 4", "선택항목 5", "선택항목 6", "선택항목 7", "선택항목 8", "선택항목 9", "선택항목 10"]
-    var selectedElements: [Int]?
+    var selectedElements: [Int] = [] // 선택한 항목 cell의 indexPath를 저장
     
     lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
@@ -150,6 +150,10 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
+        // selectedElements에서 해당 indexPath 제거
+        // firstIndex가 없을 수도 있나?
+        selectedElements.remove(at: selectedElements.firstIndex(of: indexPath.row)!)
+        
         if let titleLabelText = tableView.cellForRow(at: indexPath)?.textLabel?.text,
            let indexToRemove = selectedStackView.arrangedSubviews
                 .compactMap({ ($0 as? SelectedElementView)?.titleLabel.text })
@@ -176,7 +180,7 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
         selectedElementView.snp.makeConstraints {
             $0.height.equalTo(36)
         }
-        selectedElements?.append(indexPath.row)
+        selectedElements.append(indexPath.row)
         selectedElementView.titleLabel.text = elements[indexPath.row]
         // Set a tag for the cancelButton
         selectedElementView.cancelButton.tag = indexPath.row

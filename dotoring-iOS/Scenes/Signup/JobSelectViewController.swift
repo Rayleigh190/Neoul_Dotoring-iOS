@@ -10,6 +10,8 @@ import UIKit
 class JobSelectViewController: UIViewController {
     
     var selectView: SelectView!
+    
+    weak var jobSelectViewControllerDelegate: JobSelectViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,12 @@ class JobSelectViewController: UIViewController {
         selectView = SelectView(frame: self.view.frame)
         selectView.titleLabel.text = "직무 분야 선택"
         self.view = selectView
+        
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // 뷰 사라질때 전체 선택 목록 데이터와 선택한 인덱스 데이터를 넘김
+        jobSelectViewControllerDelegate?.didJobSelectViewControllerDismiss(elements: selectView.elements, selectedElements: selectView.selectedElements)
+    }
 
 }
