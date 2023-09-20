@@ -12,6 +12,11 @@ protocol JobSelectViewControllerDelegate: AnyObject {
     func didJobSelectViewControllerDismiss(elements: [String], selectedElements: [Int])
 }
 
+protocol DepartmentSelectViewControllerDelegate: AnyObject {
+    // 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 학과 데이터를 받음
+    func didDepartmentSelectViewControllerDismiss(elements: [String], selectedElements: [Int])
+}
+
 class MentoSignup1ViewController: UIViewController {
     
     private lazy var navTitleLabel: NanumLabel = {
@@ -282,7 +287,7 @@ private extension MentoSignup1ViewController {
     }
 }
 
-extension MentoSignup1ViewController: JobSelectViewControllerDelegate {
+extension MentoSignup1ViewController: JobSelectViewControllerDelegate, DepartmentSelectViewControllerDelegate {
     @objc private func selectTextFieldTapped(sender: UIButton) {
         var vc: UIViewController
         if sender == jobTextFieldButton {
@@ -290,7 +295,9 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate {
             jobSelectViewController.jobSelectViewControllerDelegate = self
             vc = jobSelectViewController
         } else if sender == departmentTextFieldButton {
-            vc = DepartmentSelectViewController()
+            let departmentSelectViewController = DepartmentSelectViewController()
+            departmentSelectViewController.departmentSelectViewControllerDelegate = self
+            vc = departmentSelectViewController
         } else { vc = UIViewController() }
         
         if let sheet = vc.sheetPresentationController {
@@ -313,6 +320,23 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate {
             selectedElementString = String(selectedElementString.dropLast(2))
             
             jobTextField.textField.text = selectedElementString
+        }
+        
+    }
+    
+    // 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 학과 데이터를 받음
+    func didDepartmentSelectViewControllerDismiss(elements: [String], selectedElements: [Int]) {
+        // 선택한 데이터가 0개 이상일 때만 데이터 저장 및 뷰 수정
+        if selectedElements.count > 0 {
+            // 이 뷰컨트롤러에 데이터 저장하는 코드 추가해야 됨
+            var selectedElementString: String = ""
+            for selectedElement in selectedElements {
+                print(elements[selectedElement])
+                selectedElementString += (elements[selectedElement]+", ")
+            }
+            selectedElementString = String(selectedElementString.dropLast(2))
+            
+            departmentTextField.textField.text = selectedElementString
         }
         
     }
