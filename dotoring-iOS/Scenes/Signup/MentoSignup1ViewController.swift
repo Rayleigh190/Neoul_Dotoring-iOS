@@ -172,7 +172,7 @@ class MentoSignup1ViewController: UIViewController {
     private lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
-//        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -288,6 +288,7 @@ private extension MentoSignup1ViewController {
 }
 
 extension MentoSignup1ViewController: JobSelectViewControllerDelegate, DepartmentSelectViewControllerDelegate {
+    
     @objc private func selectTextFieldTapped(sender: UIButton) {
         var vc: UIViewController
         if sender == jobTextFieldButton {
@@ -340,4 +341,10 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate, Departmen
         }
         
     }
+    
+    @objc func nextButtonTapped(sender: UIButton!) {
+        let vc = MentoSignup2ViewController()
+        navigationController?.pushViewController(vc, animated: false)
+    }
+    
 }

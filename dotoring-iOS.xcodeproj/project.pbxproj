@@ -48,6 +48,8 @@
 		F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */; };
 		F1DD2CD02A9F616D00EE9711 /* FindPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */; };
 		F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CD12A9F635900EE9711 /* FindPwView.swift */; };
+		F1FCE7652ABC754C0024AE60 /* MentoSignup2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7642ABC754C0024AE60 /* MentoSignup2ViewController.swift */; };
+		F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7662ABC75A80024AE60 /* Signup2View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +94,8 @@
 		F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdCheckView.swift; sourceTree = "<group>"; };
 		F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwViewController.swift; sourceTree = "<group>"; };
 		F1DD2CD12A9F635900EE9711 /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
+		F1FCE7642ABC754C0024AE60 /* MentoSignup2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup2ViewController.swift; sourceTree = "<group>"; };
+		F1FCE7662ABC75A80024AE60 /* Signup2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup2View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 			children = (
 				F126B1D52AA6FB0D0035E499 /* Views */,
 				F126B1CB2AA231F60035E499 /* MentoSignup1ViewController.swift */,
+				F1FCE7642ABC754C0024AE60 /* MentoSignup2ViewController.swift */,
 				F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */,
 				F126B1D12AA569390035E499 /* DepartmentSelectViewController.swift */,
 			);
@@ -123,6 +128,7 @@
 			children = (
 				F126B1D32AA6F6CF0035E499 /* SelectView.swift */,
 				F126B1D62AA6FB780035E499 /* SelectedElementView.swift */,
+				F1FCE7662ABC75A80024AE60 /* Signup2View.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,7 +355,9 @@
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
+				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
 				F126B1D22AA569390035E499 /* DepartmentSelectViewController.swift in Sources */,
+				F1FCE7652ABC754C0024AE60 /* MentoSignup2ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
