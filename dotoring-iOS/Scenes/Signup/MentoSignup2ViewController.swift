@@ -33,6 +33,9 @@ class MentoSignup2ViewController: UIViewController {
         signup2View.graduateCertificateUploadButtonActionHandler = { [weak self] in
             self?.graduateCertificateUploadButtonActionHandler()
         }
+        signup2View.nextButtonActionHandler = { [weak self] in
+            self?.nextButtonTapped()
+        }
         
         self.view = signup2View
         
@@ -52,6 +55,11 @@ class MentoSignup2ViewController: UIViewController {
     func graduateCertificateUploadButtonActionHandler() {
         // 졸업증명서 업로드
         openPdfOrImgFile(sender: 1)
+    }
+    
+    func nextButtonTapped() {
+        let vc = MentoSignup3ViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
     
 }

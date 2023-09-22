@@ -13,6 +13,7 @@ class Signup2View: UIView {
     // Add a closure property
     var certificateOfEmploymentUploadButtonActionHandler: (() -> Void)?
     var graduateCertificateUploadButtonActionHandler: (() -> Void)?
+    var nextButtonActionHandler: (() -> Void)?
     
     private lazy var navTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 14)
@@ -103,7 +104,7 @@ class Signup2View: UIView {
     private lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
-//        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -195,6 +196,11 @@ extension Signup2View {
     @objc func graduateCertificateUploadButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         graduateCertificateUploadButtonActionHandler?()
+    }
+    
+    @objc func nextButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        nextButtonActionHandler?()
     }
     
 }
