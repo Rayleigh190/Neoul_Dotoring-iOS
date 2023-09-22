@@ -45,7 +45,17 @@ class Signup2View: UIView {
     
     private lazy var content1Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "A. 재적증명서 업로드하기"
+        let text = "A. 재적증명서 업로드하기"
+        
+        let attributedStr = NSMutableAttributedString(string: text)
+        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: "재적증명서"))
+        
+        // Add spacing between text and underline
+        let spacing: CGFloat = 2
+        attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "재적증명서"))
+        attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: "재적증명서"))
+        
+        label.attributedText = attributedStr
         
         return label
     }()
@@ -53,7 +63,8 @@ class Signup2View: UIView {
     lazy var certificateOfEmploymentUploadButton: UIButton = {
         let button = UIButton()
         button.setTitle("PDF 또는 이미지", for: .normal)
-        button.backgroundColor = .black
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.setBackgroundImage(UIImage(named: "FileSelectBtnImg"), for: .normal)
         button.tag = 0
         button.addTarget(self, action: #selector(certificateOfEmploymentUploadButtonTapped), for: .touchUpInside)
         
@@ -62,7 +73,17 @@ class Signup2View: UIView {
     
     private lazy var content2Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "A. 졸업증명서 업로드하기"
+        let text = "A. 졸업증명서 업로드하기"
+        
+        let attributedStr = NSMutableAttributedString(string: text)
+        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: "졸업증명서"))
+        
+        // Add spacing between text and underline
+        let spacing: CGFloat = 2
+        attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "졸업증명서"))
+        attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: "졸업증명서"))
+        
+        label.attributedText = attributedStr
         
         return label
     }()
@@ -70,7 +91,8 @@ class Signup2View: UIView {
     lazy var graduateCertificateUploadButton: UIButton = {
         let button = UIButton()
         button.setTitle("PDF 또는 이미지", for: .normal)
-        button.backgroundColor = .black
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.setBackgroundImage(UIImage(named: "FileSelectBtnImg"), for: .normal)
         button.tag = 1
         button.addTarget(self, action: #selector(graduateCertificateUploadButtonTapped), for: .touchUpInside)
         
