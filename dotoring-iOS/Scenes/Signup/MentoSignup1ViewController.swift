@@ -304,6 +304,7 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate, Departmen
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.preferredCornerRadius = 30
+            sheet.prefersGrabberVisible = true
        }
        present(vc, animated: true)
     }
