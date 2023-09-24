@@ -22,6 +22,11 @@ class MentoSignup4ViewController: UIViewController {
         super.loadView()
         
         signup4View = Signup4View(frame: self.view.frame)
+        
+        signup4View.nextButtonActionHandler = { [weak self] in
+            self?.nextButtonTapped()
+        }
+        
         self.view = signup4View
         
     }
@@ -29,6 +34,11 @@ class MentoSignup4ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIView.setAnimationsEnabled(false)
+    }
+    
+    func nextButtonTapped() {
+        let vc = MentoSignup5ViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
 
 }

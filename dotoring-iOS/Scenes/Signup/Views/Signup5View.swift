@@ -1,13 +1,13 @@
 //
-//  Signup4View.swift
+//  Signup5View.swift
 //  dotoring-iOS
 //
-//  Created by 우진 on 2023/09/23.
+//  Created by 우진 on 2023/09/24.
 //
 
 import UIKit
 
-class Signup4View: UIView {
+class Signup5View: UIView {
     
     // Add a closure property
     var nextButtonActionHandler: (() -> Void)?
@@ -25,17 +25,17 @@ class Signup4View: UIView {
     }()
     
     private lazy var stepBar: SignupStepBar = {
-        let bar = SignupStepBar(stepCount: 6, currentStep: 4)
+        let bar = SignupStepBar(stepCount: 6, currentStep: 5)
         
         return bar
     }()
     
     private lazy var questionLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        let text = "Q. 멘토 님을 더 알고 싶어요!"
+        let text = "Q. 이 점은 유의해 주세요."
         label.text = text
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
+        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "유의"))
         label.attributedText = attributedStr
         
         return label
@@ -43,55 +43,56 @@ class Signup4View: UIView {
     
     private lazy var questionDescriptionLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 10)
-        label.text = "10자 이상, 80자 이하로 작성"
+        label.text = "동의하지 않으시면 가입이 제한됩니다."
         label.textColor = .gray
         
         return label
     }()
     
+    lazy var personalInfoTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .BaseGray
+        textView.textColor = .black
+        textView.text = "개인정보 관련 내용"
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 23, bottom: 8, right: 23)
+        
+        return textView
+    }()
+    
     private lazy var answerStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
         stackView.alignment = .fill
-        stackView.spacing = 9
+        stackView.spacing = 0
         
         return stackView
     }()
     
     private lazy var answerLabel1: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "A."
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.text = "A. 동의합니다."
         
         return label
     }()
     
-    lazy var introductionInputTextField: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .BaseGray
-        textView.textColor = .lightGray
-        textView.text = "멘토 분야에 대해 소개해 주세요"
-        textView.isEditable = true
-        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
-        textView.layer.cornerRadius = 20
-        textView.isScrollEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+    private lazy var agreeConfirmButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        button.tintColor = .gray
+        button.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
         
-        return textView
-    }()
-    
-    private lazy var introductionInputWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
-        label.text = "0/80"
-        
-        return label
+        return button
     }()
     
     private lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
-        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -107,20 +108,25 @@ class Signup4View: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        // 뷰의 레이아웃이 업데이트되고 난 후
+        super.layoutSubviews()
+        updateUI()
+    }
+    
     func setup() {
-//        updateUI()
         setupSubViews()
     }
 
 }
 
-private extension Signup4View {
+private extension Signup5View {
     
     func setupSubViews() {
-        [navTitleLabel, stepBar, questionLabel, questionDescriptionLabel, answerStackView, introductionInputWarningLabel, nextButton].forEach {addSubview($0)}
+        [navTitleLabel, stepBar, questionLabel, questionDescriptionLabel, personalInfoTextView, answerStackView, nextButton].forEach {addSubview($0)}
         
         answerStackView.addArrangedSubview(answerLabel1)
-        answerStackView.addArrangedSubview(introductionInputTextField)
+        answerStackView.addArrangedSubview(agreeConfirmButton)
         
         navTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(38)
@@ -142,19 +148,17 @@ private extension Signup4View {
             $0.top.equalTo(questionLabel.snp.bottom).offset(5)
         }
         
-        introductionInputTextField.snp.makeConstraints {
-            $0.height.equalTo(52).priority(.low)
+        personalInfoTextView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(questionLabel.snp.leading)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(35)
+            $0.height.equalTo(11).priority(.low)
         }
         
         answerStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalTo(questionLabel.snp.leading)
-            $0.top.equalTo(questionLabel.snp.bottom).offset(66)
-        }
-
-        introductionInputWarningLabel.snp.makeConstraints {
-            $0.trailing.equalTo(answerStackView.snp.trailing)
-            $0.top.equalTo(answerStackView.snp.bottom).offset(12)
+            $0.leading.equalTo(personalInfoTextView.snp.leading)
+            $0.top.equalTo(personalInfoTextView.snp.bottom).offset(76)
         }
 
         nextButton.snp.makeConstraints {
@@ -168,11 +172,22 @@ private extension Signup4View {
     }
 }
 
-extension Signup4View {
+extension Signup5View {
     
-    // textView 입력될 때마다 라벨 업데이트
-    func updateCountLabel(characterCount: Int) {
-        introductionInputWarningLabel.text = "\(characterCount)/80"
+    func updateUI() {
+        // personalInfoTextView 모서리 둥글게
+        personalInfoTextView.layer.cornerRadius = personalInfoTextView.frame.height / 2
+        personalInfoTextView.clipsToBounds = true
+    }
+    
+    // agreeConfirmButton 클릭심 마다 체크마크 색 변하게
+    @objc func agreeConfirmButtonTapped(sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.tintColor = .BaseGreen
+        } else {
+            sender.tintColor = .gray
+        }
     }
     
     @objc func nextButtonTapped(sender: UIButton!) {
@@ -181,3 +196,4 @@ extension Signup4View {
     }
     
 }
+
