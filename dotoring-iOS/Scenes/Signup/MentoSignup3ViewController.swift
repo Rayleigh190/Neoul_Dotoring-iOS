@@ -15,6 +15,7 @@ class MentoSignup3ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
+        navigationController?.navigationBar.topItem?.title = ""
     }
     
     override func loadView() {
@@ -28,6 +29,11 @@ class MentoSignup3ViewController: UIViewController {
         
         self.view = signup3View
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.setAnimationsEnabled(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

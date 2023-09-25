@@ -92,7 +92,7 @@ class Signup5View: UIView {
     private lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
-//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         return button
     }()

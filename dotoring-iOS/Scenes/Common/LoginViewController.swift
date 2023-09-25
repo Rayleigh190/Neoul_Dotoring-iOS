@@ -20,6 +20,11 @@ class LoginViewController: UIViewController {
         self.setKeyboardObserver()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.setAnimationsEnabled(true)
+    }
+    
     override func loadView() {
         super.loadView()
         

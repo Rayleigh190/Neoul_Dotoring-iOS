@@ -56,6 +56,8 @@
 		F1FCE76F2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */; };
 		F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7702AC01E950024AE60 /* Signup5View.swift */; };
 		F1FCE7732AC023390024AE60 /* MentoSignup5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */; };
+		F1FCE7752AC07CEA0024AE60 /* MentoSignup6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7742AC07CEA0024AE60 /* MentoSignup6ViewController.swift */; };
+		F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7762AC07CF90024AE60 /* Signup6View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +110,8 @@
 		F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup4ViewController.swift; sourceTree = "<group>"; };
 		F1FCE7702AC01E950024AE60 /* Signup5View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup5View.swift; sourceTree = "<group>"; };
 		F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup5ViewController.swift; sourceTree = "<group>"; };
+		F1FCE7742AC07CEA0024AE60 /* MentoSignup6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup6ViewController.swift; sourceTree = "<group>"; };
+		F1FCE7762AC07CF90024AE60 /* Signup6View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup6View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 				F1FCE76A2ABD82620024AE60 /* MentoSignup3ViewController.swift */,
 				F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */,
 				F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */,
+				F1FCE7742AC07CEA0024AE60 /* MentoSignup6ViewController.swift */,
 				F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */,
 				F126B1D12AA569390035E499 /* DepartmentSelectViewController.swift */,
 			);
@@ -147,6 +152,7 @@
 				F1FCE7682ABD7E2A0024AE60 /* Signup3View.swift */,
 				F1FCE76C2ABE8E370024AE60 /* Signup4View.swift */,
 				F1FCE7702AC01E950024AE60 /* Signup5View.swift */,
+				F1FCE7762AC07CF90024AE60 /* Signup6View.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
 				F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
+				F1FCE7752AC07CEA0024AE60 /* MentoSignup6ViewController.swift in Sources */,
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
@@ -372,6 +379,7 @@
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
+				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
 				F1FCE76F2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift in Sources */,

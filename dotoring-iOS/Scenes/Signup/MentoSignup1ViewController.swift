@@ -185,6 +185,16 @@ class MentoSignup1ViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         setupSubViews()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIView.setAnimationsEnabled(true)
+    }
+    
+    @objc func nextButtonTapped(sender: UIButton!) {
+        let vc = MentoSignup2ViewController()
+        navigationController?.pushViewController(vc, animated: false)
+    }
 
 }
 
@@ -341,11 +351,6 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate, Departmen
             departmentTextField.textField.text = selectedElementString
         }
         
-    }
-    
-    @objc func nextButtonTapped(sender: UIButton!) {
-        let vc = MentoSignup2ViewController()
-        navigationController?.pushViewController(vc, animated: false)
     }
     
 }

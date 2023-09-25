@@ -14,19 +14,36 @@ class MentoSignup5ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.topItem?.title = ""
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func loadView() {
         super.loadView()
         
         signup5View = Signup5View(frame: self.view.frame)
+        
+        signup5View.nextButtonActionHandler = { [weak self] in
+            self?.nextButtonTapped()
+        }
+        
         self.view = signup5View
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.setAnimationsEnabled(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIView.setAnimationsEnabled(false)
+    }
+    
+    func nextButtonTapped() {
+        let vc = MentoSignup6ViewController()
+        navigationController?.pushViewController(vc, animated: false)
     }
     
 }

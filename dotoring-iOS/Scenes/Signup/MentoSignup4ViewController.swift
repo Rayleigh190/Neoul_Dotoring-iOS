@@ -16,6 +16,7 @@ class MentoSignup4ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         signup4View.introductionInputTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
+        navigationController?.navigationBar.topItem?.title = ""
     }
     
     override func loadView() {
@@ -29,6 +30,11 @@ class MentoSignup4ViewController: UIViewController {
         
         self.view = signup4View
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.setAnimationsEnabled(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
