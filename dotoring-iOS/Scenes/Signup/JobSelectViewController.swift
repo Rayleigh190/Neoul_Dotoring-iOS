@@ -10,19 +10,18 @@ import UIKit
 class JobSelectViewController: UIViewController {
     
     var selectView: SelectView!
+    var titleText: String = "타이틀"
+    var style: UiStyle = .mento
     
     weak var jobSelectViewControllerDelegate: JobSelectViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        view.backgroundColor = .red
     }
     
     override func loadView() {
         super.loadView()
-        selectView = SelectView(frame: self.view.frame)
-        selectView.titleLabel.text = "직무 분야 선택"
+        selectView = SelectView(frame: self.view.frame, title: titleText, style: style)
         self.view = selectView
         
     }

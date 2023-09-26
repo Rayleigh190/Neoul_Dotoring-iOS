@@ -1,47 +1,37 @@
 //
-//  MentoSignup1ViewController.swift
+//  MenteeSignup1ViewController.swift
 //  dotoring-iOS
 //
-//  Created by 우진 on 2023/09/01.
+//  Created by 우진 on 2023/09/26.
 //
 
 import UIKit
 
-protocol JobSelectViewControllerDelegate: AnyObject {
-    // 직무선택 뷰컨트롤러 화면이 사라질 때 선택한 직무 데이터를 받음
-    func didJobSelectViewControllerDismiss(elements: [String], selectedElements: [Int])
-}
-
-protocol DepartmentSelectViewControllerDelegate: AnyObject {
-    // 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 학과 데이터를 받음
-    func didDepartmentSelectViewControllerDismiss(elements: [String], selectedElements: [Int])
-}
-
-class MentoSignup1ViewController: UIViewController {
+class MenteeSignup1ViewController: UIViewController {
     
     private lazy var navTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 14)
-        let text = "멘토로 회원가입"
+        let text = "멘티로 회원가입"
         label.text = text
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
+        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseNavy!, range: (text as NSString).range(of: "멘티"))
         label.attributedText = attributedStr
         
         return label
     }()
     
     private lazy var stepBar: SignupStepBar = {
-        let bar = SignupStepBar(stepCount: 6, currentStep: 1)
+        let bar = SignupStepBar(stepCount: 6, currentStep: 1, style: .mentee)
         
         return bar
     }()
     
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        let text = "Q. 멘토님은 어떤 분인가요?"
+        let text = "Q. 멘티님은 어떤 분인가요?"
         label.text = text
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
+        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseNavy!, range: (text as NSString).range(of: "멘티"))
         label.attributedText = attributedStr
         
         return label
@@ -56,46 +46,46 @@ class MentoSignup1ViewController: UIViewController {
     
     private lazy var content2Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "에 소속된"
+        label.text = "에 다니는"
         
         return label
     }()
     
     private lazy var content3Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "년 차"
+        label.text = "학년"
         
         return label
     }()
     
     private lazy var content4Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "입니다."
+        label.text = "학생입니다."
         
         return label
     }()
     
     private lazy var content5Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "저는 대학교에서"
+        label.text = "저는"
         
         return label
     }()
     
     private lazy var content6Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "를 다녔어요."
+        label.text = "을/를 희망합니다."
         
         return label
     }()
     
-    private lazy var companyTextField: LineTextField = {
+    private lazy var schoolTextField: LineTextField = {
         let lineTextField = LineTextField()
         lineTextField.textField.textAlignment = .center
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let centeredPlaceholder = NSAttributedString(string: "소속", attributes: [
+        let centeredPlaceholder = NSAttributedString(string: "학교", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.gray,
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
@@ -104,7 +94,7 @@ class MentoSignup1ViewController: UIViewController {
         return lineTextField
     }()
     
-    private lazy var yearTextField: LineTextField = {
+    private lazy var gradeTextField: LineTextField = {
         let lineTextField = LineTextField()
         lineTextField.textField.textAlignment = .center
         lineTextField.textField.keyboardType = .numberPad
@@ -112,44 +102,20 @@ class MentoSignup1ViewController: UIViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let centeredPlaceholder = NSAttributedString(string: "연차", attributes: [
+        let centeredPlaceholder = NSAttributedString(string: "학년", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.gray,
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
         lineTextField.textField.attributedPlaceholder = centeredPlaceholder
         
         return lineTextField
-    }()
-    
-    private lazy var jobTextField: LineTextField = {
-        let lineTextField = LineTextField()
-        lineTextField.textField.textAlignment = .center
-        lineTextField.isUserInteractionEnabled = false
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-
-        let centeredPlaceholder = NSAttributedString(string: "직무", attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor.gray,
-            NSAttributedString.Key.paragraphStyle: paragraphStyle
-        ])
-        lineTextField.textField.attributedPlaceholder = centeredPlaceholder
-        
-        return lineTextField
-    }()
-    
-    private lazy var jobTextFieldButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(selectTextFieldTapped), for: .touchUpInside)
-               
-        return button
     }()
     
     private lazy var departmentTextField: LineTextField = {
         let lineTextField = LineTextField()
         lineTextField.textField.textAlignment = .center
         lineTextField.isUserInteractionEnabled = false
-        
+
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
@@ -163,6 +129,30 @@ class MentoSignup1ViewController: UIViewController {
     }()
     
     private lazy var departmentTextFieldButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(selectTextFieldTapped), for: .touchUpInside)
+               
+        return button
+    }()
+    
+    private lazy var jobTextField: LineTextField = {
+        let lineTextField = LineTextField()
+        lineTextField.textField.textAlignment = .center
+        lineTextField.isUserInteractionEnabled = false
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+
+        let centeredPlaceholder = NSAttributedString(string: "직무 분야", attributes: [
+            NSAttributedString.Key.foregroundColor: UIColor.gray,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle
+        ])
+        lineTextField.textField.attributedPlaceholder = centeredPlaceholder
+        
+        return lineTextField
+    }()
+    
+    private lazy var jobTextFieldButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(selectTextFieldTapped), for: .touchUpInside)
                
@@ -198,15 +188,15 @@ class MentoSignup1ViewController: UIViewController {
 
 }
 
-private extension MentoSignup1ViewController {
+private extension MenteeSignup1ViewController {
     
     func setupSubViews() {
         
-        [navTitleLabel, stepBar, titleLabel, nextButton, jobTextFieldButton, departmentTextFieldButton].forEach {view.addSubview($0)}
+        [navTitleLabel, stepBar, titleLabel, nextButton, departmentTextFieldButton, jobTextFieldButton].forEach {view.addSubview($0)}
         
         [content1Label, content2Label, content3Label, content4Label, content5Label, content6Label].forEach {view.addSubview($0)}
         
-        [companyTextField, yearTextField, jobTextField, departmentTextField].forEach {view.addSubview($0)}
+        [schoolTextField, gradeTextField, departmentTextField, jobTextField].forEach {view.addSubview($0)}
         
         navTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(38)
@@ -228,65 +218,60 @@ private extension MentoSignup1ViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(66)
         }
         
-        companyTextField.snp.makeConstraints {
+        schoolTextField.snp.makeConstraints {
             $0.centerY.equalTo(content1Label)
             $0.leading.equalTo(content1Label.snp.trailing).offset(17)
             $0.width.equalTo(100)
         }
         
         content2Label.snp.makeConstraints {
-            $0.centerY.equalTo(companyTextField)
-            $0.leading.equalTo(companyTextField.snp.trailing).offset(17)
+            $0.centerY.equalTo(schoolTextField)
+            $0.leading.equalTo(schoolTextField.snp.trailing).offset(17)
         }
         
-        yearTextField.snp.makeConstraints {
-            $0.centerX.equalTo(companyTextField)
-            $0.top.equalTo(companyTextField.snp.bottom).offset(20)
+        gradeTextField.snp.makeConstraints {
+            $0.centerX.equalTo(schoolTextField)
+            $0.top.equalTo(schoolTextField.snp.bottom).offset(20)
             $0.width.equalTo(100)
         }
         
         content3Label.snp.makeConstraints {
-            $0.centerY.equalTo(yearTextField)
-            $0.leading.equalTo(yearTextField.snp.trailing).offset(17)
+            $0.centerY.equalTo(gradeTextField)
+            $0.leading.equalTo(gradeTextField.snp.trailing).offset(17)
         }
         
-        jobTextField.snp.makeConstraints {
-            $0.centerX.equalTo(yearTextField)
-            $0.top.equalTo(yearTextField.snp.bottom).offset(20)
+        departmentTextField.snp.makeConstraints {
+            $0.centerX.equalTo(gradeTextField)
+            $0.top.equalTo(gradeTextField.snp.bottom).offset(20)
             $0.width.equalTo(100)
         }
         
         content4Label.snp.makeConstraints {
-            $0.centerY.equalTo(jobTextField)
-            $0.leading.equalTo(jobTextField.snp.trailing).offset(17)
+            $0.centerY.equalTo(departmentTextField)
+            $0.leading.equalTo(departmentTextField.snp.trailing).offset(17)
         }
         
         content5Label.snp.makeConstraints {
             $0.leading.equalTo(content1Label.snp.leading).offset(25)
-            $0.top.equalTo(jobTextField.snp.bottom).offset(26)
+            $0.top.equalTo(departmentTextField.snp.bottom).offset(26)
         }
         
-        departmentTextField.snp.makeConstraints {
-            $0.centerX.equalTo(jobTextField)
-            $0.top.equalTo(content5Label.snp.bottom).offset(15)
+        jobTextField.snp.makeConstraints {
+            $0.centerX.equalTo(departmentTextField)
+            $0.top.equalTo(departmentTextField.snp.bottom).offset(20)
             $0.width.equalTo(100)
         }
         
         content6Label.snp.makeConstraints {
-            $0.centerY.equalTo(departmentTextField)
-            $0.leading.equalTo(departmentTextField.snp.trailing).offset(17)
+            $0.trailing.equalTo(content4Label.snp.trailing)
+            $0.top.equalTo(jobTextField.snp.bottom).offset(20)
         }
         
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(departmentTextField.snp.bottom).offset(54)
+            $0.top.equalTo(content6Label.snp.bottom).offset(70)
             $0.height.equalTo(45)
-        }
-        
-        jobTextFieldButton.snp.makeConstraints {
-            $0.width.height.equalTo(jobTextField)
-            $0.centerX.centerY.equalTo(jobTextField)
         }
         
         departmentTextFieldButton.snp.makeConstraints {
@@ -294,20 +279,29 @@ private extension MentoSignup1ViewController {
             $0.centerX.centerY.equalTo(departmentTextField)
         }
         
+        jobTextFieldButton.snp.makeConstraints {
+            $0.width.height.equalTo(jobTextField)
+            $0.centerX.centerY.equalTo(jobTextField)
+        }
+        
     }
 }
 
-extension MentoSignup1ViewController: JobSelectViewControllerDelegate, DepartmentSelectViewControllerDelegate {
+extension MenteeSignup1ViewController: JobSelectViewControllerDelegate, DepartmentSelectViewControllerDelegate {
     
     @objc private func selectTextFieldTapped(sender: UIButton) {
         var vc: UIViewController
         if sender == jobTextFieldButton {
             let jobSelectViewController = JobSelectViewController()
             jobSelectViewController.jobSelectViewControllerDelegate = self
+            jobSelectViewController.titleText = "희망 직무 선택"
+            jobSelectViewController.style = .mentee
             vc = jobSelectViewController
         } else if sender == departmentTextFieldButton {
             let departmentSelectViewController = DepartmentSelectViewController()
             departmentSelectViewController.departmentSelectViewControllerDelegate = self
+            departmentSelectViewController.titleText = "학과 선택"
+            departmentSelectViewController.style = .mentee
             vc = departmentSelectViewController
         } else { vc = UIViewController() }
         
@@ -354,3 +348,4 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate, Departmen
     }
     
 }
+

@@ -9,6 +9,7 @@ import UIKit
 
 class SelectView: UIView {
     
+    var uiColor: UIColor = UIColor.BaseGray!
     var elements: [String] = ["선택항목 1", "선택항목 2", "선택항목 3", "선택항목 4", "선택항목 5", "선택항목 6", "선택항목 7", "선택항목 8", "선택항목 9", "선택항목 10"]
     var selectedElements: [Int] = [] // 선택한 항목 cell의 indexPath를 저장
     
@@ -41,21 +42,43 @@ class SelectView: UIView {
     
     private lazy var tableView: UITableView = {
         let table = UITableView()
-        table.backgroundColor = .BaseGreen
+        table.backgroundColor = uiColor
         table.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         table.separatorColor = .white
         
         return table
     }()
-
-    override init(frame: CGRect) {
+    
+    init(frame: CGRect, title: String, style:UiStyle) {
         super.init(frame: frame)
-        backgroundColor = .BaseGreen
+        
+        switch style {
+        case .mento:
+            backgroundColor = .BaseGreen
+            uiColor = .BaseGreen!
+        case .mentee:
+            backgroundColor = .BaseNavy
+            uiColor = .BaseNavy!
+            clearButton.layer.borderColor = UIColor(red: 0.349, green: 0.475, blue: 0.62, alpha: 1).cgColor
+            clearButton.setTitleColor(UIColor(red: 0.349, green: 0.475, blue: 0.62, alpha: 1), for: .normal)
+        }
+        
+        titleLabel.text = title
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsMultipleSelection = true
         setup()
     }
+
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        backgroundColor = .BaseGreen
+//        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.allowsMultipleSelection = true
+//        setup()
+//    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -117,7 +140,7 @@ private extension SelectView {
 
 extension SelectView {
     @objc func selectedElementCancelButtonTapped(sender: UIButton!) {
-        let cancelButtonTag = sender.tag
+//        let cancelButtonTag = sender.tag
         print("일단 안 되서 넘어감")
 //        let indexPathToDeselect = IndexPath(row: cancelButtonTag, section: 0)
 //        tableView.deselectRow(at: indexPathToDeselect, animated: true)
@@ -132,7 +155,7 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: .none)
-        cell.backgroundColor = .BaseGreen
+        cell.backgroundColor = uiColor
         cell.textLabel?.textColor = .white
         cell.textLabel?.text = elements[indexPath.row]
         cell.selectionStyle = .none

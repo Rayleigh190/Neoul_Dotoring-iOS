@@ -7,13 +7,6 @@
 
 import UIKit
 
-enum NanumWeightType {
-    case L
-    case R
-    case B
-    case EB
-}
-
 class NanumLabel: UILabel {
     
     init(weightType: NanumWeightType, size: CGFloat) {

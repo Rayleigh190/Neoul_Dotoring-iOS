@@ -7,13 +7,6 @@
 
 import UIKit
 
-enum BaseButtonStyle {
-    case clear
-    case green
-    case black
-    case gray
-}
-
 class BaseButton: UIButton {
     
     init(style: BaseButtonStyle){

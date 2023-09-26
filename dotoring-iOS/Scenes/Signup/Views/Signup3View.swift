@@ -25,7 +25,7 @@ class Signup3View: UIView {
     }()
     
     private lazy var stepBar: SignupStepBar = {
-        let bar = SignupStepBar(stepCount: 6, currentStep: 3)
+        let bar = SignupStepBar(stepCount: 6, currentStep: 3, style: .mento)
         
         return bar
     }()

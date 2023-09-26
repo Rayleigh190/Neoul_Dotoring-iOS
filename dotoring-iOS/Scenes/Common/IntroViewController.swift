@@ -55,6 +55,7 @@ class IntroViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .BaseNavy
         button.layer.cornerRadius = 17
+        button.addTarget(self, action: #selector(menteeButtonTapped), for: .touchUpInside)
 
         return button
     }()
@@ -198,6 +199,11 @@ extension IntroViewController {
     
     @objc func mentoButtonTapped(sender: UIButton!) {
         let vc = MentoSignup1ViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func menteeButtonTapped(sender: UIButton!) {
+        let vc = MenteeSignup1ViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

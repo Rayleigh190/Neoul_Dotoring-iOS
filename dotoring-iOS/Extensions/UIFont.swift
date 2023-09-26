@@ -7,13 +7,6 @@
 
 import UIKit
 
-enum NanumFamily {
-    case NanumSquareOTFL
-    case NanumSquareOTFR
-    case NanumSquareOTFB
-    case NanumSquareOTFEB
-}
-
 extension UIFont {
     
     static func nanumSquare(style: NanumFamily, size: CGFloat) -> UIFont {

@@ -9,6 +9,9 @@ import SnapKit
 import UIKit
 
 class SignupStepBar: UIView {
+    
+    var uiColor: UIColor = .BaseGray!
+    
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -18,8 +21,13 @@ class SignupStepBar: UIView {
         return stackView
     }()
     
-    init(stepCount: Int, currentStep: Int) {
+    init(stepCount: Int, currentStep: Int, style: UiStyle) {
         super.init(frame: .zero)
+        
+        switch style {
+        case .mento: uiColor = UIColor.BaseGreen!
+        case .mentee: uiColor = UIColor.BaseNavy!
+        }
         
         setupStackView(stepCount: stepCount, currentStep: currentStep)
     }
@@ -33,7 +41,7 @@ class SignupStepBar: UIView {
         for i in 0..<stepCount {
             let stepView = UIView()
             if i < currentStep {
-                stepView.backgroundColor = UIColor.BaseGreen
+                stepView.backgroundColor = uiColor
             } else {
                 stepView.backgroundColor = UIColor.BaseGray
             }

@@ -10,19 +10,18 @@ import UIKit
 class DepartmentSelectViewController: UIViewController {
     
     var selectView: SelectView!
+    var titleText: String = "타이틀"
+    var style: UiStyle = .mento
     
     weak var departmentSelectViewControllerDelegate: DepartmentSelectViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        view.backgroundColor = .blue
     }
     
     override func loadView() {
         super.loadView()
-        selectView = SelectView(frame: self.view.frame)
-        selectView.titleLabel.text = "학과 선택"
+        selectView = SelectView(frame: self.view.frame, title: titleText, style: style)
         self.view = selectView
     }
     
