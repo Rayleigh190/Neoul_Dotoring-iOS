@@ -11,34 +11,64 @@ import UIKit
 class Signup2View: UIView {
     
     // Add a closure property
-    var certificateOfEmploymentUploadButtonActionHandler: (() -> Void)?
+    var         groupCertificateUploadButtonActionHandler: (() -> Void)?
     var graduateCertificateUploadButtonActionHandler: (() -> Void)?
     var nextButtonActionHandler: (() -> Void)?
     
+    let uiStyle: UiStyle = {
+        if UserDefaults.standard.string(forKey: "UiStyle") == "mento" {
+            return UiStyle.mento
+        } else {
+            return UiStyle.mentee
+        }
+    }()
+    
     private lazy var navTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 14)
-        let text = "멘토로 회원가입"
+        var text = ""
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+        
+        if uiStyle == .mento {
+            text = "멘토로 회원가입"
+            attrRangeText = "멘토"
+            attrStrColor = .BaseGreen!
+        } else {
+            text = "멘티로 회원가입"
+            attrRangeText = "멘티"
+            attrStrColor = .BaseNavy!
+        }
+        
         label.text = text
-        // 멘티일 경우 파란색으로 하기
+
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
+        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: attrRangeText))
         label.attributedText = attributedStr
+        
         
         return label
     }()
     
     private lazy var stepBar: SignupStepBar = {
-        let bar = SignupStepBar(stepCount: 6, currentStep: 2, style: .mento)
-        
-        return bar
+        if uiStyle == .mento {
+            return SignupStepBar(stepCount: 6, currentStep: 2, style: .mento)
+        } else {
+            return SignupStepBar(stepCount: 6, currentStep: 2, style: .mentee)
+        }
     }()
     
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         let text = "Q. 증빙서류를 업로드 해 주세요."
         label.text = text
+        var attrStrColor = UIColor.label
+        if uiStyle == .mento {
+            attrStrColor = .BaseGreen!
+        } else {
+            attrStrColor = .BaseNavy!
+        }
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "증빙서류"))
+        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: "증빙서류"))
         label.attributedText = attributedStr
         
         return label
@@ -46,28 +76,40 @@ class Signup2View: UIView {
     
     private lazy var content1Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        let text = "A. 재적증명서 업로드하기"
+        var text = ""
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+        
+        if uiStyle == .mento {
+            text = "A. 재적증명서 업로드하기"
+            attrRangeText = "재적증명서"
+            attrStrColor = .BaseGreen!
+        } else {
+            text = "A. 재학증명서 업로드하기"
+            attrRangeText = "재학증명서"
+            attrStrColor = .BaseNavy!
+        }
         
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: "재적증명서"))
+        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: attrRangeText))
         
         // Add spacing between text and underline
         let spacing: CGFloat = 2
-        attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "재적증명서"))
-        attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: "재적증명서"))
+        attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: attrRangeText))
+        attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: attrRangeText))
         
         label.attributedText = attributedStr
         
         return label
     }()
     
-    lazy var certificateOfEmploymentUploadButton: UIButton = {
+    lazy var groupCertificateUploadButton: UIButton = {
         let button = UIButton()
         button.setTitle("PDF 또는 이미지", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.setBackgroundImage(UIImage(named: "FileSelectBtnImg"), for: .normal)
         button.tag = 0
-        button.addTarget(self, action: #selector(certificateOfEmploymentUploadButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(groupCertificateUploadButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -133,7 +175,7 @@ private extension Signup2View {
     func setupSubViews() {
         [navTitleLabel, stepBar, titleLabel, nextButton].forEach {addSubview($0)}
         
-        [content1Label, certificateOfEmploymentUploadButton,  content2Label, graduateCertificateUploadButton].forEach {addSubview($0)}
+        [content1Label, groupCertificateUploadButton,  content2Label, graduateCertificateUploadButton].forEach {addSubview($0)}
         
         navTitleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(38)
@@ -155,25 +197,42 @@ private extension Signup2View {
             $0.top.equalTo(titleLabel.snp.bottom).offset(66)
         }
         
-        certificateOfEmploymentUploadButton.snp.makeConstraints {
+        groupCertificateUploadButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(content1Label.snp.leading)
             $0.top.equalTo(content1Label.snp.bottom).offset(18)
             $0.height.equalTo(86)
         }
         
-        content2Label.snp.makeConstraints {
-            $0.leading.equalTo(content1Label.snp.leading)
-            $0.top.equalTo(certificateOfEmploymentUploadButton.snp.bottom).offset(58)
+        if uiStyle == .mento {
+            content2Label.snp.makeConstraints {
+                $0.leading.equalTo(content1Label.snp.leading)
+                $0.top.equalTo(groupCertificateUploadButton.snp.bottom).offset(58)
+            }
+            
+            graduateCertificateUploadButton.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.leading.equalTo(content2Label.snp.leading)
+                $0.top.equalTo(content2Label.snp.bottom).offset(18)
+                $0.height.equalTo(86)
+            }
+            
+        } else {
+            // 멘티 회원가입에서는 안 보이게 함
+            content2Label.snp.makeConstraints {
+                $0.leading.equalTo(content1Label.snp.leading)
+                $0.top.equalTo(groupCertificateUploadButton.snp.bottom).offset(0)
+                $0.height.equalTo(0)
+            }
+            
+            graduateCertificateUploadButton.snp.makeConstraints {
+                $0.centerX.equalToSuperview()
+                $0.leading.equalTo(content2Label.snp.leading)
+                $0.top.equalTo(content2Label.snp.bottom).offset(0)
+                $0.height.equalTo(0)
+            }
+            graduateCertificateUploadButton.isHidden = true
         }
-        
-        graduateCertificateUploadButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalTo(content2Label.snp.leading)
-            $0.top.equalTo(content2Label.snp.bottom).offset(18)
-            $0.height.equalTo(86)
-        }
-        
         
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -188,9 +247,9 @@ private extension Signup2View {
 
 extension Signup2View {
     
-    @objc func certificateOfEmploymentUploadButtonTapped(sender: UIButton!) {
+    @objc func groupCertificateUploadButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
-        certificateOfEmploymentUploadButtonActionHandler?()
+                groupCertificateUploadButtonActionHandler?()
     }
     
     @objc func graduateCertificateUploadButtonTapped(sender: UIButton!) {

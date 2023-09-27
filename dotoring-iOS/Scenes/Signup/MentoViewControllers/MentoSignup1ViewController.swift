@@ -182,7 +182,7 @@ class MentoSignup1ViewController: UIViewController {
     }
     
     @objc func nextButtonTapped(sender: UIButton!) {
-        let vc = MentoSignup2ViewController()
+        let vc = Signup2ViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
 

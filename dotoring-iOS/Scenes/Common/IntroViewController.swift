@@ -198,11 +198,13 @@ extension IntroViewController {
     }
     
     @objc func mentoButtonTapped(sender: UIButton!) {
+        UserDefaults.standard.set("mento", forKey: "UiStyle")
         let vc = MentoSignup1ViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func menteeButtonTapped(sender: UIButton!) {
+        UserDefaults.standard.set("mentee", forKey: "UiStyle")
         let vc = MenteeSignup1ViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

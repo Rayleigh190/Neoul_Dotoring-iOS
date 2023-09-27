@@ -9,8 +9,9 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 
-class MentoSignup2ViewController: UIViewController {
+class Signup2ViewController: UIViewController {
 
+    let uiStyle = UserDefaults.standard.string(forKey: "UiStyle")
     var signup2View: Signup2View!
     
     var selectedFileURL: URL?  // Store the selected file URL
@@ -28,7 +29,7 @@ class MentoSignup2ViewController: UIViewController {
         signup2View = Signup2View(frame: self.view.frame)
         
         // Set the button action handler
-        signup2View.certificateOfEmploymentUploadButtonActionHandler = { [weak self] in
+        signup2View.groupCertificateUploadButtonActionHandler = { [weak self] in
             self?.certificateOfEmploymentUploadButtonTapped()
         }
         signup2View.graduateCertificateUploadButtonActionHandler = { [weak self] in
@@ -65,7 +66,7 @@ class MentoSignup2ViewController: UIViewController {
     
 }
 
-extension MentoSignup2ViewController:  UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func openPdfOrImgFile(sender: Int) {
         // Create an action sheet to let the user choose between picking a PDF or an image
@@ -93,7 +94,7 @@ extension MentoSignup2ViewController:  UIDocumentPickerDelegate, UINavigationCon
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         if sender == 0 {
-            documentPicker.view.tag = signup2View.certificateOfEmploymentUploadButton.tag
+            documentPicker.view.tag = signup2View.groupCertificateUploadButton.tag
         } else {
             documentPicker.view.tag = signup2View.graduateCertificateUploadButton.tag
         }
@@ -106,7 +107,7 @@ extension MentoSignup2ViewController:  UIDocumentPickerDelegate, UINavigationCon
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
         if sender == 0 { // 재직증명서 버튼일 경우
-            imagePicker.view.tag = signup2View.certificateOfEmploymentUploadButton.tag
+            imagePicker.view.tag = signup2View.groupCertificateUploadButton.tag
         } else if sender == 1 { // 졸업증명서 버튼일 경우
             imagePicker.view.tag = signup2View.graduateCertificateUploadButton.tag
         }
@@ -118,9 +119,9 @@ extension MentoSignup2ViewController:  UIDocumentPickerDelegate, UINavigationCon
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedPDFURL = urls.first {
             // Handle the selected PDF file here
-            if controller.view.tag == signup2View.certificateOfEmploymentUploadButton.tag {
+            if controller.view.tag == signup2View.groupCertificateUploadButton.tag {
                 selectedFileURL = selectedPDFURL
-                signup2View.certificateOfEmploymentUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
+                signup2View.groupCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
             } else if controller.view.tag == signup2View.graduateCertificateUploadButton.tag {
                 selectedFileURL2 = selectedPDFURL
                 signup2View.graduateCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
@@ -132,9 +133,9 @@ extension MentoSignup2ViewController:  UIDocumentPickerDelegate, UINavigationCon
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             // Handle the selected image here
             if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-                if picker.view.tag == signup2View.certificateOfEmploymentUploadButton.tag {
+                if picker.view.tag == signup2View.groupCertificateUploadButton.tag {
                     selectedFileURL = imageURL
-                    signup2View.certificateOfEmploymentUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
+                    signup2View.groupCertificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
                 } else if picker.view.tag == signup2View.graduateCertificateUploadButton.tag {
                     selectedFileURL2 = imageURL
                     signup2View.graduateCertificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)

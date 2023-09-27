@@ -48,7 +48,7 @@
 		F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */; };
 		F1DD2CD02A9F616D00EE9711 /* FindPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */; };
 		F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2CD12A9F635900EE9711 /* FindPwView.swift */; };
-		F1FCE7652ABC754C0024AE60 /* MentoSignup2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7642ABC754C0024AE60 /* MentoSignup2ViewController.swift */; };
+		F1FCE7652ABC754C0024AE60 /* Signup2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7642ABC754C0024AE60 /* Signup2ViewController.swift */; };
 		F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7662ABC75A80024AE60 /* Signup2View.swift */; };
 		F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7682ABD7E2A0024AE60 /* Signup3View.swift */; };
 		F1FCE76B2ABD82620024AE60 /* MentoSignup3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE76A2ABD82620024AE60 /* MentoSignup3ViewController.swift */; };
@@ -109,7 +109,7 @@
 		F1DD2CCA2A9D7CD900EE9711 /* FindIdCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdCheckView.swift; sourceTree = "<group>"; };
 		F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwViewController.swift; sourceTree = "<group>"; };
 		F1DD2CD12A9F635900EE9711 /* FindPwView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwView.swift; sourceTree = "<group>"; };
-		F1FCE7642ABC754C0024AE60 /* MentoSignup2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup2ViewController.swift; sourceTree = "<group>"; };
+		F1FCE7642ABC754C0024AE60 /* Signup2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup2ViewController.swift; sourceTree = "<group>"; };
 		F1FCE7662ABC75A80024AE60 /* Signup2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup2View.swift; sourceTree = "<group>"; };
 		F1FCE7682ABD7E2A0024AE60 /* Signup3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup3View.swift; sourceTree = "<group>"; };
 		F1FCE76A2ABD82620024AE60 /* MentoSignup3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup3ViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				F126B1D52AA6FB0D0035E499 /* Views */,
+				F1FCE7642ABC754C0024AE60 /* Signup2ViewController.swift */,
 				F1FCE7782AC2C6EA0024AE60 /* MentoViewControllers */,
 				F1FCE7792AC2C72E0024AE60 /* MenteeViewControllers */,
 				F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */,
@@ -296,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				F126B1CB2AA231F60035E499 /* MentoSignup1ViewController.swift */,
-				F1FCE7642ABC754C0024AE60 /* MentoSignup2ViewController.swift */,
 				F1FCE76A2ABD82620024AE60 /* MentoSignup3ViewController.swift */,
 				F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */,
 				F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */,
@@ -441,7 +441,7 @@
 				F1FCE76F2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift in Sources */,
 				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
 				F126B1D22AA569390035E499 /* DepartmentSelectViewController.swift in Sources */,
-				F1FCE7652ABC754C0024AE60 /* MentoSignup2ViewController.swift in Sources */,
+				F1FCE7652ABC754C0024AE60 /* Signup2ViewController.swift in Sources */,
 				F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */,
 				F1FCE7732AC023390024AE60 /* MentoSignup5ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
