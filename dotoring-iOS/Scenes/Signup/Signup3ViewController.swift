@@ -42,7 +42,7 @@ class Signup3ViewController: UIViewController {
     }
     
     func nextButtonTapped() {
-        let vc = MentoSignup4ViewController()
+        let vc = Signup4ViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
 

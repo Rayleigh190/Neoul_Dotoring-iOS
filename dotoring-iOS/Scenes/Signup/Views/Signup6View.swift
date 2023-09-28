@@ -12,6 +12,14 @@ class Signup6View: UIView {
     // Add a closure property
     var loginButtonActionHandler: (() -> Void)?
     
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .systemBackground
@@ -30,28 +38,50 @@ class Signup6View: UIView {
     
     private lazy var navTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 14)
-        let text = "멘토로 회원가입"
+        var text = ""
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+        
+        if uiStyle == .mento {
+            text = "멘토로 회원가입"
+            attrRangeText = "멘토"
+            attrStrColor = .BaseGreen!
+        } else {
+            text = "멘티로 회원가입"
+            attrRangeText = "멘티"
+            attrStrColor = .BaseNavy!
+        }
+        
         label.text = text
-        // 멘티일 경우 파란색으로 하기
+
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
+        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: attrRangeText))
         label.attributedText = attributedStr
+        
         
         return label
     }()
     
     private lazy var stepBar: SignupStepBar = {
-        let bar = SignupStepBar(stepCount: 6, currentStep: 6, style: .mento)
-        
-        return bar
+        if uiStyle == .mento {
+            return SignupStepBar(stepCount: 6, currentStep: 6, style: .mento)
+        } else {
+            return SignupStepBar(stepCount: 6, currentStep: 6, style: .mentee)
+        }
     }()
     
     private lazy var questionLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         let text = "Q. 계정 설정만 하면 끝이에요!"
         label.text = text
+        var attrStrColor = UIColor.label
+        if uiStyle == .mento {
+            attrStrColor = .BaseGreen!
+        } else {
+            attrStrColor = .BaseNavy!
+        }
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "계정"))
+        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: "계정"))
         label.attributedText = attributedStr
         
         return label

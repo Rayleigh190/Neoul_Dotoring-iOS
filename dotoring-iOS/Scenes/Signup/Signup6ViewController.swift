@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MentoSignup6ViewController: UIViewController {
+class Signup6ViewController: UIViewController {
 
     var signup6View: Signup6View!
     var fCurTextfieldBottom: CGFloat = 0.0
@@ -65,7 +65,7 @@ class MentoSignup6ViewController: UIViewController {
 
 }
 
-extension MentoSignup6ViewController: UITextFieldDelegate {
+extension Signup6ViewController: UITextFieldDelegate {
     
     // 텍스트필드에서 리턴키 눌르면 다음 텍스트필드로 포커싱 맞춰짐
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

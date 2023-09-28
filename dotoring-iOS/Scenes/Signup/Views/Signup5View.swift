@@ -11,31 +11,61 @@ class Signup5View: UIView {
     
     // Add a closure property
     var nextButtonActionHandler: (() -> Void)?
+    
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
 
     private lazy var navTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 14)
-        let text = "멘토로 회원가입"
+        var text = ""
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+        
+        if uiStyle == .mento {
+            text = "멘토로 회원가입"
+            attrRangeText = "멘토"
+            attrStrColor = .BaseGreen!
+        } else {
+            text = "멘티로 회원가입"
+            attrRangeText = "멘티"
+            attrStrColor = .BaseNavy!
+        }
+        
         label.text = text
-        // 멘티일 경우 파란색으로 하기
+
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
+        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: attrRangeText))
         label.attributedText = attributedStr
+        
         
         return label
     }()
     
     private lazy var stepBar: SignupStepBar = {
-        let bar = SignupStepBar(stepCount: 6, currentStep: 5, style: .mento)
-        
-        return bar
+        if uiStyle == .mento {
+            return SignupStepBar(stepCount: 6, currentStep: 5, style: .mento)
+        } else {
+            return SignupStepBar(stepCount: 6, currentStep: 5, style: .mentee)
+        }
     }()
     
     private lazy var questionLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         let text = "Q. 이 점은 유의해 주세요."
         label.text = text
+        var attrStrColor = UIColor.label
+        if uiStyle == .mento {
+            attrStrColor = .BaseGreen!
+        } else {
+            attrStrColor = .BaseNavy!
+        }
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "유의"))
+        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: "유의"))
         label.attributedText = attributedStr
         
         return label
@@ -184,7 +214,12 @@ extension Signup5View {
     @objc func agreeConfirmButtonTapped(sender: UIButton) {
         sender.isSelected.toggle()
         if sender.isSelected {
-            sender.tintColor = .BaseGreen
+            if uiStyle == .mento {
+                sender.tintColor = .BaseGreen
+            } else {
+                sender.tintColor = .BaseNavy
+            }
+            
         } else {
             sender.tintColor = .gray
         }

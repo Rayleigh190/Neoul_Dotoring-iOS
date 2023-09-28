@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MentoSignup5ViewController: UIViewController {
+class Signup5ViewController: UIViewController {
 
     var signup5View: Signup5View!
     
@@ -42,7 +42,7 @@ class MentoSignup5ViewController: UIViewController {
     }
     
     func nextButtonTapped() {
-        let vc = MentoSignup6ViewController()
+        let vc = Signup6ViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
     

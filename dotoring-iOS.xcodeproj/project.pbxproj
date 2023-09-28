@@ -53,10 +53,10 @@
 		F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7682ABD7E2A0024AE60 /* Signup3View.swift */; };
 		F1FCE76B2ABD82620024AE60 /* Signup3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE76A2ABD82620024AE60 /* Signup3ViewController.swift */; };
 		F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE76C2ABE8E370024AE60 /* Signup4View.swift */; };
-		F1FCE76F2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */; };
+		F1FCE76F2ABE8E4E0024AE60 /* Signup4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE76E2ABE8E4E0024AE60 /* Signup4ViewController.swift */; };
 		F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7702AC01E950024AE60 /* Signup5View.swift */; };
-		F1FCE7732AC023390024AE60 /* MentoSignup5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */; };
-		F1FCE7752AC07CEA0024AE60 /* MentoSignup6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7742AC07CEA0024AE60 /* MentoSignup6ViewController.swift */; };
+		F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7722AC023390024AE60 /* Signup5ViewController.swift */; };
+		F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7742AC07CEA0024AE60 /* Signup6ViewController.swift */; };
 		F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7762AC07CF90024AE60 /* Signup6View.swift */; };
 		F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE77A2AC2C7670024AE60 /* MenteeSignup1ViewController.swift */; };
 		F1FCE77F2AC317600024AE60 /* JobSelectViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE77E2AC317600024AE60 /* JobSelectViewControllerProtocol.swift */; };
@@ -114,10 +114,10 @@
 		F1FCE7682ABD7E2A0024AE60 /* Signup3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup3View.swift; sourceTree = "<group>"; };
 		F1FCE76A2ABD82620024AE60 /* Signup3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup3ViewController.swift; sourceTree = "<group>"; };
 		F1FCE76C2ABE8E370024AE60 /* Signup4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup4View.swift; sourceTree = "<group>"; };
-		F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup4ViewController.swift; sourceTree = "<group>"; };
+		F1FCE76E2ABE8E4E0024AE60 /* Signup4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup4ViewController.swift; sourceTree = "<group>"; };
 		F1FCE7702AC01E950024AE60 /* Signup5View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup5View.swift; sourceTree = "<group>"; };
-		F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup5ViewController.swift; sourceTree = "<group>"; };
-		F1FCE7742AC07CEA0024AE60 /* MentoSignup6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup6ViewController.swift; sourceTree = "<group>"; };
+		F1FCE7722AC023390024AE60 /* Signup5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup5ViewController.swift; sourceTree = "<group>"; };
+		F1FCE7742AC07CEA0024AE60 /* Signup6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup6ViewController.swift; sourceTree = "<group>"; };
 		F1FCE7762AC07CF90024AE60 /* Signup6View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup6View.swift; sourceTree = "<group>"; };
 		F1FCE77A2AC2C7670024AE60 /* MenteeSignup1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenteeSignup1ViewController.swift; sourceTree = "<group>"; };
 		F1FCE77E2AC317600024AE60 /* JobSelectViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectViewControllerProtocol.swift; sourceTree = "<group>"; };
@@ -145,10 +145,13 @@
 			isa = PBXGroup;
 			children = (
 				F126B1D52AA6FB0D0035E499 /* Views */,
+				F126B1CB2AA231F60035E499 /* MentoSignup1ViewController.swift */,
+				F1FCE77A2AC2C7670024AE60 /* MenteeSignup1ViewController.swift */,
 				F1FCE7642ABC754C0024AE60 /* Signup2ViewController.swift */,
 				F1FCE76A2ABD82620024AE60 /* Signup3ViewController.swift */,
-				F1FCE7782AC2C6EA0024AE60 /* MentoViewControllers */,
-				F1FCE7792AC2C72E0024AE60 /* MenteeViewControllers */,
+				F1FCE76E2ABE8E4E0024AE60 /* Signup4ViewController.swift */,
+				F1FCE7722AC023390024AE60 /* Signup5ViewController.swift */,
+				F1FCE7742AC07CEA0024AE60 /* Signup6ViewController.swift */,
 				F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */,
 				F126B1D12AA569390035E499 /* DepartmentSelectViewController.swift */,
 			);
@@ -294,25 +297,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		F1FCE7782AC2C6EA0024AE60 /* MentoViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F126B1CB2AA231F60035E499 /* MentoSignup1ViewController.swift */,
-				F1FCE76E2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift */,
-				F1FCE7722AC023390024AE60 /* MentoSignup5ViewController.swift */,
-				F1FCE7742AC07CEA0024AE60 /* MentoSignup6ViewController.swift */,
-			);
-			path = MentoViewControllers;
-			sourceTree = "<group>";
-		};
-		F1FCE7792AC2C72E0024AE60 /* MenteeViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				F1FCE77A2AC2C7670024AE60 /* MenteeSignup1ViewController.swift */,
-			);
-			path = MenteeViewControllers;
-			sourceTree = "<group>";
-		};
 		F1FCE77C2AC316D00024AE60 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,7 +407,7 @@
 				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
 				F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
-				F1FCE7752AC07CEA0024AE60 /* MentoSignup6ViewController.swift in Sources */,
+				F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */,
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
@@ -438,12 +422,12 @@
 				F1FCE7812AC317780024AE60 /* DepartmentSelectViewControllerProtocol.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
-				F1FCE76F2ABE8E4E0024AE60 /* MentoSignup4ViewController.swift in Sources */,
+				F1FCE76F2ABE8E4E0024AE60 /* Signup4ViewController.swift in Sources */,
 				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
 				F126B1D22AA569390035E499 /* DepartmentSelectViewController.swift in Sources */,
 				F1FCE7652ABC754C0024AE60 /* Signup2ViewController.swift in Sources */,
 				F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */,
-				F1FCE7732AC023390024AE60 /* MentoSignup5ViewController.swift in Sources */,
+				F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,

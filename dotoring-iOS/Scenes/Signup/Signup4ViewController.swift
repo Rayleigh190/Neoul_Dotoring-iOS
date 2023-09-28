@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MentoSignup4ViewController: UIViewController {
+class Signup4ViewController: UIViewController {
 
     var signup4View: Signup4View!
     
@@ -43,13 +43,13 @@ class MentoSignup4ViewController: UIViewController {
     }
     
     func nextButtonTapped() {
-        let vc = MentoSignup5ViewController()
+        let vc = Signup5ViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
 
 }
 
-extension MentoSignup4ViewController: UITextViewDelegate {
+extension Signup4ViewController: UITextViewDelegate {
     
     // MARK: textview 높이 자동조절
     func textViewDidChange(_ textView: UITextView) {
