@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UiStyle {
+enum UIStyle {
     case mento
     case mentee
 }

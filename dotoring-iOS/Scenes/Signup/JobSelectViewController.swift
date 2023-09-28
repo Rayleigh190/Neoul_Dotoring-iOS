@@ -11,7 +11,7 @@ class JobSelectViewController: UIViewController {
     
     var selectView: SelectView!
     var titleText: String = "타이틀"
-    var style: UiStyle = .mento
+    var style: UIStyle = .mento
     
     weak var jobSelectViewControllerDelegate: JobSelectViewControllerDelegate?
 

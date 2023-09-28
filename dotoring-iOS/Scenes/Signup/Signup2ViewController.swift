@@ -11,7 +11,6 @@ import UniformTypeIdentifiers
 
 class Signup2ViewController: UIViewController {
 
-    let uiStyle = UserDefaults.standard.string(forKey: "UiStyle")
     var signup2View: Signup2View!
     
     var selectedFileURL: URL?  // Store the selected file URL
@@ -60,7 +59,7 @@ class Signup2ViewController: UIViewController {
     }
     
     func nextButtonTapped() {
-        let vc = MentoSignup3ViewController()
+        let vc = Signup3ViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
     

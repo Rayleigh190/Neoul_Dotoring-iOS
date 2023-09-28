@@ -15,11 +15,11 @@ class Signup2View: UIView {
     var graduateCertificateUploadButtonActionHandler: (() -> Void)?
     var nextButtonActionHandler: (() -> Void)?
     
-    let uiStyle: UiStyle = {
-        if UserDefaults.standard.string(forKey: "UiStyle") == "mento" {
-            return UiStyle.mento
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
         } else {
-            return UiStyle.mentee
+            return UIStyle.mentee
         }
     }()
     

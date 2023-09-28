@@ -21,7 +21,7 @@ class SignupStepBar: UIView {
         return stackView
     }()
     
-    init(stepCount: Int, currentStep: Int, style: UiStyle) {
+    init(stepCount: Int, currentStep: Int, style: UIStyle) {
         super.init(frame: .zero)
         
         switch style {

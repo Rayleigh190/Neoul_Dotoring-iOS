@@ -49,7 +49,7 @@ class SelectView: UIView {
         return table
     }()
     
-    init(frame: CGRect, title: String, style:UiStyle) {
+    init(frame: CGRect, title: String, style:UIStyle) {
         super.init(frame: frame)
         
         switch style {

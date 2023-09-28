@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MentoSignup3ViewController: UIViewController {
+class Signup3ViewController: UIViewController {
     
     var signup3View: Signup3View!
 
