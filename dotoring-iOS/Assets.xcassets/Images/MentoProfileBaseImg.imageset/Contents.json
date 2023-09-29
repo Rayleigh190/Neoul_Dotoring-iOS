@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MainTapBarItemChatClickedImg.png",
+      "filename" : "MentoProfileBaseImg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MainTapBarItemChatClickedImg@2x.png",
+      "filename" : "MentoProfileBaseImg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MainTapBarItemChatClickedImg@3x.png",
+      "filename" : "MentoProfileBaseImg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

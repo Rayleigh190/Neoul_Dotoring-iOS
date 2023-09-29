@@ -10,11 +10,25 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "HomeBackgroundImg")
+        
+        if uiStyle == .mento {
+            imageView.image = UIImage(named: "MentoHomeBackgroundImg")
+        } else {
+            imageView.image = UIImage(named: "MenteeHomeBackgroundImg")
+        }
+        
 
         return imageView
     }()
@@ -24,8 +38,7 @@ class HomeViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
-
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .clear
         collectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: "homeCell")
         collectionView.register(
             HomeCollectionHeaderView.self,
@@ -38,11 +51,7 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+        view.backgroundColor = .systemBackground
         setupSubViews()
     }
 
@@ -91,11 +100,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 private extension HomeViewController {
     func setupSubViews() {
         
-        [backgroundImageView].forEach { view.addSubview($0) }
+        [backgroundImageView, collectionView].forEach { view.addSubview($0) }
         
         backgroundImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(00.0)
             $0.bottom.equalToSuperview().inset(29.66)
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         // UITapGestureRecognizer를 추가하여 배경 터치 시 키보드를 내릴 수 있도록 함
@@ -112,3 +125,9 @@ private extension HomeViewController {
     }
     
 }
+
+extension HomeViewController {
+    
+}
+
+

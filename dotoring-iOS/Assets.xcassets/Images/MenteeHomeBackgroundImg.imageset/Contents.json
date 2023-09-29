@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MainTapBarItemHomeClickedImg.png",
+      "filename" : "MenteeHomeBackgroundImg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MainTapBarItemHomeClickedImg@2x.png",
+      "filename" : "MenteeHomeBackgroundImg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MainTapBarItemHomeClickedImg@3x.png",
+      "filename" : "MenteeHomeBackgroundImg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

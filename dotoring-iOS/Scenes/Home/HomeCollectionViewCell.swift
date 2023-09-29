@@ -10,11 +10,24 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     private var shadowView: UIView!
 
     private lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 15)
-        label.textColor = .label
+        
+        if uiStyle == .mento {
+            label.textColor = .BaseNavy
+        } else {
+            label.textColor = .BaseGreen
+        }
 
         return label
     }()
@@ -39,15 +52,25 @@ class HomeCollectionViewCell: UICollectionViewCell {
 
         return label
     }()
+    
+    private lazy var profileImageBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0.958, green: 0.958, blue: 0.958, alpha: 1)
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 20.0
+       
+        return view
+    }()
 
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 20.0
-        imageView.backgroundColor = .lightGray
-        imageView.image = UIImage(named: "ProfileBaseImg")
-        imageView.tintColor = .black
+        
+        if uiStyle == .mento {
+            imageView.image = UIImage(named: "MentoProfileBaseImg")
+        } else {
+            imageView.image = UIImage(named: "MenteeProfileBaseImg")
+        }
 
         return imageView
     }()
@@ -118,19 +141,25 @@ class HomeCollectionViewCell: UICollectionViewCell {
 
 private extension HomeCollectionViewCell {
     func setupSubViews() {
-        [profileImageView, nicknameLabel, departmentLabel, jobFieldLabel, introductionLabel]
+        [profileImageBackgroundView, nicknameLabel, departmentLabel, jobFieldLabel, introductionLabel]
             .forEach { addSubview($0) }
+        
+        profileImageBackgroundView.addSubview(profileImageView)
 
-        profileImageView.snp.makeConstraints {
+        profileImageBackgroundView.snp.makeConstraints {
             $0.width.equalTo(83)
             $0.height.equalTo(91)
             $0.leading.equalToSuperview().inset(20.0)
             $0.centerY.equalToSuperview()
         }
         
+        profileImageView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+        }
+        
         nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.top).offset(5.0)
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(22.0)
+            $0.top.equalTo(profileImageBackgroundView.snp.top).offset(5.0)
+            $0.leading.equalTo(profileImageBackgroundView.snp.trailing).offset(22.0)
             $0.trailing.equalToSuperview()
         }
 

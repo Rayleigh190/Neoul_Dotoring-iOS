@@ -15,6 +15,14 @@ final class LoginView: UIView {
     var findPwButtonActionHandler: (() -> Void)?
     var signupButtonActionHandler: (() -> Void)?
     
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     private lazy var smallLogoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -158,6 +166,22 @@ final class LoginView: UIView {
         return view
     }()
     
+    private lazy var uiStyleSelectSwitch: UISwitch = {
+        // UI 스타일 선택 스위치
+        let switchButton = UISwitch()
+        switchButton.subviews.first?.subviews.first?.backgroundColor = .BaseGreen
+        switchButton.onTintColor = .BaseNavy
+        switchButton.addTarget(self, action: #selector(uiStyleSelectSwitchTapped), for: UIControl.Event.valueChanged)
+        
+        if uiStyle == .mento {
+            switchButton.isOn = false
+        } else {
+            switchButton.isOn = true
+        }
+        
+        return switchButton
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -177,7 +201,7 @@ final class LoginView: UIView {
 private extension LoginView {
     
     func setupSubViews() {
-        [navTitle, smallLogoImageView, backgroundImageView, titleLabel, subTitleLabel, idTextField, pwTextField, autoLoginCheckBox, autoLoginLabel, warningLabel, loginButton, accountStack].forEach { addSubview($0) }
+        [navTitle, smallLogoImageView, backgroundImageView, titleLabel, subTitleLabel, idTextField, pwTextField, autoLoginCheckBox, autoLoginLabel, warningLabel, loginButton, accountStack, uiStyleSelectSwitch].forEach { addSubview($0) }
         
 //        accountStack.addArrangedSubview(findIdButton)
         [findIdButton, line1, findPwButton, line2, signupButton].forEach { accountStack.addArrangedSubview($0)}
@@ -254,6 +278,11 @@ private extension LoginView {
             $0.width.equalTo(0.3)
         }
         
+        uiStyleSelectSwitch.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(accountStack.snp.bottom).offset(20)
+        }
+        
     }
     
     
@@ -279,6 +308,15 @@ extension LoginView {
     @objc func signupButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         signupButtonActionHandler?()
+    }
+    
+    // UI 스타일 선택 스위치 버튼 클릭 되면 UIStyle 데이터 변경
+    @objc func uiStyleSelectSwitchTapped(sender: UISwitch) {
+        if sender.isOn {
+            UserDefaults.standard.set("mentee", forKey: "UIStyle")
+        } else {
+            UserDefaults.standard.set("mento", forKey: "UIStyle")
+        }
     }
     
 }

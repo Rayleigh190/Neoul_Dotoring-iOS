@@ -9,10 +9,23 @@ import SnapKit
 import UIKit
 
 class HomeCollectionHeaderView: UICollectionReusableView {
+    
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
 
     private lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = UIColor(named: "BaseGreen")
+        
+        if uiStyle == .mento {
+            label.textColor = UIColor.BaseGreen
+        } else {
+            label.textColor = UIColor.BaseNavy
+        }
 
         return label
     }()
@@ -54,7 +67,13 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         searchBar.placeholder = "직접 검색"
         searchBar.backgroundColor = .systemBackground
         searchBar.layer.borderWidth = 2
-        searchBar.layer.borderColor = UIColor(named: "BaseGreen")?.cgColor
+        
+        if uiStyle == .mento {
+            searchBar.layer.borderColor = UIColor.BaseGreen?.cgColor
+        } else {
+            searchBar.layer.borderColor = UIColor.BaseNavy?.cgColor
+        }
+        
         searchBar.layer.cornerRadius = 20
         searchBar.searchTextField.backgroundColor = .systemBackground
         searchBar.backgroundImage = UIImage() // 위아래 선 지움
@@ -74,18 +93,19 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         return stackView
     }()
     
-    private lazy var departmentFilterButton: UIButton = {
+    lazy var departmentFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("학과", for: .normal)
-        button.backgroundColor = UIColor(named: "BaseSecondaryEmhasisGray")
+        button.backgroundColor = UIColor.BaseSecondaryEmhasisGray
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
+//        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
     }()
     
-    private lazy var hopeMentoringFilterButton: UIButton = {
+    lazy var hopeMentoringFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("희망 멘토링", for: .normal)
         button.backgroundColor = UIColor(named: "BaseSecondaryEmhasisGray")
@@ -189,7 +209,12 @@ private extension HomeCollectionHeaderView {
             searchBar.becomeFirstResponder()
         }
         
-        searchButton.tintColor = isOpen ? UIColor(named: "BaseSecondaryEmhasisGray") : UIColor(named: "BaseGreen")
+        if uiStyle == .mento {
+            searchButton.tintColor = isOpen ? UIColor.BaseSecondaryEmhasisGray : UIColor.BaseGreen
+        } else {
+            searchButton.tintColor = isOpen ? UIColor.BaseSecondaryEmhasisGray : UIColor.BaseNavy
+        }
+        
         
     }
     

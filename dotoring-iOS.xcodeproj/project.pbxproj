@@ -10,8 +10,7 @@
 		F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1C42AA0AFB60035E499 /* IntroViewController.swift */; };
 		F126B1CC2AA231F60035E499 /* MentoSignup1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1CB2AA231F60035E499 /* MentoSignup1ViewController.swift */; };
 		F126B1CE2AA41D7A0035E499 /* SignupStepBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1CD2AA41D7A0035E499 /* SignupStepBar.swift */; };
-		F126B1D02AA568D80035E499 /* JobSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */; };
-		F126B1D22AA569390035E499 /* DepartmentSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D12AA569390035E499 /* DepartmentSelectViewController.swift */; };
+		F126B1D02AA568D80035E499 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1CF2AA568D80035E499 /* SelectViewController.swift */; };
 		F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D32AA6F6CF0035E499 /* SelectView.swift */; };
 		F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D62AA6FB780035E499 /* SelectedElementView.swift */; };
 		F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */; };
@@ -59,8 +58,7 @@
 		F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7742AC07CEA0024AE60 /* Signup6ViewController.swift */; };
 		F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7762AC07CF90024AE60 /* Signup6View.swift */; };
 		F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE77A2AC2C7670024AE60 /* MenteeSignup1ViewController.swift */; };
-		F1FCE77F2AC317600024AE60 /* JobSelectViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE77E2AC317600024AE60 /* JobSelectViewControllerProtocol.swift */; };
-		F1FCE7812AC317780024AE60 /* DepartmentSelectViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7802AC317780024AE60 /* DepartmentSelectViewControllerProtocol.swift */; };
+		F1FCE77F2AC317600024AE60 /* SelectViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE77E2AC317600024AE60 /* SelectViewControllerProtocol.swift */; };
 		F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7822AC317EF0024AE60 /* UIStyle.swift */; };
 		F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7842AC318700024AE60 /* BaseButtonStyle.swift */; };
 		F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7862AC318950024AE60 /* NanumWeightType.swift */; };
@@ -71,8 +69,7 @@
 		F126B1C42AA0AFB60035E499 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		F126B1CB2AA231F60035E499 /* MentoSignup1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoSignup1ViewController.swift; sourceTree = "<group>"; };
 		F126B1CD2AA41D7A0035E499 /* SignupStepBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStepBar.swift; sourceTree = "<group>"; };
-		F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectViewController.swift; sourceTree = "<group>"; };
-		F126B1D12AA569390035E499 /* DepartmentSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectViewController.swift; sourceTree = "<group>"; };
+		F126B1CF2AA568D80035E499 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		F126B1D32AA6F6CF0035E499 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		F126B1D62AA6FB780035E499 /* SelectedElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedElementView.swift; sourceTree = "<group>"; };
 		F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dotoring-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,8 +117,7 @@
 		F1FCE7742AC07CEA0024AE60 /* Signup6ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup6ViewController.swift; sourceTree = "<group>"; };
 		F1FCE7762AC07CF90024AE60 /* Signup6View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup6View.swift; sourceTree = "<group>"; };
 		F1FCE77A2AC2C7670024AE60 /* MenteeSignup1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenteeSignup1ViewController.swift; sourceTree = "<group>"; };
-		F1FCE77E2AC317600024AE60 /* JobSelectViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobSelectViewControllerProtocol.swift; sourceTree = "<group>"; };
-		F1FCE7802AC317780024AE60 /* DepartmentSelectViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentSelectViewControllerProtocol.swift; sourceTree = "<group>"; };
+		F1FCE77E2AC317600024AE60 /* SelectViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewControllerProtocol.swift; sourceTree = "<group>"; };
 		F1FCE7822AC317EF0024AE60 /* UIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyle.swift; sourceTree = "<group>"; };
 		F1FCE7842AC318700024AE60 /* BaseButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButtonStyle.swift; sourceTree = "<group>"; };
 		F1FCE7862AC318950024AE60 /* NanumWeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanumWeightType.swift; sourceTree = "<group>"; };
@@ -152,8 +148,6 @@
 				F1FCE76E2ABE8E4E0024AE60 /* Signup4ViewController.swift */,
 				F1FCE7722AC023390024AE60 /* Signup5ViewController.swift */,
 				F1FCE7742AC07CEA0024AE60 /* Signup6ViewController.swift */,
-				F126B1CF2AA568D80035E499 /* JobSelectViewController.swift */,
-				F126B1D12AA569390035E499 /* DepartmentSelectViewController.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -236,6 +230,7 @@
 				F1DD2CA92A99CCDD00EE9711 /* Common */,
 				F1DD2C8B2A95DDF600EE9711 /* Home */,
 				F1A560622A949E6800FD2E91 /* MainTapBarController.swift */,
+				F126B1CF2AA568D80035E499 /* SelectViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -311,8 +306,7 @@
 		F1FCE77D2AC316F40024AE60 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				F1FCE77E2AC317600024AE60 /* JobSelectViewControllerProtocol.swift */,
-				F1FCE7802AC317780024AE60 /* DepartmentSelectViewControllerProtocol.swift */,
+				F1FCE77E2AC317600024AE60 /* SelectViewControllerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -419,12 +413,10 @@
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */,
 				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
-				F1FCE7812AC317780024AE60 /* DepartmentSelectViewControllerProtocol.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
 				F1FCE76F2ABE8E4E0024AE60 /* Signup4ViewController.swift in Sources */,
 				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
-				F126B1D22AA569390035E499 /* DepartmentSelectViewController.swift in Sources */,
 				F1FCE7652ABC754C0024AE60 /* Signup2ViewController.swift in Sources */,
 				F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */,
 				F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */,
@@ -436,9 +428,9 @@
 				F1FCE76B2ABD82620024AE60 /* Signup3ViewController.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
-				F1FCE77F2AC317600024AE60 /* JobSelectViewControllerProtocol.swift in Sources */,
+				F1FCE77F2AC317600024AE60 /* SelectViewControllerProtocol.swift in Sources */,
 				F126B1CC2AA231F60035E499 /* MentoSignup1ViewController.swift in Sources */,
-				F126B1D02AA568D80035E499 /* JobSelectViewController.swift in Sources */,
+				F126B1D02AA568D80035E499 /* SelectViewController.swift in Sources */,
 				F1DD2CD02A9F616D00EE9711 /* FindPwViewController.swift in Sources */,
 				F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */,
 				F1DD2CBC2A9A53AC00EE9711 /* UIFont.swift in Sources */,
