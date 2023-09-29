@@ -78,7 +78,7 @@ extension HomeViewController: UICollectionViewDataSource {
                 for: indexPath
             ) as? HomeCollectionHeaderView
         else { return UICollectionReusableView() }
-
+        header.parentViewController = self // 헤더뷰의 부모뷰를 셀프로 셋팅
         header.setup()
 
         return header

@@ -10,11 +10,21 @@ import UIKit
 
 class HomeCollectionHeaderView: UICollectionReusableView {
     
-    let uiStyle: UIStyle = {
+    weak var parentViewController: UIViewController?
+    
+    private let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
             return UIStyle.mento
         } else {
             return UIStyle.mentee
+        }
+    }()
+    
+    private lazy var baseColor: UIColor = {
+        if uiStyle == .mento {
+            return UIColor.BaseGreen!
+        } else {
+            return UIColor.BaseNavy!
         }
     }()
 
@@ -100,7 +110,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
-//        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
     }()
@@ -112,6 +122,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
     }()
@@ -241,4 +252,52 @@ extension HomeCollectionHeaderView {
             searchButton.tintColor = isOpen ? UIColor(named: "BaseSecondaryEmhasisGray") : UIColor(named: "BaseGreen")
         }
     }
+}
+
+extension HomeCollectionHeaderView: SelectViewControllerDelegate {
+    
+    @objc private func filterButtonTapped(sender: UIButton) {
+        let vc = SelectViewController()
+        if sender == departmentFilterButton {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "학과 필터"
+            vc.style = uiStyle
+        } else if sender == hopeMentoringFilterButton {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "희망 분야 필터"
+            vc.style = uiStyle
+        } else {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "필터"
+        }
+        vc.sender = sender
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.preferredCornerRadius = 30
+            sheet.prefersGrabberVisible = true
+        }
+
+        // 부모 뷰 컨트롤러에서 뷰 컨트롤러를 표시합니다.
+        parentViewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewControllerDismiss(elements: [String], selectedElements: [Int], sender: UIButton) {
+        // 선택한 데이터가 0개 이상일 때만 데이터 저장 및 뷰 수정
+        if selectedElements.count > 0 {
+            print(selectedElements)
+            if sender == departmentFilterButton {
+                departmentFilterButton.backgroundColor = baseColor
+            } else {
+                hopeMentoringFilterButton.backgroundColor = baseColor
+            }
+        } else { // 선택한 데이터가 아무것도 없을 때 색을 기본색으로 셋팅
+            if sender == departmentFilterButton {
+                departmentFilterButton.backgroundColor = .BaseSecondaryEmhasisGray
+            } else {
+                hopeMentoringFilterButton.backgroundColor = .BaseSecondaryEmhasisGray
+            }
+        }
+    }
+    
 }
