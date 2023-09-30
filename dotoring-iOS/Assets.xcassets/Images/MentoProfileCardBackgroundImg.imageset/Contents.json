@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "MentoProfileCardBackgroundImg.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "MentoProfileCardBackgroundImg@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "MentoProfileCardBackgroundImg@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

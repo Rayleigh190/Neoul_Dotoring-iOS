@@ -42,8 +42,8 @@ class MainTapBarController: UITabBarController {
         return viewController
     }()
     
-    private lazy var mypageViewController: UIViewController = {
-        let viewController = UIViewController()
+    private lazy var myPageViewController: UIViewController = {
+        let viewController = MyPageViewController()
         let tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: "MainTapBarItemMypageUnclickedImg"), tag: 3)
         viewController.tabBarItem = tabBarItem
 
@@ -53,7 +53,7 @@ class MainTapBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapBar()
-        viewControllers = [homeViewController, matchViewController, chatViewController, mypageViewController]
+        viewControllers = [homeViewController, matchViewController, chatViewController, myPageViewController]
         
     }
 

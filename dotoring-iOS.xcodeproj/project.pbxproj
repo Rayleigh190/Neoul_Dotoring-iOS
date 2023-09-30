@@ -63,6 +63,10 @@
 		F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7842AC318700024AE60 /* BaseButtonStyle.swift */; };
 		F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7862AC318950024AE60 /* NanumWeightType.swift */; };
 		F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7882AC318B00024AE60 /* NanumFamily.swift */; };
+		F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */; };
+		F1FCE78F2AC7D5FC0024AE60 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE78E2AC7D5FC0024AE60 /* MyPageView.swift */; };
+		F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */; };
+		F1FCE7932AC84FFD0024AE60 /* SetMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +126,10 @@
 		F1FCE7842AC318700024AE60 /* BaseButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButtonStyle.swift; sourceTree = "<group>"; };
 		F1FCE7862AC318950024AE60 /* NanumWeightType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanumWeightType.swift; sourceTree = "<group>"; };
 		F1FCE7882AC318B00024AE60 /* NanumFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NanumFamily.swift; sourceTree = "<group>"; };
+		F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		F1FCE78E2AC7D5FC0024AE60 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
+		F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +234,7 @@
 		F1DD2C8A2A95DDD500EE9711 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F1FCE78A2AC7D4AD0024AE60 /* MyPage */,
 				F126B1CA2AA231E20035E499 /* Signup */,
 				F1DD2CA92A99CCDD00EE9711 /* Common */,
 				F1DD2C8B2A95DDF600EE9711 /* Home */,
@@ -309,6 +318,25 @@
 				F1FCE77E2AC317600024AE60 /* SelectViewControllerProtocol.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F1FCE78A2AC7D4AD0024AE60 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				F1FCE78D2AC7D5E30024AE60 /* Views */,
+				F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		F1FCE78D2AC7D5E30024AE60 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1FCE78E2AC7D5FC0024AE60 /* MyPageView.swift */,
+				F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */,
+				F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,8 +433,10 @@
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
+				F1FCE7932AC84FFD0024AE60 /* SetMenuView.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
+				F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */,
 				F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */,
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
@@ -429,6 +459,7 @@
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
 				F1FCE77F2AC317600024AE60 /* SelectViewControllerProtocol.swift in Sources */,
+				F1FCE78F2AC7D5FC0024AE60 /* MyPageView.swift in Sources */,
 				F126B1CC2AA231F60035E499 /* MentoSignup1ViewController.swift in Sources */,
 				F126B1D02AA568D80035E499 /* SelectViewController.swift in Sources */,
 				F1DD2CD02A9F616D00EE9711 /* FindPwViewController.swift in Sources */,
@@ -440,6 +471,7 @@
 				F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
+				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
 				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
