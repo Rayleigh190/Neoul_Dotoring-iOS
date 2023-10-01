@@ -43,7 +43,7 @@ class MainTapBarController: UITabBarController {
     }()
     
     private lazy var myPageViewController: UIViewController = {
-        let viewController = MyPageViewController()
+        let viewController = UINavigationController(rootViewController: MyPageViewController())
         let tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: "MainTapBarItemMypageUnclickedImg"), tag: 3)
         viewController.tabBarItem = tabBarItem
 

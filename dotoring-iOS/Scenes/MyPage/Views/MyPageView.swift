@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MyPageView: UIView {
+final class MyPageView: UIView {
+    
+    // Add a closure property
+    var setMentoringButtonActionHandler: (() -> Void)?
+    var setAccountButtonActionHandler: (() -> Void)?
     
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 30)
@@ -56,12 +60,14 @@ class MyPageView: UIView {
     
     private lazy var setMentoringButton: UIButton = {
         let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(setMentorignButtonTapped), for: .touchUpInside)
         
         return button
     }()
     
     private lazy var setAccountButton: UIButton = {
         let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(setAccountButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -145,6 +151,20 @@ private extension MyPageView {
         }
     
         
+    }
+    
+}
+
+extension MyPageView {
+    
+    @objc func setMentorignButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        setMentoringButtonActionHandler?()
+    }
+    
+    @objc func setAccountButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        setAccountButtonActionHandler?()
     }
     
 }

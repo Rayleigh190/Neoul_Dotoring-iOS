@@ -21,7 +21,28 @@ class MyPageViewController: UIViewController {
         
         myPageView = MyPageView(frame: self.view.frame)
         
+        myPageView.setMentoringButtonActionHandler = { [weak self] in
+            self?.handleSetMentoringButtonTapped()
+        }
+        myPageView.setAccountButtonActionHandler = { [weak self] in
+            self?.handleSetAccountButtonTapped()
+        }
+        
         self.view = myPageView
     }
 
+}
+
+extension MyPageViewController {
+    
+    func handleSetMentoringButtonTapped() {
+        let vc = MentoringSetViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handleSetAccountButtonTapped() {
+        let vc = AccountSetViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
