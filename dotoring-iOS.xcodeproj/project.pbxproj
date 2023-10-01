@@ -70,6 +70,7 @@
 		F1FCE7952AC902D90024AE60 /* MentoringSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7942AC902D90024AE60 /* MentoringSetView.swift */; };
 		F1FCE7972AC902F00024AE60 /* MentoringSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7962AC902F00024AE60 /* MentoringSetViewController.swift */; };
 		F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */; };
+		F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +137,7 @@
 		F1FCE7942AC902D90024AE60 /* MentoringSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringSetView.swift; sourceTree = "<group>"; };
 		F1FCE7962AC902F00024AE60 /* MentoringSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringSetViewController.swift; sourceTree = "<group>"; };
 		F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetViewController.swift; sourceTree = "<group>"; };
+		F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +346,7 @@
 				F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */,
 				F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */,
 				F1FCE7942AC902D90024AE60 /* MentoringSetView.swift */,
+				F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
 				F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */,
+				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,

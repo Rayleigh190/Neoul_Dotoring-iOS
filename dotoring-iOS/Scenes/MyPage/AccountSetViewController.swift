@@ -8,12 +8,22 @@
 import UIKit
 
 class AccountSetViewController: UIViewController {
+    
+    var accountSetView: AccountSetView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
         setNavigationItems()
+    }
+    
+    override func loadView() {
+        super.loadView()
+        
+        accountSetView = AccountSetView(frame: self.view.frame)
+
+        self.view = accountSetView
     }
     
     private func setNavigationItems() {
