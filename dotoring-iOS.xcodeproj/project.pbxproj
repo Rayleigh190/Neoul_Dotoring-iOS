@@ -71,6 +71,10 @@
 		F1FCE7972AC902F00024AE60 /* MentoringSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7962AC902F00024AE60 /* MentoringSetViewController.swift */; };
 		F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */; };
 		F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */; };
+		F1FCE79D2AC976750024AE60 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE79C2AC976750024AE60 /* CustomAlertViewController.swift */; };
+		F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */; };
+		F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */; };
+		F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +142,10 @@
 		F1FCE7962AC902F00024AE60 /* MentoringSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringSetViewController.swift; sourceTree = "<group>"; };
 		F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetViewController.swift; sourceTree = "<group>"; };
 		F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetView.swift; sourceTree = "<group>"; };
+		F1FCE79C2AC976750024AE60 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
+		F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentsViewController.swift; sourceTree = "<group>"; };
+		F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +302,8 @@
 				F1DD2CB32A99FA9B00EE9711 /* NanumLabel.swift */,
 				F1DD2CB92A9A0F0D00EE9711 /* CheckBox.swift */,
 				F126B1CD2AA41D7A0035E499 /* SignupStepBar.swift */,
+				F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */,
+				F1FCE79C2AC976750024AE60 /* CustomAlertViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 				F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */,
 				F1FCE7962AC902F00024AE60 /* MentoringSetViewController.swift */,
 				F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */,
+				F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -347,6 +358,7 @@
 				F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */,
 				F1FCE7942AC902D90024AE60 /* MentoringSetView.swift */,
 				F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */,
+				F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -454,6 +466,7 @@
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
+				F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */,
 				F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */,
 				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
 				F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */,
@@ -467,8 +480,10 @@
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
+				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
 				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
+				F1FCE79D2AC976750024AE60 /* CustomAlertViewController.swift in Sources */,
 				F1FCE76B2ABD82620024AE60 /* Signup3ViewController.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
@@ -488,6 +503,7 @@
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
+				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,
 				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

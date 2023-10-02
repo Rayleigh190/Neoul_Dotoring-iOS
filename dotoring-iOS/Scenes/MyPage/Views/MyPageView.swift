@@ -12,6 +12,7 @@ final class MyPageView: UIView {
     // Add a closure property
     var setMentoringButtonActionHandler: (() -> Void)?
     var setAccountButtonActionHandler: (() -> Void)?
+    var departmentButtonActionHandler: (() -> Void)?
     
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 30)
@@ -24,6 +25,7 @@ final class MyPageView: UIView {
     private lazy var profileCardView: ProfileCardView = {
         let view = ProfileCardView()
         view.backgroundColor = .systemBackground
+        view.departmentButton.addTarget(self, action: #selector(departmentButtonTapped), for: .touchUpInside)
         
         return view
     }()
@@ -165,6 +167,11 @@ extension MyPageView {
     @objc func setAccountButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         setAccountButtonActionHandler?()
+    }
+    
+    @objc func departmentButtonTapped(sender: UIButton!) {
+        // Call the closure when the login button is tapped
+        departmentButtonActionHandler?()
     }
     
 }

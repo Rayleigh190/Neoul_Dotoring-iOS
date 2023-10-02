@@ -27,6 +27,9 @@ class MyPageViewController: UIViewController {
         myPageView.setAccountButtonActionHandler = { [weak self] in
             self?.handleSetAccountButtonTapped()
         }
+        myPageView.departmentButtonActionHandler = { [weak self] in self?.handledepartmentButtonTapped()
+            
+        }
         
         self.view = myPageView
     }
@@ -42,6 +45,11 @@ extension MyPageViewController {
     
     func handleSetAccountButtonTapped() {
         let vc = AccountSetViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func handledepartmentButtonTapped() {
+        let vc = UploadDocumentsViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
