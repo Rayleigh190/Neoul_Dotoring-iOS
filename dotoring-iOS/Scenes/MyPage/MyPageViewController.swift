@@ -28,8 +28,9 @@ class MyPageViewController: UIViewController {
             self?.handleSetAccountButtonTapped()
         }
         myPageView.departmentButtonActionHandler = { [weak self] in self?.handledepartmentButtonTapped()
-            
         }
+        
+        myPageView.profileCardView.jobButton.addTarget(self, action: #selector(showAlet), for: .touchUpInside)
         
         self.view = myPageView
     }
@@ -52,5 +53,28 @@ extension MyPageViewController {
         let vc = UploadDocumentsViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func showAlet(sender: UIButton!) {
+        print("show alert")
+        showAlert(
+            alertType: .onlyConfirm,
+            alertText: "소속, 분야, 연차, 졸업 학과 수정 시\n새로운 증빙서류가 요청됩니다.\n계속하시겠습니까?",
+            highlightText: "새로운 증빙서류",
+            cancelButtonText: "아니오",
+            confirmButtonText: "네"
+        )
+    }
+    
+}
+
+extension MyPageViewController: CustomAlertDelegate {
+    func action() {
+        print("액션")
+    }
+    
+    func exit() {
+        print("엑시트")
+    }
+    
     
 }

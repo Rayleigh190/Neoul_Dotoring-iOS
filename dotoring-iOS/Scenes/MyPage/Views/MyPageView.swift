@@ -22,7 +22,7 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var profileCardView: ProfileCardView = {
+    lazy var profileCardView: ProfileCardView = {
         let view = ProfileCardView()
         view.backgroundColor = .systemBackground
         view.departmentButton.addTarget(self, action: #selector(departmentButtonTapped), for: .touchUpInside)

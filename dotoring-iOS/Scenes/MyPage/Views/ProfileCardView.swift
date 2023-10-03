@@ -98,7 +98,7 @@ class ProfileCardView: UIView {
         return button
     }()
     
-    private lazy var jobButton: UIButton = {
+    lazy var jobButton: UIButton = {
         let button = UIButton(type: .system)
         
         if uiStyle == .mento {
