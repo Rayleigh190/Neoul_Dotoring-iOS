@@ -7,7 +7,7 @@
 
 import UIKit
 
-// Custom Alert의 버튼의 액션을 처리하는 Delegate입니다.
+// Custom Alert의 버튼의 액션을 처리하는 Delegate
 protocol CustomAlertDelegate {
     func action()   // confirm button event
     func exit()     // cancel button event
@@ -18,6 +18,11 @@ enum AlertType {
     case canCancel      // 확인 + 취소 버튼
 }
 
+enum AlertContentFontSize {
+    case small
+    case large
+}
+
 
 class CustomAlertViewController: UIViewController {
     
@@ -26,9 +31,15 @@ class CustomAlertViewController: UIViewController {
     
     var alertType: AlertType = .onlyConfirm
     var alertText = ""
+    var highlightText = ""
+    var contentFontSieze: AlertContentFontSize = .small
+    var hasSecondaryText: Bool = false
+    var secondaryText = ""
     var cancelButtonText = ""
     var confirmButtonText = ""
-    var highlightText = ""
+    var changeButtonPosition: Bool = false
+    var cancelButtonHighlight: Bool = false
+    var confirmButtonHighlight: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,18 +49,46 @@ class CustomAlertViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        customAlertView = CustomAlertView(frame: self.view.frame)
+        customAlertView = CustomAlertView(hasSecondaryText: hasSecondaryText, changeButtonPosition: changeButtonPosition)
         customAlertView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         customAlertView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         
+        // 컨텐츠 텍스트 설정
         customAlertView.contentLabel.text = alertText
         let attributedStr = NSMutableAttributedString(string: alertText)
         attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseWarningRed!, range: (alertText as NSString).range(of: highlightText))
         customAlertView.contentLabel.attributedText = attributedStr
         
-        
+        // 취소, 확인 버튼 타이틀 설정
         customAlertView.cancelButton.setTitle(cancelButtonText, for: .normal)
         customAlertView.confirmButton.setTitle(confirmButtonText, for: .normal)
+        
+        // 알림 타입별 화면 설정
+        if alertType == .onlyConfirm {
+            customAlertView.cancelButton.isHidden = true
+        } else {
+            
+        }
+        
+        // 컨텐츠 글 폰트 사이즈 설정
+        if contentFontSieze == .large {
+            customAlertView.contentLabel.font = .nanumSquare(style: .NanumSquareOTFR, size: 20)
+        }
+        
+        // 보조 텍스트 숨기기, 아니면 보조 텍스트 설정
+        if hasSecondaryText == false {
+            customAlertView.secondaryLabel.isHidden = true
+        } else {
+            customAlertView.secondaryLabel.text = secondaryText
+        }
+        
+        // 취소, 확인 버튼 배경 하이라이트 설정
+        if cancelButtonHighlight == true {
+            customAlertView.cancelButton.backgroundColor = .BaseWarningRed
+        }
+        if confirmButtonHighlight == true {
+            customAlertView.confirmButton.backgroundColor = .BaseWarningRed
+        }
         
         self.view = customAlertView
     }
@@ -75,8 +114,14 @@ extension CustomAlertDelegate where Self: UIViewController {
         alertType: AlertType,
         alertText: String,
         highlightText: String = "",
+        contentFontSieze: AlertContentFontSize = .small,
+        hasSecondaryText: Bool = false,
+        secondaryText: String = "",
         cancelButtonText: String? = "",
-        confirmButtonText: String
+        confirmButtonText: String,
+        changeButtonPosition: Bool = false,
+        cancelButtonHighlight: Bool = false,
+        confirmButtonHighlight: Bool = false
     ) {
         
         let customAlertViewController = CustomAlertViewController()
@@ -85,10 +130,16 @@ extension CustomAlertDelegate where Self: UIViewController {
         customAlertViewController.modalPresentationStyle = .overFullScreen
         customAlertViewController.modalTransitionStyle = .crossDissolve
         customAlertViewController.alertText = alertText
+        customAlertViewController.contentFontSieze = contentFontSieze
         customAlertViewController.alertType = alertType
         customAlertViewController.cancelButtonText = cancelButtonText ?? ""
         customAlertViewController.confirmButtonText = confirmButtonText
         customAlertViewController.highlightText = highlightText
+        customAlertViewController.hasSecondaryText = hasSecondaryText
+        customAlertViewController.secondaryText = secondaryText
+        customAlertViewController.changeButtonPosition = changeButtonPosition
+        customAlertViewController.cancelButtonHighlight = cancelButtonHighlight
+        customAlertViewController.confirmButtonHighlight = confirmButtonHighlight
         
         self.present(customAlertViewController, animated: true, completion: nil)
     }

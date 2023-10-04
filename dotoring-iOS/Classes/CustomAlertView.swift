@@ -8,6 +8,9 @@
 import UIKit
 
 class CustomAlertView: UIView {
+
+    var hasSecondaryText: Bool = false
+    var changeButtonPosition: Bool = false
     
     private lazy var alertView: UIView = {
         let view = UIView()
@@ -26,6 +29,30 @@ class CustomAlertView: UIView {
     lazy var contentLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 17)
         label.text = "Content Text"
+        label.numberOfLines = 0
+        
+        // Define the line spacing (line height) you want, in points (e.g., 10 for 10 points). 행간 적용
+        let lineSpacing: CGFloat = 6
+
+        // Create a paragraph style with the desired line spacing.
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+
+        // Create an attributed string with the paragraph style.
+        let attributedText = NSMutableAttributedString(string: "Content Text")
+        attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
+
+        // Apply the attributed text to the label.
+        label.attributedText = attributedText
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    lazy var secondaryLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 13)
+        label.text = "secondary Text"
+        label.textColor = .BaseSecondaryEmhasisGray
         label.numberOfLines = 0
         label.textAlignment = .center
         
@@ -62,8 +89,10 @@ class CustomAlertView: UIView {
         return button
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(hasSecondaryText: Bool, changeButtonPosition: Bool) {
+        super.init(frame: .zero)
+        self.hasSecondaryText = hasSecondaryText
+        self.changeButtonPosition = changeButtonPosition
         backgroundColor = .black.withAlphaComponent(0.5)
         setup()
     }
@@ -83,11 +112,15 @@ class CustomAlertView: UIView {
 private extension CustomAlertView {
     
     func setupSubViews() {
-        [alertView, contentLabel, buttonStackView].forEach {addSubview($0)}
+        [alertView, contentLabel, secondaryLabel, buttonStackView].forEach {addSubview($0)}
         
         [statusBar].forEach {alertView.addSubview($0)}
         
-        [cancelButton, confirmButton].forEach {buttonStackView.addArrangedSubview($0)}
+        if changeButtonPosition == true {
+            [confirmButton, cancelButton].forEach {buttonStackView.addArrangedSubview($0)}
+        } else {
+            [cancelButton, confirmButton].forEach {buttonStackView.addArrangedSubview($0)}
+        }
         
         alertView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -101,9 +134,21 @@ private extension CustomAlertView {
             $0.height.equalTo(32)
         }
         
-        contentLabel.snp.makeConstraints {
-            $0.centerX.equalTo(alertView)
-            $0.centerY.equalTo(alertView).offset(-10)
+        if hasSecondaryText == true {
+            contentLabel.snp.makeConstraints {
+                $0.centerX.equalTo(alertView)
+                $0.centerY.equalTo(alertView).offset(-20)
+            }
+        } else {
+            contentLabel.snp.makeConstraints {
+                $0.centerX.equalTo(alertView)
+                $0.centerY.equalTo(alertView).offset(-10)
+            }
+        }
+        
+        secondaryLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(buttonStackView.snp.top).offset(-10)
         }
         
         buttonStackView.snp.makeConstraints {
@@ -123,7 +168,7 @@ private extension CustomAlertView {
     
     func updateUI() {
         alertView.layer.cornerRadius = 20
-        statusBar.layer.cornerRadius = 20
+        alertView.clipsToBounds = true
         statusBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         cancelButton.layer.cornerRadius = 20
         confirmButton.layer.cornerRadius = 20
