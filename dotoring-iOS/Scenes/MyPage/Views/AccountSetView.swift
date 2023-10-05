@@ -51,7 +51,7 @@ class AccountSetView: UIView {
         return imageView
     }()
     
-    private lazy var logoutButton: UIButton = {
+    lazy var logoutButton: UIButton = {
         let button = UIButton(type: .system)
         
         return button
