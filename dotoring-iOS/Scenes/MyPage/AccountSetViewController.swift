@@ -40,10 +40,11 @@ class AccountSetViewController: UIViewController {
 extension AccountSetViewController {
     
     func setButtonAddTarget() {
-        accountSetView.logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        accountSetView.logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        accountSetView.accountResetButton.addTarget(self, action: #selector(resetPasswordButtonTapped), for: .touchUpInside)
     }
     
-    @objc func logout(sender: UIButton) {
+    @objc func logoutButtonTapped(sender: UIButton) {
         showAlert(
             alertType: .canCancel,
             alertText: "정말 로그아웃\n하시겠습니까?",
@@ -57,6 +58,12 @@ extension AccountSetViewController {
         )
     }
     
+    @objc func resetPasswordButtonTapped(sender: UIButton) {
+        let vc = AccountConfirmViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension AccountSetViewController: CustomAlertDelegate {
@@ -67,6 +74,5 @@ extension AccountSetViewController: CustomAlertDelegate {
     func exit() {
         print("로그아웃 취소")
     }
-    
     
 }

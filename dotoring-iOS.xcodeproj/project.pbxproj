@@ -75,6 +75,8 @@
 		F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */; };
 		F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */; };
 		F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */; };
+		F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */; };
+		F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +148,8 @@
 		F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentsViewController.swift; sourceTree = "<group>"; };
 		F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentsView.swift; sourceTree = "<group>"; };
+		F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConfirmView.swift; sourceTree = "<group>"; };
+		F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConfirmViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,8 +348,9 @@
 				F1FCE78D2AC7D5E30024AE60 /* Views */,
 				F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */,
 				F1FCE7962AC902F00024AE60 /* MentoringSetViewController.swift */,
-				F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */,
 				F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */,
+				F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */,
+				F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -357,8 +362,9 @@
 				F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */,
 				F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */,
 				F1FCE7942AC902D90024AE60 /* MentoringSetView.swift */,
-				F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */,
 				F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */,
+				F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */,
+				F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
+				F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
 				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
 				F1FCE79D2AC976750024AE60 /* CustomAlertViewController.swift in Sources */,
@@ -499,6 +506,7 @@
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
 				F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */,
+				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,

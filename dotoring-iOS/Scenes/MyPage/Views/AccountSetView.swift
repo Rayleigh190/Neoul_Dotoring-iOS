@@ -32,7 +32,7 @@ class AccountSetView: UIView {
     
     private lazy var accountResetLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "아이디/비밀번호 재설정"
+        label.text = "비밀번호 재설정"
         
         return label
     }()
@@ -57,7 +57,7 @@ class AccountSetView: UIView {
         return button
     }()
     
-    private lazy var accountResetButton: UIButton = {
+    lazy var accountResetButton: UIButton = {
         let button = UIButton(type: .system)
         
         return button
