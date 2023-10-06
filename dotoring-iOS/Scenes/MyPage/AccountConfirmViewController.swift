@@ -23,7 +23,7 @@ class AccountConfirmViewController: UIViewController {
         
         accountConfirmView = AccountConfirmView(frame: self.view.frame)
         
-//        setButtonAddTarget()
+        setButtonAddTarget()
 
         self.view = accountConfirmView
     }
@@ -32,7 +32,19 @@ class AccountConfirmViewController: UIViewController {
         accountConfirmView.idTextField.textField.delegate = self
         accountConfirmView.pwTextField.textField.delegate = self
     }
+
+}
+
+extension AccountConfirmViewController {
+
+    func setButtonAddTarget() {
+        accountConfirmView.loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    }
     
+    @objc func loginButtonTapped() {
+        let vc = PasswordResetViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }
 

@@ -77,6 +77,8 @@
 		F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */; };
 		F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */; };
 		F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */; };
+		F1FCE7A92AD03FE30024AE60 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A82AD03FE30024AE60 /* PasswordResetViewController.swift */; };
+		F1FCE7AB2AD03FF50024AE60 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +152,8 @@
 		F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDocumentsView.swift; sourceTree = "<group>"; };
 		F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConfirmView.swift; sourceTree = "<group>"; };
 		F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConfirmViewController.swift; sourceTree = "<group>"; };
+		F1FCE7A82AD03FE30024AE60 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
+		F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +355,7 @@
 				F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */,
 				F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */,
 				F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */,
+				F1FCE7A82AD03FE30024AE60 /* PasswordResetViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -365,6 +370,7 @@
 				F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */,
 				F1FCE79A2AC94A9E0024AE60 /* AccountSetView.swift */,
 				F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */,
+				F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
 				F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
+				F1FCE7A92AD03FE30024AE60 /* PasswordResetViewController.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,
 				F1FCE76F2ABE8E4E0024AE60 /* Signup4ViewController.swift in Sources */,
 				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
@@ -505,6 +512,7 @@
 				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
+				F1FCE7AB2AD03FF50024AE60 /* PasswordResetView.swift in Sources */,
 				F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */,
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,

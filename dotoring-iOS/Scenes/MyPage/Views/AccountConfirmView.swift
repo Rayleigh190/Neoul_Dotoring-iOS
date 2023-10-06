@@ -58,7 +58,7 @@ class AccountConfirmView: UIView {
         return lineTextField
     }()
     
-    private lazy var loginButton: BaseButton = {
+    lazy var loginButton: BaseButton = {
         let button = BaseButton(style: .clear)
         button.setTitle("로그인", for: .normal)
         

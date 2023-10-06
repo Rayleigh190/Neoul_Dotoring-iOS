@@ -68,7 +68,12 @@ extension AccountSetViewController {
 
 extension AccountSetViewController: CustomAlertDelegate {
     func action() {
-        print("로그아웃")
+        print("로그아웃 요청")
+        print("비밀번호 변경 요청")
+        let vc = UINavigationController(rootViewController: LoginViewController())
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     func exit() {
