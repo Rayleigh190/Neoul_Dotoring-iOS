@@ -10,6 +10,7 @@ import Foundation
 enum BaseButtonStyle {
     case clear
     case green
+    case navy
     case black
     case gray
 }

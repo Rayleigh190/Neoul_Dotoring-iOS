@@ -15,6 +15,7 @@ class BaseButton: UIButton {
         switch style {
         case .clear: setupButton(style: .clear)
         case .green: setupButton(style: .green)
+        case .navy: setupButton(style: .navy)
         case .black: setupButton(style: .black)
         case .gray: setupButton(style: .gray)
         }
@@ -44,7 +45,10 @@ private extension BaseButton {
             setTitleColor(UIColor.black, for: .normal)
         case .gray:
             backgroundColor = .BaseGray
-            setTitleColor(UIColor.black, for: .normal)
+            setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
+        case .navy:
+            backgroundColor = .BaseNavy
+            setTitleColor(.white, for: .normal)
         case .black:
             backgroundColor = .black
             setTitleColor(.white, for: .normal)

@@ -287,23 +287,23 @@ private extension MentoSignup1ViewController {
     }
 }
 
-extension MentoSignup1ViewController: JobSelectViewControllerDelegate, DepartmentSelectViewControllerDelegate {
+extension MentoSignup1ViewController: SelectViewControllerDelegate {
     
     @objc private func selectTextFieldTapped(sender: UIButton) {
-        var vc: UIViewController
+        let vc = SelectViewController()
         if sender == jobTextFieldButton {
-            let jobSelectViewController = JobSelectViewController()
-            jobSelectViewController.jobSelectViewControllerDelegate = self
-            jobSelectViewController.titleText = "직무 분야 선택"
-            jobSelectViewController.style = .mento
-            vc = jobSelectViewController
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "직무 분야 선택"
+            vc.style = .mento
         } else if sender == departmentTextFieldButton {
-            let departmentSelectViewController = DepartmentSelectViewController()
-            departmentSelectViewController.departmentSelectViewControllerDelegate = self
-            departmentSelectViewController.titleText = "학과 선택"
-            departmentSelectViewController.style = .mento
-            vc = departmentSelectViewController
-        } else { vc = UIViewController() }
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "학과 선택"
+            vc.style = .mento
+        } else {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "필터"
+        }
+        vc.sender = sender
         
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
@@ -313,8 +313,8 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate, Departmen
        present(vc, animated: true)
     }
     
-    // 직무선택 뷰컨트롤러 화면이 사라질 때 선택한 직무 데이터를 받음
-    func didJobSelectViewControllerDismiss(elements: [String], selectedElements: [Int]) {
+    // 직무선택, 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 데이터를 받음
+    func didSelectViewControllerDismiss(elements: [String], selectedElements: [Int], sender: UIButton) {
         // 선택한 데이터가 0개 이상일 때만 데이터 저장 및 뷰 수정
         if selectedElements.count > 0 {
             // 이 뷰컨트롤러에 데이터 저장하는 코드 추가해야 됨
@@ -325,24 +325,12 @@ extension MentoSignup1ViewController: JobSelectViewControllerDelegate, Departmen
             }
             selectedElementString = String(selectedElementString.dropLast(2))
             
-            jobTextField.textField.text = selectedElementString
-        }
-        
-    }
-    
-    // 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 학과 데이터를 받음
-    func didDepartmentSelectViewControllerDismiss(elements: [String], selectedElements: [Int]) {
-        // 선택한 데이터가 0개 이상일 때만 데이터 저장 및 뷰 수정
-        if selectedElements.count > 0 {
-            // 이 뷰컨트롤러에 데이터 저장하는 코드 추가해야 됨
-            var selectedElementString: String = ""
-            for selectedElement in selectedElements {
-                print(elements[selectedElement])
-                selectedElementString += (elements[selectedElement]+", ")
+            if sender == jobTextFieldButton { // 직무 선택일 때
+                jobTextField.textField.text = selectedElementString
+            } else { // 학과 선택일 때
+                departmentTextField.textField.text = selectedElementString
             }
-            selectedElementString = String(selectedElementString.dropLast(2))
             
-            departmentTextField.textField.text = selectedElementString
         }
         
     }

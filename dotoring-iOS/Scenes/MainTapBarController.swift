@@ -9,14 +9,18 @@ import SnapKit
 import UIKit
 
 class MainTapBarController: UITabBarController {
+    
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
 
     private lazy var homeViewController: UIViewController = {
         let viewController = HomeViewController()
-        let tabBarItem = UITabBarItem(
-            title: "홈",
-            image: UIImage(named: "MainTapBarItemHomeUnclickedImg"),
-            selectedImage: UIImage(named: "MainTapBarItemHomeClickedImg")
-        )
+        let tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "MainTapBarItemHomeUnclickedImg"), tag: 0)
         viewController.tabBarItem = tabBarItem
 
         return viewController
@@ -24,11 +28,7 @@ class MainTapBarController: UITabBarController {
 
     private lazy var matchViewController: UIViewController = {
         let viewController = UIViewController()
-        let tabBarItem = UITabBarItem(
-            title: "매칭",
-            image: UIImage(named: "MainTapBarItemMatchUnclickedImg"),
-            selectedImage: UIImage(named: "MainTapBarItemMatchClickedImg")
-        )
+        let tabBarItem = UITabBarItem(title: "매칭", image: UIImage(named: "MainTapBarItemMatchUnclickedImg"), tag: 1)
         viewController.tabBarItem = tabBarItem
 
         return viewController
@@ -36,23 +36,15 @@ class MainTapBarController: UITabBarController {
     
     private lazy var chatViewController: UIViewController = {
         let viewController = UIViewController()
-        let tabBarItem = UITabBarItem(
-            title: "채팅",
-            image: UIImage(named: "MainTapBarItemChatUnclickedImg"),
-            selectedImage: UIImage(named: "MainTapBarItemChatClickedImg")
-        )
+        let tabBarItem = UITabBarItem(title: "채팅", image: UIImage(named: "MainTapBarItemChatUnclickedImg"), tag: 2)
         viewController.tabBarItem = tabBarItem
 
         return viewController
     }()
     
-    private lazy var mypageViewController: UIViewController = {
-        let viewController = UIViewController()
-        let tabBarItem = UITabBarItem(
-            title: "마이페이지",
-            image: UIImage(named: "MainTapBarItemMypageClickedImg"),
-            selectedImage: UIImage(named: "MainTapBarItemMypageUnclickedImg")
-        )
+    private lazy var myPageViewController: UIViewController = {
+        let viewController = UINavigationController(rootViewController: MyPageViewController())
+        let tabBarItem = UITabBarItem(title: "마이페이지", image: UIImage(named: "MainTapBarItemMypageUnclickedImg"), tag: 3)
         viewController.tabBarItem = tabBarItem
 
         return viewController
@@ -61,7 +53,7 @@ class MainTapBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapBar()
-        viewControllers = [homeViewController, matchViewController, chatViewController, mypageViewController]
+        viewControllers = [homeViewController, matchViewController, chatViewController, myPageViewController]
         
     }
 
@@ -76,7 +68,12 @@ private extension MainTapBarController {
         self.tabBar.standardAppearance = appearance
 //        self.tabBar.scrollEdgeAppearance = appearance  // 생략 가능 (만약 스크롤 기능 따라 Bar설정 안해줘도 된다면)
         
-        tabBar.tintColor = .BaseGreen
+        if uiStyle == .mento {
+            tabBar.tintColor = .BaseGreen
+        } else {
+            tabBar.tintColor = .BaseNavy
+        }
+        
         tabBar.backgroundColor = .white
 
         // Add a radius to the tab bar to create rounded corners

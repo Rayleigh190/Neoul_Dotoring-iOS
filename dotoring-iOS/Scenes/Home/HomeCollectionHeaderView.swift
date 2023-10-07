@@ -9,10 +9,33 @@ import SnapKit
 import UIKit
 
 class HomeCollectionHeaderView: UICollectionReusableView {
+    
+    weak var parentViewController: UIViewController?
+    
+    private let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
+    private lazy var baseColor: UIColor = {
+        if uiStyle == .mento {
+            return UIColor.BaseGreen!
+        } else {
+            return UIColor.BaseNavy!
+        }
+    }()
 
     private lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = UIColor(named: "BaseGreen")
+        
+        if uiStyle == .mento {
+            label.textColor = UIColor.BaseGreen
+        } else {
+            label.textColor = UIColor.BaseNavy
+        }
 
         return label
     }()
@@ -54,7 +77,13 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         searchBar.placeholder = "직접 검색"
         searchBar.backgroundColor = .systemBackground
         searchBar.layer.borderWidth = 2
-        searchBar.layer.borderColor = UIColor(named: "BaseGreen")?.cgColor
+        
+        if uiStyle == .mento {
+            searchBar.layer.borderColor = UIColor.BaseGreen?.cgColor
+        } else {
+            searchBar.layer.borderColor = UIColor.BaseNavy?.cgColor
+        }
+        
         searchBar.layer.cornerRadius = 20
         searchBar.searchTextField.backgroundColor = .systemBackground
         searchBar.backgroundImage = UIImage() // 위아래 선 지움
@@ -74,24 +103,26 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         return stackView
     }()
     
-    private lazy var departmentFilterButton: UIButton = {
+    lazy var departmentFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("학과", for: .normal)
-        button.backgroundColor = UIColor(named: "BaseSecondaryEmhasisGray")
+        button.backgroundColor = UIColor.BaseSecondaryEmhasisGray
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
     }()
     
-    private lazy var hopeMentoringFilterButton: UIButton = {
+    lazy var hopeMentoringFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("희망 멘토링", for: .normal)
         button.backgroundColor = UIColor(named: "BaseSecondaryEmhasisGray")
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
     }()
@@ -189,7 +220,12 @@ private extension HomeCollectionHeaderView {
             searchBar.becomeFirstResponder()
         }
         
-        searchButton.tintColor = isOpen ? UIColor(named: "BaseSecondaryEmhasisGray") : UIColor(named: "BaseGreen")
+        if uiStyle == .mento {
+            searchButton.tintColor = isOpen ? UIColor.BaseSecondaryEmhasisGray : UIColor.BaseGreen
+        } else {
+            searchButton.tintColor = isOpen ? UIColor.BaseSecondaryEmhasisGray : UIColor.BaseNavy
+        }
+        
         
     }
     
@@ -216,4 +252,52 @@ extension HomeCollectionHeaderView {
             searchButton.tintColor = isOpen ? UIColor(named: "BaseSecondaryEmhasisGray") : UIColor(named: "BaseGreen")
         }
     }
+}
+
+extension HomeCollectionHeaderView: SelectViewControllerDelegate {
+    
+    @objc private func filterButtonTapped(sender: UIButton) {
+        let vc = SelectViewController()
+        if sender == departmentFilterButton {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "학과 필터"
+            vc.style = uiStyle
+        } else if sender == hopeMentoringFilterButton {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "희망 분야 필터"
+            vc.style = uiStyle
+        } else {
+            vc.selectViewControllerDelegate = self
+            vc.titleText = "필터"
+        }
+        vc.sender = sender
+
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.preferredCornerRadius = 30
+            sheet.prefersGrabberVisible = true
+        }
+
+        // 부모 뷰 컨트롤러에서 뷰 컨트롤러를 표시합니다.
+        parentViewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectViewControllerDismiss(elements: [String], selectedElements: [Int], sender: UIButton) {
+        // 선택한 데이터가 0개 이상일 때만 데이터 저장 및 뷰 수정
+        if selectedElements.count > 0 {
+            print(selectedElements)
+            if sender == departmentFilterButton {
+                departmentFilterButton.backgroundColor = baseColor
+            } else {
+                hopeMentoringFilterButton.backgroundColor = baseColor
+            }
+        } else { // 선택한 데이터가 아무것도 없을 때 색을 기본색으로 셋팅
+            if sender == departmentFilterButton {
+                departmentFilterButton.backgroundColor = .BaseSecondaryEmhasisGray
+            } else {
+                hopeMentoringFilterButton.backgroundColor = .BaseSecondaryEmhasisGray
+            }
+        }
+    }
+    
 }
