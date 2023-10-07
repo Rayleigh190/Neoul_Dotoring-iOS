@@ -97,6 +97,17 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension HomeViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(indexPath.row)")
+        let vc = UserDetailViewController()
+        vc.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
 private extension HomeViewController {
     func setupSubViews() {
         
@@ -115,6 +126,7 @@ private extension HomeViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false //
         
     }
     
