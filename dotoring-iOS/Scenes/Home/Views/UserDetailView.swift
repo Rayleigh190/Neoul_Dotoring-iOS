@@ -15,6 +15,63 @@ class UserDetailView: UIView {
         return userDetailProfileCardView
     }()
     
+    private lazy var hopeFieldLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .EB, size: 20)
+        label.text = "희망 멘토링 분야"
+        
+        return label
+    }()
+    
+    private lazy var scrollerView: UIScrollView = {
+        let scrollerView = UIScrollView()
+        scrollerView.translatesAutoresizingMaskIntoConstraints = false
+        scrollerView.showsHorizontalScrollIndicator = false
+        
+        return scrollerView
+    }()
+    
+    lazy var fieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 13
+        
+        return stackView
+    }()
+    
+    private lazy var introductionLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .EB, size: 20)
+        label.text = "한 줄 소개"
+        
+        return label
+    }()
+    
+    private lazy var introductionContentLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 17)
+        label.text = "내용"
+        label.numberOfLines = 0
+        label.textAlignment = .natural
+        
+        return label
+    }()
+    
+    private lazy var hopeMentoringLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .EB, size: 20)
+        label.text = "원하는 멘토링"
+        
+        return label
+    }()
+    
+    private lazy var hopeMentoringContentLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 17)
+        label.text = "내용"
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
@@ -37,13 +94,55 @@ private extension UserDetailView {
     
     func setupSubViews() {
         
-        [userDetailProfileCardView].forEach{addSubview($0)}
+        [userDetailProfileCardView, hopeFieldLabel, scrollerView, introductionLabel, introductionContentLabel, hopeMentoringLabel, hopeMentoringContentLabel].forEach{addSubview($0)}
+        
+        scrollerView.addSubview(fieldStackView)
         
         userDetailProfileCardView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.height.equalTo(289)
             $0.top.equalToSuperview()
+        }
+        
+        hopeFieldLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(userDetailProfileCardView.snp.bottom).offset(30)
+        }
+        
+        scrollerView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.top.equalTo(hopeFieldLabel.snp.bottom).offset(10)
+        }
+        
+        fieldStackView.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.top.bottom.equalToSuperview()
+            $0.height.equalToSuperview()
+        }
+        
+        introductionLabel.snp.makeConstraints {
+            $0.leading.equalTo(hopeFieldLabel.snp.leading)
+            $0.top.equalTo(hopeFieldLabel.snp.bottom).offset(98)
+        }
+        
+        introductionContentLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(introductionLabel.snp.leading)
+            $0.top.equalTo(introductionLabel.snp.bottom).offset(5)
+        }
+        
+        hopeMentoringLabel.snp.makeConstraints {
+            $0.leading.equalTo(introductionContentLabel.snp.leading)
+            $0.top.equalTo(introductionContentLabel.snp.bottom).offset(40)
+        }
+        
+        hopeMentoringContentLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(hopeMentoringLabel.snp.leading)
+            $0.top.equalTo(hopeMentoringLabel.snp.bottom).offset(5)
         }
         
     }

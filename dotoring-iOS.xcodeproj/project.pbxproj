@@ -82,6 +82,7 @@
 		F1FCE7AF2AD1358F0024AE60 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7AE2AD1358F0024AE60 /* UserDetailViewController.swift */; };
 		F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */; };
 		F1FCE7B32AD140360024AE60 /* UserDetailProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */; };
+		F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +161,7 @@
 		F1FCE7AE2AD1358F0024AE60 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailProfileCardView.swift; sourceTree = "<group>"; };
+		F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +390,7 @@
 				F1DD2CA72A98896300EE9711 /* ExpandableView.swift */,
 				F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */,
 				F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */,
+				F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
+				F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
 				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,

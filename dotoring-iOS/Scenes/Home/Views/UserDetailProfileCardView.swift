@@ -95,6 +95,11 @@ class UserDetailProfileCardView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        clipsToBounds = true
+    }
+    
     func setup() {
         setupSubViews()
 //        updateUI()
