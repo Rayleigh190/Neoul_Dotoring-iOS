@@ -15,6 +15,13 @@ class UserDetailView: UIView {
         return userDetailProfileCardView
     }()
     
+    private lazy var userDetailProfileCardShadowView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        
+        return view
+    }()
+    
     private lazy var hopeFieldLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
         label.text = "희망 멘토링 분야"
@@ -94,7 +101,7 @@ private extension UserDetailView {
     
     func setupSubViews() {
         
-        [userDetailProfileCardView, hopeFieldLabel, scrollerView, introductionLabel, introductionContentLabel, hopeMentoringLabel, hopeMentoringContentLabel].forEach{addSubview($0)}
+        [userDetailProfileCardShadowView, userDetailProfileCardView, hopeFieldLabel, scrollerView, introductionLabel, introductionContentLabel, hopeMentoringLabel, hopeMentoringContentLabel].forEach{addSubview($0)}
         
         scrollerView.addSubview(fieldStackView)
         
@@ -103,6 +110,10 @@ private extension UserDetailView {
             $0.leading.equalToSuperview()
             $0.height.equalTo(289)
             $0.top.equalToSuperview()
+        }
+        
+        userDetailProfileCardShadowView.snp.makeConstraints {
+            $0.edges.equalTo(userDetailProfileCardView)
         }
         
         hopeFieldLabel.snp.makeConstraints {
@@ -151,12 +162,17 @@ private extension UserDetailView {
         // View에 그림자와 cornerRadius 적용
         [userDetailProfileCardView].forEach { view in
             view.layer.cornerRadius = 20
-            view.layer.shadowColor = UIColor.black.cgColor
-            view.layer.shadowOpacity = 0.4
+            view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            view.clipsToBounds = true
+        }
+        
+        [userDetailProfileCardShadowView].forEach { view in
+            view.layer.cornerRadius = 20
+            view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            view.layer.shadowColor = UIColor.black.withAlphaComponent(0.36).cgColor
+            view.layer.shadowOpacity = 1
             view.layer.shadowOffset = CGSize(width: 0, height: 4)
             view.layer.shadowRadius = 8
-            view.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-            view.layer.masksToBounds = false
         }
     }
     
