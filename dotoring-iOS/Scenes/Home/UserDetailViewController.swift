@@ -13,6 +13,14 @@ class UserDetailViewController: UIViewController {
     
     private var rightBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: UserDetailViewController.self, action: .none)
+        let blockAction = UIAction(title: "차단", image: UIImage(systemName: "nosign"), handler: { _ in print("차단") })
+        let reportAction = UIAction(title: "신고", image: UIImage(systemName: "exclamationmark.bubble"), handler: { _ in print("신고") })
+        
+        barButtonItem.menu = UIMenu(title: "",
+                                    image: nil,
+                                    identifier: nil,
+                                    options: .displayInline,
+                                    children: [blockAction, reportAction])
         
         return barButtonItem
     }()
@@ -45,6 +53,21 @@ class UserDetailViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         
         navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+}
+
+private extension UserDetailViewController {
+    
+}
+
+extension UserDetailViewController: CustomAlertDelegate {
+    func action() {
+        return
+    }
+    
+    func exit() {
+        return
     }
     
 }
