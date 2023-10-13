@@ -11,10 +11,10 @@ class UserDetailViewController: UIViewController {
     
     var userDetailView: UserDetailView!
     
-    private var rightBarButtonItem: UIBarButtonItem = {
+    private lazy var rightBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: UserDetailViewController.self, action: .none)
-        let blockAction = UIAction(title: "차단", image: UIImage(systemName: "nosign"), handler: { _ in print("차단") })
-        let reportAction = UIAction(title: "신고", image: UIImage(systemName: "exclamationmark.bubble"), handler: { _ in print("신고") })
+        let blockAction = UIAction(title: "차단", image: UIImage(systemName: "nosign"), handler: blockButtonActionHandler)
+        let reportAction = UIAction(title: "신고", image: UIImage(systemName: "exclamationmark.bubble"), handler: reportButtonActionHandler)
         
         barButtonItem.menu = UIMenu(title: "",
                                     image: nil,
@@ -59,6 +59,29 @@ class UserDetailViewController: UIViewController {
 
 private extension UserDetailViewController {
     
+    func blockButtonActionHandler(sender: UIAction!) {
+        showAlert(
+            alertType: .canCancel,
+            alertText: "닉네임 님을\n차단하시겠습니까?",
+            highlightText: "차단",
+            hasSecondaryText: true,
+            secondaryText: "차단 해제는 마이페이지에서 가능합니다.",
+            cancelButtonText: "아니오",
+            confirmButtonText: "네",
+            changeButtonPosition: true,
+            cancelButtonHighlight: true)
+    }
+    
+    func reportButtonActionHandler(sender: UIAction!) {
+        let text = "신고는 반대 의견을 나타내는\n기능이 아닙니다.\n신고 사유에 맞지 않는 신고를 했을 경우\n해당 신고는 처리되지 않습니다."
+        
+        showAlert(
+            alertType: .onlyConfirm,
+            alertText: text,
+            boldText: "해당 신고는 처리되지 않습니다.",
+            confirmButtonText: "확인",
+            confirmButtonHighlight: true)
+    }
 }
 
 extension UserDetailViewController: CustomAlertDelegate {
