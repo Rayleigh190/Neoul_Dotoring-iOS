@@ -83,6 +83,9 @@
 		F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */; };
 		F1FCE7B32AD140360024AE60 /* UserDetailProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */; };
 		F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */; };
+		F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */; };
+		F1FCE7B92ADA5FA00024AE60 /* ReportReasonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B82ADA5FA00024AE60 /* ReportReasonAlertView.swift */; };
+		F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7BA2ADA623A0024AE60 /* ReportReasonAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +165,9 @@
 		F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
 		F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailProfileCardView.swift; sourceTree = "<group>"; };
 		F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRectView.swift; sourceTree = "<group>"; };
+		F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
+		F1FCE7B82ADA5FA00024AE60 /* ReportReasonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonAlertView.swift; sourceTree = "<group>"; };
+		F1FCE7BA2ADA623A0024AE60 /* ReportReasonAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonAlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +289,7 @@
 				F1FCE7AC2AD135530024AE60 /* Views */,
 				F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */,
 				F1FCE7AE2AD1358F0024AE60 /* UserDetailViewController.swift */,
+				F1FCE7BA2ADA623A0024AE60 /* ReportReasonAlertViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -320,6 +327,7 @@
 				F126B1CD2AA41D7A0035E499 /* SignupStepBar.swift */,
 				F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */,
 				F1FCE79C2AC976750024AE60 /* CustomAlertViewController.swift */,
+				F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -391,6 +399,7 @@
 				F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */,
 				F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */,
 				F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */,
+				F1FCE7B82ADA5FA00024AE60 /* ReportReasonAlertView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -492,11 +501,13 @@
 				F126B1CE2AA41D7A0035E499 /* SignupStepBar.swift in Sources */,
 				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
 				F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */,
+				F1FCE7B92ADA5FA00024AE60 /* ReportReasonAlertView.swift in Sources */,
 				F1FCE7AF2AD1358F0024AE60 /* UserDetailViewController.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
 				F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */,
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
+				F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
 				F1FCE7932AC84FFD0024AE60 /* SetMenuView.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
@@ -525,6 +536,7 @@
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
 				F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */,
+				F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
 				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
 				F1FCE79D2AC976750024AE60 /* CustomAlertViewController.swift in Sources */,

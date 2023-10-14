@@ -10,6 +10,7 @@ import UIKit
 class UserDetailViewController: UIViewController {
     
     var userDetailView: UserDetailView!
+    var isReportConfirmButtonClicked: Bool = false
     
     private lazy var rightBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: UserDetailViewController.self, action: .none)
@@ -36,6 +37,26 @@ class UserDetailViewController: UIViewController {
             userDetailView.fieldStackView.addArrangedSubview(fieldRectView)
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("보여짐\(isReportConfirmButtonClicked)")
+        if isReportConfirmButtonClicked == true {
+            let text = "신고는 반대 의견을 나타내는\n기능이 아닙니다.\n신고 사유에 맞지 않는 신고를 했을 경우\n해당 신고는 처리되지 않습니다."
+
+            showAlert(
+                alertType: .onlyConfirm,
+                alertText: text,
+                boldText: "해당 신고는 처리되지 않습니다.",
+                confirmButtonText: "확인",
+                confirmButtonHighlight: true)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        isReportConfirmButtonClicked = false
     }
 
     override func loadView() {
@@ -73,14 +94,12 @@ private extension UserDetailViewController {
     }
     
     func reportButtonActionHandler(sender: UIAction!) {
-        let text = "신고는 반대 의견을 나타내는\n기능이 아닙니다.\n신고 사유에 맞지 않는 신고를 했을 경우\n해당 신고는 처리되지 않습니다."
         
-        showAlert(
-            alertType: .onlyConfirm,
-            alertText: text,
-            boldText: "해당 신고는 처리되지 않습니다.",
-            confirmButtonText: "확인",
-            confirmButtonHighlight: true)
+        let vc = ReportReasonAlertViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        
+        self.present(vc, animated: true)
     }
 }
 
