@@ -25,15 +25,8 @@ class ReportReasonAlertView: UIView {
     
     private lazy var statusBarLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 17)
+        label.textColor = .white
         label.text = "신고 사유"
-        
-        return label
-    }()
-    
-    lazy var contentLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "Content Text"
-        label.numberOfLines = 1
         
         return label
     }()
@@ -49,28 +42,7 @@ class ReportReasonAlertView: UIView {
     
     private var reason1Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "낚시/도배"
-        
-        return label
-    }()
-    
-    private var reason2Label: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "유출/사칭/사기"
-        
-        return label
-    }()
-    
-    private var reason3Label: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "욕설/비하"
-        
-        return label
-    }()
-    
-    private var reason4Label: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "음란물/불건전한 만남 및 대화"
+        label.text = " 낚시/도배"
         
         return label
     }()
@@ -85,6 +57,25 @@ class ReportReasonAlertView: UIView {
         return button
     }()
     
+    private lazy var reason1StackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.spacing = 0
+        
+        [reason1Label, reason1Button].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private var reason2Label: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 17)
+        label.text = " 유출/사칭/사기"
+        
+        return label
+    }()
+    
     private lazy var reason2Button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -93,6 +84,24 @@ class ReportReasonAlertView: UIView {
 //        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
         
         return button
+    }()
+    
+    private lazy var reason2StackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.spacing = 0
+        [reason2Label, reason2Button].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private var reason3Label: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 17)
+        label.text = " 욕설/비하"
+        
+        return label
     }()
     
     private lazy var reason3Button: UIButton = {
@@ -105,6 +114,24 @@ class ReportReasonAlertView: UIView {
         return button
     }()
     
+    private lazy var reason3StackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.spacing = 0
+        [reason3Label, reason3Button].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private var reason4Label: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 17)
+        label.text = " 음란물/불건전한 만남 및 대화"
+        
+        return label
+    }()
+
     private lazy var reason4Button: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -113,6 +140,41 @@ class ReportReasonAlertView: UIView {
 //        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
         
         return button
+    }()
+    
+    private lazy var reason4StackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.spacing = 0
+        [reason4Label, reason4Button].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private lazy var dashedLine1View: DashedLineView = {
+        let line = DashedLineView()
+        
+        return line
+    }()
+    
+    private lazy var dashedLine2View: DashedLineView = {
+        let line = DashedLineView()
+        
+        return line
+    }()
+    
+    private lazy var dashedLine3View: DashedLineView = {
+        let line = DashedLineView()
+        
+        return line
+    }()
+    
+    private lazy var dashedLine4View: DashedLineView = {
+        let line = DashedLineView()
+        
+        return line
     }()
     
     lazy var secondaryLabel: NanumLabel = {
@@ -175,9 +237,13 @@ class ReportReasonAlertView: UIView {
 private extension ReportReasonAlertView {
     
     func setupSubViews() {
-        [alertView, contentLabel, buttonStackView].forEach {addSubview($0)}
+        [alertView, buttonStackView].forEach {addSubview($0)}
         
-        [statusBar].forEach {alertView.addSubview($0)}
+        [statusBar, contentStackView, secondaryLabel].forEach {alertView.addSubview($0)}
+        
+        statusBar.addSubview(statusBarLabel)
+        
+        [reason1StackView, dashedLine1View, reason2StackView, dashedLine2View, reason3StackView, dashedLine3View, reason4StackView, dashedLine4View].forEach { contentStackView.addArrangedSubview($0) }
         
         [cancelButton, confirmButton].forEach {buttonStackView.addArrangedSubview($0)}
         
@@ -190,12 +256,35 @@ private extension ReportReasonAlertView {
         statusBar.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview()
+            $0.top.equalToSuperview()
             $0.height.equalTo(47)
         }
         
-        contentLabel.snp.makeConstraints {
-            $0.centerX.equalTo(alertView)
-            $0.centerY.equalTo(alertView).offset(-10)
+        statusBarLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        [reason1Label, reason2Label, reason3Label, reason4Label].forEach {
+            $0.snp.makeConstraints {
+                $0.height.equalTo(49)
+            }
+        }
+        
+        [reason1Button, reason2Button, reason3Button, reason4Button].forEach {
+            $0.snp.makeConstraints {
+                $0.width.equalTo(20)
+            }
+        }
+        
+        contentStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().offset(8)
+            $0.top.equalTo(statusBar.snp.bottom).offset(18)
+        }
+        
+        secondaryLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(buttonStackView.snp.top).offset(-10)
         }
         
         buttonStackView.snp.makeConstraints {

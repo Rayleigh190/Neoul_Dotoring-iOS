@@ -39,9 +39,9 @@ class DashedLineView: UIView {
     
     func drawLine() {
         let shapeLayer = self.layer as! CAShapeLayer
-        shapeLayer.strokeColor = UIColor.black.cgColor
-        shapeLayer.lineWidth = 2
-        shapeLayer.lineDashPattern = [5, 5] // 점선 패턴을 설정 (5 포인트 점, 5 포인트 공백)
+        shapeLayer.strokeColor = UIColor(red: 0.133, green: 0.133, blue: 0.133, alpha: 0.4).cgColor
+        shapeLayer.lineWidth = 0.5
+        shapeLayer.lineDashPattern = [3, 2] // 점선 패턴을 설정 (5 포인트 점, 5 포인트 공백)
     }
     
 }
