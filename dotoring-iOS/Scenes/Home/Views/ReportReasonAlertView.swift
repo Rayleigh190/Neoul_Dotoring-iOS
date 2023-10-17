@@ -52,7 +52,7 @@ class ReportReasonAlertView: UIView {
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .gray
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
-//        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(reasonButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -81,7 +81,7 @@ class ReportReasonAlertView: UIView {
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .gray
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
-//        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(reasonButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -109,7 +109,7 @@ class ReportReasonAlertView: UIView {
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .gray
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
-//        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(reasonButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -137,7 +137,7 @@ class ReportReasonAlertView: UIView {
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .gray
         button.setContentHuggingPriority(.defaultLow, for: .horizontal)
-//        button.addTarget(self, action: #selector(agreeConfirmButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(reasonButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -308,6 +308,20 @@ private extension ReportReasonAlertView {
         statusBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         cancelButton.layer.cornerRadius = 18
         confirmButton.layer.cornerRadius = 18
+    }
+    
+}
+
+extension ReportReasonAlertView {
+    
+    // reasonButton 클릭시 마다 체크마크 색 변하게
+    @objc func reasonButtonTapped(sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.tintColor = .BaseWarningRed
+        } else {
+            sender.tintColor = .gray
+        }
     }
     
 }
