@@ -79,6 +79,15 @@ class UserDetailView: UIView {
         return label
     }()
     
+    private lazy var chatButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .BaseNavy
+        button.setTitle("채팅", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
@@ -101,7 +110,7 @@ private extension UserDetailView {
     
     func setupSubViews() {
         
-        [userDetailProfileCardShadowView, userDetailProfileCardView, hopeFieldLabel, scrollerView, introductionLabel, introductionContentLabel, hopeMentoringLabel, hopeMentoringContentLabel].forEach{addSubview($0)}
+        [userDetailProfileCardShadowView, userDetailProfileCardView, hopeFieldLabel, scrollerView, introductionLabel, introductionContentLabel, hopeMentoringLabel, hopeMentoringContentLabel, chatButton].forEach{addSubview($0)}
         
         scrollerView.addSubview(fieldStackView)
         
@@ -154,6 +163,12 @@ private extension UserDetailView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(hopeMentoringLabel.snp.leading)
             $0.top.equalTo(hopeMentoringLabel.snp.bottom).offset(5)
+        }
+        
+        chatButton.snp.makeConstraints {
+            $0.width.height.equalTo(61)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-32)
         }
         
     }
