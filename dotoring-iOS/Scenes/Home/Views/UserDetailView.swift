@@ -9,6 +9,14 @@ import UIKit
 
 class UserDetailView: UIView {
     
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     private lazy var userDetailProfileCardView: UserDetailProfileCardView = {
         let userDetailProfileCardView = UserDetailProfileCardView()
         
@@ -81,8 +89,15 @@ class UserDetailView: UIView {
     
     private lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .BaseNavy
-        button.setTitle("채팅", for: .normal)
+        
+        if uiStyle == .mento {
+            button.backgroundColor = .BaseNavy
+        } else {
+            button.backgroundColor = .BaseGreen
+        }
+        
+        button.setImage(UIImage(named: "UserDetailViewChatBtnImg"), for: .normal)
+        button.tintColor = .white
         button.setTitleColor(.white, for: .normal)
         
         return button
@@ -99,9 +114,13 @@ class UserDetailView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateUI()
+    }
+    
     func setup() {
         setupSubViews()
-        updateUI()
     }
     
 }
@@ -189,6 +208,15 @@ private extension UserDetailView {
             view.layer.shadowOffset = CGSize(width: 0, height: 4)
             view.layer.shadowRadius = 8
         }
+        
+        [chatButton].forEach { view in
+            view.layer.cornerRadius = view.frame.height/2
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowOpacity = 0.3
+            view.layer.shadowOffset = CGSize(width: 0, height: 3)
+            view.layer.shadowRadius = 5
+        }
+        
     }
     
 }
