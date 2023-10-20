@@ -19,7 +19,7 @@ class MainTapBarController: UITabBarController {
     }()
 
     private lazy var homeViewController: UIViewController = {
-        let viewController = HomeViewController()
+        let viewController = UINavigationController(rootViewController: HomeViewController())
         let tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "MainTapBarItemHomeUnclickedImg"), tag: 0)
         viewController.tabBarItem = tabBarItem
 

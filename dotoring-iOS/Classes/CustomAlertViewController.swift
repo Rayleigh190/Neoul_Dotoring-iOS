@@ -32,6 +32,7 @@ class CustomAlertViewController: UIViewController {
     var alertType: AlertType = .onlyConfirm
     var alertText = ""
     var highlightText = ""
+    var boldText = ""
     var contentFontSieze: AlertContentFontSize = .small
     var hasSecondaryText: Bool = false
     var secondaryText = ""
@@ -57,6 +58,8 @@ class CustomAlertViewController: UIViewController {
         customAlertView.contentLabel.text = alertText
         let attributedStr = NSMutableAttributedString(string: alertText)
         attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseWarningRed!, range: (alertText as NSString).range(of: highlightText))
+        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFEB, size: 17), range: (alertText as NSString).range(of: boldText))
+        
         customAlertView.contentLabel.attributedText = attributedStr
         
         // 취소, 확인 버튼 타이틀 설정
@@ -114,6 +117,7 @@ extension CustomAlertDelegate where Self: UIViewController {
         alertType: AlertType,
         alertText: String,
         highlightText: String = "",
+        boldText: String = "",
         contentFontSieze: AlertContentFontSize = .small,
         hasSecondaryText: Bool = false,
         secondaryText: String = "",
@@ -135,6 +139,7 @@ extension CustomAlertDelegate where Self: UIViewController {
         customAlertViewController.cancelButtonText = cancelButtonText ?? ""
         customAlertViewController.confirmButtonText = confirmButtonText
         customAlertViewController.highlightText = highlightText
+        customAlertViewController.boldText = boldText
         customAlertViewController.hasSecondaryText = hasSecondaryText
         customAlertViewController.secondaryText = secondaryText
         customAlertViewController.changeButtonPosition = changeButtonPosition

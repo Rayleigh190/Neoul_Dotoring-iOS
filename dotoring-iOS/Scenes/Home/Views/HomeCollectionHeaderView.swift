@@ -10,6 +10,8 @@ import UIKit
 
 class HomeCollectionHeaderView: UICollectionReusableView {
     
+    var isSearchBarClosedFromTap: Bool = false
+    
     weak var parentViewController: UIViewController?
     
     private let uiStyle: UIStyle = {
@@ -197,7 +199,13 @@ private extension HomeCollectionHeaderView {
     }
     
     @objc func toggle() {
-
+        if isSearchBarClosedFromTap == true {
+            isSearchBarClosedFromTap = false
+            return
+        } else {
+            
+        }
+        
         let isOpen = leftConstraint.isActive == true
 
         // Inactivating the left constraint closes the expandable header.
@@ -237,6 +245,7 @@ extension HomeCollectionHeaderView {
         let isOpen = leftConstraint.isActive == true
         // 애니메이션 적용
         if isOpen {
+            isSearchBarClosedFromTap = true
             // Inactivating the left constraint closes the expandable header.
             leftConstraint.isActive = isOpen ? false : true
             
@@ -250,6 +259,8 @@ extension HomeCollectionHeaderView {
             }
             self.endEditing(true) // 키보드도 함께 내림
             searchButton.tintColor = isOpen ? UIColor(named: "BaseSecondaryEmhasisGray") : UIColor(named: "BaseGreen")
+        } else {
+            isSearchBarClosedFromTap = false
         }
     }
 }

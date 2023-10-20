@@ -102,6 +102,13 @@ class CustomAlertView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        cancelButton.layer.cornerRadius = cancelButton.frame.height/2
+        confirmButton.layer.cornerRadius = confirmButton.frame.height/2
+    }
+    
     func setup() {
         setupSubViews()
         updateUI()
@@ -170,8 +177,6 @@ private extension CustomAlertView {
         alertView.layer.cornerRadius = 20
         alertView.clipsToBounds = true
         statusBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        cancelButton.layer.cornerRadius = 20
-        confirmButton.layer.cornerRadius = 20
     }
     
 }

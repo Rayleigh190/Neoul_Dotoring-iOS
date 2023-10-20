@@ -25,7 +25,7 @@ class SelectView: UIView {
         let button = BaseButton(style: .clear)
         button.setTitle("초기화", for: .normal)
         button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 11)
-//        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(clearButtonTapped), for: .touchUpInside)
         
         return button
     }()
@@ -70,15 +70,6 @@ class SelectView: UIView {
         tableView.allowsMultipleSelection = true
         setup()
     }
-
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        backgroundColor = .BaseGreen
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.allowsMultipleSelection = true
-//        setup()
-//    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -94,19 +85,6 @@ class SelectView: UIView {
 }
 
 private extension SelectView {
-    
-    func updateUI() {
-        for _ in 1...3 {
-            let selectedElementView = SelectedElementView()
-            selectedElementView.backgroundColor = .systemBackground
-            selectedElementView.layer.cornerRadius = 36/2
-            selectedElementView.snp.makeConstraints {
-                $0.height.equalTo(36)
-            }
-            selectedStackView.addArrangedSubview(selectedElementView)
-        }
-        
-    }
     
     func setupSubViews() {
         [titleLabel, clearButton, selectedStackView, tableView].forEach { addSubview($0) }
@@ -139,11 +117,23 @@ private extension SelectView {
 }
 
 extension SelectView {
+    
+    /**
+     * selectedElement(선택된 요소)의 cancel button이 눌렸을때 tableView의 cell을 deselect함.
+     */
     @objc func selectedElementCancelButtonTapped(sender: UIButton!) {
-//        let cancelButtonTag = sender.tag
-        print("일단 안 되서 넘어감")
-//        let indexPathToDeselect = IndexPath(row: cancelButtonTag, section: 0)
-//        tableView.deselectRow(at: indexPathToDeselect, animated: true)
+        tableView(tableView, didDeselectRowAt: IndexPath(row: sender.tag, section: 0))
+        tableView.deselectRow(at: IndexPath(row: sender.tag, section: 0), animated: true)
+    }
+    
+    /**
+     * 모든 선택된 요소에 대해 deselect을 수행함.
+     */
+    @objc func clearButtonTapped(sender: UIButton!) {
+        for i in selectedElements {
+            tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: true)
+            tableView(tableView, didDeselectRowAt: IndexPath(row: i, section: 0))
+        }
     }
 }
 
@@ -172,16 +162,14 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
+        print("Deselect: \(indexPath.row), section: \(indexPath.section)")
         // selectedElements에서 해당 indexPath 제거
         // firstIndex가 없을 수도 있나?
-        selectedElements.remove(at: selectedElements.firstIndex(of: indexPath.row)!)
+        if let selectedElementIndex = selectedElements.firstIndex(of: indexPath.row) {
+            selectedElements.remove(at: selectedElementIndex)
+        } else { return }
         
-        if let titleLabelText = tableView.cellForRow(at: indexPath)?.textLabel?.text,
-           let indexToRemove = selectedStackView.arrangedSubviews
-                .compactMap({ ($0 as? SelectedElementView)?.titleLabel.text })
-                .firstIndex(of: titleLabelText) {
-//            selectedStackView.removeArrangedSubview(selectedStackView.arrangedSubviews[indexToRemove])
+        if let indexToRemove = selectedStackView.arrangedSubviews.compactMap({ ($0 as? SelectedElementView)?.tag }).firstIndex(of: indexPath.row) {
             selectedStackView.arrangedSubviews[indexToRemove].removeFromSuperview()
         }
         
@@ -197,6 +185,7 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("select: \(indexPath.row), section: \(indexPath.section)")
         let selectedElementView = SelectedElementView()
         selectedElementView.backgroundColor = .systemBackground
         selectedElementView.layer.cornerRadius = 36/2
@@ -206,6 +195,7 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
         selectedElements.append(indexPath.row)
         selectedElementView.titleLabel.text = elements[indexPath.row]
         // Set a tag for the cancelButton
+        selectedElementView.tag = indexPath.row
         selectedElementView.cancelButton.tag = indexPath.row
         selectedElementView.cancelButton.addTarget(self, action: #selector(selectedElementCancelButtonTapped), for: .touchUpInside)
         selectedStackView.addArrangedSubview(selectedElementView)
@@ -224,6 +214,27 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
             
             customAccessoryView.addSubview(smallCustomAccessoryView)
 
+            cell.accessoryView = customAccessoryView
+        }
+    }
+    
+    /**
+     * cell이 보여지기 전에 선택 되어 있는 cell인지 확인해서 customAccessoryView를 설정함.
+     */
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.isSelected {
+            let customAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20)) // 큰 원 추가
+            customAccessoryView.layer.cornerRadius = 10
+            customAccessoryView.layer.borderWidth = 1.5
+            customAccessoryView.layer.borderColor = UIColor.white.cgColor
+            customAccessoryView.backgroundColor = .clear
+            
+            // 선택된 셀에서 커스텀 accessoryView에 작은 원 추가
+            let smallCustomAccessoryView = UIView(frame: CGRect(x: 3, y: 3, width: 14, height: 14)) // Autolayout을 적용하면 안 나타나서 x,y를 적용함
+            smallCustomAccessoryView.backgroundColor = .systemBackground
+            smallCustomAccessoryView.layer.cornerRadius = 7
+            customAccessoryView.addSubview(smallCustomAccessoryView)
+            
             cell.accessoryView = customAccessoryView
         }
     }

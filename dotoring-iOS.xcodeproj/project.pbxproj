@@ -79,6 +79,13 @@
 		F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */; };
 		F1FCE7A92AD03FE30024AE60 /* PasswordResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7A82AD03FE30024AE60 /* PasswordResetViewController.swift */; };
 		F1FCE7AB2AD03FF50024AE60 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */; };
+		F1FCE7AF2AD1358F0024AE60 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7AE2AD1358F0024AE60 /* UserDetailViewController.swift */; };
+		F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */; };
+		F1FCE7B32AD140360024AE60 /* UserDetailProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */; };
+		F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */; };
+		F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */; };
+		F1FCE7B92ADA5FA00024AE60 /* ReportReasonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7B82ADA5FA00024AE60 /* ReportReasonAlertView.swift */; };
+		F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7BA2ADA623A0024AE60 /* ReportReasonAlertViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +161,13 @@
 		F1FCE7A62ACE88050024AE60 /* AccountConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountConfirmViewController.swift; sourceTree = "<group>"; };
 		F1FCE7A82AD03FE30024AE60 /* PasswordResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewController.swift; sourceTree = "<group>"; };
 		F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
+		F1FCE7AE2AD1358F0024AE60 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailProfileCardView.swift; sourceTree = "<group>"; };
+		F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRectView.swift; sourceTree = "<group>"; };
+		F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLineView.swift; sourceTree = "<group>"; };
+		F1FCE7B82ADA5FA00024AE60 /* ReportReasonAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonAlertView.swift; sourceTree = "<group>"; };
+		F1FCE7BA2ADA623A0024AE60 /* ReportReasonAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportReasonAlertViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,10 +285,11 @@
 		F1DD2C8B2A95DDF600EE9711 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F1FCE7AD2AD135610024AE60 /* Cells */,
+				F1FCE7AC2AD135530024AE60 /* Views */,
 				F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */,
-				F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */,
-				F1DD2CA52A96FACD00EE9711 /* HomeCollectionHeaderView.swift */,
-				F1DD2CA72A98896300EE9711 /* ExpandableView.swift */,
+				F1FCE7AE2AD1358F0024AE60 /* UserDetailViewController.swift */,
+				F1FCE7BA2ADA623A0024AE60 /* ReportReasonAlertViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -312,6 +327,7 @@
 				F126B1CD2AA41D7A0035E499 /* SignupStepBar.swift */,
 				F1FCE79E2AC9795C0024AE60 /* CustomAlertView.swift */,
 				F1FCE79C2AC976750024AE60 /* CustomAlertViewController.swift */,
+				F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -373,6 +389,27 @@
 				F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F1FCE7AC2AD135530024AE60 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD2CA52A96FACD00EE9711 /* HomeCollectionHeaderView.swift */,
+				F1DD2CA72A98896300EE9711 /* ExpandableView.swift */,
+				F1FCE7B02AD136D20024AE60 /* UserDetailView.swift */,
+				F1FCE7B22AD140360024AE60 /* UserDetailProfileCardView.swift */,
+				F1FCE7B42AD3C73F0024AE60 /* FieldRectView.swift */,
+				F1FCE7B82ADA5FA00024AE60 /* ReportReasonAlertView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F1FCE7AD2AD135610024AE60 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,10 +501,13 @@
 				F126B1CE2AA41D7A0035E499 /* SignupStepBar.swift in Sources */,
 				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
 				F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */,
+				F1FCE7B92ADA5FA00024AE60 /* ReportReasonAlertView.swift in Sources */,
+				F1FCE7AF2AD1358F0024AE60 /* UserDetailViewController.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
 				F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */,
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
+				F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
 				F1FCE7932AC84FFD0024AE60 /* SetMenuView.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
@@ -488,6 +528,7 @@
 				F1FCE76F2ABE8E4E0024AE60 /* Signup4ViewController.swift in Sources */,
 				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
 				F1FCE7652ABC754C0024AE60 /* Signup2ViewController.swift in Sources */,
+				F1FCE7B32AD140360024AE60 /* UserDetailProfileCardView.swift in Sources */,
 				F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */,
 				F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
@@ -495,6 +536,7 @@
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
 				F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */,
+				F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
 				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
 				F1FCE79D2AC976750024AE60 /* CustomAlertViewController.swift in Sources */,
@@ -510,6 +552,7 @@
 				F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */,
 				F1DD2CBC2A9A53AC00EE9711 /* UIFont.swift in Sources */,
 				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,
+				F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
 				F1FCE7AB2AD03FF50024AE60 /* PasswordResetView.swift in Sources */,
@@ -517,6 +560,7 @@
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
+				F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
 				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,
