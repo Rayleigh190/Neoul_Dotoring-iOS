@@ -50,10 +50,17 @@ final class LoginView: UIView {
     }()
     
     private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 24)
+        let label = NanumLabel(weightType: .R, size: 28)
         label.textColor = .label
-        label.text = "<전남대학교> 선배와 후배를\n한 공간에서 만나 보세요."
+        let text = "<전남대학교> 선배와 후배를\n한 공간에서 만나 보세요."
+        label.text = text
         label.numberOfLines = 0
+        
+        let fontSize = UIFont.nanumSquare(style: .NanumSquareOTFEB, size: 28)
+        let attributedStr = NSMutableAttributedString(string: text)
+
+        attributedStr.addAttribute(.font, value: fontSize, range: (text as NSString).range(of: "한 공간에서"))
+        label.attributedText = attributedStr
         
         return label
     }()
@@ -98,14 +105,14 @@ final class LoginView: UIView {
     }()
     
     private lazy var autoLoginLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "자동 로그인"
         
         return label
     }()
     
     private lazy var warningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "존재하지 않는 계정입니다. 다시 입력해 주세요."
         label.textColor = .BaseWarningRed
         
@@ -117,7 +124,7 @@ final class LoginView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .equalSpacing
-//        stack.spacing = 0
+        stack.spacing = 16
         
         return stack
     }()
@@ -126,7 +133,7 @@ final class LoginView: UIView {
         let button = UIButton()
         button.setTitle("아이디 찾기", for: .normal)
         button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 15)
         button.addTarget(self, action: #selector(findIdButtonTapped), for: .touchUpInside)
         
         return button
@@ -136,7 +143,7 @@ final class LoginView: UIView {
         let button = UIButton()
         button.setTitle("비밀번호 찾기", for: .normal)
         button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 15)
         button.addTarget(self, action: #selector(findPwButtonTapped), for: .touchUpInside)
         
         return button
@@ -146,7 +153,7 @@ final class LoginView: UIView {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 12)
+        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFL, size: 15)
         button.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         
         return button
@@ -203,12 +210,11 @@ private extension LoginView {
     func setupSubViews() {
         [navTitle, smallLogoImageView, backgroundImageView, titleLabel, subTitleLabel, idTextField, pwTextField, autoLoginCheckBox, autoLoginLabel, warningLabel, loginButton, accountStack, uiStyleSelectSwitch].forEach { addSubview($0) }
         
-//        accountStack.addArrangedSubview(findIdButton)
         [findIdButton, line1, findPwButton, line2, signupButton].forEach { accountStack.addArrangedSubview($0)}
         
         smallLogoImageView.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(38.0)
-            $0.top.equalToSuperview().inset(83.0)
+            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().inset(65)
         }
         
         navTitle.snp.makeConstraints {
@@ -218,12 +224,12 @@ private extension LoginView {
         
         backgroundImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(00.0)
-            $0.bottom.equalToSuperview().inset(29.66)
+            $0.bottom.equalToSuperview().inset(73.66)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalToSuperview().offset(218.0)
+            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(smallLogoImageView).offset(99.61)
         }
         
         subTitleLabel.snp.makeConstraints {
@@ -232,19 +238,21 @@ private extension LoginView {
         }
         
         idTextField.snp.makeConstraints {
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(105.0)
-            $0.leading.trailing.equalToSuperview().inset(35.0)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(112)
+            $0.leading.equalTo(titleLabel.snp.leading)
         }
         
         pwTextField.snp.makeConstraints {
-            $0.top.equalTo(idTextField.snp.bottom).offset(45.0)
-            $0.leading.trailing.equalToSuperview().inset(35.0)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(idTextField.snp.bottom).offset(42)
+            $0.leading.equalTo(titleLabel.snp.leading)
         }
         
         autoLoginCheckBox.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalTo(pwTextField.snp.bottom).offset(11.0)
-            $0.width.height.equalTo(14.0)
+            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.top.equalTo(pwTextField.snp.bottom).offset(20)
+            $0.width.equalTo(15)
         }
         
         autoLoginLabel.snp.makeConstraints {
@@ -254,28 +262,28 @@ private extension LoginView {
         
         warningLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(loginButton.snp.top).offset(-10.0)
+            $0.bottom.equalTo(loginButton.snp.top).offset(-7)
         }
         
         loginButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(30.0)
-            $0.top.equalTo(pwTextField.snp.bottom).offset(70.0)
+            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.top.equalTo(pwTextField.snp.bottom).offset(96)
             $0.height.equalTo(48.0)
         }
         
         accountStack.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(82.0)
             $0.top.equalTo(loginButton.snp.bottom).offset(15.0)
             $0.height.equalTo(14.0)
         }
         
         line1.snp.makeConstraints {
-            $0.width.equalTo(0.3)
+            $0.width.equalTo(0.5)
         }
         
         line2.snp.makeConstraints {
-            $0.width.equalTo(0.3)
+            $0.width.equalTo(0.5)
         }
         
         uiStyleSelectSwitch.snp.makeConstraints {
