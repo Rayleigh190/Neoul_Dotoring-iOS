@@ -76,15 +76,33 @@ final class LoginView: UIView {
     
     private lazy var idTextField: LineTextField = {
         let lineTextField = LineTextField()
-        lineTextField.textField.placeholder = "아이디"
+        
+        // 폰트 및 스타일을 설정할 NSAttributedString 생성
+       let placeholderText = "아이디"
+       let placeholderAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.nanumSquare(style: .NanumSquareOTFR, size: 17),
+        .foregroundColor: UIColor(red: 0.702, green: 0.702, blue: 0.702, alpha: 1) // 원하는 텍스트 색상으로 변경
+       ]
+
+       let attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
+        lineTextField.textField.attributedPlaceholder = attributedPlaceholder
         
         return lineTextField
     }()
     
     private lazy var pwTextField: LineTextField = {
         let lineTextField = LineTextField()
-        lineTextField.textField.placeholder = "비밀번호"
         lineTextField.textField.isSecureTextEntry = true
+        
+        // 폰트 및 스타일을 설정할 NSAttributedString 생성
+       let placeholderText = "비밀번호"
+       let placeholderAttributes: [NSAttributedString.Key: Any] = [
+        .font: UIFont.nanumSquare(style: .NanumSquareOTFR, size: 17),
+        .foregroundColor: UIColor(red: 0.702, green: 0.702, blue: 0.702, alpha: 1) // 원하는 텍스트 색상으로 변경
+       ]
+
+       let attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
+        lineTextField.textField.attributedPlaceholder = attributedPlaceholder
         
         return lineTextField
     }()
