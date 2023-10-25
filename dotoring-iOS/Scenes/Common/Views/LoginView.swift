@@ -129,6 +129,13 @@ final class LoginView: UIView {
         return label
     }()
     
+    private lazy var autoLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(autoLoginButtonTapped), for: .touchUpInside)
+        
+        return button
+    }()
+    
     private lazy var warningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "존재하지 않는 계정입니다. 다시 입력해 주세요."
@@ -226,7 +233,7 @@ final class LoginView: UIView {
 private extension LoginView {
     
     func setupSubViews() {
-        [navTitle, smallLogoImageView, backgroundImageView, titleLabel, subTitleLabel, idTextField, pwTextField, autoLoginCheckBox, autoLoginLabel, warningLabel, loginButton, accountStack, uiStyleSelectSwitch].forEach { addSubview($0) }
+        [navTitle, smallLogoImageView, backgroundImageView, titleLabel, subTitleLabel, idTextField, pwTextField, autoLoginCheckBox, autoLoginLabel, autoLoginButton, warningLabel, loginButton, accountStack, uiStyleSelectSwitch].forEach { addSubview($0) }
         
         [findIdButton, line1, findPwButton, line2, signupButton].forEach { accountStack.addArrangedSubview($0)}
         
@@ -270,12 +277,19 @@ private extension LoginView {
         autoLoginCheckBox.snp.makeConstraints {
             $0.leading.equalTo(titleLabel.snp.leading)
             $0.top.equalTo(pwTextField.snp.bottom).offset(20)
-            $0.width.equalTo(15)
+            $0.width.height.equalTo(15)
         }
         
         autoLoginLabel.snp.makeConstraints {
             $0.centerY.equalTo(autoLoginCheckBox)
             $0.leading.equalTo(autoLoginCheckBox.snp.trailing).offset(4.0)
+        }
+        
+        autoLoginButton.snp.makeConstraints {
+            $0.leading.equalTo(autoLoginCheckBox.snp.trailing)
+            $0.trailing.equalTo(autoLoginLabel.snp.trailing)
+            $0.centerY.equalTo(autoLoginLabel)
+            $0.height.equalTo(18)
         }
         
         warningLabel.snp.makeConstraints {
@@ -334,6 +348,15 @@ extension LoginView {
     @objc func signupButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
         signupButtonActionHandler?()
+    }
+    
+    // 자동 로그인 체크 박스 체크 상태 변경
+    @objc func autoLoginButtonTapped(sender: UIButton!) {
+        if autoLoginCheckBox.isChecked {
+            autoLoginCheckBox.isChecked = false
+        } else {
+            autoLoginCheckBox.isChecked = true
+        }
     }
     
     // UI 스타일 선택 스위치 버튼 클릭 되면 UIStyle 데이터 변경
