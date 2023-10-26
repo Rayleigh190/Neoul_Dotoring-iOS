@@ -19,6 +19,8 @@ class BaseButton: UIButton {
         case .black: setupButton(style: .black)
         case .gray: setupButton(style: .gray)
         }
+        
+        self.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 17)
 
     }
     
