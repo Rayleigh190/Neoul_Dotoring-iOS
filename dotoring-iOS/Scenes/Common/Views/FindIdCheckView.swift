@@ -40,7 +40,7 @@ class FindIdCheckView: UIView {
     
     private lazy var idBoxView: UIView = {
         let view = UIView()
-        view.backgroundColor = .BaseGray
+        view.backgroundColor = .BaseGray100
         view.layer.cornerRadius = 20
         
         return view

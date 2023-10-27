@@ -46,7 +46,7 @@ private extension BaseButton {
             backgroundColor = .clear
             setTitleColor(UIColor.black, for: .normal)
         case .gray:
-            backgroundColor = .BaseGray
+            backgroundColor = .BaseGray100
             setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
         case .navy:
             backgroundColor = .BaseNavy

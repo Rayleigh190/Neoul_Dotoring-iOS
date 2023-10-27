@@ -34,7 +34,7 @@ final class LoginView: UIView {
     
     private lazy var navTitle: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         label.text = "도토링"
         
         return label

@@ -33,7 +33,7 @@ final class MyPageView: UIView {
     private lazy var infoLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 10)
         label.text = "수정을 원하시면 해당 텍스트를 클릭해 주세요."
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         
         return label
     }()
