@@ -31,7 +31,7 @@ class FindPwView: UIView {
     
     private lazy var subTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 10)
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         let text = "메일로 새로운 비밀번호를 발송해 드릴게요."
         label.text = text
         label.numberOfLines = 1

@@ -180,7 +180,7 @@ class ReportReasonAlertView: UIView {
     lazy var secondaryLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "신고가 접수 후엔 취소가 불가능합니다."
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         label.textAlignment = .center
         
         return label

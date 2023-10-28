@@ -105,7 +105,7 @@ class Signup4View: UIView {
     
     lazy var introductionInputTextField: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .BaseGray
+        textView.backgroundColor = .BaseGray100
         textView.textColor = .lightGray
         if uiStyle == .mento {
             textView.text = "멘토 분야에 대해 소개해 주세요"

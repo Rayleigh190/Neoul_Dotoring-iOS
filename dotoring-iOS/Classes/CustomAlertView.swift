@@ -52,7 +52,7 @@ class CustomAlertView: UIView {
     lazy var secondaryLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "secondary Text"
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         label.numberOfLines = 0
         label.textAlignment = .center
         

@@ -10,7 +10,7 @@ import UIKit
 
 class SignupStepBar: UIView {
     
-    var uiColor: UIColor = .BaseGray!
+    var uiColor: UIColor = .BaseGray100!
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -43,7 +43,7 @@ class SignupStepBar: UIView {
             if i < currentStep {
                 stepView.backgroundColor = uiColor
             } else {
-                stepView.backgroundColor = UIColor.BaseGray
+                stepView.backgroundColor = UIColor.BaseGray100
             }
             
             stepView.snp.makeConstraints { make in

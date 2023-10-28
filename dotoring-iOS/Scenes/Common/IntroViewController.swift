@@ -11,13 +11,13 @@ import UIKit
 class IntroViewController: UIViewController {
     
     private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = .label
+        let label = NanumLabel(weightType: .R, size: 28)
+        label.textColor = .BaseGray900
         let text = "우리들의 멘토링\n도토링"
         label.text = text
         label.numberOfLines = 2
         
-        let fontSize = UIFont.nanumSquare(style: .NanumSquareOTFEB, size: 30)
+        let fontSize = UIFont.nanumSquare(style: .NanumSquareOTFEB, size: 34)
         let attributedStr = NSMutableAttributedString(string: text)
 
         attributedStr.addAttribute(.font, value: fontSize, range: (text as NSString).range(of: "도토링"))
@@ -61,7 +61,7 @@ class IntroViewController: UIViewController {
     }()
     
     private lazy var mentoBtnLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
+        let label = NanumLabel(weightType: .R, size: 17)
         label.textColor = .white
         let text = "후배들에게 도움을 주는\n멘토"
         label.text = text
@@ -84,7 +84,7 @@ class IntroViewController: UIViewController {
     }()
     
     private lazy var mentiBtnLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
+        let label = NanumLabel(weightType: .R, size: 17)
         label.textColor = .white
         let text = "더 성장하고 싶은\n멘티"
         label.text = text
@@ -111,13 +111,8 @@ class IntroViewController: UIViewController {
         let title = "로그인하러 가기"
         button.addTarget(self, action: #selector(goLoginButtonTapped), for: .touchUpInside)
         
-//        let attributedTitle = NSAttributedString(string: title, attributes: [
-//            .foregroundColor: UIColor.gray,
-//            .font: UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13),
-//            .underlineStyle: NSUnderlineStyle.single.rawValue
-//        ])
         let attributedTitle = NSMutableAttributedString(string: title)
-        attributedTitle.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: 0, length: attributedTitle.length))
+        attributedTitle.addAttribute(.foregroundColor, value: UIColor.BaseGray600!, range: NSRange(location: 0, length: attributedTitle.length))
         attributedTitle.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13), range: NSRange(location: 0, length: attributedTitle.length))
         
         // Add spacing between text and underline
@@ -150,25 +145,25 @@ private extension IntroViewController {
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(153.0)
+            $0.top.equalToSuperview().offset(151)
         }
         
         mainLogoImageView.snp.makeConstraints {
             $0.centerX.equalTo(titleLabel)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(29.0)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(38)
         }
         
         mentoButton.snp.makeConstraints {
             $0.centerX.equalTo(mainLogoImageView)
-            $0.leading.equalToSuperview().offset(85.0)
-            $0.top.equalTo(mainLogoImageView.snp.bottom).offset(54.66)
+            $0.leading.equalToSuperview().offset(52)
+            $0.top.equalTo(mainLogoImageView.snp.bottom).offset(38.66)
             $0.height.equalTo(103.0)
         }
         
         mentiButton.snp.makeConstraints {
             $0.centerX.equalTo(mentoButton)
             $0.leading.equalTo(mentoButton.snp.leading)
-            $0.top.equalTo(mentoButton.snp.bottom).offset(10.0)
+            $0.top.equalTo(mentoButton.snp.bottom).offset(12)
             $0.height.equalTo(103.0)
         }
         
@@ -182,7 +177,7 @@ private extension IntroViewController {
         
         goLoginButton.snp.makeConstraints {
             $0.centerX.equalTo(mentiButton)
-            $0.top.equalTo(mentiButton.snp.bottom).offset(149.0)
+            $0.bottom.equalToSuperview().offset(-58)
         }
         
     }

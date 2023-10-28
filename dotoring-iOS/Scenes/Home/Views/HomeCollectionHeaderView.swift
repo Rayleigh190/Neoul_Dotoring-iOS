@@ -68,7 +68,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     private lazy var searchButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = UIColor(named: "BaseSecondaryEmhasisGray")
+        button.tintColor = UIColor(named: "BaseGray700")
         button.addTarget(self, action: #selector(toggle), for: .touchUpInside)
         
         return button
@@ -108,7 +108,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     lazy var departmentFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("학과", for: .normal)
-        button.backgroundColor = UIColor.BaseSecondaryEmhasisGray
+        button.backgroundColor = UIColor.BaseGray700
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
@@ -120,7 +120,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     lazy var hopeMentoringFilterButton: UIButton = {
         let button = UIButton()
         button.setTitle("희망 멘토링", for: .normal)
-        button.backgroundColor = UIColor(named: "BaseSecondaryEmhasisGray")
+        button.backgroundColor = UIColor(named: "BaseGray700")
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
         button.layer.cornerRadius = 17
@@ -229,9 +229,9 @@ private extension HomeCollectionHeaderView {
         }
         
         if uiStyle == .mento {
-            searchButton.tintColor = isOpen ? UIColor.BaseSecondaryEmhasisGray : UIColor.BaseGreen
+            searchButton.tintColor = isOpen ? UIColor.BaseGray700 : UIColor.BaseGreen
         } else {
-            searchButton.tintColor = isOpen ? UIColor.BaseSecondaryEmhasisGray : UIColor.BaseNavy
+            searchButton.tintColor = isOpen ? UIColor.BaseGray700 : UIColor.BaseNavy
         }
         
         
@@ -258,7 +258,7 @@ extension HomeCollectionHeaderView {
                 }
             }
             self.endEditing(true) // 키보드도 함께 내림
-            searchButton.tintColor = isOpen ? UIColor(named: "BaseSecondaryEmhasisGray") : UIColor(named: "BaseGreen")
+            searchButton.tintColor = isOpen ? UIColor(named: "BaseGray700") : UIColor(named: "BaseGreen")
         } else {
             isSearchBarClosedFromTap = false
         }
@@ -304,9 +304,9 @@ extension HomeCollectionHeaderView: SelectViewControllerDelegate {
             }
         } else { // 선택한 데이터가 아무것도 없을 때 색을 기본색으로 셋팅
             if sender == departmentFilterButton {
-                departmentFilterButton.backgroundColor = .BaseSecondaryEmhasisGray
+                departmentFilterButton.backgroundColor = .BaseGray700
             } else {
-                hopeMentoringFilterButton.backgroundColor = .BaseSecondaryEmhasisGray
+                hopeMentoringFilterButton.backgroundColor = .BaseGray700
             }
         }
     }

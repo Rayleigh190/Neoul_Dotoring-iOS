@@ -44,7 +44,7 @@ class MentoringSetView: UIView {
     private lazy var infoLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "250자 이내로 제한됩니다."
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         
         return label
     }()

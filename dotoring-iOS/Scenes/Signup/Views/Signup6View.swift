@@ -107,7 +107,7 @@ class Signup6View: UIView {
     private lazy var idInfoLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 10)
         label.text = "영문과 숫자를 포함한 8-12글자로 표기해 주세요"
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         
         return label
     }()
@@ -138,7 +138,7 @@ class Signup6View: UIView {
     private lazy var pwInfoLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 10)
         label.text = "영문과 숫자, 특수문자를 포함한 7-12글자로 표기해 주세요."
-        label.textColor = .BaseSecondaryEmhasisGray
+        label.textColor = .BaseGray700
         
         return label
     }()

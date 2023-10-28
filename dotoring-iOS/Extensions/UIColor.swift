@@ -8,9 +8,15 @@
 import UIKit
 
 extension UIColor {
-    static let BaseGray = UIColor(named: "BaseGray")
+    // 회색
+    static let BaseGray100 = UIColor(named: "BaseGray100")
+    static let BaseGray400 = UIColor(named: "BaseGray400")
+    static let BaseGray600 = UIColor(named: "BaseGray600")
+    static let BaseGray700 = UIColor(named: "BaseGray700")
+    static let BaseGray900 = UIColor(named: "BaseGray900")
+    
+    // 기타
     static let BaseGreen = UIColor(named: "BaseGreen")
     static let BaseNavy = UIColor(named: "BaseNavy")
-    static let BaseSecondaryEmhasisGray = UIColor(named: "BaseSecondaryEmhasisGray")
     static let BaseWarningRed = UIColor(named: "BaseWarningRed")
 }
