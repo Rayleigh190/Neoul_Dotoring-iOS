@@ -74,8 +74,9 @@ final class LoginView: UIView {
         return label
     }()
     
-    private lazy var idTextField: LineTextField = {
+    lazy var idTextField: LineTextField = {
         let lineTextField = LineTextField()
+        lineTextField.textField.returnKeyType = .continue
         
         // 폰트 및 스타일을 설정할 NSAttributedString 생성
        let placeholderText = "아이디"
@@ -90,8 +91,9 @@ final class LoginView: UIView {
         return lineTextField
     }()
     
-    private lazy var pwTextField: LineTextField = {
+    lazy var pwTextField: LineTextField = {
         let lineTextField = LineTextField()
+        lineTextField.textField.returnKeyType = .done
         lineTextField.textField.isSecureTextEntry = true
         
         // 폰트 및 스타일을 설정할 NSAttributedString 생성

@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
         
         self.hideKeyboardWhenTappedAround()
         self.setKeyboardObserver()
+        setDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +68,28 @@ class LoginViewController: UIViewController {
     func handleSignupButtonTapped() {
         let vc = IntroViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+extension LoginViewController {
+    
+    func setDelegate() {
+        loginView.idTextField.textField.delegate = self
+        loginView.pwTextField.textField.delegate = self
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    // 텍스트필드에서 리턴키 눌르면 다음 텍스트필드로 포커싱 맞춰짐
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == loginView.idTextField.textField {
+            loginView.pwTextField.textField.becomeFirstResponder()
+        } else {
+            loginView.pwTextField.textField.resignFirstResponder()
+        }
+        return true
     }
     
 }
