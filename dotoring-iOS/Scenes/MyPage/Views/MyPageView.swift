@@ -9,70 +9,210 @@ import UIKit
 
 final class MyPageView: UIView {
     
-    // Add a closure property
-    var setMentoringButtonActionHandler: (() -> Void)?
-    var setAccountButtonActionHandler: (() -> Void)?
-    var departmentButtonActionHandler: (() -> Void)?
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
     
     private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .B, size: 30)
+        let label = NanumLabel(weightType: .EB, size: 34)
         label.text = "마이페이지"
-        label.textColor = .label
+        label.textColor = .BaseGray900
         
         return label
     }()
     
-    lazy var profileCardView: ProfileCardView = {
+    private lazy var profileCardView: ProfileCardView = {
         let view = ProfileCardView()
-        view.backgroundColor = .systemBackground
-        view.departmentButton.addTarget(self, action: #selector(departmentButtonTapped), for: .touchUpInside)
+        view.layer.cornerRadius = 20
+        
+        if uiStyle == .mento {
+            view.backgroundColor = .BaseGreen
+        } else {
+            view.backgroundColor = .BaseNavy
+        }
         
         return view
     }()
     
-    private lazy var infoLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
-        label.text = "수정을 원하시면 해당 텍스트를 클릭해 주세요."
-        label.textColor = .BaseGray700
+    private lazy var organizationLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 15)
+        label.textColor = .BaseGray600
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        if uiStyle == .mento {
+            label.text = "소속 |"
+        } else {
+            label.text = "학교 |"
+        }
         
         return label
     }()
     
-    private lazy var setStackView: UIStackView = {
+    private lazy var userOrganizationLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
+        label.textColor = .BaseGray900
+        label.text = "소속 or 학교"
+        
+        return label
+    }()
+    
+    private lazy var organizationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = 12
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        [organizationLabel, userOrganizationLabel].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
     
-    private lazy var setMentorignView: SetMenuView = {
-        let view = SetMenuView(frame: self.frame, title: "멘토링 방식 설정하기", image: UIImage(named: "MentoringSetMenuLogoImg")!)        
+    private lazy var dashedLine1ImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "DashedLineImg")
         
-        return view
+        return imageView
     }()
     
-    private lazy var setAccountView: UIView = {
-        let view = SetMenuView(frame: self.frame, title: "계정 설정하기", image: UIImage(named: "AccountSetMenuLogoImg")!)
+    private lazy var fieldLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 15)
+        label.textColor = .BaseGray600
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        if uiStyle == .mento {
+            label.text = "분야 |"
+        } else {
+            label.text = "학과 |"
+        }
         
-        return view
+        return label
     }()
     
-    private lazy var setMentoringButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(setMentorignButtonTapped), for: .touchUpInside)
+    private lazy var userFieldLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
+        label.textColor = .BaseGray900
+        label.text = "멘토링 분야 or -학과"
         
-        return button
+        return label
     }()
     
-    private lazy var setAccountButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.addTarget(self, action: #selector(setAccountButtonTapped), for: .touchUpInside)
+    private lazy var fieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
         
-        return button
+        [fieldLabel, userFieldLabel].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
     }()
+    
+    private lazy var dashedLine2ImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "DashedLineImg")
+        
+        return imageView
+    }()
+    
+    private lazy var gradeLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 15)
+        label.textColor = .BaseGray600
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        if uiStyle == .mento {
+            label.text = "연차 |"
+        } else {
+            label.text = "학년 |"
+        }
+        
+        return label
+    }()
+    
+    private lazy var userGradeLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
+        label.textColor = .BaseGray900
+        label.text = "n년차 or n학년"
+        
+        return label
+    }()
+    
+    private lazy var gradeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        [gradeLabel, userGradeLabel].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private lazy var dashedLine3ImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "DashedLineImg")
+        
+        return imageView
+    }()
+    
+    private lazy var field2Label: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 15)
+        label.textColor = .BaseGray600
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        if uiStyle == .mento {
+            label.text = "학과 |"
+        } else {
+            label.text = "분야 |"
+        }
+        
+        return label
+    }()
+    
+    private lazy var userfield2Label: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
+        label.textColor = .BaseGray900
+        label.text = "x학과 졸업 or 희망 직무 분야"
+        
+        return label
+    }()
+    
+    private lazy var field2StackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        [field2Label, userfield2Label].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private lazy var dashedLine4ImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "DashedLineImg")
+        
+        return imageView
+    }()
+    
+    private lazy var userInfoStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 21
+        
+        [organizationStackView, dashedLine1ImageView,
+         fieldStackView, dashedLine2ImageView,
+         gradeStackView, dashedLine3ImageView,
+         field2StackView, dashedLine4ImageView].forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,84 +234,36 @@ final class MyPageView: UIView {
 private extension MyPageView {
     
     func setupSubViews() {
-        [titleLabel, profileCardView, infoLabel, setStackView, setMentoringButton, setAccountButton].forEach {addSubview($0)}
-        
-        [setMentorignView, setAccountView].forEach {setStackView.addArrangedSubview($0)}
+        [titleLabel, profileCardView, userInfoStackView].forEach {addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalToSuperview().offset(77)
+            $0.leading.equalToSuperview().offset(15)
+            $0.top.equalToSuperview().offset(59)
         }
         
         profileCardView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(15)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(39)
-            $0.height.equalTo(220)
+            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
+            $0.height.equalTo(121)
         }
         
-        infoLabel.snp.makeConstraints {
-            $0.centerX.equalTo(profileCardView)
-            $0.top.equalTo(profileCardView.snp.bottom).offset(10)
-        }
-        
-        setStackView.snp.makeConstraints {
-            $0.centerX.equalTo(profileCardView)
-            $0.leading.equalTo(profileCardView.snp.leading)
-            $0.top.equalTo(profileCardView.snp.bottom).offset(39)
-        }
-        
-        setMentorignView.snp.makeConstraints {
-            $0.height.equalTo(154)
-        }
-        
-        setAccountView.snp.makeConstraints {
-            $0.height.equalTo(154)
-        }
-        
-        setMentoringButton.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(setMentorignView)
-            $0.width.height.equalTo(setMentorignView)
-        }
-        
-        setAccountButton.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(setAccountView)
-            $0.width.height.equalTo(setAccountView)
+        userInfoStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(profileCardView.snp.bottom).offset(24)
         }
         
     }
     
     func updateUI() {
-        // View에 그림자와 cornerRadius 적용
-        [profileCardView, setMentorignView, setAccountView].forEach { view in
-            view.layer.cornerRadius = 20
-            view.layer.shadowColor = UIColor.black.cgColor
-            view.layer.shadowOpacity = 0.2
-            view.layer.shadowOffset = CGSize(width: 0, height: 0)
-            view.layer.shadowRadius = 7
-            view.layer.masksToBounds = false
-        }
-    
-        
+        backgroundColor = .BaseGray100
     }
     
 }
 
 extension MyPageView {
     
-    @objc func setMentorignButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
-        setMentoringButtonActionHandler?()
-    }
-    
-    @objc func setAccountButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
-        setAccountButtonActionHandler?()
-    }
-    
-    @objc func departmentButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
-        departmentButtonActionHandler?()
-    }
+
     
 }

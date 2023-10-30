@@ -9,7 +9,7 @@ import UIKit
 
 class SelectView: UIView {
     
-    var uiColor: UIColor = UIColor.BaseGray100!
+    var uiColor: UIColor = UIColor.BaseGray200!
     var elements: [String] = ["선택항목 1", "선택항목 2", "선택항목 3", "선택항목 4", "선택항목 5", "선택항목 6", "선택항목 7", "선택항목 8", "선택항목 9", "선택항목 10"]
     var selectedElements: [Int] = [] // 선택한 항목 cell의 indexPath를 저장
     

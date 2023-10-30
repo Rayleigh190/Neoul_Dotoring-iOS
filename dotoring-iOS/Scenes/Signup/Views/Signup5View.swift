@@ -81,7 +81,7 @@ class Signup5View: UIView {
     
     lazy var personalInfoTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .BaseGray100
+        textView.backgroundColor = .BaseGray200
         textView.textColor = .black
         textView.text = "개인정보 관련 내용"
         textView.isScrollEnabled = false

@@ -20,18 +20,6 @@ class MyPageViewController: UIViewController {
         super.loadView()
         
         myPageView = MyPageView(frame: self.view.frame)
-        
-        myPageView.setMentoringButtonActionHandler = { [weak self] in
-            self?.handleSetMentoringButtonTapped()
-        }
-        myPageView.setAccountButtonActionHandler = { [weak self] in
-            self?.handleSetAccountButtonTapped()
-        }
-        myPageView.departmentButtonActionHandler = { [weak self] in self?.handledepartmentButtonTapped()
-        }
-        
-        myPageView.profileCardView.jobButton.addTarget(self, action: #selector(showAlet), for: .touchUpInside)
-        
         self.view = myPageView
     }
 
