@@ -198,6 +198,35 @@ final class MyPageView: UIView {
         return imageView
     }()
     
+    private lazy var introductionLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 15)
+        label.textColor = .BaseGray600
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.text = "한 줄 소개"
+        
+        return label
+    }()
+    
+    private lazy var introductionDescriptLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 10)
+        label.textColor = .BaseGray700
+        label.text = "10자 이상, 80자 이하 작성"
+        
+        return label
+    }()
+    
+    private lazy var introductionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .bottom
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        
+        [introductionLabel, introductionDescriptLabel].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
     private lazy var userInfoStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -213,6 +242,13 @@ final class MyPageView: UIView {
         return stackView
     }()
     
+    private lazy var userIntroductionLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 17)
+        label.textColor = .BaseGray900
+        label.text = "기존 내용"
+        
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -234,7 +270,7 @@ final class MyPageView: UIView {
 private extension MyPageView {
     
     func setupSubViews() {
-        [titleLabel, profileCardView, userInfoStackView].forEach {addSubview($0)}
+        [titleLabel, profileCardView, userInfoStackView, introductionStackView, userIntroductionLabel].forEach {addSubview($0)}
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
@@ -252,6 +288,17 @@ private extension MyPageView {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
             $0.top.equalTo(profileCardView.snp.bottom).offset(24)
+        }
+        
+        introductionStackView.snp.makeConstraints {
+            $0.leading.equalTo(userInfoStackView.snp.leading)
+            $0.top.equalTo(userInfoStackView.snp.bottom).offset(12)
+        }
+        
+        userIntroductionLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(introductionLabel.snp.leading)
+            $0.top.equalTo(introductionLabel.snp.bottom).offset(15)
         }
         
     }
