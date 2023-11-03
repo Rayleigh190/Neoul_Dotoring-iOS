@@ -250,6 +250,16 @@ final class MyPageView: UIView {
         return label
     }()
     
+    /**
+     * 마이페이지 하단에 차단 관리, 작성글 관리, 멘토링 방식, 계정 설정 버튼을 포함하고 있는 메뉴바 입니다.
+     */
+    private lazy var menuBarView: MenuBarView = {
+        let view = MenuBarView()
+        view.layer.cornerRadius = 20
+        
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -270,7 +280,7 @@ final class MyPageView: UIView {
 private extension MyPageView {
     
     func setupSubViews() {
-        [titleLabel, profileCardView, userInfoStackView, introductionStackView, userIntroductionLabel].forEach {addSubview($0)}
+        [titleLabel, profileCardView, userInfoStackView, introductionStackView, userIntroductionLabel, menuBarView].forEach {addSubview($0)}
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(15)
@@ -299,6 +309,13 @@ private extension MyPageView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(introductionLabel.snp.leading)
             $0.top.equalTo(introductionLabel.snp.bottom).offset(15)
+        }
+        
+        menuBarView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(96)
+            $0.bottom.equalToSuperview().offset(-124)
         }
         
     }

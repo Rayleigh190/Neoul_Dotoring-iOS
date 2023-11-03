@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MentoringSetMenuLogoImg.png",
+      "filename" : "MyPageMenuBarMentoringTypeBtnImg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "MentoringSetMenuLogoImg@2x.png",
+      "filename" : "MyPageMenuBarMentoringTypeBtnImg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "MentoringSetMenuLogoImg@3x.png",
+      "filename" : "MyPageMenuBarMentoringTypeBtnImg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

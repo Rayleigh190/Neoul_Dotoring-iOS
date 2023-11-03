@@ -19,6 +19,7 @@
 		F1A560682A949E6900FD2E91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A560672A949E6900FD2E91 /* Assets.xcassets */; };
 		F1A5606B2A949E6900FD2E91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */; };
 		F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F1A560732A94A42B00FD2E91 /* Kingfisher */; };
+		F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -102,6 +103,7 @@
 		F1A560672A949E6900FD2E91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1A5606A2A949E6900FD2E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1A5606C2A949E6900FD2E91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 			children = (
 				F1FCE78E2AC7D5FC0024AE60 /* MyPageView.swift */,
 				F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */,
+				F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */,
 				F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */,
 				F1FCE7942AC902D90024AE60 /* MentoringSetView.swift */,
 				F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */,
@@ -519,6 +522,7 @@
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */,
+				F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */,
 				F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */,
 				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
 				F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */,
