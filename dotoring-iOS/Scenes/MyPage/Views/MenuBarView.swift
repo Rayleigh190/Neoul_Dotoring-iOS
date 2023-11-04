@@ -111,6 +111,27 @@ class MenuBarView: UIView {
         return button
     }()
     
+    private lazy var line1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .BaseGray600
+        
+        return view
+    }()
+    
+    private lazy var line2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .BaseGray600
+        
+        return view
+    }()
+    
+    private lazy var line3: UIView = {
+        let view = UIView()
+        view.backgroundColor = .BaseGray600
+        
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
@@ -135,7 +156,13 @@ private extension MenuBarView {
         [menuBarStackView].forEach { addSubview($0)
         }
         
-        [blockMnageButton, postManageButton, mentorignTypeButton, accountSetButton].forEach { menuBarStackView.addArrangedSubview($0)
+        [blockMnageButton, line1, postManageButton, line2, mentorignTypeButton, line3, accountSetButton].forEach { menuBarStackView.addArrangedSubview($0)
+        }
+        
+        [line1, line2, line3].forEach {
+            $0.snp.makeConstraints {
+                $0.width.equalTo(0.5)
+            }
         }
         
         menuBarStackView.snp.makeConstraints {
