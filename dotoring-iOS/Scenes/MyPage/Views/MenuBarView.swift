@@ -22,7 +22,7 @@ class MenuBarView: UIView {
         return stackView
     }()
     
-    private lazy var blockMnageButton: UIButton = {
+    lazy var blockManageButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = "차단 관리"
         config.image = UIImage(named: "MyPageMenuBarBlockManageBtnImg")
@@ -44,7 +44,7 @@ class MenuBarView: UIView {
         return button
     }()
     
-    private lazy var postManageButton: UIButton = {
+    lazy var postManageButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = "작성글 관리"
         config.image = UIImage(named: "MyPageMenuBarPostMangeBtnImg")
@@ -66,7 +66,7 @@ class MenuBarView: UIView {
         return button
     }()
     
-    private lazy var mentorignTypeButton: UIButton = {
+    lazy var mentorignMethodButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = "멘토링 방식"
         config.image = UIImage(named: "MyPageMenuBarMentoringTypeBtnImg")
@@ -89,7 +89,7 @@ class MenuBarView: UIView {
         return button
     }()
     
-    private lazy var accountSetButton: UIButton = {
+    lazy var accountSetButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.title = "계정 설정"
         config.image = UIImage(named: "MyPageMenuBarAccountSetBtnImg")
@@ -156,7 +156,7 @@ private extension MenuBarView {
         [menuBarStackView].forEach { addSubview($0)
         }
         
-        [blockMnageButton, line1, postManageButton, line2, mentorignTypeButton, line3, accountSetButton].forEach { menuBarStackView.addArrangedSubview($0)
+        [blockManageButton, line1, postManageButton, line2, mentorignMethodButton, line3, accountSetButton].forEach { menuBarStackView.addArrangedSubview($0)
         }
         
         [line1, line2, line3].forEach {

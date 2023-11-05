@@ -1,5 +1,5 @@
 //
-//  MentoringSetViewController.swift
+//  MentoringMethodSetViewController.swift
 //  dotoring-iOS
 //
 //  Created by 우진 on 2023/10/01.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MentoringSetView: UIView {
+class MentoringMethodSetView: UIView {
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -109,7 +109,7 @@ class MentoringSetView: UIView {
 
 }
 
-private extension MentoringSetView {
+private extension MentoringMethodSetView {
     
     func setupSubViews() {
         
@@ -154,7 +154,7 @@ private extension MentoringSetView {
     
 }
 
-extension MentoringSetView {
+extension MentoringMethodSetView {
     
     // textView 입력될 때마다 라벨 업데이트
     func updateCountLabel(characterCount: Int) {

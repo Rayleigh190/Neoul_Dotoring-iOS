@@ -27,9 +27,9 @@ class PasswordResetView: UIView {
     }()
     
     private lazy var subTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .L, size: 13)
-        label.textColor = .label
-        label.text = "필요한 부분만 수정 후 다시 로그인해 주세요."
+        let label = NanumLabel(weightType: .R, size: 13)
+        label.textColor = .BaseGray700
+        label.text = "수정 후 다시 로그인해 주세요."
         label.numberOfLines = 1
         
         return label

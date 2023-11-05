@@ -253,7 +253,7 @@ final class MyPageView: UIView {
     /**
      * 마이페이지 하단에 차단 관리, 작성글 관리, 멘토링 방식, 계정 설정 버튼을 포함하고 있는 메뉴바 입니다.
      */
-    private lazy var menuBarView: MenuBarView = {
+    lazy var menuBarView: MenuBarView = {
         let view = MenuBarView()
         view.layer.cornerRadius = 20
         

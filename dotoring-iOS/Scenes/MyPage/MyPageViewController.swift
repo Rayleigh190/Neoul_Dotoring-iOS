@@ -13,7 +13,7 @@ class MyPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setButtonAddTarget()
     }
     
     override func loadView() {
@@ -27,12 +27,18 @@ class MyPageViewController: UIViewController {
 
 extension MyPageViewController {
     
-    func handleSetMentoringButtonTapped() {
-        let vc = MentoringSetViewController()
+    func setButtonAddTarget() {
+        myPageView.menuBarView.mentorignMethodButton.addTarget(self, action: #selector(mentorignMethodButtonTapped), for: .touchUpInside)
+        
+        myPageView.menuBarView.accountSetButton.addTarget(self, action: #selector(accountSetButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func mentorignMethodButtonTapped() {
+        let vc = MentoringMethodSetViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func handleSetAccountButtonTapped() {
+    @objc func accountSetButtonTapped() {
         let vc = AccountSetViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
