@@ -67,7 +67,6 @@
 		F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */; };
 		F1FCE78F2AC7D5FC0024AE60 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE78E2AC7D5FC0024AE60 /* MyPageView.swift */; };
 		F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */; };
-		F1FCE7932AC84FFD0024AE60 /* SetMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */; };
 		F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7942AC902D90024AE60 /* MentoringMethodSetView.swift */; };
 		F1FCE7972AC902F00024AE60 /* MentoringMethodSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7962AC902F00024AE60 /* MentoringMethodSetViewController.swift */; };
 		F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */; };
@@ -150,7 +149,6 @@
 		F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		F1FCE78E2AC7D5FC0024AE60 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		F1FCE7902AC825D60024AE60 /* ProfileCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCardView.swift; sourceTree = "<group>"; };
-		F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMenuView.swift; sourceTree = "<group>"; };
 		F1FCE7942AC902D90024AE60 /* MentoringMethodSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringMethodSetView.swift; sourceTree = "<group>"; };
 		F1FCE7962AC902F00024AE60 /* MentoringMethodSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentoringMethodSetViewController.swift; sourceTree = "<group>"; };
 		F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSetViewController.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 				F1FCE7A42ACE87C10024AE60 /* AccountConfirmView.swift */,
 				F1FCE7AA2AD03FF50024AE60 /* PasswordResetView.swift */,
 				F1FCE7A22ACB04830024AE60 /* UploadDocumentsView.swift */,
-				F1FCE7922AC84FFD0024AE60 /* SetMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -512,7 +509,6 @@
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
-				F1FCE7932AC84FFD0024AE60 /* SetMenuView.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,

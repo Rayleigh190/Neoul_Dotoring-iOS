@@ -7,6 +7,9 @@
 
 import UIKit
 
+/**
+ * 마이페이지 View입니다.
+ */
 final class MyPageView: UIView {
     
     let uiStyle: UIStyle = {
@@ -25,6 +28,7 @@ final class MyPageView: UIView {
         return label
     }()
     
+    // 마이페이지 상단에 사용자 닉네임과 프로필 이미지를 보여주는 View입니다.
     private lazy var profileCardView: ProfileCardView = {
         let view = ProfileCardView()
         view.layer.cornerRadius = 20
@@ -250,9 +254,7 @@ final class MyPageView: UIView {
         return label
     }()
     
-    /**
-     * 마이페이지 하단에 차단 관리, 작성글 관리, 멘토링 방식, 계정 설정 버튼을 포함하고 있는 메뉴바 입니다.
-     */
+    // 마이페이지 하단에 차단 관리, 작성글 관리, 멘토링 방식, 계정 설정 버튼을 포함하고 있는 메뉴바 입니다.
     lazy var menuBarView: MenuBarView = {
         let view = MenuBarView()
         view.layer.cornerRadius = 20

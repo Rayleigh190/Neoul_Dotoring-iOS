@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ * 마이페이지 > 계정 설정 > 비밀번호 재설정(버튼) > 계정 확인
+ * 계정 설정을 위해 계정을 확인하는 View입니다.
+ */
 class AccountConfirmView: UIView {
 
     private lazy var backgroundImageView: UIImageView = {

@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ * 마이페이지 상단에 위치한 사용자의 프로필 카드 View입니다.
+ * 닉네임과 프로필 이미지를 포함하고 있습니다.
+ */
 class ProfileCardView: UIView {
     
     let uiStyle: UIStyle = {

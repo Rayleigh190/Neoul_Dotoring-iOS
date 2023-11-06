@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ * 마이페이지 > 계정 설정 > 비밀번호 재설정(버튼) > 계정확인 > 비밀번호 설정
+ * 계정 비밀번호를 재설정하기 위한 View입니다.
+ */
 class PasswordResetView: UIView {
     
     let uiStyle: UIStyle = {
