@@ -7,10 +7,14 @@
 
 import UIKit
 
+/**
+ * 마이페이지 > 계정 설정 > 정보 수정하기(버튼) > 정보 수정 > 서류 제출
+ * 계정 정보 수정 후 서류를 제출하는 View입니다.
+ */
 class UploadDocumentsView: UIView {
     
     // Add a closure property
-    var         groupCertificateUploadButtonActionHandler: (() -> Void)?
+    var groupCertificateUploadButtonActionHandler: (() -> Void)?
     var graduateCertificateUploadButtonActionHandler: (() -> Void)?
     var nextButtonActionHandler: (() -> Void)?
     
@@ -227,7 +231,7 @@ extension UploadDocumentsView {
     
     @objc func groupCertificateUploadButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped
-                groupCertificateUploadButtonActionHandler?()
+        groupCertificateUploadButtonActionHandler?()
     }
     
     @objc func graduateCertificateUploadButtonTapped(sender: UIButton!) {

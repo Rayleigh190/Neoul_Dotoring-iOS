@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ * 마이페이지 상단에 위치한 사용자의 프로필 카드 View입니다.
+ * 닉네임과 프로필 이미지를 포함하고 있습니다.
+ */
 class ProfileCardView: UIView {
     
     let uiStyle: UIStyle = {
@@ -17,24 +21,9 @@ class ProfileCardView: UIView {
         }
     }()
     
-    private lazy var backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        
-        if uiStyle == .mento {
-            imageView.image = UIImage(named: "MentoProfileCardBackgroundImg")
-        } else {
-            imageView.image = UIImage(named: "MenteeProfileCardBackgroundImg")
-        }
-        
-
-        return imageView
-    }()
-    
     private lazy var profileImageBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.958, green: 0.958, blue: 0.958, alpha: 1)
+        view.backgroundColor = .white
         view.clipsToBounds = true
         view.layer.cornerRadius = 20.0
        
@@ -54,125 +43,24 @@ class ProfileCardView: UIView {
         return imageView
     }()
     
-    private lazy var nickNameButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("닉네임", for: .normal)
-        
+    private lazy var titleLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 13)
+        label.textColor = .white
         if uiStyle == .mento {
-            button.setTitleColor(.BaseGreen, for: .normal)
+            label.text = "도토링 멘토"
         } else {
-            button.setTitleColor(.BaseNavy, for: .normal)
+            label.text = "도토링 멘티"
         }
         
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20)
-        
-        // Create a custom button configuration
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-
-        // Apply the custom configuration to the button
-        button.configuration = buttonConfiguration
-        
-        return button
+        return label
     }()
     
-    lazy var departmentButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var nickNameLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .EB, size: 26)
+        label.textColor = .white
+        label.text = "닉네임"
         
-        if uiStyle == .mento {
-            button.setTitle("소속", for: .normal)
-        } else {
-            button.setTitle("학과", for: .normal)
-        }
-        
-        button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13)
-        
-        // Create a custom button configuration
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-
-        // Apply the custom configuration to the button
-        button.configuration = buttonConfiguration
-        
-        return button
-    }()
-    
-    lazy var jobButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        if uiStyle == .mento {
-            button.setTitle("직무 분야", for: .normal)
-        } else {
-            button.setTitle("희망 직무 분야", for: .normal)
-        }
-        
-        button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13)
-        
-        // Create a custom button configuration
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-
-        // Apply the custom configuration to the button
-        button.configuration = buttonConfiguration
-        
-        return button
-    }()
-    
-    private lazy var gradeButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        if uiStyle == .mento {
-            button.setTitle("n년차", for: .normal)
-        } else {
-            button.setTitle("n학년", for: .normal)
-        }
-        
-        button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13)
-        
-        // Create a custom button configuration
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-
-        // Apply the custom configuration to the button
-        button.configuration = buttonConfiguration
-        
-        return button
-    }()
-    
-    private lazy var graduationDepartmentButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("졸업학과", for: .normal)
-        button.setTitleColor(.label, for: .normal)
-        button.titleLabel?.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13)
-        
-        // Create a custom button configuration
-        var buttonConfiguration = UIButton.Configuration.plain()
-        buttonConfiguration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-
-        // Apply the custom configuration to the button
-        button.configuration = buttonConfiguration
-        
-        return button
-    }()
-    
-    private lazy var introductionTextView: UITextView = {
-        let textView = UITextView()
-        textView.text = "한 줄 소개"
-        textView.backgroundColor = .clear
-        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 10)
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        
-        return textView
-    }()
-    
-    private lazy var introductionEditButton: UIButton = {
-        let button = UIButton(type: .system)
-        
-        return button
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -188,7 +76,6 @@ class ProfileCardView: UIView {
     
     func setup() {
         setupSubViews()
-        updateUI()
     }
     
 }
@@ -196,67 +83,34 @@ class ProfileCardView: UIView {
 private extension ProfileCardView {
     
     func setupSubViews() {
-        [backgroundImageView, profileImageBackgroundView, nickNameButton, departmentButton, jobButton, gradeButton, graduationDepartmentButton, introductionTextView, introductionEditButton]
+        [profileImageBackgroundView, titleLabel, nickNameLabel]
             .forEach { addSubview($0) }
         
         profileImageBackgroundView.addSubview(profileImageView)
-        
-        backgroundImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
+ 
         
         profileImageBackgroundView.snp.makeConstraints {
-            $0.width.equalTo(94)
-            $0.height.equalTo(103)
-            $0.leading.equalToSuperview().offset(26)
-            $0.top.equalToSuperview().offset(26)
+            $0.width.equalTo(77.5)
+            $0.height.equalTo(85)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-13.43)
         }
         
         profileImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
+            $0.width.equalTo(33)
         }
         
-        nickNameButton.snp.makeConstraints {
-            $0.leading.equalTo(profileImageBackgroundView.snp.trailing).offset(14)
-            $0.top.equalTo(profileImageBackgroundView.snp.top).offset(5)
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(18)
+            $0.top.equalToSuperview().offset(28)
         }
         
-        departmentButton.snp.makeConstraints {
-            $0.leading.equalTo(nickNameButton.snp.leading)
-            $0.top.equalTo(nickNameButton.snp.bottom).offset(6)
+        nickNameLabel.snp.makeConstraints {
+            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         
-        jobButton.snp.makeConstraints {
-            $0.leading.equalTo(departmentButton.snp.leading)
-            $0.top.equalTo(departmentButton.snp.bottom).offset(6)
-        }
-        
-        gradeButton.snp.makeConstraints {
-            $0.leading.equalTo(jobButton.snp.leading)
-            $0.top.equalTo(jobButton.snp.bottom).offset(6)
-        }
-        
-        graduationDepartmentButton.snp.makeConstraints {
-            $0.centerY.equalTo(gradeButton)
-            $0.leading.equalTo(gradeButton.snp.trailing).offset(34)
-        }
-        
-        introductionTextView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalTo(profileImageBackgroundView.snp.leading).offset(8)
-            $0.top.equalTo(profileImageBackgroundView.snp.bottom).offset(11)
-        }
-        
-        introductionEditButton.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(introductionTextView)
-            $0.width.height.equalTo(introductionTextView)
-        }
     }
-    
-    func updateUI() {
-        if uiStyle == .mentee {
-            graduationDepartmentButton.isHidden = true
-        }
-    }
+
 }

@@ -47,7 +47,7 @@ extension PasswordResetViewController {
     }
     
     @objc func reLoginButtonTapped() {
-        showAlert(alertType: .canCancel, alertText: "이대로\n저장하시겠습니까?", highlightText: "저장", contentFontSieze: .large, cancelButtonText: "아니오", confirmButtonText: "네", confirmButtonHighlight: true)
+        showAlert(alertType: .canCancel, alertText: "이대로\n저장하시겠습니까?", highlightText: "저장", boldText: "저장", contentFontSieze: .large, cancelButtonText: "아니오", confirmButtonText: "네", confirmButtonHighlight: true)
     }
     
 }

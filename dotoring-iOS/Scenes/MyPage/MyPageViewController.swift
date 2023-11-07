@@ -13,25 +13,13 @@ class MyPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setButtonAddTarget()
     }
     
     override func loadView() {
         super.loadView()
         
         myPageView = MyPageView(frame: self.view.frame)
-        
-        myPageView.setMentoringButtonActionHandler = { [weak self] in
-            self?.handleSetMentoringButtonTapped()
-        }
-        myPageView.setAccountButtonActionHandler = { [weak self] in
-            self?.handleSetAccountButtonTapped()
-        }
-        myPageView.departmentButtonActionHandler = { [weak self] in self?.handledepartmentButtonTapped()
-        }
-        
-        myPageView.profileCardView.jobButton.addTarget(self, action: #selector(showAlet), for: .touchUpInside)
-        
         self.view = myPageView
     }
 
@@ -39,12 +27,18 @@ class MyPageViewController: UIViewController {
 
 extension MyPageViewController {
     
-    func handleSetMentoringButtonTapped() {
-        let vc = MentoringSetViewController()
+    func setButtonAddTarget() {
+        myPageView.menuBarView.mentorignMethodButton.addTarget(self, action: #selector(mentorignMethodButtonTapped), for: .touchUpInside)
+        
+        myPageView.menuBarView.accountSetButton.addTarget(self, action: #selector(accountSetButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func mentorignMethodButtonTapped() {
+        let vc = MentoringMethodSetViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func handleSetAccountButtonTapped() {
+    @objc func accountSetButtonTapped() {
         let vc = AccountSetViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

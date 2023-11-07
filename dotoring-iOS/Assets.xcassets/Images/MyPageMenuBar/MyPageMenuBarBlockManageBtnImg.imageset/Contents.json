@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "AccountSetMenuLogoImg.png",
+      "filename" : "MyPageMenuBarBlockManageBtnImg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "AccountSetMenuLogoImg@2x.png",
+      "filename" : "MyPageMenuBarBlockManageBtnImg@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "AccountSetMenuLogoImg@3x.png",
+      "filename" : "MyPageMenuBarBlockManageBtnImg@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

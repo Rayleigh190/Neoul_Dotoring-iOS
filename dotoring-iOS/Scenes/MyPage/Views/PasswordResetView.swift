@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ * 마이페이지 > 계정 설정 > 비밀번호 재설정(버튼) > 계정확인 > 비밀번호 설정
+ * 계정 비밀번호를 재설정하기 위한 View입니다.
+ */
 class PasswordResetView: UIView {
     
     let uiStyle: UIStyle = {
@@ -27,9 +31,9 @@ class PasswordResetView: UIView {
     }()
     
     private lazy var subTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .L, size: 13)
-        label.textColor = .label
-        label.text = "필요한 부분만 수정 후 다시 로그인해 주세요."
+        let label = NanumLabel(weightType: .R, size: 13)
+        label.textColor = .BaseGray700
+        label.text = "수정 후 다시 로그인해 주세요."
         label.numberOfLines = 1
         
         return label

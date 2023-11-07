@@ -7,6 +7,11 @@
 
 import UIKit
 
+/**
+ * 마이페이지 > 계정 설정
+ * 계정 설정과 관련된 여러 메뉴가 있는 View입니다.
+ * 로그아웃, 비밀번호 재설정
+ */
 class AccountSetView: UIView {
     
     private lazy var logoutView: UIView = {
@@ -136,7 +141,7 @@ private extension AccountSetView {
     
     func updateUI() {
         
-        // View에 그림자와 cornerRadius 적용
+        // View에 그림자와 cornerRadius 적용합니다.
         [logoutView, accountResetView].forEach { view in
             view.layer.cornerRadius = 20
             view.layer.shadowColor = UIColor.black.cgColor

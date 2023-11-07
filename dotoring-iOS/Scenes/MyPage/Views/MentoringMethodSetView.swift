@@ -1,5 +1,5 @@
 //
-//  MentoringSetViewController.swift
+//  MentoringMethodSetViewController.swift
 //  dotoring-iOS
 //
 //  Created by 우진 on 2023/10/01.
@@ -7,7 +7,12 @@
 
 import UIKit
 
-class MentoringSetView: UIView {
+/**
+ * 마이페이지 > 멘토링 방식 설정
+ * 멘토링 방식을 설정 할 수 있는 View입니다.
+ * inputTextField에서 텍스트를 편집할 수 있습니다.
+ */
+class MentoringMethodSetView: UIView {
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -109,7 +114,7 @@ class MentoringSetView: UIView {
 
 }
 
-private extension MentoringSetView {
+private extension MentoringMethodSetView {
     
     func setupSubViews() {
         
@@ -154,9 +159,9 @@ private extension MentoringSetView {
     
 }
 
-extension MentoringSetView {
+extension MentoringMethodSetView {
     
-    // textView 입력될 때마다 라벨 업데이트
+    // inputTextField가 입력될 때마다 inputCountLabel을 업데이트 합니다.
     func updateCountLabel(characterCount: Int) {
         inputCountLabel.text = "\(characterCount)/250"
     }

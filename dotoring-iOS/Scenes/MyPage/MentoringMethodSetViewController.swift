@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MentoringSetViewController: UIViewController {
+class MentoringMethodSetViewController: UIViewController {
     
-    var mentoringSetView: MentoringSetView!
+    var mentoringSetView: MentoringMethodSetView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class MentoringSetViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        mentoringSetView = MentoringSetView(frame: self.view.frame)
+        mentoringSetView = MentoringMethodSetView(frame: self.view.frame)
 
         self.view = mentoringSetView
     }
@@ -36,7 +36,7 @@ class MentoringSetViewController: UIViewController {
 
 }
 
-extension MentoringSetViewController: UITextViewDelegate {
+extension MentoringMethodSetViewController: UITextViewDelegate {
     
     // textView 글자수 제한
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

@@ -7,6 +7,10 @@
 
 import UIKit
 
+/**
+ * 마이페이지 > 계정 설정 > 비밀번호 재설정(버튼) > 계정 확인
+ * 계정 설정을 위해 계정을 확인하는 View입니다.
+ */
 class AccountConfirmView: UIView {
 
     private lazy var backgroundImageView: UIImageView = {
@@ -25,7 +29,7 @@ class AccountConfirmView: UIView {
         var text = "계정 설정을 위해\n다시 로그인해 주세요."
         
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 28), range: (text as NSString).range(of: "다시"))
+        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFEB, size: 28), range: (text as NSString).range(of: "다시"))
         
         label.attributedText = attributedStr
         
@@ -33,8 +37,8 @@ class AccountConfirmView: UIView {
     }()
     
     private lazy var subTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .L, size: 13)
-        label.textColor = .label
+        let label = NanumLabel(weightType: .R, size: 13)
+        label.textColor = .BaseGray700
         label.text = "본인 확인을 위해 다시 로그인해 주세요."
         label.numberOfLines = 1
         
