@@ -8,6 +8,10 @@
 import SnapKit
 import UIKit
 
+/**
+ * 홈 화면 상단에 위치한 CollectionHeaderView입니다.
+ * 홈 화면 안내 문구와 검색 버튼, 알림창 버튼, 필터 버튼이 있습니다.
+ */
 class HomeCollectionHeaderView: UICollectionReusableView {
     
     var isSearchBarClosedFromTap: Bool = false
@@ -31,7 +35,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     }()
 
     private lazy var nicknameLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
+        let label = NanumLabel(weightType: .R, size: 24)
         
         if uiStyle == .mento {
             label.textColor = UIColor.BaseGreen
@@ -43,16 +47,16 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     }()
     
     private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
+        let label = NanumLabel(weightType: .R, size: 24)
         label.text = "님을 위한"
-        label.textColor = .label
+        label.textColor = .BaseGray900
 
         return label
     }()
     
     private lazy var subTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .EB, size: 40)
-        label.textColor = .label
+        let label = NanumLabel(weightType: .EB, size: 34)
+        label.textColor = .BaseGray900
 
         return label
     }()
@@ -66,9 +70,9 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     }()
     
     private lazy var searchButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        button.tintColor = UIColor(named: "BaseGray700")
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "SearchIcon"), for: .normal)
+        button.tintColor = .BaseGray700
         button.addTarget(self, action: #selector(toggle), for: .touchUpInside)
         
         return button
@@ -76,7 +80,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "직접 검색"
+        searchBar.placeholder = "직접 검색하기"
         searchBar.backgroundColor = .systemBackground
         searchBar.layer.borderWidth = 2
         
@@ -86,7 +90,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
             searchBar.layer.borderColor = UIColor.BaseNavy?.cgColor
         }
         
-        searchBar.layer.cornerRadius = 20
+        searchBar.layer.cornerRadius = 10
         searchBar.searchTextField.backgroundColor = .systemBackground
         searchBar.backgroundImage = UIImage() // 위아래 선 지움
         searchBar.translatesAutoresizingMaskIntoConstraints = false // superview가 변함에 따라 subview의 크기를 어떻게 할것인가
@@ -101,7 +105,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
-        stackView.spacing = 12
+        stackView.spacing = 6
         return stackView
     }()
     
@@ -110,8 +114,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         button.setTitle("학과", for: .normal)
         button.backgroundColor = UIColor.BaseGray700
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
-        button.layer.cornerRadius = 17
+        button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 15)
         button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
@@ -122,8 +125,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         button.setTitle("희망 멘토링", for: .normal)
         button.backgroundColor = UIColor(named: "BaseGray700")
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 12)
-        button.layer.cornerRadius = 17
+        button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 15)
         button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
@@ -136,12 +138,23 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         setupViews()
         self.bringSubviewToFront(searchButton) // searchButton을 최상단으로 올림
         
-        // searchBar 오른쪽에 20만큼 여백을 줌
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: searchBar.frame.height))
+        // searchBar 오른쪽에 30만큼 여백을 줌
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: searchBar.frame.height))
         searchBar.searchTextField.rightView = paddingView
         searchBar.searchTextField.rightViewMode = .always
         
     }
+    
+    func updateUI() {
+        departmentFilterButton.layer.cornerRadius = departmentFilterButton.frame.height/2
+        hopeMentoringFilterButton.layer.cornerRadius = hopeMentoringFilterButton.frame.height/2
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateUI()
+    }
+    
 
 }
 
@@ -170,8 +183,8 @@ private extension HomeCollectionHeaderView {
         }
         
         nicknameLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(54.0)
-            $0.top.equalToSuperview().inset(95.0)
+            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().offset(10)
         }
         
         titleLabel.snp.makeConstraints {
@@ -181,23 +194,28 @@ private extension HomeCollectionHeaderView {
 
         subTitleLabel.snp.makeConstraints {
             $0.leading.equalTo(nicknameLabel)
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(1.0)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(7)
         }
         
         searchButton.snp.makeConstraints {
             $0.centerY.equalTo(subTitleLabel)
-            $0.trailing.equalToSuperview().inset(65.0) // 54
+            $0.trailing.equalToSuperview().inset(34) // 54
         }
 
         buttonStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(subTitleLabel)
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(10.0)
-            $0.height.equalTo(33.0)
+            $0.top.equalTo(searchButton.snp.bottom).offset(29.68)
+            $0.height.equalTo(39)
         }
         
     }
     
+    /**
+     * 검색 버튼을 클릭하면 검색 창이 왼쪽으로 확장 되도록 합니다.
+     * 다시 한 번 더 클릭하면 원상태로 줄어듭니다.
+     * searchBar는 expandableView를 부모뷰로 두고 있습니다.
+     */
     @objc func toggle() {
         if isSearchBarClosedFromTap == true {
             isSearchBarClosedFromTap = false
@@ -228,6 +246,7 @@ private extension HomeCollectionHeaderView {
             searchBar.becomeFirstResponder()
         }
         
+        // 검색 창이 확장 될 때 틴트 색을 변경합니다. 축소시 원래 색으로 돌아옵니다.
         if uiStyle == .mento {
             searchButton.tintColor = isOpen ? UIColor.BaseGray700 : UIColor.BaseGreen
         } else {
@@ -240,6 +259,9 @@ private extension HomeCollectionHeaderView {
 }
 
 extension HomeCollectionHeaderView {
+    /**
+     * 키보드와 검색 창이 열려 있을 때 배경을 클릭하면 키보드와 검색 창을 닫습니다.
+     */
     func handleBackgroundTap() {
         
         let isOpen = leftConstraint.isActive == true

@@ -54,10 +54,24 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupSubViews()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // navigationBar 때문에 상단 여백이 맞지 않아 안 보이게 처리합니다.
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
 
 }
 
 extension HomeViewController: UICollectionViewDataSource {
+    /**
+     * collectionView에 재사용 가능한 Cell을 설정합니다.
+     */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as? HomeCollectionViewCell
         cell?.setup()
@@ -65,10 +79,16 @@ extension HomeViewController: UICollectionViewDataSource {
         return cell ?? UICollectionViewCell()
     }
     
+    /**
+     * collectionView의 Cell의 개수를 설정합니다.
+     */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         8
     }
     
+    /**
+     * collectionView의 Header를 설정합니다.
+     */
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard
             kind == UICollectionView.elementKindSectionHeader,
@@ -86,19 +106,28 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    /**
+     * collectionViewCell의 사이즈(가로, 세로)를 설정합니다.
+     */
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = collectionView.frame.width - 108.0
-        let height: CGFloat = 127.0
+        let width: CGFloat = collectionView.frame.width - 32
+        let height: CGFloat = 170
         return CGSize(width: width, height: height)
     }
     
+    /**
+     * collectionHeaderView의 사이즈(가로, 세로)를 설정합니다.
+     */
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 108.0, height: 230.0)
+        return CGSize(width: collectionView.frame.width, height: 160)
     }
 }
 
 extension HomeViewController: UICollectionViewDelegate {
-    
+    /**
+     * collectionViewCell이 클릭 되었을 때 행동을 정의합니다.
+     * 유저 리스트 중 하나가 클릭 되었을 때 유저 디테일 화면으로 이동합니다.
+     */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\(indexPath.row)")
         let vc = UserDetailViewController()
@@ -115,14 +144,14 @@ private extension HomeViewController {
         
         backgroundImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(00.0)
-            $0.bottom.equalToSuperview().inset(29.66)
+            $0.bottom.equalToSuperview().inset(80)
         }
         
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        // UITapGestureRecognizer를 추가하여 배경 터치 시 키보드를 내릴 수 있도록 함
+        // UITapGestureRecognizer를 추가하여 배경 터치 시 키보드를 내릴 수 있도록 합니다.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(tapGesture)
