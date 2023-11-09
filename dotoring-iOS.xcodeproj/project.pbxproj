@@ -20,6 +20,13 @@
 		F1A5606B2A949E6900FD2E91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */; };
 		F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F1A560732A94A42B00FD2E91 /* Kingfisher */; };
 		F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */; };
+		F1CA7E4E2AFCBA5A002D733E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E4D2AFCBA5A002D733E /* Alamofire */; };
+		F1CA7E512AFCC30E002D733E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E502AFCC30E002D733E /* Constants.swift */; };
+		F1CA7E542AFCE056002D733E /* BaseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */; };
+		F1CA7E562AFCE127002D733E /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E552AFCE127002D733E /* BaseInterceptor.swift */; };
+		F1CA7E582AFCE7AB002D733E /* BaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E572AFCE7AB002D733E /* BaseLogger.swift */; };
+		F1CA7E5A2AFCE9B0002D733E /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E592AFCE9B0002D733E /* BaseRouter.swift */; };
+		F1CA7E5D2AFCFE17002D733E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E5C2AFCFE17002D733E /* Model.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -103,6 +110,12 @@
 		F1A5606A2A949E6900FD2E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1A5606C2A949E6900FD2E91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		F1CA7E502AFCC30E002D733E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkManager.swift; sourceTree = "<group>"; };
+		F1CA7E552AFCE127002D733E /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
+		F1CA7E572AFCE7AB002D733E /* BaseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLogger.swift; sourceTree = "<group>"; };
+		F1CA7E592AFCE9B0002D733E /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		F1CA7E5C2AFCFE17002D733E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -175,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1CA7E4E2AFCBA5A002D733E /* Alamofire in Frameworks */,
 				F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */,
 				F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */,
 			);
@@ -232,11 +246,14 @@
 			isa = PBXGroup;
 			children = (
 				F1DD2CB82A9A0B6000EE9711 /* Classes */,
-				F1DD2CB52A9A05BB00EE9711 /* Extensions */,
 				F1FCE77C2AC316D00024AE60 /* Enums */,
-				F1DD2C8A2A95DDD500EE9711 /* Scenes */,
+				F1DD2CB52A9A05BB00EE9711 /* Extensions */,
 				F1A560762A94ADEF00FD2E91 /* Fonts */,
+				F1DD2C8A2A95DDD500EE9711 /* Scenes */,
+				F1CA7E522AFCDE94002D733E /* Networks */,
+				F1CA7E5B2AFCFD64002D733E /* Models */,
 				F1FCE77D2AC316F40024AE60 /* Protocols */,
+				F1CA7E4F2AFCC29B002D733E /* Utils */,
 				F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */,
 				F1A560602A949E6800FD2E91 /* SceneDelegate.swift */,
 				F1A560672A949E6900FD2E91 /* Assets.xcassets */,
@@ -267,6 +284,33 @@
 				F1DD2C972A95F82C00EE9711 /* NanumSquareR.otf */,
 			);
 			path = NanumSquare;
+			sourceTree = "<group>";
+		};
+		F1CA7E4F2AFCC29B002D733E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E502AFCC30E002D733E /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F1CA7E522AFCDE94002D733E /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */,
+				F1CA7E552AFCE127002D733E /* BaseInterceptor.swift */,
+				F1CA7E572AFCE7AB002D733E /* BaseLogger.swift */,
+				F1CA7E592AFCE9B0002D733E /* BaseRouter.swift */,
+			);
+			path = Networks;
+			sourceTree = "<group>";
+		};
+		F1CA7E5B2AFCFD64002D733E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E5C2AFCFE17002D733E /* Model.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F1DD2C8A2A95DDD500EE9711 /* Scenes */ = {
@@ -431,6 +475,7 @@
 			packageProductDependencies = (
 				F1A560732A94A42B00FD2E91 /* Kingfisher */,
 				F1DD2C8F2A95E26600EE9711 /* SnapKit */,
+				F1CA7E4D2AFCBA5A002D733E /* Alamofire */,
 			);
 			productName = "dotoring-iOS";
 			productReference = F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */;
@@ -463,6 +508,7 @@
 			packageReferences = (
 				F1A560722A94A42B00FD2E91 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F1CA7E4C2AFCBA5A002D733E /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = F1A5605C2A949E6800FD2E91 /* Products */;
 			projectDirPath = "";
@@ -498,11 +544,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1CA7E542AFCE056002D733E /* BaseNetworkManager.swift in Sources */,
 				F126B1CE2AA41D7A0035E499 /* SignupStepBar.swift in Sources */,
 				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
 				F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */,
 				F1FCE7B92ADA5FA00024AE60 /* ReportReasonAlertView.swift in Sources */,
+				F1CA7E582AFCE7AB002D733E /* BaseLogger.swift in Sources */,
 				F1FCE7AF2AD1358F0024AE60 /* UserDetailViewController.swift in Sources */,
+				F1CA7E562AFCE127002D733E /* BaseInterceptor.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
 				F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */,
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
@@ -513,6 +562,7 @@
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,
 				F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */,
+				F1CA7E5D2AFCFE17002D733E /* Model.swift in Sources */,
 				F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */,
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
@@ -533,7 +583,9 @@
 				F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
+				F1CA7E512AFCC30E002D733E /* Constants.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
+				F1CA7E5A2AFCE9B0002D733E /* BaseRouter.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
 				F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */,
 				F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */,
@@ -784,6 +836,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		F1CA7E4C2AFCBA5A002D733E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -799,6 +859,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F1A560722A94A42B00FD2E91 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		F1CA7E4D2AFCBA5A002D733E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1CA7E4C2AFCBA5A002D733E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		F1DD2C8F2A95E26600EE9711 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

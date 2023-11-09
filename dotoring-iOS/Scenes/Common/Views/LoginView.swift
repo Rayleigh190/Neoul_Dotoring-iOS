@@ -138,10 +138,11 @@ final class LoginView: UIView {
         return button
     }()
     
-    private lazy var warningLabel: NanumLabel = {
+    lazy var warningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "존재하지 않는 계정입니다. 다시 입력해 주세요."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()

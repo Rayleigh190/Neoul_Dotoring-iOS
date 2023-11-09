@@ -7,6 +7,7 @@
 
 import SnapKit
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -48,11 +49,56 @@ class LoginViewController: UIViewController {
         self.view = loginView
     }
     
+}
+
+extension LoginViewController {
+    
+    func setDelegate() {
+        loginView.idTextField.textField.delegate = self
+        loginView.pwTextField.textField.delegate = self
+    }
+    
+    // MARK: - Button action methods
+    // 로그인 버튼이 클릭 되었을때
     func handleLoginButtonTapped() {
-        let vc = MainTapBarController()
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        print("LoginViewController  - handleLoginButtonTapped() called")
+        
+        guard let userInputID = self.loginView.idTextField.textField.text else { return }
+        guard let userInputPW = self.loginView.pwTextField.textField.text else { return }
+        
+        // 사용자가 입력한 아이디와 비밀번호를 받습니다.
+        let urlToCall = BaseRouter.userLogin(userID: userInputID, userPW: userInputPW)
+        
+        BaseNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...400) // 200~400 사이가 아니면 interceptor에서 retry를 함
+            .responseDecodable(of: LoginResponseData.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    print("LoginViewController - handleLoginButtonTapped() : 로그인 성공")
+                    debugPrint(successData)
+                    if successData.success == true {
+                        // 토큰 저장
+                        guard let accessToken = response.response?.value(forHTTPHeaderField: "Authorization") else { return }
+                        print("인증 토큰 : \(accessToken)")
+                        
+                        // 홈 화면으로 이동
+                        let vc = MainTapBarController()
+                        vc.modalTransitionStyle = .crossDissolve
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated: true)
+                    }
+                case .failure(let error):
+                    print("LoginViewController - handleLoginButtonTapped() : 로그인 실패")
+                    debugPrint(error)
+                    self.loginView.warningLabel.isHidden = false
+                }
+                
+                debugPrint(response)
+            }
+
     }
     
     func handleFindIdButtonTapped() {
@@ -70,14 +116,6 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-}
-
-extension LoginViewController {
-    
-    func setDelegate() {
-        loginView.idTextField.textField.delegate = self
-        loginView.pwTextField.textField.delegate = self
-    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
