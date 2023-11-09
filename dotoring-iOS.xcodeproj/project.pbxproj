@@ -27,6 +27,8 @@
 		F1CA7E582AFCE7AB002D733E /* BaseLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E572AFCE7AB002D733E /* BaseLogger.swift */; };
 		F1CA7E5A2AFCE9B0002D733E /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E592AFCE9B0002D733E /* BaseRouter.swift */; };
 		F1CA7E5D2AFCFE17002D733E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E5C2AFCFE17002D733E /* Model.swift */; };
+		F1CA7E5F2AFD2620002D733E /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1CA7E5E2AFD2620002D733E /* Secrets.plist */; };
+		F1CA7E612AFD26AE002D733E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E602AFD26AE002D733E /* Bundle.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -116,6 +118,8 @@
 		F1CA7E572AFCE7AB002D733E /* BaseLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLogger.swift; sourceTree = "<group>"; };
 		F1CA7E592AFCE9B0002D733E /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		F1CA7E5C2AFCFE17002D733E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F1CA7E5E2AFD2620002D733E /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		F1CA7E602AFD26AE002D733E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				F1A560672A949E6900FD2E91 /* Assets.xcassets */,
 				F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */,
 				F1A5606C2A949E6900FD2E91 /* Info.plist */,
+				F1CA7E5E2AFD2620002D733E /* Secrets.plist */,
 			);
 			path = "dotoring-iOS";
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				F1CA7E502AFCC30E002D733E /* Constants.swift */,
+				F1CA7E602AFD26AE002D733E /* Bundle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -525,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1DD2C9B2A95F82C00EE9711 /* NanumSquareOTF_acL.otf in Resources */,
+				F1CA7E5F2AFD2620002D733E /* Secrets.plist in Resources */,
 				F1DD2C9F2A95F82C00EE9711 /* NanumSquareR.otf in Resources */,
 				F1DD2CA12A95F82C00EE9711 /* NanumSquareOTF_acEB.otf in Resources */,
 				F1DD2CA22A95F82C00EE9711 /* NanumSquareEB.otf in Resources */,
@@ -607,6 +614,7 @@
 				F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
+				F1CA7E612AFD26AE002D733E /* Bundle.swift in Sources */,
 				F1FCE7AB2AD03FF50024AE60 /* PasswordResetView.swift in Sources */,
 				F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */,
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,

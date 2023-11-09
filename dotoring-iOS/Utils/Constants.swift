@@ -9,6 +9,6 @@ import Foundation
 
 enum API {
     
-    static let BASE_URL : String = "http://~:8080/"
+    static let BASE_URL : String = Bundle.main.getSecret(name: "BASE_API_URL")
     
 }

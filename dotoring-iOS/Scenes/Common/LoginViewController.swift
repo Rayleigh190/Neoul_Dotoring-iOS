@@ -74,7 +74,7 @@ extension LoginViewController {
             .session
             .request(urlToCall)
             .validate(statusCode: 200...400) // 200~400 사이가 아니면 interceptor에서 retry를 함
-            .responseDecodable(of: LoginResponseData.self) { response in
+            .responseDecodable(of: LoginAPIResponse.self) { response in
                 switch response.result {
                 case .success(let successData):
                     print("LoginViewController - handleLoginButtonTapped() : 로그인 성공")
