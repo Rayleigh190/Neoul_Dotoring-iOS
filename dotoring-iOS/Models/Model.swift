@@ -9,7 +9,7 @@ import Foundation
 
 struct ErrorData: Codable {
     let message: String
-    let code: String
+//    let code: String
     let status: String
 }
 

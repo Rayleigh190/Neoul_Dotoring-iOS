@@ -8,6 +8,7 @@
 import SnapKit
 import UIKit
 import Alamofire
+import JWTDecode
 
 class LoginViewController: UIViewController {
     
@@ -81,8 +82,42 @@ extension LoginViewController {
                     debugPrint(successData)
                     if successData.success == true {
                         // 토큰 저장
-                        guard let accessToken = response.response?.value(forHTTPHeaderField: "Authorization") else { return }
-                        print("인증 토큰 : \(accessToken)")
+                        guard let accessTokenData = response.response?.value(forHTTPHeaderField: "Authorization") else { return }
+                        guard let refreshTokenData = response.response?.value(forHTTPHeaderField: "Set-Cookie") else { return }
+                        
+                        // accessToken 파싱
+                        let parsedAccessToken = String(accessTokenData.dropFirst(7))
+                        
+                        // refreshToken 파싱
+                        let startIndex = refreshTokenData.index(after: refreshTokenData.firstIndex(of: "=")!)
+                        let endIndex = refreshTokenData.index(before: refreshTokenData.firstIndex(of: ";")!)
+                        let parsedRefreshToken = String(refreshTokenData[startIndex...endIndex])
+                        
+                        print("LoginViewController - parsed Access Token : \(parsedAccessToken)")
+                        print("LoginViewController - parsed Refresh Token : \(parsedRefreshToken)")
+                        
+                        var decodedAccessToken: JWT
+                        var decodedRefreshToken: JWT
+                        
+                        do {
+                            decodedAccessToken = try decode(jwt: parsedAccessToken)
+                            decodedRefreshToken = try decode(jwt: parsedRefreshToken)
+                            print("decoded Access Token : \(decodedAccessToken)")
+                            print("decoded Refresh Token : \(decodedRefreshToken)")
+                        } catch {
+                            print("LoginViewController - 토큰 디코딩 실패")
+                            debugPrint(error)
+                            return
+                        }
+                        
+                        // MENTO 또는 MENTI UI 설정
+                        if decodedAccessToken["aud"].string == "MENTO" {
+                            print("LoginViewController - 로그인 유저 타입 : 멘토")
+                            UserDefaults.standard.set("mento", forKey: "UIStyle")
+                        } else {
+                            print("LoginViewController - 로그인 유저 타입 : 멘티")
+                            UserDefaults.standard.set("mentee", forKey: "UIStyle")
+                        }
                         
                         // 홈 화면으로 이동
                         let vc = MainTapBarController()
@@ -94,6 +129,9 @@ extension LoginViewController {
                     print("LoginViewController - handleLoginButtonTapped() : 로그인 실패")
                     debugPrint(error)
                     self.loginView.warningLabel.isHidden = false
+                    /**
+                     * status 403 심사중인 회원 안내를 구현해야 합니다.
+                     */
                 }
                 
                 debugPrint(response)
