@@ -119,6 +119,10 @@ extension LoginViewController {
                             UserDefaults.standard.set("mentee", forKey: "UIStyle")
                         }
                         
+                        // 토큰 정보 저장
+                        KeyChain.create(key: KeyChainKey.accessToken, token: parsedAccessToken)
+                        KeyChain.create(key: KeyChainKey.refreshToken, token: parsedRefreshToken)
+                        
                         // 홈 화면으로 이동
                         let vc = MainTapBarController()
                         vc.modalTransitionStyle = .crossDissolve
@@ -132,6 +136,9 @@ extension LoginViewController {
                     /**
                      * status 403 심사중인 회원 안내를 구현해야 합니다.
                      */
+//                    if response.response?.statusCode == 403 {
+//                        
+//                    }
                 }
                 
                 debugPrint(response)

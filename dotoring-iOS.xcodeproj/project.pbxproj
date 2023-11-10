@@ -30,6 +30,7 @@
 		F1CA7E5F2AFD2620002D733E /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1CA7E5E2AFD2620002D733E /* Secrets.plist */; };
 		F1CA7E612AFD26AE002D733E /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E602AFD26AE002D733E /* Bundle.swift */; };
 		F1CA7E662AFDB280002D733E /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E652AFDB280002D733E /* JWTDecode */; };
+		F1CA7E6A2AFDD5D1002D733E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E692AFDD5D1002D733E /* KeyChain.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -121,6 +122,7 @@
 		F1CA7E5C2AFCFE17002D733E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		F1CA7E5E2AFD2620002D733E /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		F1CA7E602AFD26AE002D733E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		F1CA7E692AFDD5D1002D733E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			children = (
 				F1CA7E502AFCC30E002D733E /* Constants.swift */,
 				F1CA7E602AFD26AE002D733E /* Bundle.swift */,
+				F1CA7E692AFDD5D1002D733E /* KeyChain.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */,
 				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
 				F1FCE7992AC909270024AE60 /* AccountSetViewController.swift in Sources */,
+				F1CA7E6A2AFDD5D1002D733E /* KeyChain.swift in Sources */,
 				F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */,
 				F1FCE7A92AD03FE30024AE60 /* PasswordResetViewController.swift in Sources */,
 				F1DD2CAB2A99CD0B00EE9711 /* LoginViewController.swift in Sources */,

@@ -12,3 +12,10 @@ enum API {
     static let BASE_URL : String = Bundle.main.BASE_API_URL
     
 }
+
+enum KeyChainKey {
+    
+    static let accessToken: String = "accessToken"
+    static let refreshToken: String = "refreshToken"
+    
+}
