@@ -8,6 +8,10 @@
 import SnapKit
 import UIKit
 
+/**
+ * UICollectionView의 Cell을 정의합니다.
+ * 홈 화면 유저 리스트의 Cell을 정의합니다.
+ */
 class HomeCollectionViewCell: UICollectionViewCell {
     
     let uiStyle: UIStyle = {
@@ -21,7 +25,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     private var shadowView: UIView!
 
     private lazy var nicknameLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .EB, size: 15)
+        let label = NanumLabel(weightType: .EB, size: 20)
         
         if uiStyle == .mento {
             label.textColor = .BaseNavy
@@ -33,29 +37,29 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }()
 
     private lazy var departmentLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
-        label.textColor = .label
+        let label = NanumLabel(weightType: .B, size: 17)
+        label.textColor = .BaseGray900
 
         return label
     }()
 
     private lazy var jobFieldLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
-        label.textColor = .label
+        let label = NanumLabel(weightType: .R, size: 15)
+        label.textColor = .BaseGray700
 
         return label
     }()
     
     private lazy var introductionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .L, size: 8)
-        label.textColor = .label
+        let label = NanumLabel(weightType: .L, size: 13)
+        label.textColor = .BaseGray700
 
         return label
     }()
     
     private lazy var profileImageBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 0.958, green: 0.958, blue: 0.958, alpha: 1)
+        view.backgroundColor = .BaseGray100
         view.clipsToBounds = true
         view.layer.cornerRadius = 20.0
        
@@ -64,7 +68,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
 
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         
         if uiStyle == .mento {
             imageView.image = UIImage(named: "MentoProfileBaseImg")
@@ -122,7 +126,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
             
             // Content view to use
             let contentView = UIView(frame: shadowView.frame)
-//            contentView.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.5)
+            // 셀의 배경색을 지정합니다.
+            contentView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
             contentView.center = shadowView.center
             contentView.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin, .flexibleLeftMargin]
             addSubview(contentView)
@@ -133,7 +138,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         nicknameLabel.text = "닉네임"
         departmentLabel.text = "학과"
-        jobFieldLabel.text = "희망 직무 분야"
+        jobFieldLabel.text = "분야"
         introductionLabel.text = "한 줄 소개"
     }
 
@@ -147,38 +152,39 @@ private extension HomeCollectionViewCell {
         profileImageBackgroundView.addSubview(profileImageView)
 
         profileImageBackgroundView.snp.makeConstraints {
-            $0.width.equalTo(83)
-            $0.height.equalTo(91)
-            $0.leading.equalToSuperview().inset(20.0)
+            $0.width.equalTo(135)
+            $0.height.equalTo(148)
+            $0.leading.equalToSuperview().inset(18)
             $0.centerY.equalToSuperview()
         }
         
         profileImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
+            $0.height.equalTo(61)
         }
         
         nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageBackgroundView.snp.top).offset(5.0)
-            $0.leading.equalTo(profileImageBackgroundView.snp.trailing).offset(22.0)
+            $0.top.equalTo(profileImageBackgroundView.snp.top).offset(8)
+            $0.leading.equalTo(profileImageBackgroundView.snp.trailing).offset(9)
             $0.trailing.equalToSuperview()
         }
 
         departmentLabel.snp.makeConstraints {
             $0.leading.equalTo(nicknameLabel)
             $0.trailing.equalTo(nicknameLabel)
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(7.0)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(5)
         }
 
         jobFieldLabel.snp.makeConstraints {
             $0.leading.equalTo(departmentLabel)
             $0.trailing.equalTo(departmentLabel)
-            $0.top.equalTo(departmentLabel.snp.bottom).offset(7.0)
+            $0.top.equalTo(departmentLabel.snp.bottom).offset(8)
         }
 
         introductionLabel.snp.makeConstraints {
             $0.leading.equalTo(jobFieldLabel)
             $0.trailing.equalTo(jobFieldLabel)
-            $0.top.equalTo(jobFieldLabel.snp.bottom).offset(7.0)
+            $0.top.equalTo(jobFieldLabel.snp.bottom).offset(10)
         }
         
     }
