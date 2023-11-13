@@ -59,6 +59,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         // navigationBar 때문에 상단 여백이 맞지 않아 안 보이게 처리합니다.
         navigationController?.navigationBar.isHidden = true
+        fetchUserList()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -168,6 +169,31 @@ private extension HomeViewController {
 }
 
 extension HomeViewController {
+    
+    /**
+     * 추천 멘티 또는 멘토 리스트를 요청하고 받습니다.
+     */
+    func fetchUserList() {
+        
+        var urlToCall:  HomeRouter{
+            switch uiStyle {
+            case .mento:
+                return HomeRouter.menti(size: 10)
+            case .mentee:
+                return HomeRouter.mento(size: 10)
+            }
+        }
+        
+        HomeNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...400)
+            .responseJSON(completionHandler: { response in
+                debugPrint(response)
+            })
+        
+    }
     
 }
 
