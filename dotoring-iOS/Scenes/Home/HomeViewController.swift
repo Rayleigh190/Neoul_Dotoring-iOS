@@ -7,8 +7,12 @@
 
 import SnapKit
 import UIKit
+import Kingfisher
 
 class HomeViewController: UIViewController {
+    
+    var myNickName = "닉네임"
+    var users: [HomeUser] = []
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -53,13 +57,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupSubViews()
+        fetchUserList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // navigationBar 때문에 상단 여백이 맞지 않아 안 보이게 처리합니다.
         navigationController?.navigationBar.isHidden = true
-        fetchUserList()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,7 +79,18 @@ extension HomeViewController: UICollectionViewDataSource {
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as? HomeCollectionViewCell
+        let profileImageURL = URL(string: users[indexPath.row].profileImage)
+        
         cell?.setup()
+        cell?.nicknameLabel.text = users[indexPath.row].nickname
+        cell?.departmentLabel.text = users[indexPath.row].majors.joined(separator: ", ")
+        cell?.jobFieldLabel.text = users[indexPath.row].fields.joined(separator: ", ")
+        cell?.profileImageView.kf.setImage(with: profileImageURL)
+        if uiStyle == .mento {
+            cell?.introductionLabel.text = users[indexPath.row].preferredMentoringSystem
+        } else {
+            cell?.introductionLabel.text = users[indexPath.row].mentoringSystem
+        }
 
         return cell ?? UICollectionViewCell()
     }
@@ -84,7 +99,7 @@ extension HomeViewController: UICollectionViewDataSource {
      * collectionView의 Cell의 개수를 설정합니다.
      */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        return users.count
     }
     
     /**
@@ -101,6 +116,7 @@ extension HomeViewController: UICollectionViewDataSource {
         else { return UICollectionReusableView() }
         header.parentViewController = self // 헤더뷰의 부모뷰를 셀프로 셋팅
         header.setup()
+        header.nicknameLabel.text = myNickName
 
         return header
     }
@@ -189,9 +205,21 @@ extension HomeViewController {
             .session
             .request(urlToCall)
             .validate(statusCode: 200...400)
-            .responseJSON(completionHandler: { response in
+            .responseDecodable(of: HomeUserAPIResponse.self) { response in
+                
+                switch response.result {
+                case .success(let successData):
+                    print("HomeViewController - fetchUserList() called()")
+                    self.users = successData.response.content
+                    self.myNickName = successData.response.pageable.nickname
+                    self.collectionView.reloadData()
+                case .failure(let error):
+                    print("HomeViewController - fetchUserList() failed()")
+                    debugPrint(error)
+                }
+                
                 debugPrint(response)
-            })
+            }
         
     }
     
