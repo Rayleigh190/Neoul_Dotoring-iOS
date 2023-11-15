@@ -13,6 +13,8 @@ enum HomeRouter: URLRequestConvertible {
     
     case menti(size: Int)
     case mento(size: Int)
+    case mentiDetail(id: Int)
+    case mentoDetail(id: Int)
 
     var baseURL: URL {
         return URL(string: API.BASE_URL + "api")!
@@ -20,7 +22,7 @@ enum HomeRouter: URLRequestConvertible {
 
     var method: HTTPMethod {
         switch self {
-        case .menti, .mento:
+        case .menti, .mento, .mentiDetail, .mentoDetail:
             return .get
         }
     }
@@ -31,13 +33,19 @@ enum HomeRouter: URLRequestConvertible {
             return "menti"
         case .mento:
             return "mento"
+        case let .mentiDetail(id):
+            return "menti/\(id)"
+        case let .mentoDetail(id):
+            return "mento/\(id)"
         }
     }
     
     var parameters : [String: Int] {
         switch self {
         case let .menti(size), let .mento(size):
-         return ["size" : size]
+            return ["size" : size]
+        default:
+            return [:]
         }
     }
 
@@ -54,6 +62,7 @@ enum HomeRouter: URLRequestConvertible {
         switch self {
         case .menti, .mento:
             request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
+        default: break
         }
 
         return request

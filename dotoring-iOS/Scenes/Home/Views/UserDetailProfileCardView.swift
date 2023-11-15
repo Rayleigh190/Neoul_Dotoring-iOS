@@ -41,7 +41,7 @@ class UserDetailProfileCardView: UIView {
         return view
     }()
 
-    private lazy var profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         
@@ -54,7 +54,7 @@ class UserDetailProfileCardView: UIView {
         return imageView
     }()
     
-    private lazy var departmentLabel: NanumLabel = {
+    lazy var departmentLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = .white
         label.text = "학과"
@@ -62,7 +62,7 @@ class UserDetailProfileCardView: UIView {
         return label
     }()
     
-    private lazy var gradeLabel: NanumLabel = {
+    lazy var gradeLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = .white
         label.text = "n 학년"
@@ -70,7 +70,7 @@ class UserDetailProfileCardView: UIView {
         return label
     }()
     
-    private lazy var nicknameLabel: NanumLabel = {
+    lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 30)
         label.textColor = .white
         label.text = "닉네임"
@@ -128,6 +128,7 @@ private extension UserDetailProfileCardView {
         
         profileImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         nicknameLabel.snp.makeConstraints {

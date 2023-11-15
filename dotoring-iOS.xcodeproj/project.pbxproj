@@ -36,6 +36,7 @@
 		F1CA7E732B00E818002D733E /* OAuthAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E722B00E818002D733E /* OAuthAuthenticator.swift */; };
 		F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E742B00E83E002D733E /* OAuthCredential.swift */; };
 		F1CA7E782B024B0D002D733E /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E772B024B0D002D733E /* HomeModel.swift */; };
+		F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E792B04F163002D733E /* UserDetailModel.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -133,6 +134,7 @@
 		F1CA7E722B00E818002D733E /* OAuthAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticator.swift; sourceTree = "<group>"; };
 		F1CA7E742B00E83E002D733E /* OAuthCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCredential.swift; sourceTree = "<group>"; };
 		F1CA7E772B024B0D002D733E /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		F1CA7E792B04F163002D733E /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			children = (
 				F1CA7E5C2AFCFE17002D733E /* Model.swift */,
 				F1CA7E772B024B0D002D733E /* HomeModel.swift */,
+				F1CA7E792B04F163002D733E /* UserDetailModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -684,6 +687,7 @@
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
 				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,
+				F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */,
 				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

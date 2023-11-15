@@ -146,9 +146,9 @@ extension HomeViewController: UICollectionViewDelegate {
      * 유저 리스트 중 하나가 클릭 되었을 때 유저 디테일 화면으로 이동합니다.
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.row)")
         let vc = UserDetailViewController()
         vc.hidesBottomBarWhenPushed = true
+        vc.userID = users[indexPath.row].id
         navigationController?.pushViewController(vc, animated: true)
     }
     
