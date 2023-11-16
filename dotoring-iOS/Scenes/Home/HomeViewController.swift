@@ -200,6 +200,7 @@ extension HomeViewController {
             }
         }
         
+        HomeNetworkManager.shared.reloadCredential()
         HomeNetworkManager
             .shared
             .session

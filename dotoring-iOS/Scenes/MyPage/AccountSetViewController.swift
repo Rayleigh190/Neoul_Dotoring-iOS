@@ -64,12 +64,28 @@ extension AccountSetViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func deleteUserAccountInfo() {
+        // 자동 로그인 id, pw 삭제
+        if let _ = KeyChain.read(key: KeyChainKey.userID) {
+            KeyChain.delete(key: KeyChainKey.userID)
+            KeyChain.delete(key: KeyChainKey.userPW)
+            print("AccountSetVC - deleteUserAccountInfo() : ID, PW 삭제 완료")
+        }
+        // 인증, 재인증 토큰 삭제
+        if let _ = KeyChain.read(key: KeyChainKey.accessToken) {
+            KeyChain.delete(key: KeyChainKey.accessToken)
+            KeyChain.delete(key: KeyChainKey.refreshToken)
+            print("AccountSetVC - deleteUserAccountInfo() : accessToken, refreshToken 삭제 완료")
+        }
+    }
+    
 }
 
 extension AccountSetViewController: CustomAlertDelegate {
     func action() {
-        print("로그아웃 요청")
-        print("비밀번호 변경 요청")
+        print("AccountSetViewController - logoutButtonTapped() called")
+        deleteUserAccountInfo()
+        
         let vc = UINavigationController(rootViewController: LoginViewController())
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .fullScreen

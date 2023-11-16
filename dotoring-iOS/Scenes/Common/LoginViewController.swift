@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkAutoLogin()
         view.backgroundColor = .systemBackground
         
         self.hideKeyboardWhenTappedAround()
@@ -59,16 +60,18 @@ extension LoginViewController {
         loginView.pwTextField.textField.delegate = self
     }
     
-    // MARK: - Button action methods
-    // 로그인 버튼이 클릭 되었을때
-    func handleLoginButtonTapped() {
-        print("LoginViewController  - handleLoginButtonTapped() called")
-        
-        guard let userInputID = self.loginView.idTextField.textField.text else { return }
-        guard let userInputPW = self.loginView.pwTextField.textField.text else { return }
-        
+    func checkAutoLogin() {
+        print("LoginVC - checkAutoLogin() called")
+        if let userID = KeyChain.read(key: KeyChainKey.userID),
+           let userPW = KeyChain.read(key: KeyChainKey.userPW) {
+            getLogin(userID: userID, userPW: userPW)
+            print("LoginVC - checkAutoLogin() : 자동 로그인 성공")
+        }
+    }
+    
+    func getLogin(userID: String, userPW: String) {
         // 사용자가 입력한 아이디와 비밀번호를 받습니다.
-        let urlToCall = BaseRouter.userLogin(userID: userInputID, userPW: userInputPW)
+        let urlToCall = BaseRouter.userLogin(userID: userID, userPW: userPW)
         
         BaseNetworkManager
             .shared
@@ -78,7 +81,7 @@ extension LoginViewController {
             .responseDecodable(of: LoginAPIResponse.self) { response in
                 switch response.result {
                 case .success(let successData):
-                    print("LoginViewController - handleLoginButtonTapped() : 로그인 성공")
+                    print("LoginViewController - getLogin() : 로그인 성공")
                     debugPrint(successData)
                     if successData.success == true {
                         // 토큰 저장
@@ -123,6 +126,8 @@ extension LoginViewController {
                         KeyChain.create(key: KeyChainKey.accessToken, token: parsedAccessToken)
                         KeyChain.create(key: KeyChainKey.refreshToken, token: parsedRefreshToken)
                         
+                        self.saveUserAccountInfo(userID: userID, userPW: userPW)
+                        
                         // 홈 화면으로 이동
                         let vc = MainTapBarController()
                         vc.modalTransitionStyle = .crossDissolve
@@ -130,20 +135,40 @@ extension LoginViewController {
                         self.present(vc, animated: true)
                     }
                 case .failure(let error):
-                    print("LoginViewController - handleLoginButtonTapped() : 로그인 실패")
+                    print("LoginViewController - getLogin() : 로그인 실패")
                     debugPrint(error)
                     self.loginView.warningLabel.isHidden = false
                     /**
                      * status 403 심사중인 회원 안내를 구현해야 합니다.
                      */
 //                    if response.response?.statusCode == 403 {
-//                        
+//
 //                    }
                 }
                 
                 debugPrint(response)
             }
+    }
+    
+    // MARK: - Button action methods
+    // 로그인 버튼이 클릭 되었을때
+    func handleLoginButtonTapped() {
+        print("LoginViewController  - handleLoginButtonTapped() called")
+        
+        guard let userInputID = self.loginView.idTextField.textField.text else { return }
+        guard let userInputPW = self.loginView.pwTextField.textField.text else { return }
+        
+        getLogin(userID: userInputID, userPW: userInputPW)
 
+    }
+    
+    func saveUserAccountInfo(userID: String, userPW: String) {
+        // 자동 로그인 체크 했을시 id, pw 저장
+        if loginView.autoLoginCheckBox.isChecked {
+            KeyChain.create(key: KeyChainKey.userID, token: userID)
+            KeyChain.create(key: KeyChainKey.userPW, token: userPW)
+            print("LoginVC - saveUserAccountInfo() : 자동 로그인 정보 저장")
+        }
     }
     
     func handleFindIdButtonTapped() {

@@ -117,7 +117,7 @@ final class LoginView: UIView {
         return button
     }()
     
-    private lazy var autoLoginCheckBox: CheckBox = {
+    lazy var autoLoginCheckBox: CheckBox = {
         let checkBout = CheckBox()
         checkBout.tintColor = .black
         
