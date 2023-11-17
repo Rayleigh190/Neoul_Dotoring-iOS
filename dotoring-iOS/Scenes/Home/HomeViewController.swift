@@ -13,6 +13,10 @@ class HomeViewController: UIViewController {
     
     var myNickName = "닉네임"
     var users: [HomeUser] = []
+    var lastID: Int = 0
+    var isLastPage: Bool = false
+    var isPaging: Bool = false
+    var isShowingToast: Bool = false
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -79,18 +83,22 @@ extension HomeViewController: UICollectionViewDataSource {
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as? HomeCollectionViewCell
-        let profileImageURL = URL(string: users[indexPath.row].profileImage)
+        let profileImageURLString = users[indexPath.row].profileImage.replacingOccurrences(of: "http://localhost:8080/", with: API.BASE_URL)
+        let profileImageURL = URL(string: profileImageURLString)
+        let profilePlaceholdImage: UIImage
         
         cell?.setup()
         cell?.nicknameLabel.text = users[indexPath.row].nickname
         cell?.departmentLabel.text = users[indexPath.row].majors.joined(separator: ", ")
         cell?.jobFieldLabel.text = users[indexPath.row].fields.joined(separator: ", ")
-        cell?.profileImageView.kf.setImage(with: profileImageURL)
         if uiStyle == .mento {
             cell?.introductionLabel.text = users[indexPath.row].preferredMentoringSystem
+            profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
         } else {
             cell?.introductionLabel.text = users[indexPath.row].mentoringSystem
+            profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
         }
+        cell?.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
 
         return cell ?? UICollectionViewCell()
     }
@@ -152,6 +160,24 @@ extension HomeViewController: UICollectionViewDelegate {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    // 페이징
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출합니다.
+        if offsetY > (contentHeight - height) {
+            if isPaging == false && !isLastPage {
+                fetchNextPageUserList()
+            }
+            if isLastPage && isShowingToast == false{
+                showToast(message: "마지막 페이지입니다.", font: .nanumSquare(style: .NanumSquareOTFB, size: 15))
+            }
+            
+        }
+    }
+    
 }
 
 private extension HomeViewController {
@@ -191,12 +217,14 @@ extension HomeViewController {
      */
     func fetchUserList() {
         
+        let pageSize = 5
+        
         var urlToCall:  HomeRouter{
             switch uiStyle {
             case .mento:
-                return HomeRouter.menti(size: 10)
+                return HomeRouter.menti(size: pageSize)
             case .mentee:
-                return HomeRouter.mento(size: 10)
+                return HomeRouter.mento(size: pageSize)
             }
         }
         
@@ -205,7 +233,7 @@ extension HomeViewController {
             .shared
             .session
             .request(urlToCall)
-            .validate(statusCode: 200...400)
+            .validate(statusCode: 200...300)
             .responseDecodable(of: HomeUserAPIResponse.self) { response in
                 
                 switch response.result {
@@ -213,6 +241,10 @@ extension HomeViewController {
                     print("HomeViewController - fetchUserList() called()")
                     self.users = successData.response.content
                     self.myNickName = successData.response.pageable.nickname
+                    if let lastID = successData.response.content.last?.id {
+                        self.lastID = lastID
+                    }
+                    self.isLastPage = successData.response.last
                     self.collectionView.reloadData()
                 case .failure(let error):
                     print("HomeViewController - fetchUserList() failed()")
@@ -222,6 +254,71 @@ extension HomeViewController {
                 debugPrint(response)
             }
         
+    }
+    
+    /**
+     * 추천 멘티 또는 멘토 리스트의 다음 페이지를 요청하고 받습니다.
+     */
+    func fetchNextPageUserList() {
+        isPaging = true
+        let pageSize = 5
+        
+        var urlToCall:  HomeRouter{
+            switch uiStyle {
+            case .mento:
+                return HomeRouter.mentiPage(size: pageSize, lastMentiId: lastID)
+            case .mentee:
+                return HomeRouter.mentoPage(size: pageSize, lastMentoId: lastID)
+            }
+        }
+        
+        HomeNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...300)
+            .responseDecodable(of: HomeUserAPIResponse.self) { response in
+                
+                switch response.result {
+                case .success(let successData):
+                    print("HomeViewController - fetchNextPageUserList() called")
+                    self.users.append(contentsOf: successData.response.content)
+                    if let lastID = successData.response.content.last?.id {
+                        self.lastID = lastID
+                    }
+                    self.isLastPage = successData.response.last
+                    self.collectionView.reloadData()
+                    self.isPaging = false
+                case .failure(let error):
+                    print("HomeViewController - fetchNextPageUserList() failed")
+                    debugPrint(error)
+                    self.isPaging = false
+                }
+                
+                debugPrint(response)
+            }
+        
+    }
+    
+    
+    func showToast(message : String, font: UIFont) {
+        isShowingToast = true
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-150, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
+             toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+            self.isShowingToast = false
+        })
     }
     
 }

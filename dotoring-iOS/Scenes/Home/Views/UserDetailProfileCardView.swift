@@ -143,6 +143,7 @@ private extension UserDetailProfileCardView {
         
         departmentLabel.snp.makeConstraints {
             $0.leading.equalTo(gradeLabel.snp.leading)
+            $0.trailing.equalToSuperview().offset(-16)
             $0.bottom.equalTo(gradeLabel.snp.top).offset(-4)
         }
         

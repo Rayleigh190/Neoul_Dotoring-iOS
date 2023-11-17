@@ -25,6 +25,8 @@ struct HomePageable: Codable {
 struct HomeUserList: Codable {
     let content: [HomeUser]
     let pageable: HomePageable
+    let first: Bool
+    let last: Bool
 }
 
 struct HomeUserAPIResponse: Codable {

@@ -110,17 +110,24 @@ private extension UserDetailViewController {
      */
     func updateUI(userInfo: UserDetailInfo) {
         
-        let profileImageURL = URL(string: userInfo.profileImage)
-        userDetailView.userDetailProfileCardView.profileImageView.kf.setImage(with: profileImageURL)
+        let profileImageURLString = userInfo.profileImage.replacingOccurrences(of: "http://localhost:8080/", with: API.BASE_URL)
+        let profileImageURL = URL(string: profileImageURLString)
+        let profilePlaceholdImage: UIImage
+        
         userDetailView.userDetailProfileCardView.gradeLabel.text = "\(userInfo.grade) 학년"
         userDetailView.userDetailProfileCardView.nicknameLabel.text = userInfo.nickname
         userDetailView.introductionContentLabel.text = userInfo.introduction
+        userDetailView.userDetailProfileCardView.departmentLabel.text = userInfo.majors.joined(separator: ", ")
         
         if uiStyle == .mento {
             userDetailView.hopeMentoringContentLabel.text = userInfo.preferredMentoring
+            profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
         } else {
             userDetailView.hopeMentoringContentLabel.text = userInfo.mentoringSystem
+            profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
         }
+        
+        userDetailView.userDetailProfileCardView.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
         
         let userFieldCount =  userInfo.fields.count
         
