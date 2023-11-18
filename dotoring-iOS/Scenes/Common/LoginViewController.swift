@@ -8,7 +8,6 @@
 import SnapKit
 import UIKit
 import Alamofire
-import JWTDecode
 
 class LoginViewController: UIViewController {
     
@@ -64,90 +63,9 @@ extension LoginViewController {
         print("LoginVC - checkAutoLogin() called")
         if let userID = KeyChain.read(key: KeyChainKey.userID),
            let userPW = KeyChain.read(key: KeyChainKey.userPW) {
-            getLogin(userID: userID, userPW: userPW)
-            print("LoginVC - checkAutoLogin() : 자동 로그인 성공")
+            getLogin(userID: userID, userPW: userPW, setAutoLogin: false)
+            print("LoginViewController - checkAutoLogin() : 자동 로그인 성공")
         }
-    }
-    
-    func getLogin(userID: String, userPW: String) {
-        // 사용자가 입력한 아이디와 비밀번호를 받습니다.
-        let urlToCall = BaseRouter.userLogin(userID: userID, userPW: userPW)
-        
-        BaseNetworkManager
-            .shared
-            .session
-            .request(urlToCall)
-            .validate(statusCode: 200...400) // 200~400 사이가 아니면 interceptor에서 retry를 함
-            .responseDecodable(of: LoginAPIResponse.self) { response in
-                switch response.result {
-                case .success(let successData):
-                    print("LoginViewController - getLogin() : 로그인 성공")
-                    debugPrint(successData)
-                    if successData.success == true {
-                        // 토큰 저장
-                        guard let accessTokenData = response.response?.value(forHTTPHeaderField: "Authorization") else { return }
-                        guard let refreshTokenData = response.response?.value(forHTTPHeaderField: "Set-Cookie") else { return }
-                        
-                        // accessToken 파싱
-                        let parsedAccessToken = String(accessTokenData.dropFirst(7))
-                        
-                        // refreshToken 파싱
-                        let startIndex = refreshTokenData.index(after: refreshTokenData.firstIndex(of: "=")!)
-                        let endIndex = refreshTokenData.index(before: refreshTokenData.firstIndex(of: ";")!)
-                        let parsedRefreshToken = String(refreshTokenData[startIndex...endIndex])
-                        
-                        print("LoginViewController - parsed Access Token : \(parsedAccessToken)")
-                        print("LoginViewController - parsed Refresh Token : \(parsedRefreshToken)")
-                        
-                        var decodedAccessToken: JWT
-                        var decodedRefreshToken: JWT
-                        
-                        do {
-                            decodedAccessToken = try decode(jwt: parsedAccessToken)
-                            decodedRefreshToken = try decode(jwt: parsedRefreshToken)
-                            print("decoded Access Token : \(decodedAccessToken)")
-                            print("decoded Refresh Token : \(decodedRefreshToken)")
-                        } catch {
-                            print("LoginViewController - 토큰 디코딩 실패")
-                            debugPrint(error)
-                            return
-                        }
-                        
-                        // MENTO 또는 MENTI UI 설정
-                        if decodedAccessToken["aud"].string == "MENTO" {
-                            print("LoginViewController - 로그인 유저 타입 : 멘토")
-                            UserDefaults.standard.set("mento", forKey: "UIStyle")
-                        } else {
-                            print("LoginViewController - 로그인 유저 타입 : 멘티")
-                            UserDefaults.standard.set("mentee", forKey: "UIStyle")
-                        }
-                        
-                        // 토큰 정보 저장
-                        KeyChain.create(key: KeyChainKey.accessToken, token: parsedAccessToken)
-                        KeyChain.create(key: KeyChainKey.refreshToken, token: parsedRefreshToken)
-                        
-                        self.saveUserAccountInfo(userID: userID, userPW: userPW)
-                        
-                        // 홈 화면으로 이동
-                        let vc = MainTapBarController()
-                        vc.modalTransitionStyle = .crossDissolve
-                        vc.modalPresentationStyle = .fullScreen
-                        self.present(vc, animated: true)
-                    }
-                case .failure(let error):
-                    print("LoginViewController - getLogin() : 로그인 실패")
-                    debugPrint(error)
-                    self.loginView.warningLabel.isHidden = false
-                    /**
-                     * status 403 심사중인 회원 안내를 구현해야 합니다.
-                     */
-//                    if response.response?.statusCode == 403 {
-//
-//                    }
-                }
-                
-                debugPrint(response)
-            }
     }
     
     // MARK: - Button action methods
@@ -157,17 +75,50 @@ extension LoginViewController {
         
         guard let userInputID = self.loginView.idTextField.textField.text else { return }
         guard let userInputPW = self.loginView.pwTextField.textField.text else { return }
+        let setAutoLogin = loginView.autoLoginCheckBox.isChecked
         
-        getLogin(userID: userInputID, userPW: userInputPW)
-
+        if userInputID == "" || userInputPW == "" {
+            Alert.showAlert(title: "안내", message: "아이디와 비밀번호를 입력하세요.")
+            return
+        }
+        
+        getLogin(userID: userInputID, userPW: userInputPW, setAutoLogin: setAutoLogin)
+        
     }
     
-    func saveUserAccountInfo(userID: String, userPW: String) {
-        // 자동 로그인 체크 했을시 id, pw 저장
-        if loginView.autoLoginCheckBox.isChecked {
-            KeyChain.create(key: KeyChainKey.userID, token: userID)
-            KeyChain.create(key: KeyChainKey.userPW, token: userPW)
-            print("LoginVC - saveUserAccountInfo() : 자동 로그인 정보 저장")
+    func getLogin(userID: String, userPW: String, setAutoLogin: Bool) {
+        
+        HomeNetworkService.getLogin(userID: userID, userPW: userPW, setAutoLogin: setAutoLogin) { response, error in
+            if error != nil {
+                // 로그인 요청 에러 발생
+                print("로그인 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                if let statusCode = error?.asAFError?.responseCode {
+                    Alert.showAlert(title: "로그인 요청 에러 발생", message: "\(statusCode)")
+                } else {
+                    Alert.showAlert(title: "로그인 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                }
+            } else {
+                if response?.success == true {
+                    // 로그인 성공
+                    // 홈 화면으로 이동
+                    let vc = MainTapBarController()
+                    vc.modalTransitionStyle = .crossDissolve
+                    vc.modalPresentationStyle = .fullScreen
+                    self.present(vc, animated: true)
+                } else {
+                    // 로그인 실패
+                    switch response?.error?.status {
+                    case 400:
+                        Alert.showAlert(title: "로그인 실패", message: "존재하지 않는 아이디입니다.")
+                        self.loginView.warningLabel.isHidden = false
+                    case 403:
+                        Alert.showAlert(title: "로그인 실패", message: "심사중인 회원입니다.")
+                    default:
+                        Alert.showAlert(title: "로그인 실패", message: "알 수 없는 오류입니다. code : \(response?.error?.status ?? 0)")
+                    }
+                }
+            }
+            
         }
     }
     
