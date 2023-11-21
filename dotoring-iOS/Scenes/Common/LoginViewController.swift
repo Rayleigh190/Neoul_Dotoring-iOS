@@ -8,6 +8,7 @@
 import SnapKit
 import UIKit
 import Alamofire
+import Toast
 
 class LoginViewController: UIViewController {
     
@@ -87,9 +88,10 @@ extension LoginViewController {
     }
     
     func getLogin(userID: String, userPW: String, setAutoLogin: Bool) {
-        
+        self.view.makeToastActivity(.center)
         HomeNetworkService.getLogin(userID: userID, userPW: userPW, setAutoLogin: setAutoLogin) { response, error in
             if error != nil {
+                self.view.hideToastActivity()
                 // 로그인 요청 에러 발생
                 print("로그인 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
                 if let statusCode = error?.asAFError?.responseCode {
@@ -105,8 +107,10 @@ extension LoginViewController {
                     vc.modalTransitionStyle = .crossDissolve
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
+                    self.view.hideToastActivity()
                 } else {
                     // 로그인 실패
+                    self.view.hideToastActivity()
                     switch response?.error?.status {
                     case 400:
                         Alert.showAlert(title: "로그인 실패", message: "존재하지 않는 아이디입니다.")

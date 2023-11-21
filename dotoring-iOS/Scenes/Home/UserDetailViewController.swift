@@ -142,6 +142,7 @@ private extension UserDetailViewController {
      * 멘티 또는 멘토 상세정보를 요청하고 받습니다.
      */
     func fetchUserDetail() {
+        self.view.makeToastActivity(.center)
         // 예외처리 하기
         guard let unwrappedUserID = userID else { return }
         
@@ -174,7 +175,7 @@ private extension UserDetailViewController {
                 
                 debugPrint(response)
             }
-        
+        self.view.hideToastActivity()
     }
 }
 

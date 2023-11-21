@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     var isLastPage: Bool = false
     var isPaging: Bool = false
     var isShowingToast: Bool = false
+    var isCollectionViewRefreshing: Bool = false
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -41,6 +42,13 @@ class HomeViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshUserList), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -53,6 +61,7 @@ class HomeViewController: UIViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: "HomeCollectionHeaderView"
         )
+        collectionView.refreshControl = refreshControl
 
         return collectionView
     }()
@@ -172,7 +181,7 @@ extension HomeViewController: UICollectionViewDelegate {
                 fetchNextPageUserList()
             }
             if isLastPage && isShowingToast == false{
-                showToast(message: "마지막 페이지입니다.", font: .nanumSquare(style: .NanumSquareOTFB, size: 15))
+                self.view.makeToast("마지막 페이지입니다.", duration: 1, position: .bottom)
             }
             
         }
@@ -213,10 +222,23 @@ private extension HomeViewController {
 extension HomeViewController {
     
     /**
+     * colectionView의 멘티 또는 멘티 리스트를 새로고침 합니다.
+     */
+    @objc func refreshUserList() {
+        isCollectionViewRefreshing = true
+        fetchUserList()
+    }
+    
+    /**
      * 추천 멘티 또는 멘토 리스트를 요청하고 받습니다.
      */
     func fetchUserList() {
-        
+        if isCollectionViewRefreshing {
+            users.removeAll()
+        } else {
+            self.view.makeToastActivity(.center)
+        }
+
         let pageSize = 5
         
         var urlToCall:  HomeRouter{
@@ -253,13 +275,19 @@ extension HomeViewController {
                 
                 debugPrint(response)
             }
-        
+        if isCollectionViewRefreshing {
+            self.refreshControl.endRefreshing()
+            isCollectionViewRefreshing = false
+        } else {
+            self.view.hideToastActivity()
+        }
     }
     
     /**
      * 추천 멘티 또는 멘토 리스트의 다음 페이지를 요청하고 받습니다.
      */
     func fetchNextPageUserList() {
+        self.view.makeToastActivity(.center)
         isPaging = true
         let pageSize = 5
         
@@ -297,28 +325,7 @@ extension HomeViewController {
                 
                 debugPrint(response)
             }
-        
-    }
-    
-    
-    func showToast(message : String, font: UIFont) {
-        isShowingToast = true
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-150, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = font
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: {
-             toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-            self.isShowingToast = false
-        })
+        self.view.hideToastActivity()
     }
     
 }

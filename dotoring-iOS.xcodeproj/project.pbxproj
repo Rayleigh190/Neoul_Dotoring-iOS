@@ -39,6 +39,7 @@
 		F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E792B04F163002D733E /* UserDetailModel.swift */; };
 		F1CA7E7D2B0854B3002D733E /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */; };
 		F1CA7E7F2B087E69002D733E /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7E2B087E69002D733E /* Alert.swift */; };
+		F1CA7E822B0CA51B002D733E /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E812B0CA51B002D733E /* Toast */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -214,6 +215,7 @@
 				F1CA7E4E2AFCBA5A002D733E /* Alamofire in Frameworks */,
 				F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */,
 				F1CA7E662AFDB280002D733E /* JWTDecode in Frameworks */,
+				F1CA7E822B0CA51B002D733E /* Toast in Frameworks */,
 				F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +554,7 @@
 				F1DD2C8F2A95E26600EE9711 /* SnapKit */,
 				F1CA7E4D2AFCBA5A002D733E /* Alamofire */,
 				F1CA7E652AFDB280002D733E /* JWTDecode */,
+				F1CA7E812B0CA51B002D733E /* Toast */,
 			);
 			productName = "dotoring-iOS";
 			productReference = F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */;
@@ -586,6 +589,7 @@
 				F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F1CA7E4C2AFCBA5A002D733E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F1CA7E642AFDB27F002D733E /* XCRemoteSwiftPackageReference "JWTDecode" */,
+				F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = F1A5605C2A949E6800FD2E91 /* Products */;
 			projectDirPath = "";
@@ -940,6 +944,14 @@
 				minimumVersion = 3.1.0;
 			};
 		};
+		F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -965,6 +977,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F1CA7E642AFDB27F002D733E /* XCRemoteSwiftPackageReference "JWTDecode" */;
 			productName = JWTDecode;
+		};
+		F1CA7E812B0CA51B002D733E /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		F1DD2C8F2A95E26600EE9711 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
