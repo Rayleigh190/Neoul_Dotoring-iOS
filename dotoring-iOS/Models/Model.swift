@@ -10,11 +10,11 @@ import Foundation
 struct ErrorData: Codable {
     let message: String
 //    let code: String
-    let status: String
+    let status: Int
 }
 
 struct LoginAPIResponse: Codable {
     let success: Bool
 //    let response: String
-//    let error: ErrorData
+    let error: ErrorData?
 }

@@ -17,5 +17,7 @@ enum KeyChainKey {
     
     static let accessToken: String = "accessToken"
     static let refreshToken: String = "refreshToken"
+    static let userID: String = "userID"
+    static let userPW: String = "userPW"
     
 }

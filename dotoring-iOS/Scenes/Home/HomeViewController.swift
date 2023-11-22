@@ -7,8 +7,17 @@
 
 import SnapKit
 import UIKit
+import Kingfisher
 
 class HomeViewController: UIViewController {
+    
+    var myNickName = "닉네임"
+    var users: [HomeUser] = []
+    var lastID: Int = 0
+    var isLastPage: Bool = false
+    var isPaging: Bool = false
+    var isShowingToast: Bool = false
+    var isCollectionViewRefreshing: Bool = false
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -33,6 +42,13 @@ class HomeViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshUserList), for: .valueChanged)
+        
+        return refreshControl
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -45,6 +61,7 @@ class HomeViewController: UIViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: "HomeCollectionHeaderView"
         )
+        collectionView.refreshControl = refreshControl
 
         return collectionView
     }()
@@ -53,6 +70,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupSubViews()
+        fetchUserList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +92,22 @@ extension HomeViewController: UICollectionViewDataSource {
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as? HomeCollectionViewCell
+        let profileImageURLString = users[indexPath.row].profileImage.replacingOccurrences(of: "http://localhost:8080/", with: API.BASE_URL)
+        let profileImageURL = URL(string: profileImageURLString)
+        let profilePlaceholdImage: UIImage
+        
         cell?.setup()
+        cell?.nicknameLabel.text = users[indexPath.row].nickname
+        cell?.departmentLabel.text = users[indexPath.row].majors.joined(separator: ", ")
+        cell?.jobFieldLabel.text = users[indexPath.row].fields.joined(separator: ", ")
+        if uiStyle == .mento {
+            cell?.introductionLabel.text = users[indexPath.row].preferredMentoringSystem
+            profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
+        } else {
+            cell?.introductionLabel.text = users[indexPath.row].mentoringSystem
+            profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
+        }
+        cell?.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
 
         return cell ?? UICollectionViewCell()
     }
@@ -83,7 +116,7 @@ extension HomeViewController: UICollectionViewDataSource {
      * collectionView의 Cell의 개수를 설정합니다.
      */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        8
+        return users.count
     }
     
     /**
@@ -100,6 +133,7 @@ extension HomeViewController: UICollectionViewDataSource {
         else { return UICollectionReusableView() }
         header.parentViewController = self // 헤더뷰의 부모뷰를 셀프로 셋팅
         header.setup()
+        header.nicknameLabel.text = myNickName
 
         return header
     }
@@ -129,10 +163,28 @@ extension HomeViewController: UICollectionViewDelegate {
      * 유저 리스트 중 하나가 클릭 되었을 때 유저 디테일 화면으로 이동합니다.
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.row)")
         let vc = UserDetailViewController()
         vc.hidesBottomBarWhenPushed = true
+        vc.userID = users[indexPath.row].id
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // 페이징
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        // 스크롤이 테이블 뷰 Offset의 끝에 가게 되면 다음 페이지를 호출합니다.
+        if offsetY > (contentHeight - height) {
+            if isPaging == false && !isLastPage {
+                fetchNextPageUserList()
+            }
+            if isLastPage && isShowingToast == false{
+                self.view.makeToast("마지막 페이지입니다.", duration: 1, position: .bottom)
+            }
+            
+        }
     }
     
 }
@@ -168,6 +220,113 @@ private extension HomeViewController {
 }
 
 extension HomeViewController {
+    
+    /**
+     * colectionView의 멘티 또는 멘티 리스트를 새로고침 합니다.
+     */
+    @objc func refreshUserList() {
+        isCollectionViewRefreshing = true
+        fetchUserList()
+    }
+    
+    /**
+     * 추천 멘티 또는 멘토 리스트를 요청하고 받습니다.
+     */
+    func fetchUserList() {
+        if isCollectionViewRefreshing {
+            users.removeAll()
+        } else {
+            self.view.makeToastActivity(.center)
+        }
+
+        let pageSize = 5
+        
+        var urlToCall:  HomeRouter{
+            switch uiStyle {
+            case .mento:
+                return HomeRouter.menti(size: pageSize)
+            case .mentee:
+                return HomeRouter.mento(size: pageSize)
+            }
+        }
+        
+        HomeNetworkManager.shared.reloadCredential()
+        HomeNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...300)
+            .responseDecodable(of: HomeUserAPIResponse.self) { response in
+                
+                switch response.result {
+                case .success(let successData):
+                    print("HomeViewController - fetchUserList() called()")
+                    self.users = successData.response.content
+                    self.myNickName = successData.response.pageable.nickname
+                    if let lastID = successData.response.content.last?.id {
+                        self.lastID = lastID
+                    }
+                    self.isLastPage = successData.response.last
+                    self.collectionView.reloadData()
+                case .failure(let error):
+                    print("HomeViewController - fetchUserList() failed()")
+                    debugPrint(error)
+                }
+                
+                debugPrint(response)
+            }
+        if isCollectionViewRefreshing {
+            self.refreshControl.endRefreshing()
+            isCollectionViewRefreshing = false
+        } else {
+            self.view.hideToastActivity()
+        }
+    }
+    
+    /**
+     * 추천 멘티 또는 멘토 리스트의 다음 페이지를 요청하고 받습니다.
+     */
+    func fetchNextPageUserList() {
+        self.view.makeToastActivity(.center)
+        isPaging = true
+        let pageSize = 5
+        
+        var urlToCall:  HomeRouter{
+            switch uiStyle {
+            case .mento:
+                return HomeRouter.mentiPage(size: pageSize, lastMentiId: lastID)
+            case .mentee:
+                return HomeRouter.mentoPage(size: pageSize, lastMentoId: lastID)
+            }
+        }
+        
+        HomeNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...300)
+            .responseDecodable(of: HomeUserAPIResponse.self) { response in
+                
+                switch response.result {
+                case .success(let successData):
+                    print("HomeViewController - fetchNextPageUserList() called")
+                    self.users.append(contentsOf: successData.response.content)
+                    if let lastID = successData.response.content.last?.id {
+                        self.lastID = lastID
+                    }
+                    self.isLastPage = successData.response.last
+                    self.collectionView.reloadData()
+                    self.isPaging = false
+                case .failure(let error):
+                    print("HomeViewController - fetchNextPageUserList() failed")
+                    debugPrint(error)
+                    self.isPaging = false
+                }
+                
+                debugPrint(response)
+            }
+        self.view.hideToastActivity()
+    }
     
 }
 

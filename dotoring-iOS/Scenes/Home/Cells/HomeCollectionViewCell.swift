@@ -24,7 +24,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     private var shadowView: UIView!
 
-    private lazy var nicknameLabel: NanumLabel = {
+    lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
         
         if uiStyle == .mento {
@@ -36,28 +36,30 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private lazy var departmentLabel: NanumLabel = {
+    lazy var departmentLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 17)
         label.textColor = .BaseGray900
 
         return label
     }()
 
-    private lazy var jobFieldLabel: NanumLabel = {
+    lazy var jobFieldLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 15)
         label.textColor = .BaseGray700
 
         return label
     }()
     
-    private lazy var introductionLabel: NanumLabel = {
+    lazy var introductionLabel: NanumLabel = {
         let label = NanumLabel(weightType: .L, size: 13)
         label.textColor = .BaseGray700
+        label.numberOfLines = 0
+        label.textAlignment = .justified
 
         return label
     }()
     
-    private lazy var profileImageBackgroundView: UIView = {
+    lazy var profileImageBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .BaseGray100
         view.clipsToBounds = true
@@ -66,9 +68,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return view
     }()
 
-    private lazy var profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         
         if uiStyle == .mento {
             imageView.image = UIImage(named: "MentoProfileBaseImg")
@@ -136,10 +138,10 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         setupSubViews()
         
-        nicknameLabel.text = "닉네임"
-        departmentLabel.text = "학과"
-        jobFieldLabel.text = "분야"
-        introductionLabel.text = "한 줄 소개"
+//        nicknameLabel.text = "닉네임"
+//        departmentLabel.text = "학과"
+//        jobFieldLabel.text = "분야"
+//        introductionLabel.text = "한 줄 소개"
     }
 
 }
@@ -160,13 +162,14 @@ private extension HomeCollectionViewCell {
         
         profileImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
-            $0.height.equalTo(61)
+            $0.edges.equalToSuperview()
+//            $0.height.equalTo(61)
         }
         
         nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageBackgroundView.snp.top).offset(8)
             $0.leading.equalTo(profileImageBackgroundView.snp.trailing).offset(9)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
         }
 
         departmentLabel.snp.makeConstraints {

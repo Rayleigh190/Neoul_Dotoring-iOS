@@ -34,7 +34,7 @@ class HomeCollectionHeaderView: UICollectionReusableView {
         }
     }()
 
-    private lazy var nicknameLabel: NanumLabel = {
+    lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 24)
         
         if uiStyle == .mento {

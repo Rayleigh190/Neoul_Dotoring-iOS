@@ -117,7 +117,7 @@ final class LoginView: UIView {
         return button
     }()
     
-    private lazy var autoLoginCheckBox: CheckBox = {
+    lazy var autoLoginCheckBox: CheckBox = {
         let checkBout = CheckBox()
         checkBout.tintColor = .black
         
@@ -207,6 +207,7 @@ final class LoginView: UIView {
         switchButton.subviews.first?.subviews.first?.backgroundColor = .BaseGreen
         switchButton.onTintColor = .BaseNavy
         switchButton.addTarget(self, action: #selector(uiStyleSelectSwitchTapped), for: UIControl.Event.valueChanged)
+        switchButton.isHidden = true
         
         if uiStyle == .mento {
             switchButton.isOn = false

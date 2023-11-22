@@ -17,7 +17,7 @@ class UserDetailView: UIView {
         }
     }()
     
-    private lazy var userDetailProfileCardView: UserDetailProfileCardView = {
+    lazy var userDetailProfileCardView: UserDetailProfileCardView = {
         let userDetailProfileCardView = UserDetailProfileCardView()
         
         return userDetailProfileCardView
@@ -62,7 +62,7 @@ class UserDetailView: UIView {
         return label
     }()
     
-    private lazy var introductionContentLabel: NanumLabel = {
+    lazy var introductionContentLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 17)
         label.text = "내용"
         label.numberOfLines = 0
@@ -78,7 +78,7 @@ class UserDetailView: UIView {
         return label
     }()
     
-    private lazy var hopeMentoringContentLabel: NanumLabel = {
+    lazy var hopeMentoringContentLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 17)
         label.text = "내용"
         label.numberOfLines = 0

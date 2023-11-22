@@ -9,8 +9,18 @@ import UIKit
 
 class UserDetailViewController: UIViewController {
     
+    var userID: Int?
+    var userDetailInfo: UserDetailInfo?
     var userDetailView: UserDetailView!
     var isReportConfirmButtonClicked: Bool = false
+    
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
     
     private lazy var rightBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"), style: .plain, target: UserDetailViewController.self, action: .none)
@@ -29,14 +39,7 @@ class UserDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationItems()
-        
-        
-        for i in 1...6 {
-            let fieldRectView = FieldRectView()
-            fieldRectView.contentLabel.text = "분야 \(i)"
-            userDetailView.fieldStackView.addArrangedSubview(fieldRectView)
-        }
-        
+        fetchUserDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +103,79 @@ private extension UserDetailViewController {
         vc.modalTransitionStyle = .crossDissolve
         
         self.present(vc, animated: true)
+    }
+    
+    /**
+     * 응답 받은 멘티 또는 멘토 상세정보를 view에 적용
+     */
+    func updateUI(userInfo: UserDetailInfo) {
+        
+        let profileImageURLString = userInfo.profileImage.replacingOccurrences(of: "http://localhost:8080/", with: API.BASE_URL)
+        let profileImageURL = URL(string: profileImageURLString)
+        let profilePlaceholdImage: UIImage
+        
+        userDetailView.userDetailProfileCardView.gradeLabel.text = "\(userInfo.grade) 학년"
+        userDetailView.userDetailProfileCardView.nicknameLabel.text = userInfo.nickname
+        userDetailView.introductionContentLabel.text = userInfo.introduction
+        userDetailView.userDetailProfileCardView.departmentLabel.text = userInfo.majors.joined(separator: ", ")
+        
+        if uiStyle == .mento {
+            userDetailView.hopeMentoringContentLabel.text = userInfo.preferredMentoring
+            profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
+        } else {
+            userDetailView.hopeMentoringContentLabel.text = userInfo.mentoringSystem
+            profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
+        }
+        
+        userDetailView.userDetailProfileCardView.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
+        
+        let userFieldCount =  userInfo.fields.count
+        
+        for i in 0..<userFieldCount {
+            let fieldRectView = FieldRectView()
+            fieldRectView.contentLabel.text = "\(userInfo.fields[i])"
+            userDetailView.fieldStackView.addArrangedSubview(fieldRectView)
+        }
+    }
+    
+    /**
+     * 멘티 또는 멘토 상세정보를 요청하고 받습니다.
+     */
+    func fetchUserDetail() {
+        self.view.makeToastActivity(.center)
+        // 예외처리 하기
+        guard let unwrappedUserID = userID else { return }
+        
+        var urlToCall:  HomeRouter{
+            switch uiStyle {
+            case .mento:
+                return HomeRouter.mentiDetail(id: unwrappedUserID)
+            case .mentee:
+                return HomeRouter.mentoDetail(id: unwrappedUserID)
+            }
+        }
+        
+        HomeNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...400)
+            .responseDecodable(of: UserDetailAPIResponse.self) { response in
+                
+                switch response.result {
+                case .success(let successData):
+                    print("UserDetailViewController - fetchUserDetail() called()")
+                    self.userDetailInfo = successData.response
+                    guard let unwrapedUserDetailInfo = self.userDetailInfo else { return }
+                    self.updateUI(userInfo: unwrapedUserDetailInfo)
+                case .failure(let error):
+                    print("UserDetailViewController - fetchUserDetail() failed()")
+                    debugPrint(error)
+                }
+                
+                debugPrint(response)
+            }
+        self.view.hideToastActivity()
     }
 }
 
