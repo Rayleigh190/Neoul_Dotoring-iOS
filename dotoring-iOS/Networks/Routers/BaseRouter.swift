@@ -12,9 +12,7 @@ import Alamofire
 enum BaseRouter: URLRequestConvertible {
     
     case userLogin(userID: String, userPW: String) // 로그인
-//    case post([String: String])
-//    case post([String: String])
-//    case post(term: String)
+    case reIssue // 토큰 재발급
 
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
@@ -22,10 +20,8 @@ enum BaseRouter: URLRequestConvertible {
 
     var method: HTTPMethod {
         switch self {
-        case .userLogin:
+        case .userLogin, .reIssue:
             return .post
-//        case .post:
-//            return .post
         }
     }
 
@@ -33,17 +29,17 @@ enum BaseRouter: URLRequestConvertible {
         switch self {
         case .userLogin:
             return "member/login"
-//        case .post:
-//            return "post"
+        case .reIssue:
+            return "api/auth/reIssue"
         }
     }
     
     var parameters : [String: String] {
         switch self {
         case let .userLogin(userID, userPW):
-         return ["loginId" : userID, "password" : userPW]
-//        default:
-//            <#code#>
+            return ["loginId" : userID, "password" : userPW]
+        default:
+            return [:]
         }
     }
 
@@ -60,8 +56,8 @@ enum BaseRouter: URLRequestConvertible {
         switch self {
         case .userLogin:
             request.httpBody = try JSONEncoder().encode(parameters)
-//        case let .post(parameters):
-//            request = try JSONParameterEncoder().encode(parameters, into: request)
+        default:
+            break
         }
 
         return request

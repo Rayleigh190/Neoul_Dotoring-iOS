@@ -17,7 +17,7 @@ final class HomeNetworkManager {
     let authenticator = OAuthAuthenticator()
     
     // Generally load from keychain if it exists
-    let credential = OAuthCredential(accessToken: KeyChain.read(key: KeyChainKey.accessToken) ?? "", refreshToken: KeyChain.read(key: KeyChainKey.refreshToken) ?? "")
+    let credential = OAuthCredential(accessToken: KeyChain.read(key: KeyChainKey.accessToken) ?? "")
     
     let authInterceptor: AuthenticationInterceptor<OAuthAuthenticator>
     
@@ -49,7 +49,7 @@ final class HomeNetworkManager {
     }
     
     func reloadCredential() {
-        authInterceptor.credential = OAuthCredential(accessToken: KeyChain.read(key: KeyChainKey.accessToken) ?? "", refreshToken: KeyChain.read(key: KeyChainKey.refreshToken) ?? "")
+        authInterceptor.credential = OAuthCredential(accessToken: KeyChain.read(key: KeyChainKey.accessToken) ?? "")
     }
     
 }

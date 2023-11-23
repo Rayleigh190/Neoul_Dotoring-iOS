@@ -37,9 +37,11 @@
 		F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E742B00E83E002D733E /* OAuthCredential.swift */; };
 		F1CA7E782B024B0D002D733E /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E772B024B0D002D733E /* HomeModel.swift */; };
 		F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E792B04F163002D733E /* UserDetailModel.swift */; };
-		F1CA7E7D2B0854B3002D733E /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */; };
+		F1CA7E7D2B0854B3002D733E /* CommonNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7C2B0854B3002D733E /* CommonNetworkService.swift */; };
 		F1CA7E7F2B087E69002D733E /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7E2B087E69002D733E /* Alert.swift */; };
 		F1CA7E822B0CA51B002D733E /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E812B0CA51B002D733E /* Toast */; };
+		F1CA7E842B0F17BD002D733E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E832B0F17BD002D733E /* Error.swift */; };
+		F1CA7E872B0F4033002D733E /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E862B0F4033002D733E /* HomeNetworkService.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -138,8 +140,10 @@
 		F1CA7E742B00E83E002D733E /* OAuthCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCredential.swift; sourceTree = "<group>"; };
 		F1CA7E772B024B0D002D733E /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		F1CA7E792B04F163002D733E /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
-		F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
+		F1CA7E7C2B0854B3002D733E /* CommonNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNetworkService.swift; sourceTree = "<group>"; };
 		F1CA7E7E2B087E69002D733E /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		F1CA7E832B0F17BD002D733E /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		F1CA7E862B0F4033002D733E /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -384,7 +388,15 @@
 		F1CA7E7B2B08548F002D733E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */,
+				F1CA7E7C2B0854B3002D733E /* CommonNetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F1CA7E852B0F3F9B002D733E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E862B0F4033002D733E /* HomeNetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -405,6 +417,7 @@
 		F1DD2C8B2A95DDF600EE9711 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F1CA7E852B0F3F9B002D733E /* Services */,
 				F1FCE7AD2AD135610024AE60 /* Cells */,
 				F1FCE7AC2AD135530024AE60 /* Views */,
 				F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */,
@@ -471,6 +484,7 @@
 				F1FCE7842AC318700024AE60 /* BaseButtonStyle.swift */,
 				F1FCE7862AC318950024AE60 /* NanumWeightType.swift */,
 				F1FCE7882AC318B00024AE60 /* NanumFamily.swift */,
+				F1CA7E832B0F17BD002D733E /* Error.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -666,6 +680,7 @@
 				F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
+				F1CA7E842B0F17BD002D733E /* Error.swift in Sources */,
 				F1CA7E512AFCC30E002D733E /* Constants.swift in Sources */,
 				F1CA7E702AFFD487002D733E /* HomeNetworkManager.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
@@ -692,7 +707,7 @@
 				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,
 				F1CA7E6D2AFFD17E002D733E /* HomeRouter.swift in Sources */,
 				F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */,
-				F1CA7E7D2B0854B3002D733E /* HomeNetworkService.swift in Sources */,
+				F1CA7E7D2B0854B3002D733E /* CommonNetworkService.swift in Sources */,
 				F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
@@ -703,6 +718,7 @@
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
+				F1CA7E872B0F4033002D733E /* HomeNetworkService.swift in Sources */,
 				F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,

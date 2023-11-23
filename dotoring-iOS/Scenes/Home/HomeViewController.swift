@@ -92,23 +92,26 @@ extension HomeViewController: UICollectionViewDataSource {
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeCell", for: indexPath) as? HomeCollectionViewCell
-        let profileImageURLString = users[indexPath.row].profileImage.replacingOccurrences(of: "http://localhost:8080/", with: API.BASE_URL)
-        let profileImageURL = URL(string: profileImageURLString)
-        let profilePlaceholdImage: UIImage
         
-        cell?.setup()
-        cell?.nicknameLabel.text = users[indexPath.row].nickname
-        cell?.departmentLabel.text = users[indexPath.row].majors.joined(separator: ", ")
-        cell?.jobFieldLabel.text = users[indexPath.row].fields.joined(separator: ", ")
-        if uiStyle == .mento {
-            cell?.introductionLabel.text = users[indexPath.row].preferredMentoringSystem
-            profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
-        } else {
-            cell?.introductionLabel.text = users[indexPath.row].mentoringSystem
-            profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
+        if users.count > 0 {
+            let profileImageURLString = users[indexPath.row].profileImage.replacingOccurrences(of: "http://localhost:8080/", with: API.BASE_URL)
+            let profileImageURL = URL(string: profileImageURLString)
+            let profilePlaceholdImage: UIImage
+            
+            cell?.setup()
+            cell?.nicknameLabel.text = users[indexPath.row].nickname
+            cell?.departmentLabel.text = users[indexPath.row].majors.joined(separator: ", ")
+            cell?.jobFieldLabel.text = users[indexPath.row].fields.joined(separator: ", ")
+            if uiStyle == .mento {
+                cell?.introductionLabel.text = users[indexPath.row].preferredMentoringSystem
+                profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
+            } else {
+                cell?.introductionLabel.text = users[indexPath.row].mentoringSystem
+                profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
+            }
+            cell?.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
         }
-        cell?.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
-
+        
         return cell ?? UICollectionViewCell()
     }
     
@@ -250,31 +253,33 @@ extension HomeViewController {
             }
         }
         
-        HomeNetworkManager.shared.reloadCredential()
-        HomeNetworkManager
-            .shared
-            .session
-            .request(urlToCall)
-            .validate(statusCode: 200...300)
-            .responseDecodable(of: HomeUserAPIResponse.self) { response in
-                
-                switch response.result {
-                case .success(let successData):
-                    print("HomeViewController - fetchUserList() called()")
-                    self.users = successData.response.content
-                    self.myNickName = successData.response.pageable.nickname
-                    if let lastID = successData.response.content.last?.id {
+        HomeNetworkService.fetchUserList(uiStyle: uiStyle) { response, error in
+            
+            if error != nil {
+                // 추천 유저 요청 에러 발생
+                print("추천 유저 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                if let statusCode = error?.asAFError?.responseCode {
+                    Alert.showAlert(title: "추천 유저 요청 에러 발생", message: "\(statusCode)")
+                } else {
+                    Alert.showAlert(title: "추천 유저 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                }
+            } else {
+                if response?.success == true {
+                    guard let data = response?.response else { return }
+
+                    self.users = data.content
+                    self.myNickName = data.pageable.nickname
+                    if let lastID = data.content.last?.id {
                         self.lastID = lastID
                     }
-                    self.isLastPage = successData.response.last
+                    self.isLastPage = data.last
                     self.collectionView.reloadData()
-                case .failure(let error):
-                    print("HomeViewController - fetchUserList() failed()")
-                    debugPrint(error)
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
                 }
-                
-                debugPrint(response)
             }
+        }
+
         if isCollectionViewRefreshing {
             self.refreshControl.endRefreshing()
             isCollectionViewRefreshing = false
@@ -310,11 +315,14 @@ extension HomeViewController {
                 switch response.result {
                 case .success(let successData):
                     print("HomeViewController - fetchNextPageUserList() called")
-                    self.users.append(contentsOf: successData.response.content)
-                    if let lastID = successData.response.content.last?.id {
+                    
+                    guard let data = successData.response else { return }
+                    
+                    self.users.append(contentsOf: data.content)
+                    if let lastID = data.content.last?.id {
                         self.lastID = lastID
                     }
-                    self.isLastPage = successData.response.last
+                    self.isLastPage = data.last
                     self.collectionView.reloadData()
                     self.isPaging = false
                 case .failure(let error):

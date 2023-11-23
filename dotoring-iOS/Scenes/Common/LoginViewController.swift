@@ -89,7 +89,7 @@ extension LoginViewController {
     
     func getLogin(userID: String, userPW: String, setAutoLogin: Bool) {
         self.view.makeToastActivity(.center)
-        HomeNetworkService.getLogin(userID: userID, userPW: userPW, setAutoLogin: setAutoLogin) { response, error in
+        CommonNetworkService.getLogin(userID: userID, userPW: userPW, setAutoLogin: setAutoLogin) { response, error in
             if error != nil {
                 self.view.hideToastActivity()
                 // 로그인 요청 에러 발생

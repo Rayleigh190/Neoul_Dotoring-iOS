@@ -22,10 +22,8 @@ class BaseInterceptor: RequestInterceptor {
         completion(.success(request))
     }
     
-    // 토큰값 없을때 여기서 핸들링하기
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         print("BaseInterceptor - retry() called")
-        
 //        guard let statusCode = request.response?.statusCode else {
 //            // statusCode가 없으면 아무것도 하지 않음
 //            completion(.doNotRetry)
