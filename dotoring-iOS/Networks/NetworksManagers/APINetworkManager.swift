@@ -1,5 +1,5 @@
 //
-//  HomeNetworkManager.swift
+//  APINetworkManager.swift
 //  dotoring-iOS
 //
 //  Created by 우진 on 11/12/23.
@@ -8,10 +8,10 @@
 import Foundation
 import Alamofire
 
-final class HomeNetworkManager {
+final class APINetworkManager {
     
     // 싱글턴 적용
-    static let shared = HomeNetworkManager()
+    static let shared = APINetworkManager()
     
     // Create the interceptor
     let authenticator = OAuthAuthenticator()
@@ -28,7 +28,7 @@ final class HomeNetworkManager {
     var session : Session
     
     private init(session: Session = Session.default) {
-        print("HomeNetworkManager() called!!!!")
+        print("APINetworkManager() called!!!!")
         
         authInterceptor = AuthenticationInterceptor(
             authenticator: authenticator,

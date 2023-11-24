@@ -32,7 +32,7 @@
 		F1CA7E662AFDB280002D733E /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E652AFDB280002D733E /* JWTDecode */; };
 		F1CA7E6A2AFDD5D1002D733E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E692AFDD5D1002D733E /* KeyChain.swift */; };
 		F1CA7E6D2AFFD17E002D733E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E6C2AFFD17E002D733E /* HomeRouter.swift */; };
-		F1CA7E702AFFD487002D733E /* HomeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E6F2AFFD487002D733E /* HomeNetworkManager.swift */; };
+		F1CA7E702AFFD487002D733E /* APINetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */; };
 		F1CA7E732B00E818002D733E /* OAuthAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E722B00E818002D733E /* OAuthAuthenticator.swift */; };
 		F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E742B00E83E002D733E /* OAuthCredential.swift */; };
 		F1CA7E782B024B0D002D733E /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E772B024B0D002D733E /* HomeModel.swift */; };
@@ -135,7 +135,7 @@
 		F1CA7E602AFD26AE002D733E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		F1CA7E692AFDD5D1002D733E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		F1CA7E6C2AFFD17E002D733E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
-		F1CA7E6F2AFFD487002D733E /* HomeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkManager.swift; sourceTree = "<group>"; };
+		F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkManager.swift; sourceTree = "<group>"; };
 		F1CA7E722B00E818002D733E /* OAuthAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticator.swift; sourceTree = "<group>"; };
 		F1CA7E742B00E83E002D733E /* OAuthCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCredential.swift; sourceTree = "<group>"; };
 		F1CA7E772B024B0D002D733E /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */,
-				F1CA7E6F2AFFD487002D733E /* HomeNetworkManager.swift */,
+				F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */,
 			);
 			path = NetworksManagers;
 			sourceTree = "<group>";
@@ -682,7 +682,7 @@
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
 				F1CA7E842B0F17BD002D733E /* Error.swift in Sources */,
 				F1CA7E512AFCC30E002D733E /* Constants.swift in Sources */,
-				F1CA7E702AFFD487002D733E /* HomeNetworkManager.swift in Sources */,
+				F1CA7E702AFFD487002D733E /* APINetworkManager.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
 				F1CA7E5A2AFCE9B0002D733E /* BaseRouter.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,

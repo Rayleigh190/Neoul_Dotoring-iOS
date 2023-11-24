@@ -24,7 +24,7 @@ class OAuthAuthenticator: Authenticator {
         // be authenticated using the `apply(_:to:)` method using the new credential.
         
         let urlToCall = BaseRouter.reIssue
-        HomeNetworkManager
+        APINetworkManager
             .shared
             .session
             .request(urlToCall)
@@ -97,7 +97,7 @@ class OAuthAuthenticator: Authenticator {
 //        if didRequest(urlRequest, with: response, failDueToAuthenticationError: error) {
 //            print("handleAuthenticationError - didRequest() called")
 //            
-//            refresh(HomeNetworkManager.shared.credential, for: HomeNetworkManager.shared.session) { result in
+//            refresh(APINetworkManager.shared.credential, for: HomeNetworkManager.shared.session) { result in
 //
 //                switch result {
 //                case .success:

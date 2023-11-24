@@ -294,45 +294,38 @@ extension HomeViewController {
     func fetchNextPageUserList() {
         self.view.makeToastActivity(.center)
         isPaging = true
-        let pageSize = 5
         
-        var urlToCall:  HomeRouter{
-            switch uiStyle {
-            case .mento:
-                return HomeRouter.mentiPage(size: pageSize, lastMentiId: lastID)
-            case .mentee:
-                return HomeRouter.mentoPage(size: pageSize, lastMentoId: lastID)
-            }
-        }
-        
-        HomeNetworkManager
-            .shared
-            .session
-            .request(urlToCall)
-            .validate(statusCode: 200...300)
-            .responseDecodable(of: HomeUserAPIResponse.self) { response in
-                
-                switch response.result {
-                case .success(let successData):
-                    print("HomeViewController - fetchNextPageUserList() called")
+        HomeNetworkService.fetchNextPageUserList(uiStyle: uiStyle, lastID: lastID) { response, error in
+            
+            if error != nil {
+                // 추천 유저 페이지 요청 에러 발생
+                print("추천 유저 페이지 요청 오류 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                if let _ = error?.asAFError?.responseCode {
+//                    Alert.showAlert(title: "추천 유저 페이지 요청 오류 발생", message: "\(statusCode)")
+                } else {
+                    Alert.showAlert(title: "추천 유저 페이지 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+                }
+            } else {
+                if response?.success == true {
                     
-                    guard let data = successData.response else { return }
+                    guard let data = response?.response else { return }
                     
                     self.users.append(contentsOf: data.content)
+        
                     if let lastID = data.content.last?.id {
                         self.lastID = lastID
                     }
+                    
                     self.isLastPage = data.last
                     self.collectionView.reloadData()
-                    self.isPaging = false
-                case .failure(let error):
-                    print("HomeViewController - fetchNextPageUserList() failed")
-                    debugPrint(error)
-                    self.isPaging = false
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
                 }
-                
-                debugPrint(response)
             }
+            
+            self.isPaging = false
+        }
+        
         self.view.hideToastActivity()
     }
     
