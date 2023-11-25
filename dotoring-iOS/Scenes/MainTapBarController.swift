@@ -35,7 +35,7 @@ class MainTapBarController: UITabBarController {
     }()
     
     private lazy var chatViewController: UIViewController = {
-        let viewController = UIViewController()
+        let viewController = UINavigationController(rootViewController: ChannelViewController())
         let tabBarItem = UITabBarItem(title: "채팅", image: UIImage(named: "MainTapBarItemChatUnclickedImg"), tag: 2)
         viewController.tabBarItem = tabBarItem
 
