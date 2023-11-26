@@ -32,8 +32,12 @@ class ChannelViewController: UIViewController {
         
         return view
     }()
-        
-    var channels = [Channel]()
+    
+    
+    var channels = [
+        Channel(id: "0", name: "홍길동", major: "경영학과", lastLetter: "우리 언제 만나요?", updateAt: "6월 19일 14시 55분"),
+        Channel(id: "1", name: "김이식", major: "컴퓨터공학과", lastLetter: "개발이 너무 어려워요ㅠㅠ", updateAt: "6월 18일 10시 25분")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +59,6 @@ class ChannelViewController: UIViewController {
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
-        channels = getChannelMocks()
     }
     
 }
@@ -64,7 +67,6 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
     // 셀 개수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return channels.count
-//        return 5
     }
     
     // 셀 설정
@@ -72,7 +74,11 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChannelTableViewCell.className, for: indexPath) as! ChannelTableViewCell
         
         if channels.count > 0 {
-            cell.chatRoomNicknameLabel.text = channels[indexPath.row].name
+            let channel = channels[indexPath.row]
+            cell.chatRoomNicknameLabel.text = channel.name
+            cell.chatRoomDepartmentLabel.text = channel.major
+            cell.chatRoomContentLabel.text = channel.lastLetter
+            cell.chatRoomDateLabel.text = channel.updateAt
         }
         return cell
     }

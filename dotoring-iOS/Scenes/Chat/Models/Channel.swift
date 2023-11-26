@@ -8,12 +8,18 @@
 import Foundation
 
 struct Channel {
-    var id: String?
+    var id: String
     let name: String
+    let major: String
+    let lastLetter: String
+    let updateAt: String
     
-    init(id: String? = nil, name: String) {
+    init(id: String, name: String, major: String, lastLetter: String, updateAt: String) {
         self.id = id
         self.name = name
+        self.major = major
+        self.lastLetter = lastLetter
+        self.updateAt = updateAt
     }
 }
 

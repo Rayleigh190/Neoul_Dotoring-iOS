@@ -11,13 +11,10 @@ import UIKit
 
 struct Message: MessageType {
     
-    let id: String?
-    var messageId: String {
-        return id ?? UUID().uuidString
-    }
-    let content: String
-    let sentDate: Date
+//    let id: String
+    let messageId: String
     let sender: SenderType
+    let sentDate: Date
     var kind: MessageKind {
         if let image = image {
             let mediaItem = ImageMediaItem(image: image)
@@ -26,30 +23,31 @@ struct Message: MessageType {
             return .text(content)
         }
     }
-    
+    let content: String
+   
     var image: UIImage?
-    var downloadURL: URL?
+//    var downloadURL: URL?
     
-    init(content: String, senderID: String) {
-        sender = Sender(senderId: senderID, displayName: "displayName(TODO...)")
+    init(messageId: String, sender: SenderType, sentDate: Date, content: String) {
+        self.messageId = messageId
+        self.sender = sender
+        self.sentDate = sentDate
         self.content = content
-        sentDate = Date()
-        id = nil
     }
     
-    init(image: UIImage) {
-        sender = Sender(senderId: "id(TODO...)", displayName: "displayName(TODO...)")
-        self.image = image
-        sentDate = Date()
-        content = ""
-        id = nil
-    }
+//    init(image: UIImage) {
+//        sender = Sender(senderId: "id(TODO...)", displayName: "displayName(TODO...)")
+//        self.image = image
+//        sentDate = Date()
+//        content = ""
+//        id = nil
+//    }
     
 }
 
 extension Message: Comparable {
   static func == (lhs: Message, rhs: Message) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.messageId == rhs.messageId
   }
 
   static func < (lhs: Message, rhs: Message) -> Bool {
