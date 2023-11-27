@@ -9,12 +9,23 @@ import Foundation
 
 struct ErrorData: Codable {
     let message: String
-//    let code: String
+    let code: String?
     let status: Int
+}
+
+struct ErrorData2: Codable {
+    let message: String
+    let code: String?
+    let status: String
 }
 
 struct LoginAPIResponse: Codable {
     let success: Bool
 //    let response: String
     let error: ErrorData?
+}
+
+struct ReIssueAPIResponse: Codable {
+    let success: Bool
+    let error: ErrorData2?
 }

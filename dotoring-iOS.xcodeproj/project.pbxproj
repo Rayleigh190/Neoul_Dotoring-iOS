@@ -32,14 +32,24 @@
 		F1CA7E662AFDB280002D733E /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E652AFDB280002D733E /* JWTDecode */; };
 		F1CA7E6A2AFDD5D1002D733E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E692AFDD5D1002D733E /* KeyChain.swift */; };
 		F1CA7E6D2AFFD17E002D733E /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E6C2AFFD17E002D733E /* HomeRouter.swift */; };
-		F1CA7E702AFFD487002D733E /* HomeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E6F2AFFD487002D733E /* HomeNetworkManager.swift */; };
+		F1CA7E702AFFD487002D733E /* APINetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */; };
 		F1CA7E732B00E818002D733E /* OAuthAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E722B00E818002D733E /* OAuthAuthenticator.swift */; };
 		F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E742B00E83E002D733E /* OAuthCredential.swift */; };
 		F1CA7E782B024B0D002D733E /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E772B024B0D002D733E /* HomeModel.swift */; };
 		F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E792B04F163002D733E /* UserDetailModel.swift */; };
-		F1CA7E7D2B0854B3002D733E /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */; };
+		F1CA7E7D2B0854B3002D733E /* CommonNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7C2B0854B3002D733E /* CommonNetworkService.swift */; };
 		F1CA7E7F2B087E69002D733E /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E7E2B087E69002D733E /* Alert.swift */; };
 		F1CA7E822B0CA51B002D733E /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E812B0CA51B002D733E /* Toast */; };
+		F1CA7E842B0F17BD002D733E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E832B0F17BD002D733E /* Error.swift */; };
+		F1CA7E872B0F4033002D733E /* HomeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E862B0F4033002D733E /* HomeNetworkService.swift */; };
+		F1CA7E8C2B117C3C002D733E /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E8B2B117C3C002D733E /* ChannelViewController.swift */; };
+		F1CA7E8F2B117D1D002D733E /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E8E2B117D1D002D733E /* MessageKit */; };
+		F1CA7E912B117E4C002D733E /* ChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E902B117E4C002D733E /* ChannelTableViewCell.swift */; };
+		F1CA7E932B117EC9002D733E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E922B117EC9002D733E /* ChatViewController.swift */; };
+		F1CA7E962B117F18002D733E /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E952B117F18002D733E /* Channel.swift */; };
+		F1CA7E9A2B117F74002D733E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E992B117F74002D733E /* Message.swift */; };
+		F1CA7E9C2B117F95002D733E /* ImageMediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E9B2B117F95002D733E /* ImageMediaItem.swift */; };
+		F1CA7E9E2B118083002D733E /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E9D2B118083002D733E /* Sender.swift */; };
 		F1DD2C8D2A95DE5C00EE9711 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */; };
 		F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F1DD2C8F2A95E26600EE9711 /* SnapKit */; };
 		F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */; };
@@ -133,13 +143,22 @@
 		F1CA7E602AFD26AE002D733E /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		F1CA7E692AFDD5D1002D733E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		F1CA7E6C2AFFD17E002D733E /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
-		F1CA7E6F2AFFD487002D733E /* HomeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkManager.swift; sourceTree = "<group>"; };
+		F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APINetworkManager.swift; sourceTree = "<group>"; };
 		F1CA7E722B00E818002D733E /* OAuthAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthAuthenticator.swift; sourceTree = "<group>"; };
 		F1CA7E742B00E83E002D733E /* OAuthCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthCredential.swift; sourceTree = "<group>"; };
 		F1CA7E772B024B0D002D733E /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		F1CA7E792B04F163002D733E /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
-		F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
+		F1CA7E7C2B0854B3002D733E /* CommonNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNetworkService.swift; sourceTree = "<group>"; };
 		F1CA7E7E2B087E69002D733E /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		F1CA7E832B0F17BD002D733E /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		F1CA7E862B0F4033002D733E /* HomeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetworkService.swift; sourceTree = "<group>"; };
+		F1CA7E8B2B117C3C002D733E /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
+		F1CA7E902B117E4C002D733E /* ChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTableViewCell.swift; sourceTree = "<group>"; };
+		F1CA7E922B117EC9002D733E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		F1CA7E952B117F18002D733E /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		F1CA7E992B117F74002D733E /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F1CA7E9B2B117F95002D733E /* ImageMediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMediaItem.swift; sourceTree = "<group>"; };
+		F1CA7E9D2B118083002D733E /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1DD2C912A95E81200EE9711 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD2C932A95F82C00EE9711 /* NanumSquareOTF_acL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTF_acL.otf; sourceTree = "<group>"; };
@@ -215,6 +234,7 @@
 				F1CA7E4E2AFCBA5A002D733E /* Alamofire in Frameworks */,
 				F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */,
 				F1CA7E662AFDB280002D733E /* JWTDecode in Frameworks */,
+				F1CA7E8F2B117D1D002D733E /* MessageKit in Frameworks */,
 				F1CA7E822B0CA51B002D733E /* Toast in Frameworks */,
 				F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */,
 			);
@@ -359,7 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */,
-				F1CA7E6F2AFFD487002D733E /* HomeNetworkManager.swift */,
+				F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */,
 			);
 			path = NetworksManagers;
 			sourceTree = "<group>";
@@ -384,9 +404,39 @@
 		F1CA7E7B2B08548F002D733E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F1CA7E7C2B0854B3002D733E /* HomeNetworkService.swift */,
+				F1CA7E7C2B0854B3002D733E /* CommonNetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F1CA7E852B0F3F9B002D733E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E862B0F4033002D733E /* HomeNetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F1CA7E8A2B117C0D002D733E /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E942B117F02002D733E /* Models */,
+				F1CA7E8B2B117C3C002D733E /* ChannelViewController.swift */,
+				F1CA7E902B117E4C002D733E /* ChannelTableViewCell.swift */,
+				F1CA7E922B117EC9002D733E /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		F1CA7E942B117F02002D733E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1CA7E952B117F18002D733E /* Channel.swift */,
+				F1CA7E992B117F74002D733E /* Message.swift */,
+				F1CA7E9D2B118083002D733E /* Sender.swift */,
+				F1CA7E9B2B117F95002D733E /* ImageMediaItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		F1DD2C8A2A95DDD500EE9711 /* Scenes */ = {
@@ -394,6 +444,7 @@
 			children = (
 				F1FCE78A2AC7D4AD0024AE60 /* MyPage */,
 				F126B1CA2AA231E20035E499 /* Signup */,
+				F1CA7E8A2B117C0D002D733E /* Chat */,
 				F1DD2CA92A99CCDD00EE9711 /* Common */,
 				F1DD2C8B2A95DDF600EE9711 /* Home */,
 				F1A560622A949E6800FD2E91 /* MainTapBarController.swift */,
@@ -405,6 +456,7 @@
 		F1DD2C8B2A95DDF600EE9711 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F1CA7E852B0F3F9B002D733E /* Services */,
 				F1FCE7AD2AD135610024AE60 /* Cells */,
 				F1FCE7AC2AD135530024AE60 /* Views */,
 				F1DD2C8C2A95DE5C00EE9711 /* HomeViewController.swift */,
@@ -471,6 +523,7 @@
 				F1FCE7842AC318700024AE60 /* BaseButtonStyle.swift */,
 				F1FCE7862AC318950024AE60 /* NanumWeightType.swift */,
 				F1FCE7882AC318B00024AE60 /* NanumFamily.swift */,
+				F1CA7E832B0F17BD002D733E /* Error.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -555,6 +608,7 @@
 				F1CA7E4D2AFCBA5A002D733E /* Alamofire */,
 				F1CA7E652AFDB280002D733E /* JWTDecode */,
 				F1CA7E812B0CA51B002D733E /* Toast */,
+				F1CA7E8E2B117D1D002D733E /* MessageKit */,
 			);
 			productName = "dotoring-iOS";
 			productReference = F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */;
@@ -590,6 +644,7 @@
 				F1CA7E4C2AFCBA5A002D733E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				F1CA7E642AFDB27F002D733E /* XCRemoteSwiftPackageReference "JWTDecode" */,
 				F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				F1CA7E8D2B117D1D002D733E /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = F1A5605C2A949E6800FD2E91 /* Products */;
 			projectDirPath = "";
@@ -643,6 +698,7 @@
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,
+				F1CA7E9C2B117F95002D733E /* ImageMediaItem.swift in Sources */,
 				F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */,
 				F1CA7E5D2AFCFE17002D733E /* Model.swift in Sources */,
 				F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */,
@@ -661,16 +717,20 @@
 				F1FCE76F2ABE8E4E0024AE60 /* Signup4ViewController.swift in Sources */,
 				F1FCE7672ABC75A80024AE60 /* Signup2View.swift in Sources */,
 				F1FCE7652ABC754C0024AE60 /* Signup2ViewController.swift in Sources */,
+				F1CA7E962B117F18002D733E /* Channel.swift in Sources */,
 				F1FCE7B32AD140360024AE60 /* UserDetailProfileCardView.swift in Sources */,
 				F1FCE7692ABD7E2A0024AE60 /* Signup3View.swift in Sources */,
 				F1FCE7732AC023390024AE60 /* Signup5ViewController.swift in Sources */,
 				F1DD2CC62A9D7AE800EE9711 /* FindIdCheckViewController.swift in Sources */,
 				F1DD2CC42A9C851300EE9711 /* FindIdViewController.swift in Sources */,
+				F1CA7E842B0F17BD002D733E /* Error.swift in Sources */,
+				F1CA7E912B117E4C002D733E /* ChannelTableViewCell.swift in Sources */,
 				F1CA7E512AFCC30E002D733E /* Constants.swift in Sources */,
-				F1CA7E702AFFD487002D733E /* HomeNetworkManager.swift in Sources */,
+				F1CA7E702AFFD487002D733E /* APINetworkManager.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
 				F1CA7E5A2AFCE9B0002D733E /* BaseRouter.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
+				F1CA7E9A2B117F74002D733E /* Message.swift in Sources */,
 				F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */,
 				F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,
@@ -682,6 +742,7 @@
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
 				F1CA7E732B00E818002D733E /* OAuthAuthenticator.swift in Sources */,
 				F1FCE77F2AC317600024AE60 /* SelectViewControllerProtocol.swift in Sources */,
+				F1CA7E9E2B118083002D733E /* Sender.swift in Sources */,
 				F1FCE78F2AC7D5FC0024AE60 /* MyPageView.swift in Sources */,
 				F1FCE7972AC902F00024AE60 /* MentoringMethodSetViewController.swift in Sources */,
 				F126B1CC2AA231F60035E499 /* MentoSignup1ViewController.swift in Sources */,
@@ -692,10 +753,11 @@
 				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,
 				F1CA7E6D2AFFD17E002D733E /* HomeRouter.swift in Sources */,
 				F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */,
-				F1CA7E7D2B0854B3002D733E /* HomeNetworkService.swift in Sources */,
+				F1CA7E7D2B0854B3002D733E /* CommonNetworkService.swift in Sources */,
 				F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,
+				F1CA7E932B117EC9002D733E /* ChatViewController.swift in Sources */,
 				F1CA7E782B024B0D002D733E /* HomeModel.swift in Sources */,
 				F1CA7E612AFD26AE002D733E /* Bundle.swift in Sources */,
 				F1FCE7AB2AD03FF50024AE60 /* PasswordResetView.swift in Sources */,
@@ -703,9 +765,11 @@
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
+				F1CA7E872B0F4033002D733E /* HomeNetworkService.swift in Sources */,
 				F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
+				F1CA7E8C2B117C3C002D733E /* ChannelViewController.swift in Sources */,
 				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,
 				F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */,
 				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,
@@ -952,6 +1016,14 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		F1CA7E8D2B117D1D002D733E /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
 		F1DD2C8E2A95E26600EE9711 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -982,6 +1054,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		F1CA7E8E2B117D1D002D733E /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F1CA7E8D2B117D1D002D733E /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
 		};
 		F1DD2C8F2A95E26600EE9711 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

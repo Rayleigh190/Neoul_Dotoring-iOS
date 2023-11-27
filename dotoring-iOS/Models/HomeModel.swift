@@ -31,5 +31,6 @@ struct HomeUserList: Codable {
 
 struct HomeUserAPIResponse: Codable {
     let success: Bool
-    let response: HomeUserList
+    let response: HomeUserList?
+    let error: ErrorData2?
 }

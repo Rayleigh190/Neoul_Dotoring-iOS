@@ -10,7 +10,7 @@ import Alamofire
 
 struct OAuthCredential: AuthenticationCredential {
     let accessToken: String
-    let refreshToken: String
+//    let refreshToken: String
 //    let userID: String
 //    let expiration: Date
 

@@ -74,8 +74,8 @@ extension AccountSetViewController {
         // 인증, 재인증 토큰 삭제
         if let _ = KeyChain.read(key: KeyChainKey.accessToken) {
             KeyChain.delete(key: KeyChainKey.accessToken)
-            KeyChain.delete(key: KeyChainKey.refreshToken)
-            print("AccountSetVC - deleteUserAccountInfo() : accessToken, refreshToken 삭제 완료")
+//            KeyChain.delete(key: KeyChainKey.refreshToken)
+            print("AccountSetVC - deleteUserAccountInfo() : accessToken 삭제 완료")
         }
     }
     

@@ -155,7 +155,7 @@ private extension UserDetailViewController {
             }
         }
         
-        HomeNetworkManager
+        APINetworkManager
             .shared
             .session
             .request(urlToCall)
