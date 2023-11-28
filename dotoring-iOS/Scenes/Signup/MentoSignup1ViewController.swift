@@ -9,17 +9,6 @@ import UIKit
 
 class MentoSignup1ViewController: UIViewController {
     
-    private lazy var navTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
-        let text = "멘토로 회원가입"
-        label.text = text
-        let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: UIColor.BaseGreen!, range: (text as NSString).range(of: "멘토"))
-        label.attributedText = attributedStr
-        
-        return label
-    }()
-    
     private lazy var stepBar: SignupStepBar = {
         let bar = SignupStepBar(stepCount: 6, currentStep: 1, style: .mento)
         
@@ -27,7 +16,7 @@ class MentoSignup1ViewController: UIViewController {
     }()
     
     private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
+        let label = NanumLabel(weightType: .R, size: 24)
         let text = "Q. 멘토님은 어떤 분인가요?"
         label.text = text
         let attributedStr = NSMutableAttributedString(string: text)
@@ -46,21 +35,21 @@ class MentoSignup1ViewController: UIViewController {
     
     private lazy var content2Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "에 소속된"
+        label.text = "에 다니는"
         
         return label
     }()
     
     private lazy var content3Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "년 차"
+        label.text = "학년"
         
         return label
     }()
     
     private lazy var content4Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "입니다."
+        label.text = "멘토입니다."
         
         return label
     }()
@@ -85,7 +74,7 @@ class MentoSignup1ViewController: UIViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let centeredPlaceholder = NSAttributedString(string: "소속", attributes: [
+        let centeredPlaceholder = NSAttributedString(string: "학교", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.gray,
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
@@ -102,7 +91,7 @@ class MentoSignup1ViewController: UIViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let centeredPlaceholder = NSAttributedString(string: "연차", attributes: [
+        let centeredPlaceholder = NSAttributedString(string: "학년", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.gray,
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
@@ -119,7 +108,7 @@ class MentoSignup1ViewController: UIViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let centeredPlaceholder = NSAttributedString(string: "직무", attributes: [
+        let centeredPlaceholder = NSAttributedString(string: "멘토링 분야", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.gray,
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
@@ -170,10 +159,10 @@ class MentoSignup1ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.topItem?.title = ""
-        navigationController?.navigationBar.tintColor = .black
+
         self.hideKeyboardWhenTappedAround()
         setupSubViews()
+        setupUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -190,32 +179,47 @@ class MentoSignup1ViewController: UIViewController {
 
 private extension MentoSignup1ViewController {
     
+    func setupUI() {
+        self.navigationController?.navigationBar.tintColor = .BaseGray700
+        self.navigationController?.navigationBar.topItem?.title = ""
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "멘토로 회원가입"
+        titleLabel.textColor = UIColor.label // 전체 글씨 색상
+        titleLabel.font = .nanumSquare(style: .NanumSquareOTFR, size: 15)
+        titleLabel.sizeToFit()
+
+        let mentorRange = (titleLabel.text! as NSString).range(of: "멘토")
+        let attributedString = NSMutableAttributedString(string: titleLabel.text!)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.BaseGreen!, range: mentorRange)
+
+        titleLabel.attributedText = attributedString
+
+        self.navigationItem.titleView = titleLabel
+    
+    }
+    
     func setupSubViews() {
         
-        [navTitleLabel, stepBar, titleLabel, nextButton, jobTextFieldButton, departmentTextFieldButton].forEach {view.addSubview($0)}
+        [stepBar, titleLabel, nextButton, jobTextFieldButton, departmentTextFieldButton].forEach {view.addSubview($0)}
         
         [content1Label, content2Label, content3Label, content4Label, content5Label, content6Label].forEach {view.addSubview($0)}
         
         [companyTextField, yearTextField, jobTextField, departmentTextField].forEach {view.addSubview($0)}
         
-        navTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalToSuperview().offset(104)
-        }
-        
         stepBar.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(navTitleLabel.snp.bottom).offset(87)
+            $0.leading.equalToSuperview().offset(17)
+            $0.top.equalToSuperview().offset(147)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(stepBar.snp.bottom).offset(25)
+            $0.leading.equalTo(stepBar.snp.leading)
+            $0.top.equalTo(stepBar.snp.bottom).offset(20)
         }
         
         content1Label.snp.makeConstraints {
             $0.leading.equalTo(titleLabel.snp.leading)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(66)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(65)
         }
         
         companyTextField.snp.makeConstraints {
@@ -269,9 +273,9 @@ private extension MentoSignup1ViewController {
         
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(departmentTextField.snp.bottom).offset(54)
-            $0.height.equalTo(45)
+            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(departmentTextField.snp.bottom).offset(55)
+            $0.height.equalTo(48)
         }
         
         jobTextFieldButton.snp.makeConstraints {
