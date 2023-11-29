@@ -145,7 +145,8 @@ private extension IntroViewController {
         
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(151)
+            $0.top.equalToSuperview().inset(151).priority(.low)
+            $0.top.greaterThanOrEqualToSuperview().inset(10).priority(.required)
         }
         
         mainLogoImageView.snp.makeConstraints {
@@ -165,6 +166,8 @@ private extension IntroViewController {
             $0.leading.equalTo(mentoButton.snp.leading)
             $0.top.equalTo(mentoButton.snp.bottom).offset(12)
             $0.height.equalTo(103.0)
+            $0.bottom.equalTo(goLoginButton.snp.top).offset(-100).priority(.high)
+            $0.bottom.greaterThanOrEqualTo(goLoginButton.snp.top).offset(-50).priority(.high)
         }
         
         mentoBtnLabel.snp.makeConstraints {
@@ -177,7 +180,7 @@ private extension IntroViewController {
         
         goLoginButton.snp.makeConstraints {
             $0.centerX.equalTo(mentiButton)
-            $0.bottom.equalToSuperview().offset(-58)
+            $0.bottom.equalToSuperview().inset(58)
         }
         
     }
