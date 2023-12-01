@@ -42,10 +42,10 @@ final class LoginView: UIView {
 
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.image = UIImage(named: "LoginBackgroundImg")
-
+        
         return imageView
     }()
     
@@ -243,7 +243,8 @@ private extension LoginView {
         
         smallLogoImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
-            $0.top.equalToSuperview().inset(65)
+            $0.top.equalToSuperview().inset(65).priority(.low)
+            $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
         }
         
         navTitle.snp.makeConstraints {
@@ -252,13 +253,16 @@ private extension LoginView {
         }
         
         backgroundImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(00.0)
+            $0.top.greaterThanOrEqualToSuperview().inset(100).priority(.required)
+            $0.trailing.equalToSuperview()
+            $0.leading.greaterThanOrEqualToSuperview().inset(70).priority(.high)
             $0.bottom.equalToSuperview().inset(73.66)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalTo(smallLogoImageView).offset(99.61)
+            $0.leading.trailing.equalToSuperview().offset(16)
+            $0.top.equalTo(smallLogoImageView.snp.bottom).offset(99.61).priority(.low)
+            $0.top.greaterThanOrEqualTo(smallLogoImageView.snp.bottom).offset(50).priority(.required)
         }
         
         subTitleLabel.snp.makeConstraints {
@@ -268,7 +272,8 @@ private extension LoginView {
         
         idTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(subTitleLabel.snp.bottom).offset(112)
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(112).priority(.high)
+            $0.top.greaterThanOrEqualTo(subTitleLabel.snp.bottom).offset(10).priority(.required)
             $0.leading.equalTo(titleLabel.snp.leading)
         }
         
@@ -312,6 +317,7 @@ private extension LoginView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(loginButton.snp.bottom).offset(15.0)
             $0.height.equalTo(14.0)
+            $0.bottom.lessThanOrEqualToSuperview().inset(20).priority(.required)
         }
         
         line1.snp.makeConstraints {
