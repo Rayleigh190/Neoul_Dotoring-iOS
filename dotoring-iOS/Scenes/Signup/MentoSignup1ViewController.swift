@@ -29,6 +29,7 @@ class MentoSignup1ViewController: UIViewController {
     private lazy var content1Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.text = "A. 저는"
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         return label
     }()
@@ -36,6 +37,7 @@ class MentoSignup1ViewController: UIViewController {
     private lazy var content2Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.text = "에 다니는"
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         return label
     }()
@@ -68,7 +70,7 @@ class MentoSignup1ViewController: UIViewController {
         return label
     }()
     
-    private lazy var companyTextField: LineTextField = {
+    private lazy var schoolTextField: LineTextField = {
         let lineTextField = LineTextField()
         lineTextField.textField.textAlignment = .center
         let paragraphStyle = NSMutableParagraphStyle()
@@ -79,11 +81,12 @@ class MentoSignup1ViewController: UIViewController {
             NSAttributedString.Key.paragraphStyle: paragraphStyle
         ])
         lineTextField.textField.attributedPlaceholder = centeredPlaceholder
+        lineTextField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         return lineTextField
     }()
     
-    private lazy var yearTextField: LineTextField = {
+    private lazy var gradeTextField: LineTextField = {
         let lineTextField = LineTextField()
         lineTextField.textField.textAlignment = .center
         lineTextField.textField.keyboardType = .numberPad
@@ -100,7 +103,7 @@ class MentoSignup1ViewController: UIViewController {
         return lineTextField
     }()
     
-    private lazy var jobTextField: LineTextField = {
+    private lazy var fieldTextField: LineTextField = {
         let lineTextField = LineTextField()
         lineTextField.textField.textAlignment = .center
         lineTextField.isUserInteractionEnabled = false
@@ -117,7 +120,7 @@ class MentoSignup1ViewController: UIViewController {
         return lineTextField
     }()
     
-    private lazy var jobTextFieldButton: UIButton = {
+    private lazy var fieldTextFieldButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(selectTextFieldTapped), for: .touchUpInside)
                
@@ -201,15 +204,16 @@ private extension MentoSignup1ViewController {
     
     func setupSubViews() {
         
-        [stepBar, titleLabel, nextButton, jobTextFieldButton, departmentTextFieldButton].forEach {view.addSubview($0)}
+        [stepBar, titleLabel, nextButton, fieldTextFieldButton, departmentTextFieldButton].forEach {view.addSubview($0)}
         
         [content1Label, content2Label, content3Label, content4Label, content5Label, content6Label].forEach {view.addSubview($0)}
         
-        [companyTextField, yearTextField, jobTextField, departmentTextField].forEach {view.addSubview($0)}
+        [schoolTextField, gradeTextField, fieldTextField, departmentTextField].forEach {view.addSubview($0)}
         
         stepBar.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(17)
-            $0.top.equalToSuperview().offset(147)
+            $0.top.equalToSuperview().offset(147).priority(.low)
+            $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
         }
         
         titleLabel.snp.makeConstraints {
@@ -222,53 +226,60 @@ private extension MentoSignup1ViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(65)
         }
         
-        companyTextField.snp.makeConstraints {
+        schoolTextField.snp.makeConstraints {
             $0.centerY.equalTo(content1Label)
             $0.leading.equalTo(content1Label.snp.trailing).offset(17)
-            $0.width.equalTo(100)
+//            $0.width.equalTo(100)
+            $0.width.greaterThanOrEqualTo(80)
         }
         
         content2Label.snp.makeConstraints {
-            $0.centerY.equalTo(companyTextField)
-            $0.leading.equalTo(companyTextField.snp.trailing).offset(17)
+            $0.centerY.equalTo(schoolTextField)
+            $0.leading.equalTo(schoolTextField.snp.trailing).offset(17)
+//            $0.width.equalTo(91)
+            $0.trailing.equalToSuperview().inset(58).priority(.high)
+            $0.trailing.greaterThanOrEqualToSuperview().inset(16).priority(.high)
         }
         
-        yearTextField.snp.makeConstraints {
-            $0.centerX.equalTo(companyTextField)
-            $0.top.equalTo(companyTextField.snp.bottom).offset(20)
-            $0.width.equalTo(100)
+        gradeTextField.snp.makeConstraints {
+            $0.centerX.equalTo(schoolTextField)
+            $0.top.equalTo(schoolTextField.snp.bottom).offset(20)
+//            $0.width.greaterThanOrEqualTo(80)
+            $0.leading.equalTo(schoolTextField.snp.leading)
         }
         
         content3Label.snp.makeConstraints {
-            $0.centerY.equalTo(yearTextField)
-            $0.leading.equalTo(yearTextField.snp.trailing).offset(17)
+            $0.centerY.equalTo(gradeTextField)
+//            $0.leading.equalTo(content2Label.snp.leading)
+            $0.width.equalTo(91)
+            $0.trailing.greaterThanOrEqualToSuperview().inset(41)
         }
         
-        jobTextField.snp.makeConstraints {
-            $0.centerX.equalTo(yearTextField)
-            $0.top.equalTo(yearTextField.snp.bottom).offset(20)
-            $0.width.equalTo(100)
+        fieldTextField.snp.makeConstraints {
+            $0.centerX.equalTo(gradeTextField)
+            $0.top.equalTo(gradeTextField.snp.bottom).offset(20)
+            $0.leading.equalTo(gradeTextField.snp.leading)
         }
         
         content4Label.snp.makeConstraints {
-            $0.centerY.equalTo(jobTextField)
-            $0.leading.equalTo(jobTextField.snp.trailing).offset(17)
+            $0.centerY.equalTo(fieldTextField)
+            $0.leading.equalTo(content3Label.snp.leading)
         }
         
         content5Label.snp.makeConstraints {
             $0.leading.equalTo(content1Label.snp.leading).offset(25)
-            $0.top.equalTo(jobTextField.snp.bottom).offset(26)
+            $0.top.equalTo(fieldTextField.snp.bottom).offset(26)
         }
         
         departmentTextField.snp.makeConstraints {
-            $0.centerX.equalTo(jobTextField)
+            $0.centerX.equalTo(fieldTextField)
             $0.top.equalTo(content5Label.snp.bottom).offset(15)
-            $0.width.equalTo(100)
+            $0.leading.equalTo(fieldTextField.snp.leading)
         }
         
         content6Label.snp.makeConstraints {
             $0.centerY.equalTo(departmentTextField)
-            $0.leading.equalTo(departmentTextField.snp.trailing).offset(17)
+            $0.leading.equalTo(content4Label.snp.leading)
         }
         
         nextButton.snp.makeConstraints {
@@ -276,11 +287,12 @@ private extension MentoSignup1ViewController {
             $0.leading.equalToSuperview().offset(16)
             $0.top.equalTo(departmentTextField.snp.bottom).offset(55)
             $0.height.equalTo(48)
+            $0.bottom.lessThanOrEqualToSuperview().inset(20).priority(.required)
         }
         
-        jobTextFieldButton.snp.makeConstraints {
-            $0.width.height.equalTo(jobTextField)
-            $0.centerX.centerY.equalTo(jobTextField)
+        fieldTextFieldButton.snp.makeConstraints {
+            $0.width.height.equalTo(fieldTextField)
+            $0.centerX.centerY.equalTo(fieldTextField)
         }
         
         departmentTextFieldButton.snp.makeConstraints {
@@ -295,9 +307,9 @@ extension MentoSignup1ViewController: SelectViewControllerDelegate {
     
     @objc private func selectTextFieldTapped(sender: UIButton) {
         let vc = SelectViewController()
-        if sender == jobTextFieldButton {
+        if sender == fieldTextFieldButton {
             vc.selectViewControllerDelegate = self
-            vc.titleText = "직무 분야 선택"
+            vc.titleText = "멘토링 분야 선택"
             vc.style = .mento
         } else if sender == departmentTextFieldButton {
             vc.selectViewControllerDelegate = self
@@ -329,8 +341,8 @@ extension MentoSignup1ViewController: SelectViewControllerDelegate {
             }
             selectedElementString = String(selectedElementString.dropLast(2))
             
-            if sender == jobTextFieldButton { // 직무 선택일 때
-                jobTextField.textField.text = selectedElementString
+            if sender == fieldTextFieldButton { // 직무 선택일 때
+                fieldTextField.textField.text = selectedElementString
             } else { // 학과 선택일 때
                 departmentTextField.textField.text = selectedElementString
             }
