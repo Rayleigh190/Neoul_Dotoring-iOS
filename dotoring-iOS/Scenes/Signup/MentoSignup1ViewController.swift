@@ -9,6 +9,9 @@ import UIKit
 
 class MentoSignup1ViewController: UIViewController {
     
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    
     private lazy var stepBar: SignupStepBar = {
         let bar = SignupStepBar(stepCount: 6, currentStep: 1, style: .mento)
         
@@ -212,8 +215,12 @@ private extension MentoSignup1ViewController {
         
         stepBar.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(17)
-            $0.top.equalToSuperview().offset(147).priority(.low)
-            $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(70)
+            } else {
+                $0.top.equalToSuperview().offset(147).priority(.low)
+                $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            }
         }
         
         titleLabel.snp.makeConstraints {
@@ -229,14 +236,12 @@ private extension MentoSignup1ViewController {
         schoolTextField.snp.makeConstraints {
             $0.centerY.equalTo(content1Label)
             $0.leading.equalTo(content1Label.snp.trailing).offset(17)
-//            $0.width.equalTo(100)
             $0.width.greaterThanOrEqualTo(80)
         }
         
         content2Label.snp.makeConstraints {
             $0.centerY.equalTo(schoolTextField)
             $0.leading.equalTo(schoolTextField.snp.trailing).offset(17)
-//            $0.width.equalTo(91)
             $0.trailing.equalToSuperview().inset(58).priority(.high)
             $0.trailing.greaterThanOrEqualToSuperview().inset(16).priority(.high)
         }
@@ -244,13 +249,11 @@ private extension MentoSignup1ViewController {
         gradeTextField.snp.makeConstraints {
             $0.centerX.equalTo(schoolTextField)
             $0.top.equalTo(schoolTextField.snp.bottom).offset(20)
-//            $0.width.greaterThanOrEqualTo(80)
             $0.leading.equalTo(schoolTextField.snp.leading)
         }
         
         content3Label.snp.makeConstraints {
             $0.centerY.equalTo(gradeTextField)
-//            $0.leading.equalTo(content2Label.snp.leading)
             $0.width.equalTo(91)
             $0.trailing.greaterThanOrEqualToSuperview().inset(41)
         }

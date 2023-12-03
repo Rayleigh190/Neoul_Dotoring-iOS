@@ -10,6 +10,9 @@ import UIKit
 
 class Signup2View: UIView {
     
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    
     // Add a closure property
     var certificateUploadButtonActionHandler: (() -> Void)?
     var nextButtonActionHandler: (() -> Void)?
@@ -32,7 +35,8 @@ class Signup2View: UIView {
     
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 24)
-        let text = "Q. 증빙서류를 업로드 해 주세요."
+        let text = "Q. 증빙서류를 업로드해 주세요."
+        label.numberOfLines = 0
         label.text = text
         var attrStrColor = UIColor.label
         if uiStyle == .mento {
@@ -119,17 +123,24 @@ private extension Signup2View {
         
         stepBar.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(17)
-            $0.top.equalToSuperview().offset(147)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(70)
+            } else {
+                $0.top.equalToSuperview().offset(147).priority(.low)
+                $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            }
         }
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalTo(stepBar.snp.leading)
             $0.top.equalTo(stepBar.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().inset(17)
         }
         
         content1Label.snp.makeConstraints {
             $0.leading.equalTo(titleLabel.snp.leading)
             $0.top.equalTo(titleLabel.snp.bottom).offset(65)
+            $0.trailing.equalTo(titleLabel.snp.trailing)
         }
         
         certificateUploadButton.snp.makeConstraints {
