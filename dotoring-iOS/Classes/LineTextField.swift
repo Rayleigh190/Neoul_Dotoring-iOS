@@ -35,7 +35,7 @@ class LineTextField: UIView {
 
     private lazy var line: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .BaseGray900
         
         return view
     }()
@@ -76,7 +76,7 @@ private extension LineTextField {
         }
         
         button.snp.makeConstraints {
-            $0.width.equalTo(76)
+            $0.width.equalTo(60)
        }
        
        button.isHidden = !isButtonVisible
