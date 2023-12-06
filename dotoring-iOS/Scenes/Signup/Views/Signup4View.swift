@@ -9,6 +9,9 @@ import UIKit
 
 class Signup4View: UIView {
     
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    
     // Add a closure property
     var nextButtonActionHandler: (() -> Void)?
     
@@ -18,32 +21,6 @@ class Signup4View: UIView {
         } else {
             return UIStyle.mentee
         }
-    }()
-
-    private lazy var navTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
-        var text = ""
-        var attrRangeText = ""
-        var attrStrColor = UIColor.label
-        
-        if uiStyle == .mento {
-            text = "멘토로 회원가입"
-            attrRangeText = "멘토"
-            attrStrColor = .BaseGreen!
-        } else {
-            text = "멘티로 회원가입"
-            attrRangeText = "멘티"
-            attrStrColor = .BaseNavy!
-        }
-        
-        label.text = text
-
-        let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: attrRangeText))
-        label.attributedText = attributedStr
-        
-        
-        return label
     }()
     
     private lazy var stepBar: SignupStepBar = {
@@ -55,7 +32,7 @@ class Signup4View: UIView {
     }()
     
     private lazy var questionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
+        let label = NanumLabel(weightType: .R, size: 24)
         var text = ""
         var attrRangeText = ""
         var attrStrColor = UIColor.label
@@ -78,7 +55,7 @@ class Signup4View: UIView {
     }()
     
     private lazy var questionDescriptionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "10자 이상, 80자 이하로 작성"
         label.textColor = .gray
         
@@ -157,24 +134,25 @@ class Signup4View: UIView {
 private extension Signup4View {
     
     func setupSubViews() {
-        [navTitleLabel, stepBar, questionLabel, questionDescriptionLabel, answerStackView, introductionInputWarningLabel, nextButton].forEach {addSubview($0)}
+        [stepBar, questionLabel, questionDescriptionLabel, answerStackView, introductionInputWarningLabel, nextButton].forEach {addSubview($0)}
         
         answerStackView.addArrangedSubview(answerLabel1)
         answerStackView.addArrangedSubview(introductionInputTextField)
         
-        navTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalToSuperview().offset(104)
-        }
-        
         stepBar.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(navTitleLabel.snp.bottom).offset(87)
+            $0.leading.equalToSuperview().offset(17)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(70)
+            } else {
+                $0.top.equalToSuperview().offset(147).priority(.low)
+                $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            }
         }
         
         questionLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(stepBar.snp.bottom).offset(25)
+            $0.leading.equalTo(stepBar.snp.leading)
+            $0.top.equalTo(stepBar.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().inset(17)
         }
         
         questionDescriptionLabel.snp.makeConstraints {
@@ -199,8 +177,8 @@ private extension Signup4View {
 
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalToSuperview().offset(574)
+            $0.leading.equalTo(answerStackView.snp.leading)
+            $0.top.equalTo(introductionInputTextField.snp.bottom).offset(55)
             $0.height.equalTo(45)
         }
         
