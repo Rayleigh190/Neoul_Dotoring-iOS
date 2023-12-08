@@ -12,6 +12,14 @@ class Signup6ViewController: UIViewController {
     var signup6View: Signup6View!
     var fCurTextfieldBottom: CGFloat = 0.0
     
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -19,6 +27,7 @@ class Signup6ViewController: UIViewController {
         navigationController?.navigationBar.topItem?.title = ""
         setDelegate()
         registerForKeyboardNotifications()
+        setupNavigationBar()
     }
     
     deinit {
@@ -61,6 +70,38 @@ class Signup6ViewController: UIViewController {
             let destinationVC = viewControllers[viewControllers.count - 8]
             self.navigationController?.popToViewController(destinationVC, animated: true)
         }
+    }
+    
+    func setupNavigationBar() {
+        
+        self.navigationController?.navigationBar.tintColor = .BaseGray700
+        self.navigationController?.navigationBar.topItem?.title = ""
+        
+        let titleLabel = UILabel()
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+
+        titleLabel.textColor = UIColor.label // 전체 글씨 색상
+        titleLabel.font = .nanumSquare(style: .NanumSquareOTFR, size: 15)
+        titleLabel.sizeToFit()
+
+        if uiStyle == .mentee {
+            titleLabel.text = "멘티로 회원가입"
+            attrRangeText = "멘티"
+            attrStrColor = .BaseNavy!
+        } else {
+            titleLabel.text = "멘토로 회원가입"
+            attrRangeText = "멘토"
+            attrStrColor = .BaseGreen!
+        }
+        
+        let attributedString = NSMutableAttributedString(string: titleLabel.text!)
+        
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: attrStrColor, range: (titleLabel.text! as NSString).range(of: attrRangeText))
+
+        titleLabel.attributedText = attributedString
+
+        self.navigationItem.titleView = titleLabel
     }
 
 }

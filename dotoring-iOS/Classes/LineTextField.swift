@@ -76,7 +76,7 @@ private extension LineTextField {
         }
         
         button.snp.makeConstraints {
-            $0.width.equalTo(60)
+            $0.width.equalTo(76)
        }
        
        button.isHidden = !isButtonVisible
