@@ -9,6 +9,9 @@ import UIKit
 
 class FindPwView: UIView {
     
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    
     var goLoginButtonActionHandler: (() -> Void)?
 
     private lazy var titleLabel: NanumLabel = {
@@ -30,7 +33,7 @@ class FindPwView: UIView {
     }()
     
     private lazy var subTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.textColor = .BaseGray700
         let text = "메일로 새로운 비밀번호를 발송해 드릴게요."
         label.text = text
@@ -54,7 +57,7 @@ class FindPwView: UIView {
     }()
     
     private lazy var idWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "등록되지 않은 아이디예요."
         label.textColor = .BaseWarningRed
         
@@ -62,7 +65,7 @@ class FindPwView: UIView {
     }()
     
     private lazy var emailWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "등록되지 않은 이메일이에요."
         label.textColor = .BaseWarningRed
         
@@ -70,7 +73,7 @@ class FindPwView: UIView {
     }()
     
     private lazy var authTimerLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "05:00"
         label.textColor = .BaseWarningRed
         
@@ -86,7 +89,7 @@ class FindPwView: UIView {
     }()
     
     private lazy var sendCheckLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "발송 완료되었습니다."
         label.textColor = .BaseWarningRed
         
@@ -117,8 +120,15 @@ private extension FindPwView {
         [titleLabel, subTitleLabel, emailTextField, idTextField, emailWarningLabel, idWarningLabel, authTimerLabel, goLoginButton, sendCheckLabel].forEach { addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalToSuperview().inset(208.0)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(100)
+            } else if screenHeight <= 667 && 568 < screenHeight {
+                $0.top.equalToSuperview().inset(150)
+            }
+            else {
+                $0.top.equalToSuperview().inset(208.0)
+            }
         }
         
         subTitleLabel.snp.makeConstraints {
@@ -128,25 +138,30 @@ private extension FindPwView {
         
         idTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(116.0)
+            $0.leading.equalTo(titleLabel.snp.leading)
             
+            if screenHeight <= 568 {
+                $0.top.equalTo(subTitleLabel.snp.bottom).offset(50)
+            } else {
+                $0.top.equalTo(subTitleLabel.snp.bottom).offset(93)
+            }
+            
+        }
+        
+        idWarningLabel.snp.makeConstraints {
+            $0.leading.equalTo(idTextField.snp.leading)
+            $0.top.equalTo(idTextField.snp.bottom).offset(12.0)
         }
         
         emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalTo(idTextField.snp.bottom).offset(43.0)
+            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.top.equalTo(idWarningLabel.snp.bottom).offset(22)
         }
         
         emailWarningLabel.snp.makeConstraints {
-            $0.leading.equalTo(emailTextField.snp.leading).offset(3.0)
+            $0.leading.equalTo(emailTextField.snp.leading)
             $0.top.equalTo(emailTextField.snp.bottom).offset(12.0)
-        }
-        
-        idWarningLabel.snp.makeConstraints {
-            $0.leading.equalTo(idTextField.snp.leading).offset(3.0)
-            $0.top.equalTo(idTextField.snp.bottom).offset(12.0)
         }
         
         authTimerLabel.snp.makeConstraints {
@@ -156,8 +171,8 @@ private extension FindPwView {
         
         goLoginButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalTo(emailTextField).offset(90.0)
+            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.top.equalTo(emailWarningLabel.snp.bottom).offset(79)
             $0.height.equalTo(48.0)
         }
         
