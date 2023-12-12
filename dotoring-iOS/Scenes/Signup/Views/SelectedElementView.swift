@@ -49,12 +49,12 @@ private extension SelectedElementView {
         
         titleLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(23)
+            $0.leading.equalToSuperview().inset(20)
         }
         
         cancelButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().inset(12.5)
+            $0.trailing.equalToSuperview().inset(20)
         }
     }
     
