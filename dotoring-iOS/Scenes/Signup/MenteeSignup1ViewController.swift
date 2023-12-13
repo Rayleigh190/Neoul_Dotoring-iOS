@@ -168,6 +168,14 @@ class MenteeSignup1ViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // textField 입력 넘칠 때 늘어나는 현상 방지
+        schoolTextField.snp.makeConstraints {
+            $0.width.equalTo(schoolTextField.frame.width).priority(.required)
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIView.setAnimationsEnabled(true)

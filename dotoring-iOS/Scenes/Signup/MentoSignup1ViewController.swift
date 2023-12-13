@@ -176,6 +176,14 @@ class MentoSignup1ViewController: UIViewController {
         UIView.setAnimationsEnabled(true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // textField 입력 넘칠 때 늘어나는 현상 방지
+        schoolTextField.snp.makeConstraints {
+            $0.width.equalTo(schoolTextField.frame.width).priority(.required)
+        }
+    }
+    
     @objc func nextButtonTapped(sender: UIButton!) {
         let vc = Signup2ViewController()
         navigationController?.pushViewController(vc, animated: false)
