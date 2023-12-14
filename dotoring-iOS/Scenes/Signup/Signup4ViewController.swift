@@ -22,7 +22,7 @@ class Signup4ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        signup4View.introductionInputTextField.delegate = self
+//        signup4View.introductionInputTextField.delegate = self
         self.hideKeyboardWhenTappedAround()
         setupNavigationBar()
     }

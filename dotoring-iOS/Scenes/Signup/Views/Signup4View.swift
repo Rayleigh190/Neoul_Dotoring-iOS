@@ -62,7 +62,25 @@ class Signup4View: UIView {
         return label
     }()
     
-    private lazy var answerStackView: UIStackView = {
+//    private lazy var answerStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.axis = .horizontal
+//        stackView.distribution = .fill
+//        stackView.alignment = .fill
+//        stackView.spacing = 9
+//        
+//        return stackView
+//    }()
+    
+    private lazy var answerLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 20)
+        label.text = "A."
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        return label
+    }()
+    
+    lazy var tagStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -72,38 +90,53 @@ class Signup4View: UIView {
         return stackView
     }()
     
-    private lazy var answerLabel1: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        label.text = "A."
-        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    lazy var tag1TextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .BaseGray100
         
-        return label
+        return textField
     }()
     
-    lazy var introductionInputTextField: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .BaseGray200
-        textView.textColor = .lightGray
-        if uiStyle == .mento {
-            textView.text = "멘토 분야에 대해 소개해 주세요"
-        } else {
-            textView.text = "멘티 분야에 대해 소개해 주세요"
-        }
-        textView.isEditable = true
-        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
-        textView.layer.cornerRadius = 20
-        textView.isScrollEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+    lazy var tag2TextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .BaseGray100
+        textField.isHidden = true
         
-        return textView
+        return textField
     }()
     
-    private lazy var introductionInputWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
-        label.text = "0/80"
+    lazy var tag3TextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .BaseGray100
+        textField.isHidden = true
         
-        return label
+        return textField
     }()
+    
+//    lazy var introductionInputTextField: UITextView = {
+//        let textView = UITextView()
+//        textView.backgroundColor = .BaseGray200
+//        textView.textColor = .lightGray
+//        if uiStyle == .mento {
+//            textView.text = "멘토 분야에 대해 소개해 주세요"
+//        } else {
+//            textView.text = "멘티 분야에 대해 소개해 주세요"
+//        }
+//        textView.isEditable = true
+//        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
+//        textView.layer.cornerRadius = 20
+//        textView.isScrollEnabled = false
+//        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+//        
+//        return textView
+//    }()
+//    
+//    private lazy var introductionInputWarningLabel: NanumLabel = {
+//        let label = NanumLabel(weightType: .R, size: 14)
+//        label.text = "0/80"
+//        
+//        return label
+//    }()
     
     private lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
@@ -134,10 +167,9 @@ class Signup4View: UIView {
 private extension Signup4View {
     
     func setupSubViews() {
-        [stepBar, questionLabel, questionDescriptionLabel, answerStackView, introductionInputWarningLabel, nextButton].forEach {addSubview($0)}
+        [stepBar, questionLabel, questionDescriptionLabel, answerLabel, tagStackView, nextButton].forEach {addSubview($0)}
         
-        answerStackView.addArrangedSubview(answerLabel1)
-        answerStackView.addArrangedSubview(introductionInputTextField)
+        [tag1TextField, tag2TextField, tag3TextField].forEach { tagStackView.addArrangedSubview($0) }
         
         stepBar.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(17)
@@ -160,25 +192,30 @@ private extension Signup4View {
             $0.top.equalTo(questionLabel.snp.bottom).offset(5)
         }
         
-        introductionInputTextField.snp.makeConstraints {
-            $0.height.equalTo(52).priority(.low)
-        }
-        
-        answerStackView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+        answerLabel.snp.makeConstraints {
             $0.leading.equalTo(questionLabel.snp.leading)
             $0.top.equalTo(questionLabel.snp.bottom).offset(66)
         }
-
-        introductionInputWarningLabel.snp.makeConstraints {
-            $0.trailing.equalTo(answerStackView.snp.trailing)
-            $0.top.equalTo(answerStackView.snp.bottom).offset(12)
+        
+//        introductionInputTextField.snp.makeConstraints {
+//            $0.height.equalTo(52).priority(.low)
+//        }
+        
+        tagStackView.snp.makeConstraints {
+            $0.leading.equalTo(answerLabel.snp.trailing).offset(10)
+            $0.top.equalTo(answerLabel.snp.top)
+            $0.trailing.equalTo(questionLabel.snp.trailing)
         }
+
+//        introductionInputWarningLabel.snp.makeConstraints {
+//            $0.trailing.equalTo(answerStackView.snp.trailing)
+//            $0.top.equalTo(answerStackView.snp.bottom).offset(12)
+//        }
 
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalTo(answerStackView.snp.leading)
-            $0.top.equalTo(introductionInputTextField.snp.bottom).offset(55)
+            $0.leading.equalTo(questionLabel.snp.leading)
+            $0.top.equalTo(tagStackView.snp.bottom).offset(55)
             $0.height.equalTo(45)
         }
         
@@ -190,7 +227,7 @@ extension Signup4View {
     
     // textView 입력될 때마다 라벨 업데이트
     func updateCountLabel(characterCount: Int) {
-        introductionInputWarningLabel.text = "\(characterCount)/80"
+//        introductionInputWarningLabel.text = "\(characterCount)/80"
     }
     
     @objc func nextButtonTapped(sender: UIButton!) {
