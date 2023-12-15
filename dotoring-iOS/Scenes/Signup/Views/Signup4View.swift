@@ -90,24 +90,24 @@ class Signup4View: UIView {
         return stackView
     }()
     
-    lazy var tag1TextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .BaseGray100
+    lazy var tag1TextField: TagTextField = {
+        let textField = TagTextField()
+//        textField.backgroundColor = .BaseGray100
         
         return textField
     }()
     
-    lazy var tag2TextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .BaseGray100
+    lazy var tag2TextField: TagTextField = {
+        let textField = TagTextField()
+//        textField.backgroundColor = .BaseGray100
         textField.isHidden = true
         
         return textField
     }()
     
-    lazy var tag3TextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .BaseGray100
+    lazy var tag3TextField: TagTextField = {
+        let textField = TagTextField()
+//        textField.backgroundColor = .BaseGray100
         textField.isHidden = true
         
         return textField
@@ -211,6 +211,12 @@ private extension Signup4View {
 //            $0.trailing.equalTo(answerStackView.snp.trailing)
 //            $0.top.equalTo(answerStackView.snp.bottom).offset(12)
 //        }
+        
+        [tag1TextField, tag2TextField, tag3TextField].forEach {
+            $0.snp.makeConstraints {
+                $0.height.equalTo(40)
+            }
+        }
 
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()

@@ -13,6 +13,7 @@
 		F126B1D02AA568D80035E499 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1CF2AA568D80035E499 /* SelectViewController.swift */; };
 		F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D32AA6F6CF0035E499 /* SelectView.swift */; };
 		F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D62AA6FB780035E499 /* SelectedElementView.swift */; };
+		F18E50DD2B2C0B3300D427A0 /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */; };
 		F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */; };
 		F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560602A949E6800FD2E91 /* SceneDelegate.swift */; };
 		F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560622A949E6800FD2E91 /* MainTapBarController.swift */; };
@@ -125,6 +126,7 @@
 		F126B1CF2AA568D80035E499 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		F126B1D32AA6F6CF0035E499 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		F126B1D62AA6FB780035E499 /* SelectedElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedElementView.swift; sourceTree = "<group>"; };
+		F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dotoring-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A560602A949E6800FD2E91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				F1DD2CAE2A99E57C00EE9711 /* LineTextField.swift */,
+				F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */,
 				F1DD2CB12A99EE9C00EE9711 /* BaseButton.swift */,
 				F1DD2CB32A99FA9B00EE9711 /* NanumLabel.swift */,
 				F1DD2CB92A9A0F0D00EE9711 /* CheckBox.swift */,
@@ -754,6 +757,7 @@
 				F1CA7E6D2AFFD17E002D733E /* HomeRouter.swift in Sources */,
 				F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */,
 				F1CA7E7D2B0854B3002D733E /* CommonNetworkService.swift in Sources */,
+				F18E50DD2B2C0B3300D427A0 /* TagTextField.swift in Sources */,
 				F1FCE7B12AD136D20024AE60 /* UserDetailView.swift in Sources */,
 				F1DD2CBA2A9A0F0D00EE9711 /* CheckBox.swift in Sources */,
 				F1FCE7852AC318700024AE60 /* BaseButtonStyle.swift in Sources */,

@@ -23,6 +23,9 @@ class Signup4ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 //        signup4View.introductionInputTextField.delegate = self
+        signup4View.tag1TextField.textField.delegate = self
+        signup4View.tag2TextField.textField.delegate = self
+        signup4View.tag3TextField.textField.delegate = self
         self.hideKeyboardWhenTappedAround()
         setupNavigationBar()
     }
@@ -87,6 +90,27 @@ class Signup4ViewController: UIViewController {
         self.navigationItem.titleView = titleLabel
     }
 
+}
+
+extension Signup4ViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        print("끝남")
+        
+        if textField.text?.count ?? 0 == 0 {
+            print("입력된 값 없음")
+            return
+        }
+
+        if textField == signup4View.tag1TextField.textField {
+            signup4View.tag2TextField.isHidden = false
+            signup4View.tag1TextField.button.isHidden = false
+        } else if textField == signup4View.tag2TextField.textField {
+            signup4View.tag3TextField.isHidden = false
+            signup4View.tag2TextField.button.isHidden = false
+        } else {
+            signup4View.tag3TextField.button.isHidden = false
+        }
+    }
 }
 
 extension Signup4ViewController: UITextViewDelegate {
