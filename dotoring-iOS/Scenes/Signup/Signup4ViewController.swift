@@ -24,8 +24,8 @@ class Signup4ViewController: UIViewController {
         view.backgroundColor = .systemBackground
 //        signup4View.introductionInputTextField.delegate = self
         signup4View.tag1TextField.textField.delegate = self
-        signup4View.tag2TextField.textField.delegate = self
-        signup4View.tag3TextField.textField.delegate = self
+//        signup4View.tag2TextField.textField.delegate = self
+//        signup4View.tag3TextField.textField.delegate = self
         self.hideKeyboardWhenTappedAround()
         setupNavigationBar()
     }
@@ -92,6 +92,22 @@ class Signup4ViewController: UIViewController {
 
 }
 
+extension Signup4ViewController {
+    func setAddTarget() {
+
+    }
+    
+    @objc func removeTag(sender: UIButton) {
+        signup4View.tagStackView.arrangedSubviews.forEach {
+            // Todo
+            if $0 == sender.superview {
+                signup4View.tagStackView.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
+        }
+    }
+}
+
 extension Signup4ViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         print("끝남")
@@ -100,16 +116,31 @@ extension Signup4ViewController: UITextFieldDelegate {
             print("입력된 값 없음")
             return
         }
-
-        if textField == signup4View.tag1TextField.textField {
-            signup4View.tag2TextField.isHidden = false
-            signup4View.tag1TextField.button.isHidden = false
-        } else if textField == signup4View.tag2TextField.textField {
-            signup4View.tag3TextField.isHidden = false
-            signup4View.tag2TextField.button.isHidden = false
-        } else {
-            signup4View.tag3TextField.button.isHidden = false
+        
+        if signup4View.tagStackView.arrangedSubviews.count > 2 {
+            return
         }
+        
+        let tag = TagTextField()
+        tag.textField.delegate = self
+        tag.snp.makeConstraints{$0.height.equalTo(40)}
+        tag.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
+        signup4View.tagStackView.addArrangedSubview(tag)
+        
+//        if textField == signup4View.tag1TextField.textField {
+////            signup4View.tag2TextField.isHidden = false
+////            signup4View.tag1TextField.button.isHidden = false
+//            let tag = TagTextField()
+//            tag.textField.delegate = self
+//            tag.snp.makeConstraints{$0.height.equalTo(40)}
+//            signup4View.tagStackView.addArrangedSubview(tag)
+//        } else if textField == signup4View.tagStackView.arrangedSubviews[1] {
+////            signup4View.tag3TextField.isHidden = false
+////            signup4View.tag2TextField.button.isHidden = false
+//            signup4View.tagStackView.addArrangedSubview(TagTextField())
+//        } else {
+////            signup4View.tag3TextField.button.isHidden = false
+//        }
     }
 }
 

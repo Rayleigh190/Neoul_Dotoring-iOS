@@ -97,21 +97,21 @@ class Signup4View: UIView {
         return textField
     }()
     
-    lazy var tag2TextField: TagTextField = {
-        let textField = TagTextField()
-//        textField.backgroundColor = .BaseGray100
-        textField.isHidden = true
-        
-        return textField
-    }()
-    
-    lazy var tag3TextField: TagTextField = {
-        let textField = TagTextField()
-//        textField.backgroundColor = .BaseGray100
-        textField.isHidden = true
-        
-        return textField
-    }()
+//    lazy var tag2TextField: TagTextField = {
+//        let textField = TagTextField()
+////        textField.backgroundColor = .BaseGray100
+//        textField.isHidden = true
+//        
+//        return textField
+//    }()
+//    
+//    lazy var tag3TextField: TagTextField = {
+//        let textField = TagTextField()
+////        textField.backgroundColor = .BaseGray100
+//        textField.isHidden = true
+//        
+//        return textField
+//    }()
     
 //    lazy var introductionInputTextField: UITextView = {
 //        let textView = UITextView()
@@ -169,7 +169,7 @@ private extension Signup4View {
     func setupSubViews() {
         [stepBar, questionLabel, questionDescriptionLabel, answerLabel, tagStackView, nextButton].forEach {addSubview($0)}
         
-        [tag1TextField, tag2TextField, tag3TextField].forEach { tagStackView.addArrangedSubview($0) }
+        [tag1TextField].forEach { tagStackView.addArrangedSubview($0) }
         
         stepBar.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(17)
@@ -212,7 +212,7 @@ private extension Signup4View {
 //            $0.top.equalTo(answerStackView.snp.bottom).offset(12)
 //        }
         
-        [tag1TextField, tag2TextField, tag3TextField].forEach {
+        [tag1TextField].forEach {
             $0.snp.makeConstraints {
                 $0.height.equalTo(40)
             }

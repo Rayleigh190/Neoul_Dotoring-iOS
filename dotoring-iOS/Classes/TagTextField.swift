@@ -10,7 +10,7 @@ import SnapKit
 
 class TagTextField: UIView {
     
-    private lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -32,7 +32,7 @@ class TagTextField: UIView {
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .BaseGray700
         button.backgroundColor = .BaseGray100
-        button.isHidden = true
+//        button.isHidden = true
         
         return button
     }()
