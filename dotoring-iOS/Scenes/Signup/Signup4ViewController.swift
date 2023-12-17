@@ -27,6 +27,7 @@ class Signup4ViewController: UIViewController {
 //        signup4View.tag2TextField.textField.delegate = self
 //        signup4View.tag3TextField.textField.delegate = self
         self.hideKeyboardWhenTappedAround()
+        setAddTarget()
         setupNavigationBar()
     }
     
@@ -94,13 +95,24 @@ class Signup4ViewController: UIViewController {
 
 extension Signup4ViewController {
     func setAddTarget() {
-
+        signup4View.tag1TextField.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
     }
     
     @objc func removeTag(sender: UIButton) {
         signup4View.tagStackView.arrangedSubviews.forEach {
-            // Todo
-            if $0 == sender.superview {
+
+            if $0 != sender.superview?.superview {
+                return
+            }
+            
+            // 첫 번째 태그는 글씨만 지웁니다.
+            if signup4View.tagStackView.arrangedSubviews.count == 1 {
+                let tag = signup4View.tagStackView.arrangedSubviews[0] as! TagTextField
+                tag.textField.text = ""
+            }
+            
+            // 첫 번째 태그가 아니면 stackView에서 TagTextField를 지웁니다.
+            if signup4View.tagStackView.arrangedSubviews.count != 1{
                 signup4View.tagStackView.removeArrangedSubview($0)
                 $0.removeFromSuperview()
             }
