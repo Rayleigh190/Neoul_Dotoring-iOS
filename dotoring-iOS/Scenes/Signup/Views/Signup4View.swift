@@ -56,8 +56,9 @@ class Signup4View: UIView {
     
     private lazy var questionDescriptionLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
-        label.text = "10자 이상, 80자 이하로 작성"
-        label.textColor = .gray
+        label.text = "본인에 대해서 3개 이하 태그로 작성, 글자수 6자 이하\nex)#AOS_개발"
+        label.textColor = .BaseGray600
+        label.numberOfLines = 0
         
         return label
     }()
@@ -190,6 +191,7 @@ private extension Signup4View {
         questionDescriptionLabel.snp.makeConstraints {
             $0.leading.equalTo(questionLabel.snp.leading).offset(20)
             $0.top.equalTo(questionLabel.snp.bottom).offset(5)
+            $0.trailing.equalTo(questionLabel.snp.trailing)
         }
         
         answerLabel.snp.makeConstraints {
