@@ -63,16 +63,6 @@ class Signup4View: UIView {
         return label
     }()
     
-//    private lazy var answerStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.axis = .horizontal
-//        stackView.distribution = .fill
-//        stackView.alignment = .fill
-//        stackView.spacing = 9
-//        
-//        return stackView
-//    }()
-    
     private lazy var answerLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.text = "A."
@@ -93,51 +83,9 @@ class Signup4View: UIView {
     
     lazy var tag1TextField: TagTextField = {
         let textField = TagTextField()
-//        textField.backgroundColor = .BaseGray100
         
         return textField
     }()
-    
-//    lazy var tag2TextField: TagTextField = {
-//        let textField = TagTextField()
-////        textField.backgroundColor = .BaseGray100
-//        textField.isHidden = true
-//        
-//        return textField
-//    }()
-//    
-//    lazy var tag3TextField: TagTextField = {
-//        let textField = TagTextField()
-////        textField.backgroundColor = .BaseGray100
-//        textField.isHidden = true
-//        
-//        return textField
-//    }()
-    
-//    lazy var introductionInputTextField: UITextView = {
-//        let textView = UITextView()
-//        textView.backgroundColor = .BaseGray200
-//        textView.textColor = .lightGray
-//        if uiStyle == .mento {
-//            textView.text = "멘토 분야에 대해 소개해 주세요"
-//        } else {
-//            textView.text = "멘티 분야에 대해 소개해 주세요"
-//        }
-//        textView.isEditable = true
-//        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
-//        textView.layer.cornerRadius = 20
-//        textView.isScrollEnabled = false
-//        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
-//        
-//        return textView
-//    }()
-//    
-//    private lazy var introductionInputWarningLabel: NanumLabel = {
-//        let label = NanumLabel(weightType: .R, size: 14)
-//        label.text = "0/80"
-//        
-//        return label
-//    }()
     
     private lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
@@ -199,20 +147,11 @@ private extension Signup4View {
             $0.top.equalTo(questionLabel.snp.bottom).offset(66)
         }
         
-//        introductionInputTextField.snp.makeConstraints {
-//            $0.height.equalTo(52).priority(.low)
-//        }
-        
         tagStackView.snp.makeConstraints {
             $0.leading.equalTo(answerLabel.snp.trailing).offset(10)
             $0.top.equalTo(answerLabel.snp.top)
-            $0.trailing.equalTo(questionLabel.snp.trailing)
+            $0.width.equalTo(150)
         }
-
-//        introductionInputWarningLabel.snp.makeConstraints {
-//            $0.trailing.equalTo(answerStackView.snp.trailing)
-//            $0.top.equalTo(answerStackView.snp.bottom).offset(12)
-//        }
         
         [tag1TextField].forEach {
             $0.snp.makeConstraints {
@@ -232,11 +171,6 @@ private extension Signup4View {
 }
 
 extension Signup4View {
-    
-    // textView 입력될 때마다 라벨 업데이트
-    func updateCountLabel(characterCount: Int) {
-//        introductionInputWarningLabel.text = "\(characterCount)/80"
-    }
     
     @objc func nextButtonTapped(sender: UIButton!) {
         // Call the closure when the login button is tapped

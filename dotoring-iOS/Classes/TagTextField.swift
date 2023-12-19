@@ -21,8 +21,8 @@ class TagTextField: UIView {
     
     lazy var textField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .BaseGray100
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textField.returnKeyType = .next
         
         return textField
     }()
@@ -31,20 +31,15 @@ class TagTextField: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
         button.tintColor = .BaseGray700
-        button.backgroundColor = .BaseGray100
-//        button.isHidden = true
         
         return button
     }()
-    
-//    var isButtonVisible: Bool = false {
-//        didSet {
-//            button.isHidden = !isButtonVisible
-//        }
-//    }
 
     override init(frame: CGRect){
         super.init(frame: frame)
+        self.backgroundColor = .BaseGray100
+        self.layer.cornerRadius = 10
+        self.snp.makeConstraints{$0.height.equalTo(40)}
         setupSubViews()
     }
     
@@ -63,16 +58,14 @@ private extension TagTextField {
         [textField, button].forEach{ stackView.addArrangedSubview($0) }
         
         stackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-//            $0.width.greaterThanOrEqualTo(70)
+            $0.leading.trailing.equalToSuperview().inset(14)
+            $0.top.bottom.equalToSuperview()
         }
         
-        
         button.snp.makeConstraints {
-            $0.width.equalTo(12)
+            $0.width.equalTo(15)
        }
-       
-//       button.isHidden = !isButtonVisible
+
     }
     
 }
