@@ -7,8 +7,9 @@
 
 import UIKit
 
-class Signup4ViewController: UIViewController {
-
+class Signup4ViewController: UIViewController, KeyboardEvent {
+    // 키보드 이벤트를 받을 때 움직일 뷰를 정해줍니다.
+    var transformView: UIView { return self.view }
     var signup4View: Signup4View!
     
     let uiStyle: UIStyle = {
@@ -26,6 +27,9 @@ class Signup4ViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         setAddTarget()
         setupNavigationBar()
+        
+        // KeyboardEvent의 setupKeyboardEvent
+        setupKeyboardEvent()
     }
     
     override func loadView() {
@@ -50,6 +54,14 @@ class Signup4ViewController: UIViewController {
         super.viewWillDisappear(animated)
         UIView.setAnimationsEnabled(false)
     }
+
+    // KeyboardEvent에서 사용된 addObserver는 자동으로 제거가 안되므로 여기선 제거해 줍시다.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // KeyboardEvent의 removeKeyboardObserver
+        removeKeyboardObserver()
+    }
     
     func nextButtonTapped() {
         let vc = Signup5ViewController()
@@ -60,6 +72,7 @@ class Signup4ViewController: UIViewController {
         
         self.navigationController?.navigationBar.tintColor = .BaseGray700
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.backgroundColor = .white
         
         let titleLabel = UILabel()
         var attrRangeText = ""

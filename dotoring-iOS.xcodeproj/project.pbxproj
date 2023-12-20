@@ -14,6 +14,8 @@
 		F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D32AA6F6CF0035E499 /* SelectView.swift */; };
 		F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D62AA6FB780035E499 /* SelectedElementView.swift */; };
 		F18E50DD2B2C0B3300D427A0 /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */; };
+		F1A47DA92B32FAF900D51645 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A47DA82B32FAF900D51645 /* UIResponder.swift */; };
+		F1A47DAB2B32FB2F00D51645 /* KeyboardEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A47DAA2B32FB2F00D51645 /* KeyboardEventProtocol.swift */; };
 		F1A5605F2A949E6800FD2E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */; };
 		F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560602A949E6800FD2E91 /* SceneDelegate.swift */; };
 		F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A560622A949E6800FD2E91 /* MainTapBarController.swift */; };
@@ -127,6 +129,8 @@
 		F126B1D32AA6F6CF0035E499 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		F126B1D62AA6FB780035E499 /* SelectedElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedElementView.swift; sourceTree = "<group>"; };
 		F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
+		F1A47DA82B32FAF900D51645 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
+		F1A47DAA2B32FB2F00D51645 /* KeyboardEventProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventProtocol.swift; sourceTree = "<group>"; };
 		F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dotoring-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A560602A949E6800FD2E91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -488,6 +492,7 @@
 				F1DD2CB62A9A05D900EE9711 /* UIColor.swift */,
 				F1DD2CBB2A9A53AC00EE9711 /* UIFont.swift */,
 				F1DD2CBF2A9AEDDC00EE9711 /* UIViewController.swift */,
+				F1A47DA82B32FAF900D51645 /* UIResponder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -535,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				F1FCE77E2AC317600024AE60 /* SelectViewControllerProtocol.swift */,
+				F1A47DAA2B32FB2F00D51645 /* KeyboardEventProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -694,6 +700,7 @@
 				F1CA7E562AFCE127002D733E /* BaseInterceptor.swift in Sources */,
 				F1DD2CA62A96FACD00EE9711 /* HomeCollectionHeaderView.swift in Sources */,
 				F1FCE7752AC07CEA0024AE60 /* Signup6ViewController.swift in Sources */,
+				F1A47DA92B32FAF900D51645 /* UIResponder.swift in Sources */,
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */,
@@ -740,6 +747,7 @@
 				F1DD2CCB2A9D7CD900EE9711 /* FindIdCheckView.swift in Sources */,
 				F1FCE79D2AC976750024AE60 /* CustomAlertViewController.swift in Sources */,
 				F1FCE76B2ABD82620024AE60 /* Signup3ViewController.swift in Sources */,
+				F1A47DAB2B32FB2F00D51645 /* KeyboardEventProtocol.swift in Sources */,
 				F1CA7E7F2B087E69002D733E /* Alert.swift in Sources */,
 				F1A560612A949E6800FD2E91 /* SceneDelegate.swift in Sources */,
 				F1DD2CB42A99FA9B00EE9711 /* NanumLabel.swift in Sources */,
@@ -845,7 +853,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "도토링";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -900,7 +908,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "도토링";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
