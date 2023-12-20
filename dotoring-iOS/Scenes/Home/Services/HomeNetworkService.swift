@@ -94,5 +94,34 @@ class HomeNetworkService {
         
     }
     
+    class func fetchUserDetail(uiStyle: UIStyle, userID: Int, _ completion: @escaping (UserDetailAPIResponse?, Error?) -> Void) {
+        
+        var urlToCall:  HomeRouter{
+            switch uiStyle {
+            case .mento:
+                return HomeRouter.mentiDetail(id: userID)
+            case .mentee:
+                return HomeRouter.mentoDetail(id: userID)
+            }
+        }
+        
+        APINetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...300)
+            .responseDecodable(of: UserDetailAPIResponse.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    print("HomeNetworkService - fetchUserDetail() called()")
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("HomeNetworkService - fetchUserDetail() failed()")
+                    return completion(nil, error)
+                }
+                
+            }
+    }
+    
 }
 

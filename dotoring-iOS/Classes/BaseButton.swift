@@ -52,7 +52,7 @@ private extension BaseButton {
             backgroundColor = .BaseNavy
             setTitleColor(.white, for: .normal)
         case .black:
-            backgroundColor = .black
+            backgroundColor = .BaseGray900
             setTitleColor(.white, for: .normal)
         case .green:
             backgroundColor = .BaseGreen

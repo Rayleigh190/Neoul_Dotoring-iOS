@@ -7,16 +7,29 @@
 
 import UIKit
 
-class Signup4ViewController: UIViewController {
-
+class Signup4ViewController: UIViewController, KeyboardEvent {
+    // 키보드 이벤트를 받을 때 움직일 뷰를 정해줍니다.
+    var transformView: UIView { return self.view }
     var signup4View: Signup4View!
+    
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        signup4View.introductionInputTextField.delegate = self
+        signup4View.tag1TextField.textField.delegate = self
         self.hideKeyboardWhenTappedAround()
-        navigationController?.navigationBar.topItem?.title = ""
+        setAddTarget()
+        setupNavigationBar()
+        
+        // KeyboardEvent의 setupKeyboardEvent
+        setupKeyboardEvent()
     }
     
     override func loadView() {
@@ -41,54 +54,146 @@ class Signup4ViewController: UIViewController {
         super.viewWillDisappear(animated)
         UIView.setAnimationsEnabled(false)
     }
+
+    // KeyboardEvent에서 사용된 addObserver는 자동으로 제거가 안되므로 여기선 제거해 줍시다.
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // KeyboardEvent의 removeKeyboardObserver
+        removeKeyboardObserver()
+    }
     
     func nextButtonTapped() {
         let vc = Signup5ViewController()
         navigationController?.pushViewController(vc, animated: false)
     }
+    
+    func setupNavigationBar() {
+        
+        self.navigationController?.navigationBar.tintColor = .BaseGray700
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.backgroundColor = .white
+        
+        let titleLabel = UILabel()
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+
+        titleLabel.textColor = UIColor.label // 전체 글씨 색상
+        titleLabel.font = .nanumSquare(style: .NanumSquareOTFR, size: 15)
+        titleLabel.sizeToFit()
+
+        if uiStyle == .mentee {
+            titleLabel.text = "멘티로 회원가입"
+            attrRangeText = "멘티"
+            attrStrColor = .BaseNavy!
+        } else {
+            titleLabel.text = "멘토로 회원가입"
+            attrRangeText = "멘토"
+            attrStrColor = .BaseGreen!
+        }
+        
+        let attributedString = NSMutableAttributedString(string: titleLabel.text!)
+        
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: attrStrColor, range: (titleLabel.text! as NSString).range(of: attrRangeText))
+
+        titleLabel.attributedText = attributedString
+
+        self.navigationItem.titleView = titleLabel
+    }
 
 }
 
-extension Signup4ViewController: UITextViewDelegate {
+extension Signup4ViewController {
+    func setAddTarget() {
+        signup4View.tag1TextField.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
+    }
     
-    // MARK: textview 높이 자동조절
-    func textViewDidChange(_ textView: UITextView) {
-        
-        let size = CGSize(width: view.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        
-        textView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
+    @objc func removeTag(sender: UIButton) {
+        signup4View.tagStackView.arrangedSubviews.forEach {
+
+            if $0 != sender.superview?.superview {
+                return
+            }
+            
+            // 첫 번째 태그는 글씨만 지웁니다.
+            if signup4View.tagStackView.arrangedSubviews.count == 1 {
+                let tag = signup4View.tagStackView.arrangedSubviews[0] as! TagTextField
+                tag.textField.text = ""
+            }
+            
+            // 첫 번째 태그가 아니면 stackView에서 TagTextField를 지웁니다.
+            if signup4View.tagStackView.arrangedSubviews.count != 1{
+                signup4View.tagStackView.removeArrangedSubview($0)
+                $0.removeFromSuperview()
             }
         }
     }
+}
+
+extension Signup4ViewController: UITextFieldDelegate {
     
-    // textView 포커싱 됐을 때 placeholder text 지우기
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "멘토 분야에 대해 소개해 주세요" {
-            textView.text = nil
-            textView.textColor = .black
+    func addTagTextField() {
+        // text.count가 0인 태그 필드가 있으면 return
+        signup4View.tagStackView.arrangedSubviews.forEach {
+            let tag = $0 as! TagTextField
+            if tag.textField.text?.count == 0 {
+                return
+            }
+        }
+        
+        let tag = TagTextField()
+        tag.textField.delegate = self
+        tag.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
+
+        signup4View.tagStackView.addArrangedSubview(tag)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text?.count == 0 {
+            textField.text = "#"
         }
     }
     
-    // textView 포커싱 끝났을 때 빈칸이면 placeholder text 채우기
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = "멘토 분야에 대해 소개해 주세요"
-            textView.textColor = .lightGray
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // text.count가 0인 필드가 없으면 새로운 필드 만들고 포커싱 옮기기
+        for view in signup4View.tagStackView.arrangedSubviews {
+            let tag = view as! TagTextField
+            let lastTag = signup4View.tagStackView.arrangedSubviews.last as! TagTextField
+            
+            if tag.textField.text?.count == 0 {
+                tag.textField.becomeFirstResponder()
+                return true
+            }
+            
+            // 마지막 태그에서 리턴 눌렀을 경우 키보드 내리기
+            if textField == lastTag.textField {
+                textField.resignFirstResponder()
+            }
         }
+        
+        // 태그가 3개 미만이면 태그 추가
+        if signup4View.tagStackView.arrangedSubviews.count < 3 {
+            addTagTextField()
+            let newTag = signup4View.tagStackView.arrangedSubviews.last as! TagTextField
+            newTag.textField.becomeFirstResponder()
+        }
+        
+        return true
     }
     
-    // textView 글자수 제한
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
+    // textField 글자수 제한
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let inputString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let oldString = textField.text, let newRange = Range(range, in: oldString) else { return true }
         let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
 
         let characterCount = newString.count
-        guard characterCount <= 80 else { return false }
-        signup4View.updateCountLabel(characterCount: characterCount)
+        
+        guard characterCount <= 7 else {
+            print(characterCount)
+            self.view.makeToast("6자 이하까지 작성 가능합니다.", duration: 1, position: .top)
+            return false
+        }
 
         return true
     }

@@ -9,6 +9,9 @@ import UIKit
 
 class Signup3View: UIView {
     
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    
     // Add a closure property
     var nextButtonActionHandler: (() -> Void)?
     
@@ -18,32 +21,6 @@ class Signup3View: UIView {
         } else {
             return UIStyle.mentee
         }
-    }()
-
-    private lazy var navTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
-        var text = ""
-        var attrRangeText = ""
-        var attrStrColor = UIColor.label
-        
-        if uiStyle == .mento {
-            text = "멘토로 회원가입"
-            attrRangeText = "멘토"
-            attrStrColor = .BaseGreen!
-        } else {
-            text = "멘티로 회원가입"
-            attrRangeText = "멘티"
-            attrStrColor = .BaseNavy!
-        }
-        
-        label.text = text
-
-        let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: attrRangeText))
-        label.attributedText = attributedStr
-        
-        
-        return label
     }()
     
     private lazy var stepBar: SignupStepBar = {
@@ -55,7 +32,7 @@ class Signup3View: UIView {
     }()
     
     private lazy var questionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
+        let label = NanumLabel(weightType: .R, size: 24)
         let text = "Q. 어떻게 불러드릴까요?"
         label.text = text
         var attrStrColor = UIColor.label
@@ -72,9 +49,9 @@ class Signup3View: UIView {
     }()
     
     private lazy var questionDescriptionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "3자 이상, 8자 이하, 숫자 1개 이상 입력하여 작성"
-        label.textColor = .gray
+        label.textColor = .BaseGray600
         
         return label
     }()
@@ -108,7 +85,7 @@ class Signup3View: UIView {
     }()
     
     private lazy var nickNameWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "이미 있는 닉네임입니다."
         label.textColor = .BaseWarningRed
         
@@ -151,24 +128,26 @@ class Signup3View: UIView {
 private extension Signup3View {
     
     func setupSubViews() {
-        [navTitleLabel, stepBar, questionLabel, questionDescriptionLabel, answerStackView,  nickNameWarningLabel, answerLabel2, nextButton].forEach {addSubview($0)}
+        [stepBar, questionLabel, questionDescriptionLabel, answerStackView,  nickNameWarningLabel, answerLabel2, nextButton].forEach {addSubview($0)}
         
         answerStackView.addArrangedSubview(answerLabel1)
         answerStackView.addArrangedSubview(nickNameTextField)
-        
-        navTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalToSuperview().offset(104)
-        }
+
         
         stepBar.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(navTitleLabel.snp.bottom).offset(87)
+            $0.leading.equalToSuperview().offset(17)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(70)
+            } else {
+                $0.top.equalToSuperview().offset(147).priority(.low)
+                $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            }
         }
         
         questionLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(stepBar.snp.bottom).offset(25)
+            $0.leading.equalTo(stepBar.snp.leading)
+            $0.top.equalTo(stepBar.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().inset(17)
         }
         
         questionDescriptionLabel.snp.makeConstraints {
@@ -179,7 +158,7 @@ private extension Signup3View {
         answerStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(questionLabel.snp.leading)
-            $0.top.equalTo(questionLabel.snp.bottom).offset(66)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(65)
         }
         
         nickNameWarningLabel.snp.makeConstraints {
@@ -188,13 +167,13 @@ private extension Signup3View {
         }
 
         answerLabel2.snp.makeConstraints {
-            $0.leading.equalTo(nickNameTextField.snp.leading)
-            $0.top.equalTo(nickNameTextField.snp.bottom).offset(40)
+            $0.trailing.equalTo(nickNameTextField.snp.trailing)
+            $0.top.equalTo(nickNameTextField.snp.bottom).offset(35)
         }
 
         nextButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(38)
+            $0.leading.equalTo(questionLabel.snp.leading)
             $0.top.equalTo(answerLabel2.snp.bottom).offset(55)
             $0.height.equalTo(45)
         }

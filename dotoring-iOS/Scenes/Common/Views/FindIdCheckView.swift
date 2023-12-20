@@ -9,6 +9,9 @@ import UIKit
 
 class FindIdCheckView: UIView {
     
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    
     var goLoginButtonActionHandler: (() -> Void)?
     
     private lazy var firstLabel: NanumLabel = {
@@ -21,7 +24,7 @@ class FindIdCheckView: UIView {
     }()
     
     private lazy var idLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 15)
+        let label = NanumLabel(weightType: .EB, size: 17)
         label.textColor = .label
         label.text = "아이디"
         label.numberOfLines = 1
@@ -79,8 +82,15 @@ private extension FindIdCheckView {
         idBoxView.addSubview(idLabel)
         
         firstLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(35.0)
-            $0.top.equalToSuperview().inset(238.0)
+            $0.leading.equalToSuperview().offset(16)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(100)
+            } else if screenHeight <= 667 && 568 < screenHeight {
+                $0.top.equalToSuperview().inset(150)
+            }
+            else {
+                $0.top.equalToSuperview().inset(208.0)
+            }
         }
         
         idBoxView.snp.makeConstraints {
@@ -101,9 +111,9 @@ private extension FindIdCheckView {
         
         goLoginButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(35.0)
+            $0.leading.equalTo(idBoxView.snp.leading)
             $0.top.equalTo(secondLabel).offset(55.0)
-            $0.height.equalTo(48.0)
+            $0.height.equalTo(45.0)
         }
         
     }

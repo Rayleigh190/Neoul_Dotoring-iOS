@@ -8,6 +8,9 @@
 import UIKit
 
 class Signup6View: UIView {
+    
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
 
     // Add a closure property
     var loginButtonActionHandler: (() -> Void)?
@@ -36,32 +39,6 @@ class Signup6View: UIView {
         return view
     }()
     
-    private lazy var navTitleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 14)
-        var text = ""
-        var attrRangeText = ""
-        var attrStrColor = UIColor.label
-        
-        if uiStyle == .mento {
-            text = "멘토로 회원가입"
-            attrRangeText = "멘토"
-            attrStrColor = .BaseGreen!
-        } else {
-            text = "멘티로 회원가입"
-            attrRangeText = "멘티"
-            attrStrColor = .BaseNavy!
-        }
-        
-        label.text = text
-
-        let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: attrStrColor, range: (text as NSString).range(of: attrRangeText))
-        label.attributedText = attributedStr
-        
-        
-        return label
-    }()
-    
     private lazy var stepBar: SignupStepBar = {
         if uiStyle == .mento {
             return SignupStepBar(stepCount: 6, currentStep: 6, style: .mento)
@@ -71,9 +48,10 @@ class Signup6View: UIView {
     }()
     
     private lazy var questionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
+        let label = NanumLabel(weightType: .R, size: 24)
         let text = "Q. 계정 설정만 하면 끝이에요!"
         label.text = text
+        label.numberOfLines = 0
         var attrStrColor = UIColor.label
         if uiStyle == .mento {
             attrStrColor = .BaseGreen!
@@ -105,7 +83,7 @@ class Signup6View: UIView {
     }()
     
     private lazy var idInfoLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "영문과 숫자를 포함한 8-12글자로 표기해 주세요"
         label.textColor = .BaseGray700
         
@@ -113,7 +91,7 @@ class Signup6View: UIView {
     }()
     
     private lazy var idWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "이미 있는 아이디입니다."
         label.textColor = .BaseWarningRed
         
@@ -136,9 +114,10 @@ class Signup6View: UIView {
     }()
     
     private lazy var pwInfoLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "영문과 숫자, 특수문자를 포함한 7-12글자로 표기해 주세요."
         label.textColor = .BaseGray700
+        label.numberOfLines = 0
         
         return label
     }()
@@ -152,7 +131,7 @@ class Signup6View: UIView {
     }()
     
     private lazy var pwWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "입력한 비밀번호와 달라요."
         label.textColor = .BaseWarningRed
         
@@ -204,7 +183,7 @@ class Signup6View: UIView {
     }()
     
     private lazy var authCodeWarningLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "인증 코드가 달라요."
         label.textColor = .BaseWarningRed
         
@@ -242,7 +221,7 @@ private extension Signup6View {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         
-        [navTitleLabel, stepBar, questionLabel, idAnswerLabel, idTextField, idInfoLabel, idWarningLabel, pwAnswerLabel, pwTextField, pwInfoLabel, rePwTextField, pwWarningLabel, pwChekButton, emailAnswerLabel, emailTextField, authTimerLabel,  authCodeTextField, authCodeWarningLabel, loginButton].forEach {contentView.addSubview($0)}
+        [stepBar, questionLabel, idAnswerLabel, idTextField, idInfoLabel, idWarningLabel, pwAnswerLabel, pwTextField, pwInfoLabel, rePwTextField, pwWarningLabel, pwChekButton, emailAnswerLabel, emailTextField, authTimerLabel,  authCodeTextField, authCodeWarningLabel, loginButton].forEach {contentView.addSubview($0)}
         
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -254,24 +233,26 @@ private extension Signup6View {
             $0.height.equalToSuperview().priority(.low)
         }
         
-        navTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalToSuperview().offset(13)
-        }
-        
         stepBar.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(navTitleLabel.snp.bottom).offset(87)
+            $0.leading.equalToSuperview().offset(17)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(6)
+            } else {
+                $0.top.equalToSuperview().offset(49).priority(.low)
+                $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            }
         }
         
         questionLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(stepBar.snp.bottom).offset(25)
+            $0.leading.equalTo(stepBar.snp.leading)
+            $0.top.equalTo(stepBar.snp.bottom).offset(20)
+            $0.trailing.equalToSuperview().inset(17)
         }
         
         idAnswerLabel.snp.makeConstraints {
             $0.leading.equalTo(questionLabel.snp.leading)
-            $0.top.equalTo(questionLabel.snp.bottom).offset(66)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(65)
+            $0.trailing.equalTo(questionLabel.snp.trailing)
         }
         
         idTextField.snp.makeConstraints {
@@ -281,7 +262,7 @@ private extension Signup6View {
         }
         
         idInfoLabel.snp.makeConstraints {
-            $0.leading.equalTo(idTextField.snp.leading).offset(3)
+            $0.leading.equalTo(idTextField.snp.leading)
             $0.top.equalTo(idTextField.snp.bottom).offset(12)
         }
         
@@ -292,28 +273,29 @@ private extension Signup6View {
         
         pwAnswerLabel.snp.makeConstraints {
             $0.leading.equalTo(idAnswerLabel.snp.leading)
-            $0.top.equalTo(idWarningLabel.snp.bottom).offset(19)
+            $0.top.equalTo(idWarningLabel.snp.bottom).offset(35)
         }
         
         pwTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(pwAnswerLabel.snp.leading)
-            $0.top.equalTo(pwAnswerLabel.snp.bottom).offset(25)
+            $0.top.equalTo(pwAnswerLabel.snp.bottom).offset(22)
         }
         
         pwInfoLabel.snp.makeConstraints {
-            $0.leading.equalTo(pwTextField.snp.leading).offset(3)
+            $0.leading.equalTo(pwTextField.snp.leading)
+            $0.trailing.equalTo(pwTextField.snp.trailing)
             $0.top.equalTo(pwTextField.snp.bottom).offset(12)
         }
         
         rePwTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(pwTextField.snp.leading)
-            $0.top.equalTo(pwInfoLabel.snp.bottom).offset(10)
+            $0.top.equalTo(pwInfoLabel.snp.bottom).offset(25)
         }
         
         pwWarningLabel.snp.makeConstraints {
-            $0.leading.equalTo(rePwTextField.snp.leading).offset(3)
+            $0.leading.equalTo(rePwTextField.snp.leading)
             $0.top.equalTo(rePwTextField.snp.bottom).offset(12)
         }
         
@@ -324,13 +306,13 @@ private extension Signup6View {
         
         emailAnswerLabel.snp.makeConstraints {
             $0.leading.equalTo(pwAnswerLabel.snp.leading)
-            $0.top.equalTo(rePwTextField.snp.bottom).offset(48)
+            $0.top.equalTo(pwWarningLabel.snp.bottom).offset(35)
         }
         
         emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(emailAnswerLabel.snp.leading)
-            $0.top.equalTo(emailAnswerLabel.snp.bottom).offset(28)
+            $0.top.equalTo(emailAnswerLabel.snp.bottom).offset(35)
         }
         
         authTimerLabel.snp.makeConstraints {
@@ -345,15 +327,16 @@ private extension Signup6View {
         }
         
         authCodeWarningLabel.snp.makeConstraints {
-            $0.leading.equalTo(authCodeTextField.snp.leading).offset(3)
+            $0.leading.equalTo(authCodeTextField.snp.leading)
             $0.top.equalTo(authCodeTextField.snp.bottom).offset(12)
         }
         
         loginButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(38)
-            $0.top.equalTo(authCodeWarningLabel.snp.bottom).offset(15)
+            $0.leading.equalTo(questionLabel.snp.leading)
+            $0.top.equalTo(authCodeWarningLabel.snp.bottom).offset(55)
             $0.height.equalTo(45)
+            $0.bottom.lessThanOrEqualToSuperview().inset(30)
         }
         
         

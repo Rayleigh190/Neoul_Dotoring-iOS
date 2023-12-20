@@ -90,20 +90,20 @@ private extension SelectView {
         [titleLabel, clearButton, selectedStackView, tableView].forEach { addSubview($0) }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(38)
+            $0.leading.equalToSuperview().offset(17)
             $0.top.equalToSuperview().offset(29)
         }
         
         clearButton.snp.makeConstraints {
             $0.centerY.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().inset(38)
+            $0.trailing.equalToSuperview().inset(16)
             $0.width.equalTo(53)
         }
         
         selectedStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(15)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(24)
+            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(17)
             $0.height.equalTo(5).priority(.low)
         }
         

@@ -35,7 +35,7 @@ class LineTextField: UIView {
 
     private lazy var line: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = .BaseGray900
         
         return view
     }()

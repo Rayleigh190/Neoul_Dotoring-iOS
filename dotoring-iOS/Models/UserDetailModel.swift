@@ -23,4 +23,5 @@ struct UserDetailInfo: Codable {
 struct UserDetailAPIResponse: Codable {
     let success: Bool
     let response: UserDetailInfo
+    let error: ErrorData2?
 }

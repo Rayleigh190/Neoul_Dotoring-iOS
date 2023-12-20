@@ -146,35 +146,27 @@ private extension UserDetailViewController {
         // 예외처리 하기
         guard let unwrappedUserID = userID else { return }
         
-        var urlToCall:  HomeRouter{
-            switch uiStyle {
-            case .mento:
-                return HomeRouter.mentiDetail(id: unwrappedUserID)
-            case .mentee:
-                return HomeRouter.mentoDetail(id: unwrappedUserID)
-            }
-        }
-        
-        APINetworkManager
-            .shared
-            .session
-            .request(urlToCall)
-            .validate(statusCode: 200...400)
-            .responseDecodable(of: UserDetailAPIResponse.self) { response in
-                
-                switch response.result {
-                case .success(let successData):
-                    print("UserDetailViewController - fetchUserDetail() called()")
-                    self.userDetailInfo = successData.response
+        HomeNetworkService.fetchUserDetail(uiStyle: uiStyle, userID: unwrappedUserID) { response, error in
+            
+            if error != nil {
+                // 유저 상세정보 요청 오류 발생
+                print("유저 상세정보 요청 오류 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                if let statusCode = error?.asAFError?.responseCode {
+                    Alert.showAlert(title: " 유저 상세정보 요청 오류 발생", message: "\(statusCode)")
+                } else {
+                    Alert.showAlert(title: " 유저 상세정보 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+                }
+            } else {
+                if response?.success == true {
+                    guard let data = response?.response else { return }
+                    self.userDetailInfo = data
                     guard let unwrapedUserDetailInfo = self.userDetailInfo else { return }
                     self.updateUI(userInfo: unwrapedUserDetailInfo)
-                case .failure(let error):
-                    print("UserDetailViewController - fetchUserDetail() failed()")
-                    debugPrint(error)
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
                 }
-                
-                debugPrint(response)
             }
+        }
         self.view.hideToastActivity()
     }
 }

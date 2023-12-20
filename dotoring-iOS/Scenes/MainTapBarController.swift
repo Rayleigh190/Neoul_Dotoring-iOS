@@ -77,7 +77,9 @@ private extension MainTapBarController {
         tabBar.backgroundColor = .white
 
         // Add a radius to the tab bar to create rounded corners
-        tabBar.layer.cornerRadius = 20.0
+//        tabBar.layer.cornerRadius = 20.0
+        tabBar.layer.cornerRadius = tabBar.frame.height * 0.3
+        tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         // Apply shadow to the tab bar
         tabBar.layer.shadowColor = UIColor.black.cgColor

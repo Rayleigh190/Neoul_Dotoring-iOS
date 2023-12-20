@@ -15,11 +15,19 @@ class Signup2ViewController: UIViewController {
     
     var selectedFileURL: URL?  // Store the selected file URL
     var selectedFileURL2: URL? // Store the selected file URL
+    
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.topItem?.title = ""
+        setupNavigationBar()
     }
     
     override func loadView() {
@@ -28,11 +36,8 @@ class Signup2ViewController: UIViewController {
         signup2View = Signup2View(frame: self.view.frame)
         
         // Set the button action handler
-        signup2View.groupCertificateUploadButtonActionHandler = { [weak self] in
+        signup2View.certificateUploadButtonActionHandler = { [weak self] in
             self?.certificateOfEmploymentUploadButtonTapped()
-        }
-        signup2View.graduateCertificateUploadButtonActionHandler = { [weak self] in
-            self?.graduateCertificateUploadButtonActionHandler()
         }
         signup2View.nextButtonActionHandler = { [weak self] in
             self?.nextButtonTapped()
@@ -61,6 +66,38 @@ class Signup2ViewController: UIViewController {
     func nextButtonTapped() {
         let vc = Signup3ViewController()
         navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    func setupNavigationBar() {
+        
+        self.navigationController?.navigationBar.tintColor = .BaseGray700
+        self.navigationController?.navigationBar.topItem?.title = ""
+        
+        let titleLabel = UILabel()
+        var attrRangeText = ""
+        var attrStrColor = UIColor.label
+
+        titleLabel.textColor = UIColor.label // 전체 글씨 색상
+        titleLabel.font = .nanumSquare(style: .NanumSquareOTFR, size: 15)
+        titleLabel.sizeToFit()
+
+        if uiStyle == .mentee {
+            titleLabel.text = "멘티로 회원가입"
+            attrRangeText = "멘티"
+            attrStrColor = .BaseNavy!
+        } else {
+            titleLabel.text = "멘토로 회원가입"
+            attrRangeText = "멘토"
+            attrStrColor = .BaseGreen!
+        }
+        
+        let attributedString = NSMutableAttributedString(string: titleLabel.text!)
+        
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: attrStrColor, range: (titleLabel.text! as NSString).range(of: attrRangeText))
+
+        titleLabel.attributedText = attributedString
+
+        self.navigationItem.titleView = titleLabel
     }
     
 }
@@ -93,9 +130,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         if sender == 0 {
-            documentPicker.view.tag = signup2View.groupCertificateUploadButton.tag
-        } else {
-            documentPicker.view.tag = signup2View.graduateCertificateUploadButton.tag
+            documentPicker.view.tag = signup2View.certificateUploadButton.tag
         }
         
         present(documentPicker, animated: true, completion: nil)
@@ -105,10 +140,8 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        if sender == 0 { // 재직증명서 버튼일 경우
-            imagePicker.view.tag = signup2View.groupCertificateUploadButton.tag
-        } else if sender == 1 { // 졸업증명서 버튼일 경우
-            imagePicker.view.tag = signup2View.graduateCertificateUploadButton.tag
+        if sender == 0 { // 재학증명서 버튼일 경우
+            imagePicker.view.tag = signup2View.certificateUploadButton.tag
         }
         present(imagePicker, animated: true, completion: nil)
     }
@@ -118,12 +151,9 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedPDFURL = urls.first {
             // Handle the selected PDF file here
-            if controller.view.tag == signup2View.groupCertificateUploadButton.tag {
+            if controller.view.tag == signup2View.certificateUploadButton.tag {
                 selectedFileURL = selectedPDFURL
-                signup2View.groupCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
-            } else if controller.view.tag == signup2View.graduateCertificateUploadButton.tag {
-                selectedFileURL2 = selectedPDFURL
-                signup2View.graduateCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
+                signup2View.certificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
             }
         }
     }
@@ -132,12 +162,9 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             // Handle the selected image here
             if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-                if picker.view.tag == signup2View.groupCertificateUploadButton.tag {
+                if picker.view.tag == signup2View.certificateUploadButton.tag {
                     selectedFileURL = imageURL
-                    signup2View.groupCertificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
-                } else if picker.view.tag == signup2View.graduateCertificateUploadButton.tag {
-                    selectedFileURL2 = imageURL
-                    signup2View.graduateCertificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
+                    signup2View.certificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
                 }
             }
         }
