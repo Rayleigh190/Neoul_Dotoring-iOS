@@ -13,11 +13,15 @@ class SelectViewController: UIViewController {
     var titleText: String = "타이틀"
     var style: UIStyle = .mento
     var sender: UIButton?
+    var elements: [String] = []
+    var previousSelectedElements: [Int] = []
     
     weak var selectViewControllerDelegate: SelectViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectView.elements = elements
+        selectView.previousSelectedElements = previousSelectedElements
     }
     
     override func loadView() {
