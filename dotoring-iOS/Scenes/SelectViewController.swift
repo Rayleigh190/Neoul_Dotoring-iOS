@@ -22,6 +22,7 @@ class SelectViewController: UIViewController {
         super.viewDidLoad()
         selectView.elements = elements
         selectView.previousSelectedElements = previousSelectedElements
+        selectView.setPreviousSelectedElement()
     }
     
     override func loadView() {

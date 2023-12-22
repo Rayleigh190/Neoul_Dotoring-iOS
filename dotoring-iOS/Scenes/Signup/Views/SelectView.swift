@@ -144,6 +144,15 @@ extension SelectView {
         tableView.selectRow(at: selectedElementIndex, animated: true, scrollPosition: .none)
         tableView(tableView, didSelectRowAt: selectedElementIndex)
     }
+    
+    func setPreviousSelectedElement() {
+        // 선택후 닫았다 다시 열었을때 이전에 선택 했던 것들 다시 선택
+        if previousSelectedElements.count < 1 {return}
+        for previousSelectedElement in self.previousSelectedElements {
+            let indexPath = IndexPath(row: previousSelectedElement, section: 0)
+            elementSelect(selectedElementIndex: indexPath)
+        }
+    }
 }
 
 extension SelectView: UITableViewDataSource, UITableViewDelegate {
@@ -166,13 +175,6 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
         customAccessoryView.layer.borderColor = UIColor.white.cgColor
         
         cell.accessoryView = customAccessoryView
-        
-        // 선택후 닫았다 다시 열었을때 이전에 선택 했던 것들 다시 선택
-        for previousSelectedElement in self.previousSelectedElements {
-            if previousSelectedElement == indexPath.row {
-                elementSelect(selectedElementIndex: indexPath)
-            }
-        }
         
         return cell
     }
