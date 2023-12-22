@@ -10,6 +10,11 @@ import MobileCoreServices
 import UniformTypeIdentifiers
 
 class Signup2ViewController: UIViewController {
+    // Signup Data
+    var school: String = ""
+    var grade: Int = 0
+    var fields: [String] = []
+    var majors: [String] = []
 
     var signup2View: Signup2View!
     

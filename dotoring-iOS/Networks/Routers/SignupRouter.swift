@@ -11,6 +11,7 @@ import Alamofire
 // Signup API Router
 enum SignupRouter: URLRequestConvertible {
     
+    case fields
     case majors
     
     var baseURL: URL {
@@ -19,16 +20,17 @@ enum SignupRouter: URLRequestConvertible {
 
     var method: HTTPMethod {
         switch self {
-        case .majors:
+        case .fields, .majors:
             return .get
         }
     }
 
     var endPoint: String {
         switch self {
+        case .fields:
+            return "fields"
         case .majors:
             return "majors"
-        
         }
     }
     

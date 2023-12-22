@@ -20,6 +20,7 @@ class SelectViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIView.setAnimationsEnabled(true)
         selectView.elements = elements
         selectView.previousSelectedElements = previousSelectedElements
         selectView.setPreviousSelectedElement()

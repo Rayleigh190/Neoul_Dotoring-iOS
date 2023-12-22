@@ -10,7 +10,31 @@ import Alamofire
 
 class SignupNetworkService {
     
-    class func fetchFieldList(_ completion: @escaping (MajorsAPIResponse?, Error?) -> Void) {
+    class func fetchFieldList(_ completion: @escaping (FieldsAPIResponse?, Error?) -> Void) {
+        
+        let urlToCall = SignupRouter.fields
+        
+        BaseNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...300)
+            .responseDecodable(of: FieldsAPIResponse.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    print("SignupNetworkService - fetchFieldList() called")
+                    
+                    return completion(successData, nil)
+                    
+                case .failure(let error):
+                    print("SignupNetworkService - fetchFieldList() failed")
+                    
+                    return completion(nil, error)
+                }
+            }
+    }
+    
+    class func fetchMajorList(_ completion: @escaping (MajorsAPIResponse?, Error?) -> Void) {
         
         let urlToCall = SignupRouter.majors
         
@@ -22,12 +46,12 @@ class SignupNetworkService {
             .responseDecodable(of: MajorsAPIResponse.self) { response in
                 switch response.result {
                 case .success(let successData):
-                    print("SignupNetworkService - fetchFieldList() called")
+                    print("SignupNetworkService - fetchMajorList() called")
                     
                     return completion(successData, nil)
                     
                 case .failure(let error):
-                    print("SignupNetworkService - fetchFieldList() failed")
+                    print("SignupNetworkService - fetchMajorList() failed")
                     
                     return completion(nil, error)
                 }

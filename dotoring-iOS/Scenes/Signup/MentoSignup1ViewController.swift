@@ -13,8 +13,10 @@ class MentoSignup1ViewController: UIViewController {
     let screenHeight = UIScreen.main.bounds.size.height
     
     // Data
-    var fieldList = Fields(majors: [])
+    var fieldList = Fields(fields: [])
+    var majorList = Majors(majors: [])
     var selectedFieldElements: [Int] = []
+    var selectedMajorElements: [Int] = []
     
     private lazy var stepBar: SignupStepBar = {
         let bar = SignupStepBar(stepCount: 6, currentStep: 1, style: .mento)
@@ -174,6 +176,7 @@ class MentoSignup1ViewController: UIViewController {
         setupSubViews()
         setupUI()
         fetchFieldList()
+        fetchMajorList()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -189,8 +192,42 @@ class MentoSignup1ViewController: UIViewController {
         }
     }
     
+    func checkInputValue() {
+        if schoolTextField.textField.text?.count == 0
+            || gradeTextField.textField.text?.count == 0
+            || fieldTextField.textField.text?.count == 0
+            || departmentTextField.textField.text?.count == 0
+        {
+            Alert.showAlert(title: "안내", message: "입력되지 않은 값이 있습니다.")
+            return
+        }
+        
+        if let gradeStr =  gradeTextField.textField.text {
+            let gradeInt = Int(gradeStr)!
+            if gradeInt > 4 || gradeInt < 0 {
+                Alert.showAlert(title: "안내", message: "학년은 1~4만 입력 가능합니다.")
+            }
+        }
+    }
+    
     @objc func nextButtonTapped(sender: UIButton!) {
+        checkInputValue()
+        guard let school = schoolTextField.textField.text else {return}
+        guard let grade = Int(gradeTextField.textField.text!) else {return}
+        var fields:[String] = []
+        var majors:[String] = []
+        for index in selectedFieldElements {
+            fields.append(fieldList.fields[index])
+        }
+        for index in selectedMajorElements {
+            majors.append(majorList.majors[index])
+        }
+        
         let vc = Signup2ViewController()
+        vc.school = school
+        vc.grade = grade
+        vc.fields = fields
+        vc.majors = majors
         navigationController?.pushViewController(vc, animated: false)
     }
 
@@ -345,6 +382,29 @@ extension MentoSignup1ViewController {
             }
     }
     
+    func fetchMajorList() {
+        SignupNetworkService
+            .fetchMajorList() { response, error in
+                if error != nil {
+                    // 학과 요청 에러 발생
+                    print("학과 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "학과 요청 에러 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "학과 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                    }
+                } else {
+                    if response?.success == true {
+                        debugPrint(response!)
+                        guard let majors = response?.response else {return}
+                        self.majorList = majors
+                    } else {
+                        Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                    }
+                }
+            }
+    }
+    
 }
 
 extension MentoSignup1ViewController: SelectViewControllerDelegate {
@@ -355,12 +415,14 @@ extension MentoSignup1ViewController: SelectViewControllerDelegate {
             vc.selectViewControllerDelegate = self
             vc.titleText = "멘토링 분야 선택"
             vc.style = .mento
-            vc.elements = fieldList.majors
+            vc.elements = fieldList.fields
             vc.previousSelectedElements = selectedFieldElements
         } else if sender == departmentTextFieldButton {
             vc.selectViewControllerDelegate = self
             vc.titleText = "학과 선택"
             vc.style = .mento
+            vc.elements = majorList.majors
+            vc.previousSelectedElements = selectedMajorElements
         } else {
             vc.selectViewControllerDelegate = self
             vc.titleText = "필터"
@@ -375,13 +437,10 @@ extension MentoSignup1ViewController: SelectViewControllerDelegate {
        present(vc, animated: true)
     }
     
-    // 직무선택, 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 데이터를 받음
+    // 분야선택, 학과선택 뷰컨트롤러 화면이 사라질 때 선택한 데이터를 받음
     func didSelectViewControllerDismiss(elements: [String], selectedElements: [Int], sender: UIButton) {
         // 선택한 데이터가 0개 이상일 때만 데이터 저장 및 뷰 수정
         if selectedElements.count > 0 {
-            // 이 뷰컨트롤러에 선택한 데이터 저장하는 코드
-            self.selectedFieldElements = selectedElements
-            
             // 뷰에 선택한 데이터 문자열 세팅
             var selectedElementString: String = ""
             for selectedElement in selectedElements {
@@ -390,17 +449,21 @@ extension MentoSignup1ViewController: SelectViewControllerDelegate {
             }
             selectedElementString = String(selectedElementString.dropLast(2))
             
-            if sender == fieldTextFieldButton { // 직무 선택일 때
+            if sender == fieldTextFieldButton { // 멘토링분야 선택일 때
+                // 이 뷰컨트롤러에 선택한 데이터 저장하는 코드
+                self.selectedFieldElements = selectedElements
                 fieldTextField.textField.text = selectedElementString
             } else { // 학과 선택일 때
+                self.selectedMajorElements = selectedElements
                 departmentTextField.textField.text = selectedElementString
             }
             
         } else {
-            selectedFieldElements = []
-            if sender == fieldTextFieldButton { // 직무 선택일 때
+            if sender == fieldTextFieldButton { // 멘토링분야 선택일 때
+                selectedFieldElements = []
                 fieldTextField.textField.text = ""
             } else { // 학과 선택일 때
+                selectedMajorElements = []
                 departmentTextField.textField.text = ""
             }
         }
