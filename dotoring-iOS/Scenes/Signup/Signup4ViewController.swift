@@ -8,6 +8,14 @@
 import UIKit
 
 class Signup4ViewController: UIViewController, KeyboardEvent {
+    // Signup Data
+    var school: String = ""
+    var grade: Int = 0
+    var fields: [String] = []
+    var majors: [String] = []
+    var certificationsFileURL: URL?
+    var nickname: String = ""
+    
     // 키보드 이벤트를 받을 때 움직일 뷰를 정해줍니다.
     var transformView: UIView { return self.view }
     var signup4View: Signup4View!
