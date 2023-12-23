@@ -19,7 +19,7 @@ class Signup2ViewController: UIViewController {
     var signup2View: Signup2View!
     
     var selectedFileURL: URL?  // Store the selected file URL
-    var selectedFileURL2: URL? // Store the selected file URL
+//    var selectedFileURL2: URL? // Store the selected file URL
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -42,7 +42,7 @@ class Signup2ViewController: UIViewController {
         
         // Set the button action handler
         signup2View.certificateUploadButtonActionHandler = { [weak self] in
-            self?.certificateOfEmploymentUploadButtonTapped()
+            self?.certificateOfEnrollmentUploadButtonTapped()
         }
         signup2View.nextButtonActionHandler = { [weak self] in
             self?.nextButtonTapped()
@@ -58,18 +58,31 @@ class Signup2ViewController: UIViewController {
     }
     
     // sender : 0과 1
-    func certificateOfEmploymentUploadButtonTapped() {
-        // 재직증명서 업로드
+    func certificateOfEnrollmentUploadButtonTapped() {
+        // 재학증명서 업로드
         openPdfOrImgFile(sender: 0)
     }
     
-    func graduateCertificateUploadButtonActionHandler() {
-        // 졸업증명서 업로드
-        openPdfOrImgFile(sender: 1)
+//    func graduateCertificateUploadButtonActionHandler() {
+//        // 졸업증명서 업로드
+//        openPdfOrImgFile(sender: 1)
+//    }
+    
+    func checkInputValue() {
+        if selectedFileURL == nil {
+            Alert.showAlert(title: "안내", message: "서류를 선택해 주세요.")
+            return
+        }
     }
     
     func nextButtonTapped() {
+        checkInputValue()
         let vc = Signup3ViewController()
+        vc.school = school
+        vc.grade = grade
+        vc.fields = fields
+        vc.majors = majors
+        vc.certificationsFileURL = selectedFileURL
         navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -111,17 +124,17 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
     
     func openPdfOrImgFile(sender: Int) {
         // Create an action sheet to let the user choose between picking a PDF or an image
-        let actionSheet = UIAlertController(title: "Select File Type", message: "Choose a file type to import", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "파일 유형 선택", message: "파일 유형을 선택하세요", preferredStyle: .actionSheet)
         
         let pdfAction = UIAlertAction(title: "PDF", style: .default) { (action) in
             self.pickPDF(sender: sender)
         }
         
-        let imageAction = UIAlertAction(title: "Image", style: .default) { (action) in
+        let imageAction = UIAlertAction(title: "이미지", style: .default) { (action) in
             self.pickImage(sender: sender)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         actionSheet.addAction(pdfAction)
         actionSheet.addAction(imageAction)

@@ -8,6 +8,12 @@
 import UIKit
 
 class Signup3ViewController: UIViewController {
+    // Signup Data
+    var school: String = ""
+    var grade: Int = 0
+    var fields: [String] = []
+    var majors: [String] = []
+    var certificationsFileURL: URL?
     
     var signup3View: Signup3View!
     
