@@ -73,6 +73,13 @@ class Signup4ViewController: UIViewController, KeyboardEvent {
     
     func nextButtonTapped() {
         let vc = Signup5ViewController()
+        vc.school = school
+        vc.grade = grade
+        vc.fields = fields
+        vc.majors = majors
+        vc.certificationsFileURL = certificationsFileURL
+        vc.nickname = nickname
+        vc.introduction = "안녕하세요 전남대학교 4학년 최우진입니다."
         navigationController?.pushViewController(vc, animated: false)
     }
     
