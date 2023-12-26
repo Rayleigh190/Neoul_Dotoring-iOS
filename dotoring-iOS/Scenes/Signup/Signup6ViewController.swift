@@ -8,6 +8,14 @@
 import UIKit
 
 class Signup6ViewController: UIViewController {
+    // Signup Data
+    var school: String = ""
+    var grade: Int = 0
+    var fields: [String] = []
+    var majors: [String] = []
+    var certificationsFileURL: URL?
+    var nickname: String = ""
+    var introduction: String = ""
 
     var signup6View: Signup6View!
     var fCurTextfieldBottom: CGFloat = 0.0

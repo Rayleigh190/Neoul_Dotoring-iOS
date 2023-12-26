@@ -59,7 +59,19 @@ class Signup5ViewController: UIViewController {
     }
     
     func nextButtonTapped() {
+        if !signup5View.agreeConfirmButton.isSelected {
+            self.view.makeToast("동의 체크버튼을 눌러주세요.", position: .top)
+            return
+        }
+        
         let vc = Signup6ViewController()
+        vc.school = school
+        vc.grade = grade
+        vc.fields = fields
+        vc.majors = majors
+        vc.certificationsFileURL = certificationsFileURL
+        vc.nickname = nickname
+        vc.introduction = "안녕하세요 전남대학교 4학년 최우진입니다."
         navigationController?.pushViewController(vc, animated: false)
     }
     

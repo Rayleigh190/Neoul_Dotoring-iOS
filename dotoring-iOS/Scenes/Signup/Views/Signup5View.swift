@@ -86,7 +86,7 @@ class Signup5View: UIView {
         return label
     }()
     
-    private lazy var agreeConfirmButton: UIButton = {
+    lazy var agreeConfirmButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
         button.tintColor = .gray
@@ -194,12 +194,16 @@ extension Signup5View {
         if sender.isSelected {
             if uiStyle == .mento {
                 sender.tintColor = .BaseGreen
+                nextButton.backgroundColor = .BaseGreen
             } else {
                 sender.tintColor = .BaseNavy
+                nextButton.backgroundColor = .BaseNavy
             }
-            
+            nextButton.setTitleColor(.white, for: .normal)
         } else {
             sender.tintColor = .gray
+            nextButton.backgroundColor = .BaseGray200
+            nextButton.setTitleColor(UIColor.BaseGray600, for: .normal)
         }
     }
     
