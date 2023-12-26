@@ -110,6 +110,7 @@ class Signup6View: UIView {
         let textField = LineTextField()
         textField.textField.placeholder = "비밀번호"
         textField.textField.returnKeyType = .continue
+        textField.textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -127,22 +128,25 @@ class Signup6View: UIView {
         let textField = LineTextField()
         textField.textField.placeholder = "다시 한 번 써 주세요."
         textField.textField.returnKeyType = .continue
+        textField.textField.isSecureTextEntry = true
+        textField.textField.isEnabled = false
         
         return textField
     }()
     
-    private lazy var pwWarningLabel: NanumLabel = {
+    lazy var pwWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "입력한 비밀번호와 달라요."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
     
-    private lazy var pwChekButton: UIButton = {
+    lazy var pwChekButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.tintColor = .gray
+        button.tintColor = .BaseGray400
         button.isUserInteractionEnabled = false
         
         return button

@@ -18,6 +18,7 @@ class Signup6ViewController: UIViewController {
     var introduction: String = ""
     
     var isIdValid = false
+    var isRePwValid = false
 
     var signup6View: Signup6View!
     var fCurTextfieldBottom: CGFloat = 0.0
@@ -118,6 +119,7 @@ class Signup6ViewController: UIViewController {
     func setAddTarget() {
         signup6View.idTextField.button.addTarget(self, action: #selector(validId), for: .touchUpInside)
         signup6View.idTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+        signup6View.pwTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
     }
 }
 
@@ -175,13 +177,57 @@ extension Signup6ViewController: UITextFieldDelegate {
     @objc func textFieldDidChanacge(_ sender: UITextField?) {
         if sender == signup6View.idTextField.textField {
             isIdValid = false
-            print("isIdValid : \(isIdValid)")
+        }
+        
+        if sender == signup6View.pwTextField.textField {
+            signup6View.rePwTextField.textField.text = ""
+            signup6View.pwChekButton.tintColor = .BaseGray400
+            isRePwValid = false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == signup6View.pwTextField.textField {
+            guard let pwCount = textField.text?.count else {return}
+            if pwCount > 0 {
+                signup6View.rePwTextField.textField.isEnabled = true
+            } else {
+                signup6View.rePwTextField.textField.isEnabled = false
+            }
+        }
+        
+        if textField == signup6View.rePwTextField.textField {
+            signup6View.pwWarningLabel.isHidden = true
+            guard let inputPw = signup6View.pwTextField.textField.text else {return}
+            if textField.text == inputPw {
+                isRePwValid = true
+                if uiStyle == .mento {
+                    signup6View.pwChekButton.tintColor = .BaseGreen
+                } else {
+                    signup6View.pwChekButton.tintColor = .BaseNavy
+                }
+            } else {
+                isRePwValid = false
+                signup6View.pwChekButton.tintColor = .BaseGray400
+                signup6View.pwWarningLabel.isHidden = false
+            }
         }
     }
     
 }
 
 extension Signup6ViewController {
+    
+    func isPwValid(pw: String) -> Bool {
+        // 정규표현식 패턴
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",./<>?])([A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\",./<>?]){7,12}$"
+        
+        // NSPredicate를 사용하여 패턴 검증
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordTest.evaluate(with: pw)
+    }
+    
+    
     // Network
     
     @objc func validId() {
