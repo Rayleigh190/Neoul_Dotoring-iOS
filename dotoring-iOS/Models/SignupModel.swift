@@ -27,7 +27,7 @@ struct MajorsAPIResponse: Codable {
     let error: ErrorData2?
 }
 
-struct ValidNicknameAPIResponse: Codable {
+struct ValidAPIResponse: Codable {
     let success: Bool
     let error: ErrorData2?
 }

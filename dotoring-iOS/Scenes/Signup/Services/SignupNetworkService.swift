@@ -58,7 +58,7 @@ class SignupNetworkService {
             }
     }
     
-    class func validNickname (uiStyle: UIStyle, nickname: String, _ completion: @escaping (ValidNicknameAPIResponse?, Error?) -> Void) {
+    class func validNickname (uiStyle: UIStyle, nickname: String, _ completion: @escaping (ValidAPIResponse?, Error?) -> Void) {
         
         var urlToCall:  SignupRouter{
             switch uiStyle {
@@ -74,7 +74,7 @@ class SignupNetworkService {
             .session
             .request(urlToCall)
             .validate(statusCode: 200...500)
-            .responseDecodable(of: ValidNicknameAPIResponse.self) { response in
+            .responseDecodable(of: ValidAPIResponse.self) { response in
                 switch response.result {
                 case .success(let successData):
                     print("SignupNetworkService - validNickname() called")
@@ -82,6 +82,30 @@ class SignupNetworkService {
                     return completion(successData, nil)
                 case .failure(let error):
                     print("SignupNetworkService - validNickname() failed")
+                    
+                    return completion(nil, error)
+                }
+            }
+    }
+    
+    class func validId (loginId: String, _ completion: @escaping (ValidAPIResponse?, Error?) -> Void) {
+        
+        let urlToCall = SignupRouter.validId(loginId: loginId)
+        
+        BaseNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: ValidAPIResponse.self) { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let successData):
+                    print("SignupNetworkService - validId() called")
+                    
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("SignupNetworkService - validId() failed")
                     
                     return completion(nil, error)
                 }

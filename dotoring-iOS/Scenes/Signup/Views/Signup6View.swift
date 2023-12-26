@@ -90,10 +90,11 @@ class Signup6View: UIView {
         return label
     }()
     
-    private lazy var idWarningLabel: NanumLabel = {
+    lazy var idWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "이미 있는 아이디입니다."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()

@@ -15,6 +15,7 @@ enum SignupRouter: URLRequestConvertible {
     case majors
     case validMentoNickname(nickname: String)
     case validMentiNickname(nickname: String)
+    case validId(loginId: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL + "api")!
@@ -24,7 +25,7 @@ enum SignupRouter: URLRequestConvertible {
         switch self {
         case .fields, .majors:
             return .get
-        case .validMentoNickname, .validMentiNickname:
+        case .validMentoNickname, .validMentiNickname, .validId:
             return .post
         }
     }
@@ -39,6 +40,8 @@ enum SignupRouter: URLRequestConvertible {
             return "mento/valid-nickname"
         case .validMentiNickname:
             return "menti/valid-nickname"
+        case .validId:
+            return "member/valid-loginId"
         }
     }
     
@@ -46,6 +49,8 @@ enum SignupRouter: URLRequestConvertible {
         switch self {
         case let .validMentoNickname(nickname), let .validMentiNickname(nickname):
             return ["nickname" : nickname]
+        case let .validId(loginId):
+            return ["loginId" : loginId]
         default:
             return [:]
         }
@@ -62,7 +67,7 @@ enum SignupRouter: URLRequestConvertible {
         request.method = method
 
         switch self {
-        case .validMentoNickname, .validMentiNickname:
+        case .validMentoNickname, .validMentiNickname, .validId:
             request.httpBody = try JSONEncoder().encode(parameters)
         default:
             break

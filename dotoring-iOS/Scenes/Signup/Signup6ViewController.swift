@@ -16,6 +16,8 @@ class Signup6ViewController: UIViewController {
     var certificationsFileURL: URL?
     var nickname: String = ""
     var introduction: String = ""
+    
+    var isIdValid = false
 
     var signup6View: Signup6View!
     var fCurTextfieldBottom: CGFloat = 0.0
@@ -36,6 +38,7 @@ class Signup6ViewController: UIViewController {
         setDelegate()
         registerForKeyboardNotifications()
         setupNavigationBar()
+        setAddTarget()
     }
     
     deinit {
@@ -111,7 +114,11 @@ class Signup6ViewController: UIViewController {
 
         self.navigationItem.titleView = titleLabel
     }
-
+    
+    func setAddTarget() {
+        signup6View.idTextField.button.addTarget(self, action: #selector(validId), for: .touchUpInside)
+        signup6View.idTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+    }
 }
 
 extension Signup6ViewController: UITextFieldDelegate {
@@ -162,6 +169,48 @@ extension Signup6ViewController: UITextFieldDelegate {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+    }
+    
+    // 입력값 수정 했을때 is..Valid = false 하기
+    @objc func textFieldDidChanacge(_ sender: UITextField?) {
+        if sender == signup6View.idTextField.textField {
+            isIdValid = false
+            print("isIdValid : \(isIdValid)")
+        }
+    }
+    
+}
+
+extension Signup6ViewController {
+    // Network
+    
+    @objc func validId() {
+        
+        self.signup6View.idWarningLabel.isHidden = true
+        
+        guard let inputId = signup6View.idTextField.textField.text else {return}
+        
+        self.view.makeToastActivity(.center)
+        SignupNetworkService
+            .validId(loginId: inputId) { response, error in
+                if response?.success == false {
+                    if response?.error?.code == "4010" {
+                        // 아이디 중복발생
+                        self.signup6View.idWarningLabel.isHidden = false
+                        return
+                    } else {
+                        Alert.showAlert(title: "안내", message: response?.error?.code ?? "알 수 없는 오류")
+                        return
+                    }
+                } else if response?.success == true {
+                    debugPrint(response!)
+                    Alert.showAlert(title: "안내", message: "사용 가능한 아이디입니다.")
+                    self.isIdValid = true
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                }
+            }
+        self.view.hideToastActivity()
     }
     
 }
