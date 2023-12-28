@@ -164,6 +164,7 @@ class MentoSignup1ViewController: UIViewController {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
         
         return button
     }()
@@ -175,6 +176,7 @@ class MentoSignup1ViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         setupSubViews()
         setupUI()
+        setDelegate()
         fetchFieldList()
         fetchMajorList()
     }
@@ -253,6 +255,13 @@ private extension MentoSignup1ViewController {
 
         self.navigationItem.titleView = titleLabel
     
+    }
+    
+    func setDelegate() {
+        schoolTextField.textField.delegate = self
+        gradeTextField.textField.delegate = self
+        fieldTextField.textField.delegate = self
+        departmentTextField.textField.delegate = self
     }
     
     func setupSubViews() {
@@ -407,6 +416,27 @@ extension MentoSignup1ViewController {
     
 }
 
+extension MentoSignup1ViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // 다 입력되었는지 체크. 다 입렸 됐으면 다음버튼 활성화
+        if gradeTextField.textField.text?.count ?? 0 > 0 &&
+            schoolTextField.textField.text?.count ?? 0 > 0 &&
+            fieldTextField.textField.text?.count ?? 0 > 0 &&
+            departmentTextField.textField.text?.count ?? 0 > 0 {
+            nextButton.isEnabled = true
+            nextButton.backgroundColor = .BaseGreen
+            nextButton.setTitleColor(.white, for: .normal)
+        } else {
+            nextButton.isEnabled = false
+            nextButton.backgroundColor = .BaseGray200
+            nextButton.setTitleColor(.BaseGray600, for: .normal)
+        }
+        
+    }
+        
+}
+
 extension MentoSignup1ViewController: SelectViewControllerDelegate {
     
     @objc private func selectTextFieldTapped(sender: UIButton) {
@@ -453,18 +483,22 @@ extension MentoSignup1ViewController: SelectViewControllerDelegate {
                 // 이 뷰컨트롤러에 선택한 데이터 저장하는 코드
                 self.selectedFieldElements = selectedElements
                 fieldTextField.textField.text = selectedElementString
+                textFieldDidEndEditing(fieldTextField.textField) // 텍스트필드 편집완료 실행
             } else { // 학과 선택일 때
                 self.selectedMajorElements = selectedElements
                 departmentTextField.textField.text = selectedElementString
+                textFieldDidEndEditing(departmentTextField.textField) // 텍스트필드 편집완료 실행
             }
             
         } else {
             if sender == fieldTextFieldButton { // 멘토링분야 선택일 때
                 selectedFieldElements = []
                 fieldTextField.textField.text = ""
+                textFieldDidEndEditing(fieldTextField.textField) // 텍스트필드 편집완료 실행
             } else { // 학과 선택일 때
                 selectedMajorElements = []
                 departmentTextField.textField.text = ""
+                textFieldDidEndEditing(departmentTextField.textField) // 텍스트필드 편집완료 실행
             }
         }
         
