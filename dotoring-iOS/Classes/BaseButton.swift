@@ -36,7 +36,7 @@ class BaseButton: UIButton {
 
 }
 
-private extension BaseButton {
+extension BaseButton {
     func setupButton(style: BaseButtonStyle) {
         
         switch style {

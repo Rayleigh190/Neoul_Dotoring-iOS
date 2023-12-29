@@ -140,7 +140,14 @@ extension Signup3ViewController {
                 debugPrint(response!)
                 Alert.showAlert(title: "안내", message: "사용 가능한 닉네임입니다.")
                 self.isNicknameValid = true
-                
+                // 다음버튼 활성화
+                self.signup3View.nextButton.isEnabled = true
+                self.signup3View.nextButton.setTitleColor(.white, for: .normal)
+                if self.uiStyle == .mento {
+                    self.signup3View.nextButton.backgroundColor = .BaseGreen
+                } else {
+                    self.signup3View.nextButton.backgroundColor = .BaseNavy
+                }
             } else {
                 Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
             }
@@ -162,6 +169,9 @@ extension Signup3ViewController: UITextFieldDelegate {
     // 닉네임 수정 했을때 isNicknameValid = false 하기
     @objc func textFieldDidChanacge(_ sender: Any?) {
         isNicknameValid = false
+        // 다음버튼 비활성화
+        signup3View.nextButton.isEnabled = false
+        signup3View.nextButton.setupButton(style: .gray)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
