@@ -183,6 +183,15 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
                 if picker.view.tag == signup2View.certificateUploadButton.tag {
                     selectedFileURL = imageURL
                     signup2View.certificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
+                    // 다음버튼 활성화
+                    signup2View.nextButton.isEnabled = true
+                    signup2View.nextButton.setTitleColor(.white, for: .normal)
+                    if uiStyle == .mento {
+                        signup2View.nextButton.backgroundColor = .BaseGreen
+                    } else {
+                        signup2View.nextButton.backgroundColor = .BaseNavy
+                    }
+                    
                 }
             }
         }
