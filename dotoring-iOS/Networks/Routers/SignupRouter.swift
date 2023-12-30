@@ -16,6 +16,8 @@ enum SignupRouter: URLRequestConvertible {
     case validMentoNickname(nickname: String)
     case validMentiNickname(nickname: String)
     case validId(loginId: String)
+    case validEmail(email: String)
+    case validCode(email: String, code: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL + "api")!
@@ -23,9 +25,9 @@ enum SignupRouter: URLRequestConvertible {
 
     var method: HTTPMethod {
         switch self {
-        case .fields, .majors:
+        case .fields, .majors, .validEmail:
             return .get
-        case .validMentoNickname, .validMentiNickname, .validId:
+        case .validMentoNickname, .validMentiNickname, .validId, .validCode:
             return .post
         }
     }
@@ -42,6 +44,10 @@ enum SignupRouter: URLRequestConvertible {
             return "menti/valid-nickname"
         case .validId:
             return "member/valid-loginId"
+        case .validEmail:
+            return "member/signup/code"
+        case .validCode:
+            return "member/signup/valid-code"
         }
     }
     
@@ -51,6 +57,10 @@ enum SignupRouter: URLRequestConvertible {
             return ["nickname" : nickname]
         case let .validId(loginId):
             return ["loginId" : loginId]
+        case let .validEmail(email):
+            return ["email" : email]
+        case let .validCode(email, code):
+            return ["email": email, "emailVerificationCode": code]
         default:
             return [:]
         }
@@ -67,8 +77,10 @@ enum SignupRouter: URLRequestConvertible {
         request.method = method
 
         switch self {
-        case .validMentoNickname, .validMentiNickname, .validId:
+        case .validMentoNickname, .validMentiNickname, .validId, .validCode:
             request.httpBody = try JSONEncoder().encode(parameters)
+        case .validEmail:
+            request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
         default:
             break
         }

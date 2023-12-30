@@ -111,4 +111,52 @@ class SignupNetworkService {
                 }
             }
     }
+    
+    class func validEmail (email: String, _ completion: @escaping (ValidAPIResponse?, Error?) -> Void) {
+        
+        let urlToCall = SignupRouter.validEmail(email: email)
+        
+        BaseNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: ValidAPIResponse.self) { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let successData):
+                    print("SignupNetworkService - validEmail() called")
+                    
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("SignupNetworkService - validEmail() failed")
+                    
+                    return completion(nil, error)
+                }
+            }
+    }
+    
+    class func validCode (email: String, code: String, _ completion: @escaping (ValidAPIResponse?, Error?) -> Void) {
+        
+        let urlToCall = SignupRouter.validCode(email: email, code: code)
+        
+        BaseNetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200...500)
+            .responseDecodable(of: ValidAPIResponse.self) { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let successData):
+                    print("SignupNetworkService - validCode() called")
+                    
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("SignupNetworkService - validCode() failed")
+                    
+                    return completion(nil, error)
+                }
+            }
+    }
 }

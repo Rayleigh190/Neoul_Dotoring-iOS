@@ -118,6 +118,17 @@ class Signup2ViewController: UIViewController {
         self.navigationItem.titleView = titleLabel
     }
     
+    func activeNextButton() {
+        // 다음버튼 활성화
+        signup2View.nextButton.isEnabled = true
+        signup2View.nextButton.setTitleColor(.white, for: .normal)
+        if uiStyle == .mento {
+            signup2View.nextButton.backgroundColor = .BaseGreen
+        } else {
+            signup2View.nextButton.backgroundColor = .BaseNavy
+        }
+    }
+    
 }
 
 extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
@@ -172,6 +183,8 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
             if controller.view.tag == signup2View.certificateUploadButton.tag {
                 selectedFileURL = selectedPDFURL
                 signup2View.certificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
+                // 다음버튼 활성화
+                activeNextButton()
             }
         }
     }
@@ -184,13 +197,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
                     selectedFileURL = imageURL
                     signup2View.certificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
                     // 다음버튼 활성화
-                    signup2View.nextButton.isEnabled = true
-                    signup2View.nextButton.setTitleColor(.white, for: .normal)
-                    if uiStyle == .mento {
-                        signup2View.nextButton.backgroundColor = .BaseGreen
-                    } else {
-                        signup2View.nextButton.backgroundColor = .BaseNavy
-                    }
+                    activeNextButton()
                     
                 }
             }

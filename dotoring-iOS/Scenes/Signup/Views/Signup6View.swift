@@ -169,10 +169,11 @@ class Signup6View: UIView {
         return textField
     }()
     
-    private lazy var authTimerLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+    lazy var authTimerLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "05:00"
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
@@ -183,19 +184,22 @@ class Signup6View: UIView {
         textField.textField.placeholder = "인증 코드"
         textField.button.setTitle("인증하기", for: .normal)
         textField.textField.returnKeyType = .done
+        textField.textField.isEnabled = false
+        textField.button.isEnabled = false
         
         return textField
     }()
     
-    private lazy var authCodeWarningLabel: NanumLabel = {
+    lazy var authCodeWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "인증 코드가 달라요."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
     
-    private lazy var loginButton: BaseButton = {
+    lazy var loginButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("로그인하러 가기", for: .normal)
         button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
