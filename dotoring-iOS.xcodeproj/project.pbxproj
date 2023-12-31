@@ -25,6 +25,8 @@
 		F1A560682A949E6900FD2E91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1A560672A949E6900FD2E91 /* Assets.xcassets */; };
 		F1A5606B2A949E6900FD2E91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */; };
 		F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F1A560732A94A42B00FD2E91 /* Kingfisher */; };
+		F1C3A32E2B4011CB0041907B /* MultipartNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3A32D2B4011CB0041907B /* MultipartNetworkManager.swift */; };
+		F1C3A3302B4011F10041907B /* MultipartInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C3A32F2B4011F10041907B /* MultipartInterceptor.swift */; };
 		F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */; };
 		F1CA7E4E2AFCBA5A002D733E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F1CA7E4D2AFCBA5A002D733E /* Alamofire */; };
 		F1CA7E512AFCC30E002D733E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CA7E502AFCC30E002D733E /* Constants.swift */; };
@@ -144,6 +146,8 @@
 		F1A560672A949E6900FD2E91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F1A5606A2A949E6900FD2E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F1A5606C2A949E6900FD2E91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1C3A32D2B4011CB0041907B /* MultipartNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartNetworkManager.swift; sourceTree = "<group>"; };
+		F1C3A32F2B4011F10041907B /* MultipartInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartInterceptor.swift; sourceTree = "<group>"; };
 		F1CA7E4A2AF4CF2D002D733E /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		F1CA7E502AFCC30E002D733E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkManager.swift; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 			children = (
 				F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */,
 				F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */,
+				F1C3A32D2B4011CB0041907B /* MultipartNetworkManager.swift */,
 			);
 			path = NetworksManagers;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				F1CA7E552AFCE127002D733E /* BaseInterceptor.swift */,
+				F1C3A32F2B4011F10041907B /* MultipartInterceptor.swift */,
 			);
 			path = Interceptors;
 			sourceTree = "<group>";
@@ -757,8 +763,10 @@
 				F1CA7E702AFFD487002D733E /* APINetworkManager.swift in Sources */,
 				F1FCE77B2AC2C7670024AE60 /* MenteeSignup1ViewController.swift in Sources */,
 				F1CA7E5A2AFCE9B0002D733E /* BaseRouter.swift in Sources */,
+				F1C3A32E2B4011CB0041907B /* MultipartNetworkManager.swift in Sources */,
 				F1FCE79F2AC9795C0024AE60 /* CustomAlertView.swift in Sources */,
 				F1CA7E9A2B117F74002D733E /* Message.swift in Sources */,
+				F1C3A3302B4011F10041907B /* MultipartInterceptor.swift in Sources */,
 				F1FCE7A52ACE87C10024AE60 /* AccountConfirmView.swift in Sources */,
 				F1FCE7BB2ADA623A0024AE60 /* ReportReasonAlertViewController.swift in Sources */,
 				F1DD2CAF2A99E57D00EE9711 /* LineTextField.swift in Sources */,

@@ -159,4 +159,36 @@ class SignupNetworkService {
                 }
             }
     }
+    
+    class func signup(uiStyle: UIStyle, certifications: URL, school: String, grade: String, majors: String, fields: String, nickname: String, introduction: String, loginId: String, password: String, email: String, _ completion: @escaping (ValidAPIResponse?, Error?) -> Void) {
+        
+        var urlToCall:  SignupRouter{
+            switch uiStyle {
+            case .mento:
+                return SignupRouter.signupMento(certifications: certifications, school: school, grade: grade, majors: majors, fields: fields, nickname: nickname, introduction: introduction, loginId: loginId, password: password, email: email)
+            case .mentee:
+                return SignupRouter.signupMenti(certifications: certifications, school: school, grade: grade, majors: majors, fields: fields, nickname: nickname, introduction: introduction, loginId: loginId, password: password, email: email)
+            }
+        }
+        
+        MultipartNetworkManager
+            .shared
+            .session
+            .upload(multipartFormData: urlToCall.multipartFormData, with: urlToCall)
+            .validate(statusCode: 200...300)
+            .responseDecodable(of: ValidAPIResponse.self) { response in
+                debugPrint(response)
+                switch response.result {
+                case .success(let successData):
+                    print("SignupNetworkService - signup() called")
+                    
+                    return completion(successData, nil)
+                    
+                case .failure(let error):
+                    print("SignupNetworkService - signup() failed")
+                    
+                    return completion(nil, error)
+                }
+            }
+    }
 }

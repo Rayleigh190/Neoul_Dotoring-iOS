@@ -16,6 +16,7 @@ class Signup6ViewController: UIViewController {
     var certificationsFileURL: URL?
     var nickname: String = ""
     var introduction: String = ""
+    var isDoc = false
     
     var isIdValid = false
     var isRePwValid = false
@@ -86,12 +87,16 @@ class Signup6ViewController: UIViewController {
         if isInputValid() == false {
             return
         }
-        // Todo: 회원가입 진행
-        print("all valid 회원가입 진행")
-//        if let viewControllers = self.navigationController?.viewControllers, viewControllers.count >= 8 {
-//            let destinationVC = viewControllers[viewControllers.count - 8]
-//            self.navigationController?.popToViewController(destinationVC, animated: true)
-//        }
+        // 회원가입 진행
+        reqSignup() {success in
+            if success {
+                if let viewControllers = self.navigationController?.viewControllers{
+                    let destinationVC = viewControllers[0]
+                    self.navigationController?.popToViewController(destinationVC, animated: true)
+                }
+            }
+        }
+        
     }
     
     func setupNavigationBar() {
@@ -415,5 +420,71 @@ extension Signup6ViewController {
                 self.textFieldDidEndEditing(self.signup6View.authCodeTextField.textField)
             }
         self.view.hideToastActivity()
+    }
+    
+    func reqSignup(completion: @escaping (Bool) -> Void) {
+        
+        guard let certificationsFileURL = certificationsFileURL else {
+            completion(false)
+            return
+        }
+        
+        if isDoc {
+            // Start accessing a security-scoped resource.
+            guard certificationsFileURL.startAccessingSecurityScopedResource() else {
+                print("Signup6ViewController - reqSignup(): 파일접근 실패")
+                completion(false)
+                return
+            }
+        }
+        
+        guard let loginId = signup6View.idTextField.textField.text else {
+            completion(false)
+            return
+        }
+        guard let password = signup6View.pwTextField.textField.text else {
+            completion(false)
+            return
+        }
+        guard let email = signup6View.emailTextField.textField.text else {
+            completion(false)
+            return
+        }
+
+        SignupNetworkService
+            .signup(uiStyle: uiStyle, certifications: certificationsFileURL, school: school, grade: String(grade), majors: majors.joined(separator: ","), fields: fields.joined(separator: ","), nickname: nickname, introduction: introduction, loginId: loginId, password: password, email: email) { response, error in
+                
+                if error != nil {
+                    // 회원가입 요청 에러 발생
+                    debugPrint("회원가입 요청 에러 발생 : \(String(describing: error))")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "회원가입 요청 에러 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "회원가입 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                    }
+                    completion(false)
+                } else {
+                    if response?.success == true {
+                        // 회원가입 성공
+                        //UIAlertController
+                        let alert = UIAlertController(title: "회원가입 성공", message: "로그인해 주세요!", preferredStyle: .alert)
+                        // Button
+                        let ok = UIAlertAction(title: "확인", style: .default) { (action:UIAlertAction!) in
+                            completion(true)
+                        }
+                        alert.addAction(ok)
+                        // alert 띄우기
+                        if let vc = UIApplication.shared.keyWindow?.visibleViewController as? UIViewController {
+                            vc.present(alert, animated: true, completion: nil)
+                        }
+                    } else {
+                        Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                        completion(false)
+                    }
+                }
+                if self.isDoc {
+                    certificationsFileURL.stopAccessingSecurityScopedResource()
+                }
+            }
     }
 }

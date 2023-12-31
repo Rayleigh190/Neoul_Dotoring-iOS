@@ -16,6 +16,7 @@ class Signup5ViewController: UIViewController {
     var certificationsFileURL: URL?
     var nickname: String = ""
     var introduction: String = ""
+    var isDoc = false
 
     var signup5View: Signup5View!
     
@@ -72,6 +73,7 @@ class Signup5ViewController: UIViewController {
         vc.certificationsFileURL = certificationsFileURL
         vc.nickname = nickname
         vc.introduction = "안녕하세요 전남대학교 4학년 최우진입니다."
+        vc.isDoc = isDoc
         navigationController?.pushViewController(vc, animated: false)
     }
     

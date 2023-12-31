@@ -15,6 +15,7 @@ class Signup4ViewController: UIViewController, KeyboardEvent {
     var majors: [String] = []
     var certificationsFileURL: URL?
     var nickname: String = ""
+    var isDoc = false
     
     // 키보드 이벤트를 받을 때 움직일 뷰를 정해줍니다.
     var transformView: UIView { return self.view }
@@ -80,6 +81,7 @@ class Signup4ViewController: UIViewController, KeyboardEvent {
         vc.certificationsFileURL = certificationsFileURL
         vc.nickname = nickname
         vc.introduction = "안녕하세요 전남대학교 4학년 최우진입니다."
+        vc.isDoc = isDoc
         navigationController?.pushViewController(vc, animated: false)
     }
     

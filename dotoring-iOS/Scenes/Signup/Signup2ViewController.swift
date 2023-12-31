@@ -20,6 +20,7 @@ class Signup2ViewController: UIViewController {
     
     var selectedFileURL: URL?  // Store the selected file URL
 //    var selectedFileURL2: URL? // Store the selected file URL
+    var isDoc = false
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -83,6 +84,7 @@ class Signup2ViewController: UIViewController {
         vc.fields = fields
         vc.majors = majors
         vc.certificationsFileURL = selectedFileURL
+        vc.isDoc = isDoc
         navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -155,7 +157,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
     }
     
     func pickPDF(sender: Int) {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.pdf], asCopy: true)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.pdf])
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         if sender == 0 {
@@ -166,6 +168,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
     }
 
     func pickImage(sender: Int) {
+        self.view.makeToastActivity(.center)
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
@@ -173,6 +176,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
             imagePicker.view.tag = signup2View.certificateUploadButton.tag
         }
         present(imagePicker, animated: true, completion: nil)
+        self.view.hideToastActivity()
     }
 
     // Implement the delegate methods for UIDocumentPickerViewController and UIImagePickerController to handle the selected file/image.
@@ -183,6 +187,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
             if controller.view.tag == signup2View.certificateUploadButton.tag {
                 selectedFileURL = selectedPDFURL
                 signup2View.certificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
+                isDoc = true
                 // 다음버튼 활성화
                 activeNextButton()
             }
@@ -196,6 +201,7 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
                 if picker.view.tag == signup2View.certificateUploadButton.tag {
                     selectedFileURL = imageURL
                     signup2View.certificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
+                    isDoc = false
                     // 다음버튼 활성화
                     activeNextButton()
                     

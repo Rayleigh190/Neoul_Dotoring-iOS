@@ -14,6 +14,7 @@ class Signup3ViewController: UIViewController {
     var fields: [String] = []
     var majors: [String] = []
     var certificationsFileURL: URL?
+    var isDoc = false
     //
     var isNicknameValid = false
     var inputNickname: String = ""
@@ -72,6 +73,7 @@ class Signup3ViewController: UIViewController {
         vc.majors = majors
         vc.certificationsFileURL = certificationsFileURL
         vc.nickname = inputNickname
+        vc.isDoc = isDoc
         navigationController?.pushViewController(vc, animated: false)
     }
     

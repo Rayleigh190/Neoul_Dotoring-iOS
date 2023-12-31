@@ -18,6 +18,8 @@ enum SignupRouter: URLRequestConvertible {
     case validId(loginId: String)
     case validEmail(email: String)
     case validCode(email: String, code: String)
+    case signupMento(certifications: URL, school: String, grade: String, majors: String, fields: String, nickname: String, introduction: String, loginId: String, password: String, email: String)
+    case signupMenti(certifications: URL, school: String, grade: String, majors: String, fields: String, nickname: String, introduction: String, loginId: String, password: String, email: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL + "api")!
@@ -27,7 +29,7 @@ enum SignupRouter: URLRequestConvertible {
         switch self {
         case .fields, .majors, .validEmail:
             return .get
-        case .validMentoNickname, .validMentiNickname, .validId, .validCode:
+        case .validMentoNickname, .validMentiNickname, .validId, .validCode, .signupMento, .signupMenti:
             return .post
         }
     }
@@ -48,6 +50,10 @@ enum SignupRouter: URLRequestConvertible {
             return "member/signup/code"
         case .validCode:
             return "member/signup/valid-code"
+        case .signupMento:
+            return "signup-mento"
+        case .signupMenti:
+            return "signup-menti"
         }
     }
     
@@ -64,6 +70,26 @@ enum SignupRouter: URLRequestConvertible {
         default:
             return [:]
         }
+    }
+    
+    var multipartFormData: MultipartFormData {
+        let multipartFormData = MultipartFormData()
+        switch self {
+        case let .signupMento(certifications, school, grade, majors, fields, nickname, introduction, loginId, password, email), let .signupMenti(certifications, school, grade, majors, fields, nickname, introduction, loginId, password, email):
+            multipartFormData.append(certifications, withName: "certifications")
+            multipartFormData.append(Data(school.utf8), withName: "school")
+            multipartFormData.append(Data(grade.utf8), withName: "grade")
+            multipartFormData.append(Data(majors.utf8), withName: "majors")
+            multipartFormData.append(Data(fields.utf8), withName: "fields")
+            multipartFormData.append(Data(nickname.utf8), withName: "nickname")
+            multipartFormData.append(Data(introduction.utf8), withName: "introduction")
+            multipartFormData.append(Data(loginId.utf8), withName: "loginId")
+            multipartFormData.append(Data(password.utf8), withName: "password")
+            multipartFormData.append(Data(email.utf8), withName: "email")
+        default: ()
+        }
+
+        return multipartFormData
     }
     
     func asURLRequest() throws -> URLRequest {
