@@ -8,6 +8,23 @@
 import UIKit
 
 class Signup6ViewController: UIViewController {
+    // Signup Data
+    var school: String = ""
+    var grade: Int = 0
+    var fields: [String] = []
+    var majors: [String] = []
+    var certificationsFileURL: URL?
+    var nickname: String = ""
+    var introduction: String = ""
+    var isDoc = false
+    
+    var isIdValid = false
+    var isRePwValid = false
+    var isTimerValid = false
+    var isCodeValid = false
+    
+    var timeRemaining = 300 // 5분을 초로 나타낸 값
+    var timer: Timer?
 
     var signup6View: Signup6View!
     var fCurTextfieldBottom: CGFloat = 0.0
@@ -28,6 +45,7 @@ class Signup6ViewController: UIViewController {
         setDelegate()
         registerForKeyboardNotifications()
         setupNavigationBar()
+        setAddTarget()
     }
     
     deinit {
@@ -66,10 +84,19 @@ class Signup6ViewController: UIViewController {
     }
     
     func loginButtonTapped() {
-        if let viewControllers = self.navigationController?.viewControllers, viewControllers.count >= 8 {
-            let destinationVC = viewControllers[viewControllers.count - 8]
-            self.navigationController?.popToViewController(destinationVC, animated: true)
+        if isInputValid() == false {
+            return
         }
+        // 회원가입 진행
+        reqSignup() {success in
+            if success {
+                if let viewControllers = self.navigationController?.viewControllers{
+                    let destinationVC = viewControllers[0]
+                    self.navigationController?.popToViewController(destinationVC, animated: true)
+                }
+            }
+        }
+        
     }
     
     func setupNavigationBar() {
@@ -103,7 +130,15 @@ class Signup6ViewController: UIViewController {
 
         self.navigationItem.titleView = titleLabel
     }
-
+    
+    func setAddTarget() {
+        signup6View.idTextField.button.addTarget(self, action: #selector(validId), for: .touchUpInside)
+        signup6View.idTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+        signup6View.pwTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+        signup6View.emailTextField.button.addTarget(self, action: #selector(validEmail), for: .touchUpInside)
+        signup6View.emailTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+        signup6View.authCodeTextField.button.addTarget(self, action: #selector(validCode), for: .touchUpInside)
+    }
 }
 
 extension Signup6ViewController: UITextFieldDelegate {
@@ -156,4 +191,300 @@ extension Signup6ViewController: UITextFieldDelegate {
         }
     }
     
+    // 입력값 수정 했을때 is..Valid = false 하기
+    @objc func textFieldDidChanacge(_ sender: UITextField?) {
+        if sender == signup6View.idTextField.textField {
+            isIdValid = false
+        }
+        
+        if sender == signup6View.pwTextField.textField {
+            signup6View.rePwTextField.textField.text = ""
+            signup6View.pwChekButton.tintColor = .BaseGray400
+            isRePwValid = false
+        }
+        
+        if sender == signup6View.emailTextField.textField {
+            isCodeValid = false
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == signup6View.pwTextField.textField {
+            guard let pwCount = textField.text?.count else {return}
+            if pwCount > 0 {
+                signup6View.rePwTextField.textField.isEnabled = true
+            } else {
+                signup6View.rePwTextField.textField.isEnabled = false
+            }
+        }
+        
+        if textField == signup6View.rePwTextField.textField {
+            signup6View.pwWarningLabel.isHidden = true
+            guard let inputPw = signup6View.pwTextField.textField.text else {return}
+            if textField.text == inputPw {
+                isRePwValid = true
+                if uiStyle == .mento {
+                    signup6View.pwChekButton.tintColor = .BaseGreen
+                } else {
+                    signup6View.pwChekButton.tintColor = .BaseNavy
+                }
+            } else {
+                isRePwValid = false
+                signup6View.pwChekButton.tintColor = .BaseGray400
+                signup6View.pwWarningLabel.isHidden = false
+            }
+        }
+        
+        if isIdValid == true && isRePwValid == true && isCodeValid == true {
+            if uiStyle == .mento {
+                signup6View.loginButton.setupButton(style: .green)
+            } else {
+                signup6View.loginButton.setupButton(style: .navy)
+            }
+        } else {
+            signup6View.loginButton.setupButton(style: .gray)
+        }
+    }
+    
+}
+
+extension Signup6ViewController {
+    
+    func isPwValid(pw: String) -> Bool { // 현재 안 쓰이는 함수
+        // 정규표현식 패턴
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\",./<>?])([A-Za-z\\d!@#$%^&*()_+\\-=\\[\\]{};':\",./<>?]){7,12}$"
+        
+        // NSPredicate를 사용하여 패턴 검증
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordTest.evaluate(with: pw)
+    }
+    
+    func isEmailValid(_ email: String) -> Bool {
+        // 정규표현식 패턴
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        // NSPredicate를 사용하여 패턴 검증
+        let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailTest.evaluate(with: email)
+    }
+    
+    func isInputValid() -> Bool {
+        guard let inputPw = signup6View.pwTextField.textField.text else {return false}
+        
+        if isIdValid == false {
+            Alert.showAlert(title: "안내", message: "아이디 중복확인을 해주세요.")
+            return false
+        } else if isPwValid(pw: inputPw) == false {
+            Alert.showAlert(title: "안내", message: "비밀번호 형식을 맞춰 주세요.")
+            return false
+        } else if isRePwValid == false {
+            Alert.showAlert(title: "안내", message: "비밀번호 확인을 해주세요.")
+            return false
+        } else if isCodeValid == false {
+            Alert.showAlert(title: "안내", message: "인증코드 인증을 해주세요.")
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    // Timer
+    func startTimer() {
+        // 타이머를 다시 시작하기 전에 초기화
+        timeRemaining = 300
+        timer?.invalidate() // 기존 타이머 중지
+        isTimerValid = true
+
+        // 1초 간격으로 타이머 시작
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer!, forMode: .common)
+    }
+
+    @objc func updateTimer() {
+        // 1초마다 호출되는 타이머 이벤트
+        if timeRemaining > 0 {
+            timeRemaining -= 1
+            updateTimerUI()
+        } else {
+            // 타이머 종료
+            timer?.invalidate()
+            isTimerValid = false
+        }
+    }
+
+    func updateTimerUI() {
+        let minutes = timeRemaining / 60
+        let seconds = timeRemaining % 60
+        signup6View.authTimerLabel.text = String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // Network
+    @objc func validId() {
+        
+        self.signup6View.idWarningLabel.isHidden = true
+        
+        guard let inputId = signup6View.idTextField.textField.text else {return}
+        
+        self.view.makeToastActivity(.center)
+        SignupNetworkService
+            .validId(loginId: inputId) { response, error in
+                if response?.success == false {
+                    if response?.error?.code == "4010" {
+                        // 아이디 중복발생
+                        self.signup6View.idWarningLabel.isHidden = false
+                        return
+                    } else {
+                        Alert.showAlert(title: "안내", message: response?.error?.code ?? "알 수 없는 오류")
+                        return
+                    }
+                } else if response?.success == true {
+                    debugPrint(response!)
+                    Alert.showAlert(title: "안내", message: "사용 가능한 아이디입니다.")
+                    self.isIdValid = true
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                }
+                self.textFieldDidEndEditing(self.signup6View.idTextField.textField)
+            }
+        self.view.hideToastActivity()
+    }
+    
+    @objc func validEmail() {
+        guard let inputEmail = signup6View.emailTextField.textField.text else {return}
+        // 이메일 형식 체크
+        if isEmailValid(inputEmail) == false {
+            Alert.showAlert(title: "안내", message: "이메일 형식이 맞지 않습니다.")
+            return
+        }
+        
+        self.view.makeToastActivity(.center)
+        SignupNetworkService
+            .validEmail(email: inputEmail) { response, error in
+                if response?.success == false {
+                    if response?.error?.code == "4133" {
+                        // 이메일 중복발생
+                        Alert.showAlert(title: "안내", message: response?.error?.message ?? "알 수 없는 오류")
+                        return
+                    } else {
+                        Alert.showAlert(title: "안내", message: response?.error?.code ?? "알 수 없는 오류")
+                        return
+                    }
+                } else if response?.success == true {
+                    debugPrint(response!)
+                    Alert.showAlert(title: "안내", message: "이메일로 인증코드가 발송되었습니다.")
+                    // 타이머 설정하기
+                    self.signup6View.authCodeTextField.textField.isEnabled = true
+                    self.signup6View.authCodeTextField.button.isEnabled = true
+                    self.signup6View.authTimerLabel.isHidden = false
+                    self.startTimer()
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                }
+                self.textFieldDidEndEditing(self.signup6View.emailTextField.textField)
+            }
+        self.view.hideToastActivity()
+    }
+    
+    @objc func validCode() {
+        
+        if isTimerValid == false {
+            Alert.showAlert(title: "안내", message: "인증 시간이 초과했습니다.")
+            return
+        }
+        
+        self.signup6View.authCodeWarningLabel.isHidden = true
+        
+        guard let inputCode = signup6View.authCodeTextField.textField.text else {return}
+        guard let inputEmail = signup6View.emailTextField.textField.text else {return}
+        
+        self.view.makeToastActivity(.center)
+        SignupNetworkService
+            .validCode(email: inputEmail, code: inputCode) { response, error in
+                if response?.success == false {
+                    if response?.error?.code == "4077" {
+                        // 코드 불일치 발생
+                        self.signup6View.authCodeWarningLabel.isHidden = false
+                        return
+                    } else {
+                        Alert.showAlert(title: "안내", message: response?.error?.message ?? "알 수 없는 오류")
+                        return
+                    }
+                } else if response?.success == true {
+                    debugPrint(response!)
+                    Alert.showAlert(title: "안내", message: "인증되었습니다.")
+                    self.isCodeValid = true
+                    self.signup6View.authTimerLabel.isHidden = true
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                }
+                self.textFieldDidEndEditing(self.signup6View.authCodeTextField.textField)
+            }
+        self.view.hideToastActivity()
+    }
+    
+    func reqSignup(completion: @escaping (Bool) -> Void) {
+        
+        guard let certificationsFileURL = certificationsFileURL else {
+            completion(false)
+            return
+        }
+        
+        if isDoc {
+            // Start accessing a security-scoped resource.
+            guard certificationsFileURL.startAccessingSecurityScopedResource() else {
+                print("Signup6ViewController - reqSignup(): 파일접근 실패")
+                completion(false)
+                return
+            }
+        }
+        
+        guard let loginId = signup6View.idTextField.textField.text else {
+            completion(false)
+            return
+        }
+        guard let password = signup6View.pwTextField.textField.text else {
+            completion(false)
+            return
+        }
+        guard let email = signup6View.emailTextField.textField.text else {
+            completion(false)
+            return
+        }
+
+        SignupNetworkService
+            .signup(uiStyle: uiStyle, certifications: certificationsFileURL, school: school, grade: String(grade), majors: majors.joined(separator: ","), fields: fields.joined(separator: ","), nickname: nickname, introduction: introduction, loginId: loginId, password: password, email: email) { response, error in
+                
+                if error != nil {
+                    // 회원가입 요청 에러 발생
+                    debugPrint("회원가입 요청 에러 발생 : \(String(describing: error))")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "회원가입 요청 에러 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "회원가입 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                    }
+                    completion(false)
+                } else {
+                    if response?.success == true {
+                        // 회원가입 성공
+                        //UIAlertController
+                        let alert = UIAlertController(title: "회원가입 성공", message: "로그인해 주세요!", preferredStyle: .alert)
+                        // Button
+                        let ok = UIAlertAction(title: "확인", style: .default) { (action:UIAlertAction!) in
+                            completion(true)
+                        }
+                        alert.addAction(ok)
+                        // alert 띄우기
+                        if let vc = UIApplication.shared.keyWindow?.visibleViewController as? UIViewController {
+                            vc.present(alert, animated: true, completion: nil)
+                        }
+                    } else {
+                        Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                        completion(false)
+                    }
+                }
+                if self.isDoc {
+                    certificationsFileURL.stopAccessingSecurityScopedResource()
+                }
+            }
+    }
 }

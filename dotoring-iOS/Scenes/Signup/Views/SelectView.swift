@@ -12,6 +12,7 @@ class SelectView: UIView {
     var uiColor: UIColor = UIColor.BaseGray200!
     var elements: [String] = ["선택항목 1", "선택항목 2", "선택항목 3", "선택항목 4", "선택항목 5", "선택항목 6", "선택항목 7", "선택항목 8", "선택항목 9", "선택항목 10"]
     var selectedElements: [Int] = [] // 선택한 항목 cell의 indexPath를 저장
+    var previousSelectedElements: [Int] = []
     
     lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
@@ -30,7 +31,7 @@ class SelectView: UIView {
         return button
     }()
     
-    private lazy var selectedStackView: UIStackView = {
+    lazy var selectedStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
@@ -133,6 +134,23 @@ extension SelectView {
         for i in selectedElements {
             tableView.deselectRow(at: IndexPath(row: i, section: 0), animated: true)
             tableView(tableView, didDeselectRowAt: IndexPath(row: i, section: 0))
+        }
+    }
+    
+    /**
+     * tableView의 cell을 선택 할 수 있는 함수입니다.
+     */
+    func elementSelect(selectedElementIndex: IndexPath) {
+        tableView.selectRow(at: selectedElementIndex, animated: true, scrollPosition: .none)
+        tableView(tableView, didSelectRowAt: selectedElementIndex)
+    }
+    
+    func setPreviousSelectedElement() {
+        // 선택후 닫았다 다시 열었을때 이전에 선택 했던 것들 다시 선택
+        if previousSelectedElements.count < 1 {return}
+        for previousSelectedElement in self.previousSelectedElements {
+            let indexPath = IndexPath(row: previousSelectedElement, section: 0)
+            elementSelect(selectedElementIndex: indexPath)
         }
     }
 }

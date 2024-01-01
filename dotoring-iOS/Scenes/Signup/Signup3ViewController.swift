@@ -8,6 +8,16 @@
 import UIKit
 
 class Signup3ViewController: UIViewController {
+    // Signup Data
+    var school: String = ""
+    var grade: Int = 0
+    var fields: [String] = []
+    var majors: [String] = []
+    var certificationsFileURL: URL?
+    var isDoc = false
+    //
+    var isNicknameValid = false
+    var inputNickname: String = ""
     
     var signup3View: Signup3View!
     
@@ -24,6 +34,8 @@ class Signup3ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
         setupNavigationBar()
+        setAddTarget()
+        signup3View.nickNameTextField.textField.delegate = self
     }
     
     override func loadView() {
@@ -50,7 +62,18 @@ class Signup3ViewController: UIViewController {
     }
     
     func nextButtonTapped() {
+        if isNicknameValid == false {
+            Alert.showAlert(title: "안내", message: "닉네임 중복 확인을 해주세요.")
+            return
+        }
         let vc = Signup4ViewController()
+        vc.school = school
+        vc.grade = grade
+        vc.fields = fields
+        vc.majors = majors
+        vc.certificationsFileURL = certificationsFileURL
+        vc.nickname = inputNickname
+        vc.isDoc = isDoc
         navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -86,4 +109,76 @@ class Signup3ViewController: UIViewController {
         self.navigationItem.titleView = titleLabel
     }
 
+}
+
+extension Signup3ViewController {
+    
+    func containsNumber(in text: String) -> Bool {
+        let numberCharacterSet = CharacterSet(charactersIn: "0123456789")
+        return text.rangeOfCharacter(from: numberCharacterSet) != nil
+    }
+    
+    @objc func validNickname() {
+        if inputNickname.count < 3
+            || inputNickname.count > 8 {
+            Alert.showAlert(title: "안내", message: "3자 이상, 8자 이하로 입력하세요.")
+            return
+        }
+        
+        if !containsNumber(in: inputNickname) {
+            Alert.showAlert(title: "안내", message: "숫자를 1개 이상 입력하세요.")
+            return
+        }
+        self.view.makeToastActivity(.center)
+        SignupNetworkService.validNickname(uiStyle: uiStyle, nickname: inputNickname) { response, error in
+            self.signup3View.nickNameWarningLabel.isHidden = true
+            if response?.success == false {
+                // 닉네임 중복 발생
+                if response?.error?.code == "4009" {
+                    self.signup3View.nickNameWarningLabel.isHidden = false
+                    return
+                }
+            } else if response?.success == true {
+                debugPrint(response!)
+                Alert.showAlert(title: "안내", message: "사용 가능한 닉네임입니다.")
+                self.isNicknameValid = true
+                // 다음버튼 활성화
+                self.signup3View.nextButton.isEnabled = true
+                self.signup3View.nextButton.setTitleColor(.white, for: .normal)
+                if self.uiStyle == .mento {
+                    self.signup3View.nextButton.backgroundColor = .BaseGreen
+                } else {
+                    self.signup3View.nextButton.backgroundColor = .BaseNavy
+                }
+            } else {
+                Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+            }
+            
+        }
+        self.view.hideToastActivity()
+    }
+    
+    func setAddTarget() {
+        signup3View.nickNameTextField.button.addTarget(self, action: #selector(validNickname), for: .touchUpInside)
+        
+        signup3View.nickNameTextField.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+    }
+    
+}
+
+extension Signup3ViewController: UITextFieldDelegate {
+    
+    // 닉네임 수정 했을때 isNicknameValid = false 하기
+    @objc func textFieldDidChanacge(_ sender: Any?) {
+        isNicknameValid = false
+        // 다음버튼 비활성화
+        signup3View.nextButton.isEnabled = false
+        signup3View.nextButton.setupButton(style: .gray)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let inputNickname = signup3View.nickNameTextField.textField.text {
+            self.inputNickname = inputNickname
+        }
+    }
 }

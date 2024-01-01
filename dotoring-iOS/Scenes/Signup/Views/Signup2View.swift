@@ -87,10 +87,11 @@ class Signup2View: UIView {
         return button
     }()
     
-    private lazy var nextButton: BaseButton = {
+    lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
         
         return button
     }()

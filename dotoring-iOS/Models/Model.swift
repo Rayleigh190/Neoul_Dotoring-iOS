@@ -14,7 +14,7 @@ struct ErrorData: Codable {
 }
 
 struct ErrorData2: Codable {
-    let message: String
+    let message: String?
     let code: String?
     let status: String
 }

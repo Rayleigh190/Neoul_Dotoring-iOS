@@ -36,7 +36,7 @@ class BaseButton: UIButton {
 
 }
 
-private extension BaseButton {
+extension BaseButton {
     func setupButton(style: BaseButtonStyle) {
         
         switch style {
@@ -47,7 +47,7 @@ private extension BaseButton {
             setTitleColor(UIColor.black, for: .normal)
         case .gray:
             backgroundColor = .BaseGray200
-            setTitleColor(UIColor(red: 0.592, green: 0.592, blue: 0.592, alpha: 1), for: .normal)
+            setTitleColor(UIColor.BaseGray600, for: .normal)
         case .navy:
             backgroundColor = .BaseNavy
             setTitleColor(.white, for: .normal)

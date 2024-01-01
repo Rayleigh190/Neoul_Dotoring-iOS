@@ -74,7 +74,7 @@ class Signup3View: UIView {
         return label
     }()
     
-    private lazy var nickNameTextField: LineTextField = {
+    lazy var nickNameTextField: LineTextField = {
         let textField = LineTextField()
         textField.isButtonVisible = true
         textField.textField.placeholder = "닉네임"
@@ -84,10 +84,11 @@ class Signup3View: UIView {
         return textField
     }()
     
-    private lazy var nickNameWarningLabel: NanumLabel = {
+    lazy var nickNameWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "이미 있는 닉네임입니다."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
@@ -99,10 +100,11 @@ class Signup3View: UIView {
         return label
     }()
     
-    private lazy var nextButton: BaseButton = {
+    lazy var nextButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("다음", for: .normal)
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.isEnabled = false
         
         return button
     }()

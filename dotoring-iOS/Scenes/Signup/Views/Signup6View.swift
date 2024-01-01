@@ -90,10 +90,11 @@ class Signup6View: UIView {
         return label
     }()
     
-    private lazy var idWarningLabel: NanumLabel = {
+    lazy var idWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "이미 있는 아이디입니다."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
@@ -109,6 +110,7 @@ class Signup6View: UIView {
         let textField = LineTextField()
         textField.textField.placeholder = "비밀번호"
         textField.textField.returnKeyType = .continue
+        textField.textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -126,22 +128,25 @@ class Signup6View: UIView {
         let textField = LineTextField()
         textField.textField.placeholder = "다시 한 번 써 주세요."
         textField.textField.returnKeyType = .continue
+        textField.textField.isSecureTextEntry = true
+        textField.textField.isEnabled = false
         
         return textField
     }()
     
-    private lazy var pwWarningLabel: NanumLabel = {
+    lazy var pwWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "입력한 비밀번호와 달라요."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
     
-    private lazy var pwChekButton: UIButton = {
+    lazy var pwChekButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        button.tintColor = .gray
+        button.tintColor = .BaseGray400
         button.isUserInteractionEnabled = false
         
         return button
@@ -164,10 +169,11 @@ class Signup6View: UIView {
         return textField
     }()
     
-    private lazy var authTimerLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
+    lazy var authTimerLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 13)
         label.text = "05:00"
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
@@ -178,19 +184,22 @@ class Signup6View: UIView {
         textField.textField.placeholder = "인증 코드"
         textField.button.setTitle("인증하기", for: .normal)
         textField.textField.returnKeyType = .done
+        textField.textField.isEnabled = false
+        textField.button.isEnabled = false
         
         return textField
     }()
     
-    private lazy var authCodeWarningLabel: NanumLabel = {
+    lazy var authCodeWarningLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 13)
         label.text = "인증 코드가 달라요."
         label.textColor = .BaseWarningRed
+        label.isHidden = true
         
         return label
     }()
     
-    private lazy var loginButton: BaseButton = {
+    lazy var loginButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("로그인하러 가기", for: .normal)
         button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
