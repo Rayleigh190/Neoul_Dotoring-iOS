@@ -16,6 +16,10 @@
 		F126B1D02AA568D80035E499 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1CF2AA568D80035E499 /* SelectViewController.swift */; };
 		F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D32AA6F6CF0035E499 /* SelectView.swift */; };
 		F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F126B1D62AA6FB780035E499 /* SelectedElementView.swift */; };
+		F14D0DC62B42A41900B2B62D /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DC52B42A41900B2B62D /* MatchViewController.swift */; };
+		F14D0DC82B439B1D00B2B62D /* BannerSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DC72B439B1D00B2B62D /* BannerSectionView.swift */; };
+		F14D0DCA2B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DC92B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift */; };
+		F14D0DCC2B43D83400B2B62D /* PagingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DCB2B43D83400B2B62D /* PagingCollectionViewLayout.swift */; };
 		F18E50DD2B2C0B3300D427A0 /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */; };
 		F1A47DA92B32FAF900D51645 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A47DA82B32FAF900D51645 /* UIResponder.swift */; };
 		F1A47DAB2B32FB2F00D51645 /* KeyboardEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A47DAA2B32FB2F00D51645 /* KeyboardEventProtocol.swift */; };
@@ -136,6 +140,10 @@
 		F126B1CF2AA568D80035E499 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
 		F126B1D32AA6F6CF0035E499 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		F126B1D62AA6FB780035E499 /* SelectedElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedElementView.swift; sourceTree = "<group>"; };
+		F14D0DC52B42A41900B2B62D /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		F14D0DC72B439B1D00B2B62D /* BannerSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSectionView.swift; sourceTree = "<group>"; };
+		F14D0DC92B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerSectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		F14D0DCB2B43D83400B2B62D /* PagingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextField.swift; sourceTree = "<group>"; };
 		F1A47DA82B32FAF900D51645 /* UIResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponder.swift; sourceTree = "<group>"; };
 		F1A47DAA2B32FB2F00D51645 /* KeyboardEventProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventProtocol.swift; sourceTree = "<group>"; };
@@ -295,6 +303,17 @@
 				F1FCE7762AC07CF90024AE60 /* Signup6View.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F14D0DC42B42A3CD00B2B62D /* Match */ = {
+			isa = PBXGroup;
+			children = (
+				F14D0DC52B42A41900B2B62D /* MatchViewController.swift */,
+				F14D0DC72B439B1D00B2B62D /* BannerSectionView.swift */,
+				F14D0DC92B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift */,
+				F14D0DCB2B43D83400B2B62D /* PagingCollectionViewLayout.swift */,
+			);
+			path = Match;
 			sourceTree = "<group>";
 		};
 		F1A560522A949E6800FD2E91 = {
@@ -471,11 +490,12 @@
 		F1DD2C8A2A95DDD500EE9711 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				F1FCE78A2AC7D4AD0024AE60 /* MyPage */,
-				F126B1CA2AA231E20035E499 /* Signup */,
-				F1CA7E8A2B117C0D002D733E /* Chat */,
 				F1DD2CA92A99CCDD00EE9711 /* Common */,
+				F126B1CA2AA231E20035E499 /* Signup */,
 				F1DD2C8B2A95DDF600EE9711 /* Home */,
+				F14D0DC42B42A3CD00B2B62D /* Match */,
+				F1CA7E8A2B117C0D002D733E /* Chat */,
+				F1FCE78A2AC7D4AD0024AE60 /* MyPage */,
 				F1A560622A949E6800FD2E91 /* MainTapBarController.swift */,
 				F126B1CF2AA568D80035E499 /* SelectViewController.swift */,
 			);
@@ -733,12 +753,14 @@
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,
 				F1CA7E9C2B117F95002D733E /* ImageMediaItem.swift in Sources */,
 				F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */,
+				F14D0DCC2B43D83400B2B62D /* PagingCollectionViewLayout.swift in Sources */,
 				F1CA7E5D2AFCFE17002D733E /* Model.swift in Sources */,
 				F1DD2CBE2A9AE68500EE9711 /* LoginView.swift in Sources */,
 				F1A560632A949E6800FD2E91 /* MainTapBarController.swift in Sources */,
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */,
+				F14D0DCA2B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift in Sources */,
 				F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */,
 				F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */,
 				F1FCE7772AC07CF90024AE60 /* Signup6View.swift in Sources */,
@@ -803,12 +825,14 @@
 				F1FCE7872AC318950024AE60 /* NanumWeightType.swift in Sources */,
 				F1FCE7A72ACE88050024AE60 /* AccountConfirmViewController.swift in Sources */,
 				F1FCE79B2AC94A9E0024AE60 /* AccountSetView.swift in Sources */,
+				F14D0DC82B439B1D00B2B62D /* BannerSectionView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */,
 				F1CA7E872B0F4033002D733E /* HomeNetworkService.swift in Sources */,
 				F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */,
 				F1FCE7712AC01E950024AE60 /* Signup5View.swift in Sources */,
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
+				F14D0DC62B42A41900B2B62D /* MatchViewController.swift in Sources */,
 				F1CA7E8C2B117C3C002D733E /* ChannelViewController.swift in Sources */,
 				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,
 				F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */,

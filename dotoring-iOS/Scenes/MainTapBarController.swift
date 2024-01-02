@@ -27,7 +27,7 @@ class MainTapBarController: UITabBarController {
     }()
 
     private lazy var matchViewController: UIViewController = {
-        let viewController = UIViewController()
+        let viewController = UINavigationController(rootViewController: MatchViewController())
         let tabBarItem = UITabBarItem(title: "매칭", image: UIImage(named: "MainTapBarItemMatchUnclickedImg"), tag: 1)
         viewController.tabBarItem = tabBarItem
 
