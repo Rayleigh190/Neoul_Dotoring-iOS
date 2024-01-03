@@ -13,6 +13,9 @@ class BannerSectionView: UIView {
     let cellWidth = UIScreen.main.bounds.width - 32.0
     let sectionSpacing = 16.0
     let cellSpacing = 5.0
+    // 현재 배너 페이지 체크 변수 (자동 스크롤할 때 필요)
+    let numOfBannerPage: Int = 5
+    var currentBannerPage: Int = 0
     
     private lazy var bannerSectionTitleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 17)
@@ -50,6 +53,7 @@ class BannerSectionView: UIView {
 
         setupViews()
         collectionView.reloadData()
+        bannerTimer()
     }
 
     required init?(coder: NSCoder) {
@@ -59,7 +63,7 @@ class BannerSectionView: UIView {
 
 extension BannerSectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        numOfBannerPage
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -84,9 +88,34 @@ extension BannerSectionView: UICollectionViewDelegateFlowLayout {
 ////        32.0
 //        5.0
 //    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        currentBannerPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
 }
 
 private extension BannerSectionView {
+    
+    // 2.5초마다 실행되는 타이머
+    func bannerTimer() {
+        let _: Timer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { (Timer) in
+            self.bannerMove()
+        }
+    }
+    // 배너 움직이는 매서드
+    func bannerMove() {
+        // 현재페이지가 마지막 페이지일 경우
+        if currentBannerPage == numOfBannerPage - 1 {
+        // 맨 처음 페이지로 돌아감
+            collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
+            currentBannerPage = 0
+            return
+        }
+        // 다음 페이지로 전환
+        currentBannerPage += 1
+        collectionView.scrollToItem(at: IndexPath(item: currentBannerPage, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
     func setupViews() {
         [
             bannerSectionTitleLabel,
