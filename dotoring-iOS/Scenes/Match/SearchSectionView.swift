@@ -16,20 +16,29 @@ class SearchSectionView: UIView {
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 17)
         label.text = "직접 찾아 보기"
-
         return label
     }()
+    
+    private lazy var switchButtonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 0
+        return stackView
+    }()
 
-    private lazy var showAllAppsButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("모두 보기", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 14.0, weight: .semibold)
-
+    private lazy var progressButton: UnderlineButton = {
+        let button = UnderlineButton(text: "진행중", style: .gray)
         return button
     }()
     
-    private lazy var buttonStackView: UIStackView = {
+    private lazy var deadlineButton: UnderlineButton = {
+        let button = UnderlineButton(text: "마감", style: .gray)
+        return button
+    }()
+    
+    private lazy var filterButtonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -127,25 +136,27 @@ private extension SearchSectionView {
     func setupViews() {
         [
             titleLabel,
-            showAllAppsButton,
+            switchButtonStackView,
             collectionView,
-            buttonStackView
+            filterButtonStackView
         ].forEach { addSubview($0) }
         
-        [businessNameFilterButton, pjtGoalFilterButton].forEach {buttonStackView.addArrangedSubview($0)}
+        [progressButton, deadlineButton].forEach {switchButtonStackView.addArrangedSubview($0)}
+        
+        [businessNameFilterButton, pjtGoalFilterButton].forEach {filterButtonStackView.addArrangedSubview($0)}
 
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16.0)
             $0.top.equalToSuperview().inset(16.0)
-            $0.trailing.equalTo(showAllAppsButton.snp.leading).offset(8.0)
         }
 
-        showAllAppsButton.snp.makeConstraints {
+        switchButtonStackView.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16.0)
-            $0.bottom.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(titleLabel.snp.top)
+            $0.width.equalTo(115)
         }
         
-        buttonStackView.snp.makeConstraints {
+        filterButtonStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(titleLabel)
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
@@ -154,7 +165,7 @@ private extension SearchSectionView {
 
         collectionView.snp.makeConstraints {
             let numOfCellLine = ceil(CGFloat(numOfCell)/2.0)
-            $0.top.equalTo(buttonStackView.snp.bottom)
+            $0.top.equalTo(filterButtonStackView.snp.bottom)
             $0.height.equalTo(CGFloat(cellHeight) * numOfCellLine + 5*numOfCellLine + 15) // 셀높이, 셀간 간격, top인셋
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()

@@ -14,3 +14,9 @@ enum BaseButtonStyle {
     case black
     case gray
 }
+
+enum UnderlineButtonStyle {
+    case green
+    case navy
+    case gray
+}
