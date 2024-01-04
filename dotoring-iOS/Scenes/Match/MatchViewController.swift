@@ -19,16 +19,17 @@ class MatchViewController: UIViewController {
         stackView.spacing = 0.0
 
         let bannerSectionView = BannerSectionView(frame: .zero)
-//        let rankingFeatureSectionView = RankingFeatureSectionView(frame: .zero)
-//        let exchangeCodeButtonView = ExchangeCodeButtonView(frame: .zero)
+        let searchSectionView = SearchSectionView(frame: .zero)
 
         let spacingView = UIView()
+        spacingView.backgroundColor = .systemBackground
         spacingView.snp.makeConstraints {
-            $0.height.equalTo(100.0)
+            $0.height.equalTo(50.0)
         }
 
         [
             bannerSectionView,
+            searchSectionView,
             spacingView
         ].forEach {
             stackView.addArrangedSubview($0)

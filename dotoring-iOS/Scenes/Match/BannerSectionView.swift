@@ -11,6 +11,7 @@ import UIKit
 class BannerSectionView: UIView {
 
     let cellWidth = UIScreen.main.bounds.width - 32.0
+    lazy var cellHeight = (cellWidth*4)/7
     let sectionSpacing = 16.0
     let cellSpacing = 5.0
     // 현재 배너 페이지 체크 변수 (자동 스크롤할 때 필요)
@@ -28,7 +29,7 @@ class BannerSectionView: UIView {
         let layout = PagingCollectionViewLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: sectionSpacing, bottom: 0, right: sectionSpacing)
-        layout.itemSize = CGSize(width: cellWidth, height: (cellWidth*4)/7)
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
         layout.minimumLineSpacing = cellSpacing
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -46,6 +47,21 @@ class BannerSectionView: UIView {
         )
 
         return collectionView
+    }()
+    
+    private lazy var bannerPageNumBackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .BaseGray100
+        view.layer.cornerRadius = 21/2
+        
+        return view
+    }()
+    
+    private lazy var bannerPageNumLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 13)
+        label.text = "1 / \(numOfBannerPage)"
+        
+        return label
     }()
 
     override init(frame: CGRect) {
@@ -89,12 +105,22 @@ extension BannerSectionView: UICollectionViewDelegateFlowLayout {
 //        5.0
 //    }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         currentBannerPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        updateBannerPageNumLabel()
     }
+    
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        currentBannerPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+//        updateBannerPageNumLabel()
+//    }
 }
 
 private extension BannerSectionView {
+    
+    func updateBannerPageNumLabel() {
+        bannerPageNumLabel.text = "\(currentBannerPage+1) / \(numOfBannerPage)"
+    }
     
     // 2.5초마다 실행되는 타이머
     func bannerTimer() {
@@ -109,18 +135,24 @@ private extension BannerSectionView {
         // 맨 처음 페이지로 돌아감
             collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
             currentBannerPage = 0
+            updateBannerPageNumLabel()
             return
         }
         // 다음 페이지로 전환
         currentBannerPage += 1
         collectionView.scrollToItem(at: IndexPath(item: currentBannerPage, section: 0), at: .centeredHorizontally, animated: true)
+        updateBannerPageNumLabel()
     }
     
     func setupViews() {
         [
             bannerSectionTitleLabel,
-            collectionView
+            collectionView,
+            bannerPageNumBackView,
+            bannerPageNumLabel
         ].forEach { addSubview($0) }
+        
+        bannerPageNumBackView.addSubview(bannerPageNumLabel)
         
         bannerSectionTitleLabel.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(16)
@@ -131,8 +163,19 @@ private extension BannerSectionView {
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.top.equalTo(bannerSectionTitleLabel.snp.bottom).offset(10)
-            $0.height.equalTo(snp.width)
+            $0.height.equalTo(cellHeight+15)
             $0.bottom.equalToSuperview()
+        }
+        
+        bannerPageNumBackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(20)
+            $0.width.equalTo(60)
+            $0.height.equalTo(21)
+        }
+        
+        bannerPageNumLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 
