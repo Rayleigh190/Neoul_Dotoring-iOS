@@ -113,6 +113,10 @@ extension SearchSectionView: UICollectionViewDelegateFlowLayout {
         let with = (collectionView.frame.width - 37)/2
         return CGSize(width: with, height: with*0.681)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
 }
 
 extension SearchSectionView: UICollectionViewDataSource {
@@ -126,7 +130,10 @@ extension SearchSectionView: UICollectionViewDataSource {
             for: indexPath
         ) as? SearchSectionCollectionViewCell
         cell?.setup()
-
+        if indexPath.row == 1 { // 마감된 사업이라면
+            cell?.shutterView.isHidden = false
+            cell?.isUserInteractionEnabled = false
+        }
         return cell ?? UICollectionViewCell()
     }
 }

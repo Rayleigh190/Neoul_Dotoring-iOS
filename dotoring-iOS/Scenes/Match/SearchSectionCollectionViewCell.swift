@@ -62,6 +62,22 @@ final class SearchSectionCollectionViewCell: UICollectionViewCell {
         
         return label
     }()
+    
+    lazy var shutterView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0.133, green: 0.133, blue: 0.133, alpha: 0.5)
+        view.isHidden = true
+        view.layer.cornerRadius = 10
+        
+        let label = NanumLabel(weightType: .B, size: 20)
+        label.text = "마감"
+        label.textColor = .white
+        view.addSubview(label)
+        label.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        return view
+    }()
 
     func setup() {
         setupLayout()
@@ -90,7 +106,8 @@ private extension SearchSectionCollectionViewCell {
            dateLabel,
            nicknameLabel,
            participantsImageView,
-           participantsCountLabel
+           participantsCountLabel,
+           shutterView
         ].forEach { contentView.addSubview($0) }
 
         businessNameLabel.snp.makeConstraints {
@@ -116,6 +133,10 @@ private extension SearchSectionCollectionViewCell {
         participantsCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(participantsImageView)
             $0.leading.equalTo(participantsImageView.snp.trailing).offset(2)
+        }
+        
+        shutterView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
 }
