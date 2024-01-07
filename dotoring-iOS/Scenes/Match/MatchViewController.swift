@@ -57,6 +57,31 @@ class MatchViewController: UIViewController {
 
         return stackView
     }()
+    
+    private lazy var floatingButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "MatchFloatingImgBtn")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.backgroundColor = .systemBackground
+        button.layer.cornerRadius = 60/2
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 0, height: 2)
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowRadius = 4.0
+        if uiStyle == .mento {
+            button.tintColor = .BaseGreen
+        } else {
+            button.tintColor = .BaseNavy
+        }
+        let postWriteAction = UIAction(title: "글 쓰기", image: UIImage(systemName: "pencil"), handler: {_ in })
+        let myPostAction = UIAction(title: "내 글 보기", image: UIImage(systemName: "doc.text.magnifyingglass"), handler: {_ in })
+        button.showsMenuAsPrimaryAction = true
+        button.menu = UIMenu(title: "",
+                                    image: nil,
+                                    identifier: nil,
+                                    options: .displayInline,
+                                    children: [postWriteAction, myPostAction])
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +106,9 @@ private extension MatchViewController {
     }
 
     func setupLayout() {
-        view.addSubview(scrollView)
+        [scrollView, floatingButton].forEach {
+            view.addSubview($0)
+        }
         scrollView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.bottom.equalToSuperview()
@@ -94,10 +121,16 @@ private extension MatchViewController {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
-
+        
         contentView.addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        
+        floatingButton.snp.makeConstraints {
+            $0.width.height.equalTo(60)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(60)
         }
     }
 }
@@ -115,7 +148,7 @@ extension MatchViewController: SelectViewControllerDelegate {
         } else if sender == searchSectionView.pjtGoalFilterButton {
             vc.selectViewControllerDelegate = self
             vc.titleText = "프로젝트 목표"
-            vc.style = .mento
+            vc.style = .mentee
             vc.elements = pjtGoalList
             vc.previousSelectedElements = selectedPjtGoalElements
         } else {
