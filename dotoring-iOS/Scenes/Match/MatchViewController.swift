@@ -72,7 +72,7 @@ class MatchViewController: UIViewController {
         } else {
             button.tintColor = .BaseNavy
         }
-        let postWriteAction = UIAction(title: "글 쓰기", image: UIImage(systemName: "pencil"), handler: {_ in })
+        let postWriteAction = UIAction(title: "글 쓰기", image: UIImage(systemName: "pencil"), handler: postButtonActionHandler)
         let myPostAction = UIAction(title: "내 글 보기", image: UIImage(systemName: "doc.text.magnifyingglass"), handler: {_ in })
         button.showsMenuAsPrimaryAction = true
         button.menu = UIMenu(title: "",
@@ -103,6 +103,11 @@ private extension MatchViewController {
     func setupAddTarget() {
         searchSectionView.businessNameFilterButton.addTarget(self, action: #selector(searchFilterButtonTapped), for: .touchUpInside)
         searchSectionView.pjtGoalFilterButton.addTarget(self, action: #selector(searchFilterButtonTapped), for: .touchUpInside)
+    }
+    
+    func postButtonActionHandler(sender: UIAction!) {
+        let vc = BusinessEditViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func setupLayout() {
@@ -142,13 +147,13 @@ extension MatchViewController: SelectViewControllerDelegate {
         if sender == searchSectionView.businessNameFilterButton {
             vc.selectViewControllerDelegate = self
             vc.titleText = "지원사업명"
-            vc.style = .mento
+            vc.style = uiStyle
             vc.elements = businessNameList
             vc.previousSelectedElements = selectedBusinessNameElements
         } else if sender == searchSectionView.pjtGoalFilterButton {
             vc.selectViewControllerDelegate = self
             vc.titleText = "프로젝트 목표"
-            vc.style = .mentee
+            vc.style = uiStyle
             vc.elements = pjtGoalList
             vc.previousSelectedElements = selectedPjtGoalElements
         } else {
