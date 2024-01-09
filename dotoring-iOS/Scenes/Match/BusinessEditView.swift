@@ -33,14 +33,14 @@ class BusinessEditView: UIView {
         return label
     }()
     
-    private lazy var radioButton1 = DefaultRadioButton()
-    private lazy var radioButton2 = DefaultRadioButton()
-    private lazy var radioButton3 = DefaultRadioButton()
-    private lazy var radioButton4 = DefaultRadioButton()
-    private lazy var radioButton5 = DefaultRadioButton()
-    private lazy var radioButton6 = DefaultRadioButton()
-    private lazy var radioButton7 = DefaultRadioButton()
-    private lazy var radioButton8 = DefaultRadioButton()
+    private lazy var radioButton1 = DefaultRadioButton(text: "교학상장")
+    private lazy var radioButton2 = DefaultRadioButton(text: "캡스톤디자인")
+    private lazy var radioButton3 = DefaultRadioButton(text: "기타")
+    private lazy var radioButton4 = DefaultRadioButton(text: "공모전")
+    private lazy var radioButton5 = DefaultRadioButton(text: "학업")
+    private lazy var radioButton6 = DefaultRadioButton(text: "대외활동")
+    private lazy var radioButton7 = DefaultRadioButton(text: "학교 생활")
+    private lazy var radioButton8 = DefaultRadioButton(text: "기타")
     
     private lazy var businessNameRadioButtons = [radioButton1, radioButton2, radioButton3]
     private lazy var pjtGoalRadioButtons = [radioButton4, radioButton5, radioButton6, radioButton7, radioButton8]
@@ -51,9 +51,22 @@ class BusinessEditView: UIView {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.backgroundColor = .systemBackground
+        stackView.spacing = 10
         [title1Label, radioButton1, radioButton2, radioButton3].forEach {
-            stackView.addArrangedSubview($0)
+            let subStackView = UIStackView()
+            subStackView.axis = .horizontal
+            subStackView.distribution = .fill
+            
+            let spaceView = UIView()
+            spaceView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+            
+            subStackView.addArrangedSubview($0)
+            subStackView.addArrangedSubview(spaceView)
+            
+            stackView.addArrangedSubview(subStackView)
         }
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 17, bottom: 20, right: 17)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
@@ -63,9 +76,12 @@ class BusinessEditView: UIView {
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.backgroundColor = .systemBackground
+        stackView.spacing = 10
         [title2Label, radioButton4, radioButton5, radioButton6, radioButton7, radioButton8].forEach {
             stackView.addArrangedSubview($0)
         }
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 17, bottom: 20, right: 17)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
