@@ -41,6 +41,14 @@ class BusinessEditView: UIView {
         return textField
     }()
     
+    private lazy var etcTextField2: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .systemBackground
+        textField.isEnabled = false
+        textField.placeholder = "(10자 이내 직접 입력)"
+        return textField
+    }()
+    
     private lazy var radioButton1 = DefaultRadioButton(text: "교학상장")
     private lazy var radioButton2 = DefaultRadioButton(text: "캡스톤디자인")
     private lazy var radioButton3 = DefaultRadioButton(text: "기타")
@@ -90,8 +98,37 @@ class BusinessEditView: UIView {
         stackView.alignment = .fill
         stackView.backgroundColor = .systemBackground
         stackView.spacing = 10
-        [title2Label, radioButton4, radioButton5, radioButton6, radioButton7, radioButton8].forEach {
-            stackView.addArrangedSubview($0)
+        stackView.addArrangedSubview(title2Label)
+        let radioButtons = [radioButton4, radioButton5, radioButton6, radioButton7, radioButton8]
+        for i in stride(from: 0, to: radioButtons.count, by: 2) {
+            // 두 개의 radioButton를 가지는 subStackView
+            let subStackView = UIStackView()
+            subStackView.axis = .horizontal
+            subStackView.distribution = .fillEqually
+            subStackView.alignment = .fill
+            
+            for k in i...i+1 {
+                if k < radioButtons.count {
+                    // radio버튼과 빈뷰를 나누는 스택뷰
+                    let subSubStackView = UIStackView()
+                    subSubStackView.axis = .horizontal
+                    subSubStackView.distribution = .fill
+                    subSubStackView.spacing = 5
+                    subSubStackView.addArrangedSubview(radioButtons[k])
+                    
+                    if radioButtons[k] == radioButton8 {
+                        radioButtons[k].setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                        etcTextField2.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                        subSubStackView.addArrangedSubview(etcTextField2)
+                    } else {
+                        let spaceView = UIView()
+                        spaceView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                        subSubStackView.addArrangedSubview(spaceView)
+                    }
+                    subStackView.addArrangedSubview(subSubStackView)
+                }
+            }
+            stackView.addArrangedSubview(subStackView)
         }
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 17, bottom: 20, right: 17)
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -166,9 +203,14 @@ extension BusinessEditView: RadioButtonDelegate {
         if pjtGoalRadioButtons.contains(currentRadioButton) {
             pjtGoalRadioButtons.forEach { $0.isChecked = false }
             currentRadioButton.isChecked = !currentRadioButton.isChecked
+            if currentRadioButton == radioButton8 {
+                etcTextField2.isEnabled = true
+                etcTextField2.backgroundColor = .BaseGray200
+            } else {
+                etcTextField2.isEnabled = false
+                etcTextField2.backgroundColor = .systemBackground
+                etcTextField2.text = ""
+            }
         }
-        
-        
-        
     }
 }
