@@ -33,6 +33,14 @@ class BusinessEditView: UIView {
         return label
     }()
     
+    private lazy var etcTextField1: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .systemBackground
+        textField.isEnabled = false
+        textField.placeholder = "(18자 이내 직접 입력)"
+        return textField
+    }()
+    
     private lazy var radioButton1 = DefaultRadioButton(text: "교학상장")
     private lazy var radioButton2 = DefaultRadioButton(text: "캡스톤디자인")
     private lazy var radioButton3 = DefaultRadioButton(text: "기타")
@@ -56,12 +64,17 @@ class BusinessEditView: UIView {
             let subStackView = UIStackView()
             subStackView.axis = .horizontal
             subStackView.distribution = .fill
-            
-            let spaceView = UIView()
-            spaceView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-            
+            subStackView.spacing = 5
             subStackView.addArrangedSubview($0)
-            subStackView.addArrangedSubview(spaceView)
+            if $0 == radioButton3 {
+                $0.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+                etcTextField1.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                subStackView.addArrangedSubview(etcTextField1)
+            } else {
+                let spaceView = UIView()
+                spaceView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                subStackView.addArrangedSubview(spaceView)
+            }
             
             stackView.addArrangedSubview(subStackView)
         }
@@ -140,13 +153,21 @@ extension BusinessEditView: RadioButtonDelegate {
         if businessNameRadioButtons.contains(currentRadioButton) {
             businessNameRadioButtons.forEach { $0.isChecked = false } // 모두 선택 해제
             currentRadioButton.isChecked = !currentRadioButton.isChecked
-            return
+            if currentRadioButton == radioButton3 {
+                etcTextField1.isEnabled = true
+                etcTextField1.backgroundColor = .BaseGray200
+            } else {
+                etcTextField1.isEnabled = false
+                etcTextField1.backgroundColor = .systemBackground
+                etcTextField1.text = ""
+            }
         }
         
         if pjtGoalRadioButtons.contains(currentRadioButton) {
             pjtGoalRadioButtons.forEach { $0.isChecked = false }
             currentRadioButton.isChecked = !currentRadioButton.isChecked
         }
+        
         
         
     }
