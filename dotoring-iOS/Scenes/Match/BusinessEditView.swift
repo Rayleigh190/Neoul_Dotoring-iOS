@@ -135,6 +135,120 @@ class BusinessEditView: UIView {
         return stackView
     }()
     
+    private lazy var introTitleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        
+        let titleLabel = NanumLabel(weightType: .EB, size: 17)
+        titleLabel.text = "소개"
+        titleLabel.textColor = .BaseGray900
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let subTitleLabel = NanumLabel(weightType: .R, size: 13)
+        subTitleLabel.text = "진행하려고 하는 프로젝트에 대해 소개해 주세요."
+        subTitleLabel.textColor = .BaseGray600
+        
+        [titleLabel, subTitleLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        return stackView
+    }()
+    
+    private lazy var introAnswerATextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .BaseGray200
+        textView.textColor = .BaseGray900
+        textView.isEditable = true
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
+        textView.layer.cornerRadius = 20
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+        
+        return textView
+    }()
+    
+    private lazy var introAnswerAStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        let answerLabel = NanumLabel(weightType: .R, size: 13)
+        answerLabel.text = "a. 프로젝트를 하게 된 이유"
+        answerLabel.textColor = .BaseGray900
+        [answerLabel, introAnswerATextView].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    private lazy var introAnswerBTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .BaseGray200
+        textView.textColor = .lightGray
+        textView.text = "ex) 일주일에 한 번, 비대명으로 진행하고 싶어요."
+        textView.isEditable = true
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
+        textView.layer.cornerRadius = 20
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+        
+        return textView
+    }()
+    
+    private lazy var introAnswerBStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        let answerLabel = NanumLabel(weightType: .R, size: 13)
+        answerLabel.text = "b. 진행 방식"
+        answerLabel.textColor = .BaseGray900
+        [answerLabel, introAnswerBTextView].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    private lazy var introAnswerCTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .BaseGray200
+        textView.textColor = .lightGray
+        textView.text = "ex) 알고리즘을 공부하는 사람들과 함께하고 싶어요."
+        textView.isEditable = true
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
+        textView.layer.cornerRadius = 20
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+        
+        return textView
+    }()
+    
+    private lazy var introAnswerCStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        let answerLabel = NanumLabel(weightType: .R, size: 13)
+        answerLabel.text = "c. 모집 팀원"
+        answerLabel.textColor = .BaseGray900
+        [answerLabel, introAnswerCTextView].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    private lazy var introStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.backgroundColor = .systemBackground
+        stackView.spacing = 12
+        
+        [introTitleStackView, introAnswerAStackView, introAnswerBStackView, introAnswerCStackView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 17, bottom: 20, right: 17)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
@@ -154,6 +268,9 @@ class BusinessEditView: UIView {
     }
     
     func setup() {
+        introAnswerATextView.delegate = self
+        introAnswerBTextView.delegate = self
+        introAnswerCTextView.delegate = self
         setupSubViews()
     }
 }
@@ -170,8 +287,7 @@ private extension BusinessEditView {
         stackView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()
         }
-        
-        [businessNameStackView, pjtGoalStackView].forEach {
+        [businessNameStackView, pjtGoalStackView, introStackView].forEach {
             stackView.addArrangedSubview($0)
         }
     }
@@ -211,6 +327,28 @@ extension BusinessEditView: RadioButtonDelegate {
                 etcTextField2.backgroundColor = .systemBackground
                 etcTextField2.text = ""
             }
+        }
+    }
+}
+
+extension BusinessEditView: UITextViewDelegate {
+    // textView 포커싱 됐을 때 placeholder text 지우기
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == introAnswerBTextView || textView == introAnswerCTextView {
+            textView.text = nil
+            textView.textColor = .BaseGray900
+        }
+    }
+    
+    // textView 포커싱 끝났을 때 빈칸이면 placeholder text 채우기
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if textView == introAnswerBTextView {
+                textView.text = "ex) 일주일에 한 번, 비대명으로 진행하고 싶어요."
+            } else if textView == introAnswerCTextView {
+                textView.text = "ex) 알고리즘을 공부하는 사람들과 함께하고 싶어요."
+            }
+            textView.textColor = .lightGray
         }
     }
 }

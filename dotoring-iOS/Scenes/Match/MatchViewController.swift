@@ -107,6 +107,7 @@ private extension MatchViewController {
     
     func postButtonActionHandler(sender: UIAction!) {
         let vc = BusinessEditViewController()
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
 
