@@ -329,6 +329,31 @@ class BusinessEditView: UIView {
         return stackView
     }()
     
+    lazy var registerButton: BaseButton = {
+        let button = BaseButton(style: .gray)
+        button.setTitle("등록하기", for: .normal)
+//        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.snp.makeConstraints { $0.height.equalTo(45) }
+        return button
+    }()
+    
+    private lazy var bottomSpaceView: UIView = {
+        let view = UIView()
+        view.snp.makeConstraints {$0.height.equalTo(35)}
+        return view
+    }()
+    
+    private lazy var bottomStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        [registerButton, bottomSpaceView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 17)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
@@ -365,7 +390,7 @@ private extension BusinessEditView {
         stackView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()
         }
-        [businessNameStackView, pjtGoalStackView, introStackView, personnelStackView].forEach {
+        [businessNameStackView, pjtGoalStackView, introStackView, personnelStackView, bottomStackView].forEach {
             stackView.addArrangedSubview($0)
         }
     }
