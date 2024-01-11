@@ -27,6 +27,7 @@
 		F14D0DD62B4BC13200B2B62D /* BusinessEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DD52B4BC13200B2B62D /* BusinessEditViewController.swift */; };
 		F14D0DD82B4C17C200B2B62D /* BusinessEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DD72B4C17C200B2B62D /* BusinessEditView.swift */; };
 		F14D0DDA2B4C217700B2B62D /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14D0DD92B4C217700B2B62D /* RadioButton.swift */; };
+		F17F0D722B4FB0800002323B /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F17F0D712B4FB0800002323B /* IQKeyboardManagerSwift */; };
 		F18E50DD2B2C0B3300D427A0 /* TagTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18E50DC2B2C0B3300D427A0 /* TagTextField.swift */; };
 		F1A47DA92B32FAF900D51645 /* UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A47DA82B32FAF900D51645 /* UIResponder.swift */; };
 		F1A47DAB2B32FB2F00D51645 /* KeyboardEventProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A47DAA2B32FB2F00D51645 /* KeyboardEventProtocol.swift */; };
@@ -269,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17F0D722B4FB0800002323B /* IQKeyboardManagerSwift in Frameworks */,
 				F1CA7E4E2AFCBA5A002D733E /* Alamofire in Frameworks */,
 				F1A560742A94A42B00FD2E91 /* Kingfisher in Frameworks */,
 				F1CA7E662AFDB280002D733E /* JWTDecode in Frameworks */,
@@ -682,6 +684,7 @@
 				F1CA7E652AFDB280002D733E /* JWTDecode */,
 				F1CA7E812B0CA51B002D733E /* Toast */,
 				F1CA7E8E2B117D1D002D733E /* MessageKit */,
+				F17F0D712B4FB0800002323B /* IQKeyboardManagerSwift */,
 			);
 			productName = "dotoring-iOS";
 			productReference = F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */;
@@ -718,6 +721,7 @@
 				F1CA7E642AFDB27F002D733E /* XCRemoteSwiftPackageReference "JWTDecode" */,
 				F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				F1CA7E8D2B117D1D002D733E /* XCRemoteSwiftPackageReference "MessageKit" */,
+				F17F0D702B4FB0800002323B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = F1A5605C2A949E6800FD2E91 /* Products */;
 			projectDirPath = "";
@@ -1076,6 +1080,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F17F0D702B4FB0800002323B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		F1A560722A94A42B00FD2E91 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1127,6 +1139,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F17F0D712B4FB0800002323B /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F17F0D702B4FB0800002323B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		F1A560732A94A42B00FD2E91 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F1A560722A94A42B00FD2E91 /* XCRemoteSwiftPackageReference "Kingfisher" */;

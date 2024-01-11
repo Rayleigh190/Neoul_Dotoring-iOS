@@ -40,16 +40,16 @@ class Signup6ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         navigationController?.navigationBar.topItem?.title = ""
         setDelegate()
-        registerForKeyboardNotifications()
+//        registerForKeyboardNotifications()
         setupNavigationBar()
         setAddTarget()
     }
     
     deinit {
-        removeKeyboardNotifications()
+//        removeKeyboardNotifications()
     }
     
     override func loadView() {
