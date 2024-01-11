@@ -185,7 +185,7 @@ class BusinessEditView: UIView {
         let textView = UITextView()
         textView.backgroundColor = .BaseGray200
         textView.textColor = .lightGray
-        textView.text = "ex) 일주일에 한 번, 비대명으로 진행하고 싶어요."
+        textView.text = "ex) 일주일에 한 번, 비대면으로 진행하고 싶어요."
         textView.isEditable = true
         textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
         textView.layer.cornerRadius = 20
@@ -249,6 +249,86 @@ class BusinessEditView: UIView {
         return stackView
     }()
     
+    private lazy var personnelTitleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 5
+        
+        let titleLabel = NanumLabel(weightType: .EB, size: 17)
+        titleLabel.text = "필요 인원"
+        titleLabel.textColor = .BaseGray900
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        let subTitleLabel = NanumLabel(weightType: .R, size: 13)
+        subTitleLabel.text = "현재 참여 인원/총 인원 (최대 9)"
+        subTitleLabel.textColor = .BaseGray600
+        
+        [titleLabel, subTitleLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        return stackView
+    }()
+    
+    private lazy var leftPersonnelTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .BaseGray200
+        textView.textColor = .lightGray
+        textView.text = "0"
+        textView.isEditable = true
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
+        textView.layer.cornerRadius = 20
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+        textView.keyboardType = .numberPad
+        textView.textAlignment = .center
+        textView.snp.makeConstraints {$0.width.equalTo(60)}
+        return textView
+    }()
+    
+    private lazy var rightPersonnelTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .BaseGray200
+        textView.textColor = .lightGray
+        textView.text = "0"
+        textView.isEditable = true
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 15)
+        textView.layer.cornerRadius = 20
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
+        textView.keyboardType = .numberPad
+        textView.textAlignment = .center
+        textView.snp.makeConstraints {$0.width.equalTo(60)}
+        return textView
+    }()
+    
+    private lazy var personnelInputStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 7
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "line.diagonal")
+        imageView.tintColor = .BaseGray900
+        
+        let spaceView = UIView()
+        spaceView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        [leftPersonnelTextView, imageView, rightPersonnelTextView, spaceView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
+    }()
+    
+    private lazy var personnelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.backgroundColor = .systemBackground
+        stackView.spacing = 10
+        [personnelTitleStackView, personnelInputStackView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 20, left: 17, bottom: 20, right: 17)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
@@ -268,9 +348,7 @@ class BusinessEditView: UIView {
     }
     
     func setup() {
-        introAnswerATextView.delegate = self
-        introAnswerBTextView.delegate = self
-        introAnswerCTextView.delegate = self
+        [introAnswerATextView, introAnswerBTextView, introAnswerCTextView, leftPersonnelTextView, rightPersonnelTextView].forEach {$0.delegate = self}
         setupSubViews()
     }
 }
@@ -287,7 +365,7 @@ private extension BusinessEditView {
         stackView.snp.makeConstraints {
             $0.edges.width.equalToSuperview()
         }
-        [businessNameStackView, pjtGoalStackView, introStackView].forEach {
+        [businessNameStackView, pjtGoalStackView, introStackView, personnelStackView].forEach {
             stackView.addArrangedSubview($0)
         }
     }
@@ -334,9 +412,12 @@ extension BusinessEditView: RadioButtonDelegate {
 extension BusinessEditView: UITextViewDelegate {
     // textView 포커싱 됐을 때 placeholder text 지우기
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == introAnswerBTextView || textView == introAnswerCTextView {
-            textView.text = nil
-            textView.textColor = .BaseGray900
+        let text = ["ex) 일주일에 한 번, 비대면으로 진행하고 싶어요.", "ex) 알고리즘을 공부하는 사람들과 함께하고 싶어요.", "0"]
+        if textView == introAnswerBTextView || textView == introAnswerCTextView || textView == leftPersonnelTextView || textView == rightPersonnelTextView {
+            if text.contains(textView.text) {
+                textView.text = nil
+                textView.textColor = .BaseGray900
+            }
         }
     }
     
@@ -344,11 +425,24 @@ extension BusinessEditView: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             if textView == introAnswerBTextView {
-                textView.text = "ex) 일주일에 한 번, 비대명으로 진행하고 싶어요."
+                textView.text = "ex) 일주일에 한 번, 비대면으로 진행하고 싶어요."
             } else if textView == introAnswerCTextView {
                 textView.text = "ex) 알고리즘을 공부하는 사람들과 함께하고 싶어요."
             }
             textView.textColor = .lightGray
         }
+    }
+    
+    // textView 글자수 제한
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if textView == leftPersonnelTextView || textView == rightPersonnelTextView {
+            let inputString = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard let oldString = textView.text, let newRange = Range(range, in: oldString) else { return true }
+            let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
+
+            let characterCount = newString.count
+            guard characterCount <= 1 else { return false }
+        }
+        return true
     }
 }
