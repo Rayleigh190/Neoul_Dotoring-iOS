@@ -12,6 +12,7 @@ class SearchSectionView: UIView {
     
     let cellHeight = 120
     let numOfCell = 5
+    var parentViewController: UIViewController?
 
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 17)
@@ -95,7 +96,6 @@ class SearchSectionView: UIView {
         return collectionView
     }()
 
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
@@ -116,6 +116,9 @@ extension SearchSectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        let vc = BusinessDetailViewController()
+        vc.hidesBottomBarWhenPushed = true
+        parentViewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
