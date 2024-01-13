@@ -116,7 +116,7 @@ class IntroViewController: UIViewController {
         attributedTitle.addAttribute(.foregroundColor, value: UIColor.BaseGray600!, range: NSRange(location: 0, length: attributedTitle.length))
         attributedTitle.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFR, size: 13), range: NSRange(location: 0, length: attributedTitle.length))
         
-        // Add spacing between text and underline
+        // 텍스트와 밑줄 사이에 간격 추가
         let spacing: CGFloat = 2
         attributedTitle.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: attributedTitle.length))
         attributedTitle.addAttribute(.baselineOffset, value: spacing, range: NSRange(location: 0, length: attributedTitle.length))

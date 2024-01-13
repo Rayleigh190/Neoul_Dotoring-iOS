@@ -310,8 +310,6 @@
 		F126B1D52AA6FB0D0035E499 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F126B1D32AA6F6CF0035E499 /* SelectView.swift */,
-				F126B1D62AA6FB780035E499 /* SelectedElementView.swift */,
 				F1FCE7662ABC75A80024AE60 /* Signup2View.swift */,
 				F1FCE7682ABD7E2A0024AE60 /* Signup3View.swift */,
 				F1FCE76C2ABE8E370024AE60 /* Signup4View.swift */,
@@ -331,8 +329,8 @@
 				F14D0DCD2B453D6900B2B62D /* SearchSectionView.swift */,
 				F14D0DCF2B453DC900B2B62D /* SearchSectionCollectionViewCell.swift */,
 				F14D0DD32B4BBFE900B2B62D /* BusinessDetailViewController.swift */,
-				F14D0DD52B4BC13200B2B62D /* BusinessEditViewController.swift */,
 				F14D0DD72B4C17C200B2B62D /* BusinessEditView.swift */,
+				F14D0DD52B4BC13200B2B62D /* BusinessEditViewController.swift */,
 			);
 			path = Match;
 			sourceTree = "<group>";
@@ -360,10 +358,10 @@
 				F1FCE77C2AC316D00024AE60 /* Enums */,
 				F1DD2CB52A9A05BB00EE9711 /* Extensions */,
 				F1A560762A94ADEF00FD2E91 /* Fonts */,
-				F1DD2C8A2A95DDD500EE9711 /* Scenes */,
-				F1CA7E522AFCDE94002D733E /* Networks */,
 				F1CA7E5B2AFCFD64002D733E /* Models */,
+				F1CA7E522AFCDE94002D733E /* Networks */,
 				F1FCE77D2AC316F40024AE60 /* Protocols */,
+				F1DD2C8A2A95DDD500EE9711 /* Scenes */,
 				F1CA7E4F2AFCC29B002D733E /* Utils */,
 				F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */,
 				F1A560602A949E6800FD2E91 /* SceneDelegate.swift */,
@@ -518,7 +516,6 @@
 				F1CA7E8A2B117C0D002D733E /* Chat */,
 				F1FCE78A2AC7D4AD0024AE60 /* MyPage */,
 				F1A560622A949E6800FD2E91 /* MainTapBarController.swift */,
-				F126B1CF2AA568D80035E499 /* SelectViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -575,6 +572,9 @@
 				F1FCE7B62ADA5A280024AE60 /* DashedLineView.swift */,
 				F14D0DD12B467AFC00B2B62D /* UnderlineButton.swift */,
 				F14D0DD92B4C217700B2B62D /* RadioButton.swift */,
+				F126B1D32AA6F6CF0035E499 /* SelectView.swift */,
+				F126B1D62AA6FB780035E499 /* SelectedElementView.swift */,
+				F126B1CF2AA568D80035E499 /* SelectViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

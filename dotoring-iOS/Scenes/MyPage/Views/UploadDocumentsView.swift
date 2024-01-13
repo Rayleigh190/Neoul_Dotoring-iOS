@@ -13,7 +13,6 @@ import UIKit
  */
 class UploadDocumentsView: UIView {
     
-    // Add a closure property
     var groupCertificateUploadButtonActionHandler: (() -> Void)?
     var graduateCertificateUploadButtonActionHandler: (() -> Void)?
     var nextButtonActionHandler: (() -> Void)?
@@ -67,7 +66,6 @@ class UploadDocumentsView: UIView {
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: attrRangeText))
         
-        // Add spacing between text and underline
         let spacing: CGFloat = 2
         attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: attrRangeText))
         attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: attrRangeText))
@@ -95,7 +93,6 @@ class UploadDocumentsView: UIView {
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: "졸업증명서"))
         
-        // Add spacing between text and underline
         let spacing: CGFloat = 2
         attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "졸업증명서"))
         attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: "졸업증명서"))
@@ -230,12 +227,10 @@ private extension UploadDocumentsView {
 extension UploadDocumentsView {
     
     @objc func groupCertificateUploadButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
         groupCertificateUploadButtonActionHandler?()
     }
     
     @objc func graduateCertificateUploadButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
         graduateCertificateUploadButtonActionHandler?()
     }
     

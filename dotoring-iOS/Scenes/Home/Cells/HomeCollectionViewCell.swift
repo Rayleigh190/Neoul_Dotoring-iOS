@@ -84,49 +84,49 @@ class HomeCollectionViewCell: UICollectionViewCell {
     func setup() {
         // shadowView가 없을 때(1번만 생성)
         if shadowView == nil {
-            // Create Shadow View
+            // Shadow View 생성
             shadowView = UIView(frame: contentView.bounds)
             
             shadowView.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin, .flexibleBottomMargin, .flexibleLeftMargin]
             addSubview(shadowView)
             
-            // Add a shadow to the view
+            // view에 shadowView 추가
             shadowView.layer.shadowColor = UIColor.black.cgColor
 //            shadowView.layer.shadowOffset = CGSize(width:0, height:1)
             shadowView.layer.shadowRadius = 10
             shadowView.layer.cornerRadius = 20
             shadowView.layer.shadowOpacity = 0.2
-            // Set the shadow path
+            // shadow path 설정
             shadowView.layer.shadowPath = UIBezierPath(roundedRect: shadowView.bounds, cornerRadius: shadowView.layer.cornerRadius).cgPath
             
-            // Setup a mask to match the view
+            // view와 일치하도록 mask 설정
             let maskLayer = CAShapeLayer()
             maskLayer.frame = shadowView.bounds
             maskLayer.path = UIBezierPath(roundedRect: shadowView.bounds, cornerRadius: shadowView.layer.cornerRadius).cgPath
             
-            // Make the mask area bigger than the view, so the shadow itself does not get clipped by the mask
+            // 마스크 영역을 뷰보다 크게 만들어 그림자 자체가 마스크에 의해 잘리지 않도록 함
             let shadowBorder:CGFloat = (shadowView.layer.shadowRadius * 2) + 5;
-            maskLayer.frame = maskLayer.frame.insetBy(dx:  -shadowBorder, dy:  -shadowBorder)  // Make bigger
-            maskLayer.frame = maskLayer.frame.offsetBy(dx: shadowBorder/2, dy: shadowBorder/2) // Move top and left
+            maskLayer.frame = maskLayer.frame.insetBy(dx:  -shadowBorder, dy:  -shadowBorder)  // 크게 만듬
+            maskLayer.frame = maskLayer.frame.offsetBy(dx: shadowBorder/2, dy: shadowBorder/2) // 위쪽 및 왼쪽으로 이동
             
-            // Allow for cut outs in the shape
+            // shape에 cut outs 허용
             maskLayer.fillRule = .evenOdd
             
-            // Create new path
+            // 새 path 생성
             let pathMasking = CGMutablePath()
-            // Add the outer view frame
+            // 외부 뷰 프레임 추가
             pathMasking.addPath(UIBezierPath(rect: maskLayer.frame).cgPath)
-            // Translate into the shape back to the smaller original view's frame start point
+            // 더 작은 original view's 프레임 시작점으로 다시 모양으로 변환
             var catShiftBorder = CGAffineTransform(translationX: shadowBorder/2, y: shadowBorder/2)
-            // Now add the original path for the cut out the shape of the original view
+            // original 뷰의 모양을 잘라낼 original 경로를 추가
             pathMasking.addPath(maskLayer.path!.copy(using: &catShiftBorder)!)
-            // Set this big rect with a small cutout rect as the mask
+            // small cuout 사각형을 마스크로 사용하여 big 사각형을 설정
             maskLayer.path = pathMasking;
             
-            // Set as a mask on the view with the shadow
+            // shadowView에 마스크로 설정
             shadowView.layer.mask = maskLayer;
             
-            // Content view to use
+            // Content view로 사용
             let contentView = UIView(frame: shadowView.frame)
             // 셀의 배경색을 지정합니다.
             contentView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)

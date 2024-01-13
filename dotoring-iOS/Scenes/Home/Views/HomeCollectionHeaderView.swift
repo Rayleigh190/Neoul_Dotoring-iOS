@@ -226,10 +226,8 @@ private extension HomeCollectionHeaderView {
         
         let isOpen = leftConstraint.isActive == true
 
-        // Inactivating the left constraint closes the expandable header.
         leftConstraint.isActive = isOpen ? false : true
 
-        // Animate change to visible.
         UIView.animate(withDuration: 0.5, animations: {
             self.expandableView.alpha = isOpen ? 0 : 1
             self.expandableView.layoutIfNeeded()

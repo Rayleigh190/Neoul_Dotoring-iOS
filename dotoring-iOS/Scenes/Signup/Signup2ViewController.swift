@@ -18,8 +18,8 @@ class Signup2ViewController: UIViewController {
 
     var signup2View: Signup2View!
     
-    var selectedFileURL: URL?  // Store the selected file URL
-//    var selectedFileURL2: URL? // Store the selected file URL
+    var selectedFileURL: URL?
+//    var selectedFileURL2: URL?
     var isDoc = false
     
     let uiStyle: UIStyle = {
@@ -41,7 +41,6 @@ class Signup2ViewController: UIViewController {
         
         signup2View = Signup2View(frame: self.view.frame)
         
-        // Set the button action handler
         signup2View.certificateUploadButtonActionHandler = { [weak self] in
             self?.certificateOfEnrollmentUploadButtonTapped()
         }
@@ -178,8 +177,6 @@ extension Signup2ViewController:  UIDocumentPickerDelegate, UINavigationControll
         present(imagePicker, animated: true, completion: nil)
         self.view.hideToastActivity()
     }
-
-    // Implement the delegate methods for UIDocumentPickerViewController and UIImagePickerController to handle the selected file/image.
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedPDFURL = urls.first {
