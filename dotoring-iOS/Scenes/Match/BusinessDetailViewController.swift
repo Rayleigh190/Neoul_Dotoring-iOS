@@ -8,13 +8,19 @@
 import UIKit
 
 class BusinessDetailViewController: UIViewController {
+    
+    var businessDetailView = BusinessDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
         setupNavigationController()
     }
-
+    
+    override func loadView() {
+        super.loadView()
+        businessDetailView = BusinessDetailView(frame: self.view.frame)
+        self.view = businessDetailView
+    }
 }
 
 private extension BusinessDetailViewController {
@@ -22,5 +28,6 @@ private extension BusinessDetailViewController {
         navigationItem.title = "지원사업명"
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .BaseGray900
     }
 }

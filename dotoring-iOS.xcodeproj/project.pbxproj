@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F10689302B539CDE00D652B5 /* BusinessDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -139,6 +140,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailView.swift; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				F14D0DCB2B43D83400B2B62D /* PagingCollectionViewLayout.swift */,
 				F14D0DCD2B453D6900B2B62D /* SearchSectionView.swift */,
 				F14D0DCF2B453DC900B2B62D /* SearchSectionCollectionViewCell.swift */,
+				F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */,
 				F14D0DD32B4BBFE900B2B62D /* BusinessDetailViewController.swift */,
 				F14D0DD72B4C17C200B2B62D /* BusinessEditView.swift */,
 				F14D0DD52B4BC13200B2B62D /* BusinessEditViewController.swift */,
@@ -787,6 +790,7 @@
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */,
+				F10689302B539CDE00D652B5 /* BusinessDetailView.swift in Sources */,
 				F14D0DCA2B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift in Sources */,
 				F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */,
 				F1FCE7832AC317EF0024AE60 /* UIStyle.swift in Sources */,
