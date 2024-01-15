@@ -10,7 +10,7 @@ import UIKit
 
 class SearchSectionView: UIView {
     
-    let cellHeight = 120
+    var cellHeight = 120.0
     let numOfCell = 5
     var parentViewController: UIViewController?
 
@@ -54,7 +54,6 @@ class SearchSectionView: UIView {
         button.backgroundColor = UIColor.BaseGray700
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 15)
-        button.layer.cornerRadius = 39/2
 //        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
@@ -66,7 +65,6 @@ class SearchSectionView: UIView {
         button.backgroundColor = UIColor(named: "BaseGray700")
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size: 15)
-        button.layer.cornerRadius = 39/2
 //        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
 
         return button
@@ -95,6 +93,12 @@ class SearchSectionView: UIView {
 
         return collectionView
     }()
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        pjtGoalFilterButton.layer.cornerRadius = pjtGoalFilterButton.frame.height / 2
+        businessNameFilterButton.layer.cornerRadius = businessNameFilterButton.frame.height / 2
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -111,7 +115,8 @@ class SearchSectionView: UIView {
 extension SearchSectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let with = (collectionView.frame.width - 37)/2
-        return CGSize(width: with, height: with*0.681)
+        cellHeight = with*0.681
+        return CGSize(width: with, height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -170,7 +175,7 @@ private extension SearchSectionView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(titleLabel)
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.height.equalTo(39)
+            $0.height.equalTo(filterButtonStackView.snp.width).multipliedBy(0.119)
         }
 
         collectionView.snp.makeConstraints {

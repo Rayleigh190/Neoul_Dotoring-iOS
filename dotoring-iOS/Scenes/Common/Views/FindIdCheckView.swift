@@ -113,7 +113,7 @@ private extension FindIdCheckView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(idBoxView.snp.leading)
             $0.top.equalTo(secondLabel).offset(55.0)
-            $0.height.equalTo(45.0)
+            $0.height.equalTo(goLoginButton.snp.width).multipliedBy(0.14)
         }
         
     }

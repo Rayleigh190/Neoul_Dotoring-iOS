@@ -173,7 +173,7 @@ private extension FindPwView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(titleLabel.snp.leading)
             $0.top.equalTo(emailWarningLabel.snp.bottom).offset(79)
-            $0.height.equalTo(48.0)
+            $0.height.equalTo(goLoginButton.snp.width).multipliedBy(0.14)
         }
         
         sendCheckLabel.snp.makeConstraints {

@@ -333,7 +333,6 @@ class BusinessEditView: UIView {
         let button = BaseButton(style: .gray)
         button.setTitle("등록하기", for: .normal)
 //        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        button.snp.makeConstraints { $0.height.equalTo(45) }
         return button
     }()
     
@@ -392,6 +391,10 @@ private extension BusinessEditView {
         }
         [businessNameStackView, pjtGoalStackView, introStackView, personnelStackView, bottomStackView].forEach {
             stackView.addArrangedSubview($0)
+        }
+        
+        registerButton.snp.makeConstraints {
+            $0.height.equalTo(registerButton.snp.width).multipliedBy(0.14)
         }
     }
     

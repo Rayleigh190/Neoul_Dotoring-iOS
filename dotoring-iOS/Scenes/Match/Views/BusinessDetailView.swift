@@ -198,7 +198,6 @@ class BusinessDetailView: UIView {
         if uiStyle == .mentee {
             button.setupButton(style: .navy)}
         button.setTitle("참여할래요!", for: .normal)
-        button.snp.makeConstraints { $0.height.equalTo(45) }
         return button
     }()
     
@@ -334,6 +333,10 @@ private extension BusinessDetailView {
         
         footerStackView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(safeAreaLayoutGuide)
+        }
+        
+        joinButton.snp.makeConstraints { 
+            $0.height.equalTo(joinButton.snp.width).multipliedBy(0.14)
         }
     }
 }

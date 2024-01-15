@@ -310,7 +310,7 @@ private extension LoginView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(titleLabel.snp.leading)
             $0.top.equalTo(pwTextField.snp.bottom).offset(96)
-            $0.height.equalTo(48.0)
+            $0.height.equalTo(loginButton.snp.width).multipliedBy(0.14)
         }
         
         accountStack.snp.makeConstraints {

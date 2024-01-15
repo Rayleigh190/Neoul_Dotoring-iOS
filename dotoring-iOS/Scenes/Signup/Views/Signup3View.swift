@@ -176,7 +176,7 @@ private extension Signup3View {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(questionLabel.snp.leading)
             $0.top.equalTo(answerLabel2.snp.bottom).offset(55)
-            $0.height.equalTo(45)
+            $0.height.equalTo(nextButton.snp.width).multipliedBy(0.14)
         }
         
         
