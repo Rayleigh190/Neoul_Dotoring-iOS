@@ -31,18 +31,18 @@ class CustomAlertView: UIView {
         label.text = "Content Text"
         label.numberOfLines = 0
         
-        // Define the line spacing (line height) you want, in points (e.g., 10 for 10 points). 행간 적용
+        // 행간 적용
         let lineSpacing: CGFloat = 6
 
-        // Create a paragraph style with the desired line spacing.
+        // 원하는 줄 간격으로 paragraphStyle을 만듬
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineSpacing
 
-        // Create an attributed string with the paragraph style.
+        // paragraphStyle을 사용하여 속성이 지정된 문자열을 만듬
         let attributedText = NSMutableAttributedString(string: "Content Text")
         attributedText.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
 
-        // Apply the attributed text to the label.
+        // attributedText를 라벨에 적용
         label.attributedText = attributedText
         label.textAlignment = .center
         

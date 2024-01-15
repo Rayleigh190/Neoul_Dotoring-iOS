@@ -12,7 +12,6 @@ class Signup5View: UIView {
     // 뷰 전체 높이 길이
     let screenHeight = UIScreen.main.bounds.size.height
     
-    // Add a closure property
     var nextButtonActionHandler: (() -> Void)?
     
     let uiStyle: UIStyle = {
@@ -208,7 +207,6 @@ extension Signup5View {
     }
     
     @objc func nextButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
         nextButtonActionHandler?()
     }
     

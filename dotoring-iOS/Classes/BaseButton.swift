@@ -31,7 +31,7 @@ class BaseButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = frame.size.height / 2.4
+//        layer.cornerRadius = frame.size.height / 2.4
     }
 
 }

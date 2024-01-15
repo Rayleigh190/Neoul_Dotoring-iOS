@@ -8,22 +8,38 @@
 import UIKit
 
 class BusinessDetailViewController: UIViewController {
+    
+    var businessDetailView = BusinessDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupNavigationController()
+        setAddTarget()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func loadView() {
+        super.loadView()
+        businessDetailView = BusinessDetailView(frame: self.view.frame)
+        self.view = businessDetailView
     }
-    */
+}
 
+private extension BusinessDetailViewController {
+    func setupNavigationController() {
+        navigationItem.title = "지원사업명"
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .BaseGray900
+    }
+    
+    func setAddTarget() {
+        businessDetailView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func joinButtonTapped(sender: UIButton) {
+        let vc = BusinessDetailAlertViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
+    }
 }

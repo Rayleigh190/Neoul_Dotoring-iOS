@@ -13,8 +13,8 @@ class UploadDocumentsViewController: UIViewController {
     
     var uploadDocumentsView: UploadDocumentsView!
     
-    var selectedFileURL: URL?  // Store the selected file URL
-    var selectedFileURL2: URL? // Store the selected file URL
+    var selectedFileURL: URL?
+    var selectedFileURL2: URL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,6 @@ extension UploadDocumentsViewController {
 extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func openPdfOrImgFile(sender: Int) {
-        // Create an action sheet to let the user choose between picking a PDF or an image
         let actionSheet = UIAlertController(title: "Select File Type", message: "Choose a file type to import", preferredStyle: .actionSheet)
         
         let pdfAction = UIAlertAction(title: "PDF", style: .default) { (action) in
@@ -119,11 +118,8 @@ extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationC
         present(imagePicker, animated: true, completion: nil)
     }
 
-    // Implement the delegate methods for UIDocumentPickerViewController and UIImagePickerController to handle the selected file/image.
-
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedPDFURL = urls.first {
-            // Handle the selected PDF file here
             if controller.view.tag == uploadDocumentsView.groupCertificateUploadButton.tag {
                 selectedFileURL = selectedPDFURL
                 uploadDocumentsView.groupCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
@@ -136,7 +132,6 @@ extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationC
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            // Handle the selected image here
             if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
                 if picker.view.tag == uploadDocumentsView.groupCertificateUploadButton.tag {
                     selectedFileURL = imageURL

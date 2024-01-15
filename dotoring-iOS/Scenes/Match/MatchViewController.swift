@@ -86,6 +86,7 @@ class MatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
+        searchSectionView.parentViewController = self
         setupNavigationController()
         setupAddTarget()
         setupLayout()
@@ -136,7 +137,7 @@ private extension MatchViewController {
         floatingButton.snp.makeConstraints {
             $0.width.height.equalTo(60)
             $0.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(60)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
     }
 }

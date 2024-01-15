@@ -13,7 +13,7 @@ class Signup2View: UIView {
     // 뷰 전체 높이 길이
     let screenHeight = UIScreen.main.bounds.size.height
     
-    // Add a closure property
+    // // 클로저 property 추가
     var certificateUploadButtonActionHandler: (() -> Void)?
     var nextButtonActionHandler: (() -> Void)?
     
@@ -66,7 +66,7 @@ class Signup2View: UIView {
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: attrRangeText))
         
-        // Add spacing between text and underline
+        // 텍스트와 밑줄 사이에 간격 추가
         let spacing: CGFloat = 2
         attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: attrRangeText))
         attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: attrRangeText))
@@ -165,12 +165,10 @@ private extension Signup2View {
 extension Signup2View {
     
     @objc func certificateUploadButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
-                certificateUploadButtonActionHandler?()
+        certificateUploadButtonActionHandler?()
     }
     
     @objc func nextButtonTapped(sender: UIButton!) {
-        // Call the closure when the login button is tapped
         nextButtonActionHandler?()
     }
     
