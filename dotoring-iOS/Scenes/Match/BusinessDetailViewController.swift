@@ -14,6 +14,7 @@ class BusinessDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationController()
+        setAddTarget()
     }
     
     override func loadView() {
@@ -29,5 +30,16 @@ private extension BusinessDetailViewController {
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .BaseGray900
+    }
+    
+    func setAddTarget() {
+        businessDetailView.joinButton.addTarget(self, action: #selector(joinButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func joinButtonTapped(sender: UIButton) {
+        let vc = BusinessDetailAlertViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true)
     }
 }

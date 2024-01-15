@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F10689302B539CDE00D652B5 /* BusinessDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */; };
+		F10689322B542BA800D652B5 /* BusinessDetailAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */; };
+		F10689342B542BAE00D652B5 /* BusinessDetailAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -141,6 +143,8 @@
 
 /* Begin PBXFileReference section */
 		F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailView.swift; sourceTree = "<group>"; };
+		F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailAlertViewController.swift; sourceTree = "<group>"; };
+		F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailAlertView.swift; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -285,6 +289,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F10689352B54DF8D00D652B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F14D0DC72B439B1D00B2B62D /* BannerSectionView.swift */,
+				F14D0DCD2B453D6900B2B62D /* SearchSectionView.swift */,
+				F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */,
+				F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */,
+				F14D0DD72B4C17C200B2B62D /* BusinessEditView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F10689362B54DF9900D652B5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F14D0DC92B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift */,
+				F14D0DCF2B453DC900B2B62D /* SearchSectionCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		F11FCBA82B3452C400CED2A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,15 +349,12 @@
 		F14D0DC42B42A3CD00B2B62D /* Match */ = {
 			isa = PBXGroup;
 			children = (
+				F10689362B54DF9900D652B5 /* Cells */,
+				F10689352B54DF8D00D652B5 /* Views */,
 				F14D0DC52B42A41900B2B62D /* MatchViewController.swift */,
-				F14D0DC72B439B1D00B2B62D /* BannerSectionView.swift */,
-				F14D0DC92B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift */,
 				F14D0DCB2B43D83400B2B62D /* PagingCollectionViewLayout.swift */,
-				F14D0DCD2B453D6900B2B62D /* SearchSectionView.swift */,
-				F14D0DCF2B453DC900B2B62D /* SearchSectionCollectionViewCell.swift */,
-				F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */,
 				F14D0DD32B4BBFE900B2B62D /* BusinessDetailViewController.swift */,
-				F14D0DD72B4C17C200B2B62D /* BusinessEditView.swift */,
+				F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */,
 				F14D0DD52B4BC13200B2B62D /* BusinessEditViewController.swift */,
 			);
 			path = Match;
@@ -781,6 +803,7 @@
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,
 				F1CA7E9C2B117F95002D733E /* ImageMediaItem.swift in Sources */,
+				F10689322B542BA800D652B5 /* BusinessDetailAlertViewController.swift in Sources */,
 				F14D0DD62B4BC13200B2B62D /* BusinessEditViewController.swift in Sources */,
 				F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */,
 				F14D0DCC2B43D83400B2B62D /* PagingCollectionViewLayout.swift in Sources */,
@@ -790,6 +813,7 @@
 				F1DD2CC92A9D7B4B00EE9711 /* FindIdView.swift in Sources */,
 				F1DD2CD22A9F635900EE9711 /* FindPwView.swift in Sources */,
 				F1FCE7A12ACB00C40024AE60 /* UploadDocumentsViewController.swift in Sources */,
+				F10689342B542BAE00D652B5 /* BusinessDetailAlertView.swift in Sources */,
 				F10689302B539CDE00D652B5 /* BusinessDetailView.swift in Sources */,
 				F14D0DCA2B439C0C00B2B62D /* BannerSectionCollectionViewCell.swift in Sources */,
 				F1CA7E4B2AF4CF2D002D733E /* MenuBarView.swift in Sources */,

@@ -198,7 +198,6 @@ class BusinessDetailView: UIView {
         if uiStyle == .mentee {
             button.setupButton(style: .navy)}
         button.setTitle("참여할래요!", for: .normal)
-//        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         button.snp.makeConstraints { $0.height.equalTo(45) }
         return button
     }()
