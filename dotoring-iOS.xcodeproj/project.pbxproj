@@ -10,6 +10,7 @@
 		F10689302B539CDE00D652B5 /* BusinessDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */; };
 		F10689322B542BA800D652B5 /* BusinessDetailAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */; };
 		F10689342B542BAE00D652B5 /* BusinessDetailAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */; };
+		F10689382B550B2300D652B5 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689372B550B2300D652B5 /* UIImageView.swift */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -145,6 +146,7 @@
 		F106892F2B539CDE00D652B5 /* BusinessDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailView.swift; sourceTree = "<group>"; };
 		F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailAlertViewController.swift; sourceTree = "<group>"; };
 		F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailAlertView.swift; sourceTree = "<group>"; };
+		F10689372B550B2300D652B5 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				F1DD2CBB2A9A53AC00EE9711 /* UIFont.swift */,
 				F1DD2CBF2A9AEDDC00EE9711 /* UIViewController.swift */,
 				F1A47DA82B32FAF900D51645 /* UIResponder.swift */,
+				F10689372B550B2300D652B5 /* UIImageView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				F1FCE7912AC825D60024AE60 /* ProfileCardView.swift in Sources */,
 				F14D0DC62B42A41900B2B62D /* MatchViewController.swift in Sources */,
 				F1CA7E8C2B117C3C002D733E /* ChannelViewController.swift in Sources */,
+				F10689382B550B2300D652B5 /* UIImageView.swift in Sources */,
 				F1FCE7A32ACB04830024AE60 /* UploadDocumentsView.swift in Sources */,
 				F1CA7E7A2B04F163002D733E /* UserDetailModel.swift in Sources */,
 				F1DD2CA82A98896300EE9711 /* ExpandableView.swift in Sources */,

@@ -29,16 +29,13 @@ class HomeViewController: UIViewController {
     
     private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        
         if uiStyle == .mento {
             imageView.image = UIImage(named: "MentoHomeBackgroundImg")
         } else {
             imageView.image = UIImage(named: "MenteeHomeBackgroundImg")
         }
-        
-
         return imageView
     }()
     
@@ -82,6 +79,14 @@ class HomeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // acept fit으로 인해 여백이 생긴 imageView의 크기를 내부 이미지 크기에 맞춰 줄임
+        backgroundImageView.snp.makeConstraints {
+            $0.width.equalTo(backgroundImageView.contentClippingRect.width)
+        }
     }
 
 }
@@ -148,7 +153,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
      */
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width: CGFloat = collectionView.frame.width - 32
-        let height: CGFloat = 170
+        let height: CGFloat = width * 0.475
         return CGSize(width: width, height: height)
     }
     
@@ -198,8 +203,9 @@ private extension HomeViewController {
         [backgroundImageView, collectionView].forEach { view.addSubview($0) }
         
         backgroundImageView.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(00.0)
-            $0.bottom.equalToSuperview().inset(80)
+            $0.height.equalTo(view.frame.height*0.59)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         collectionView.snp.makeConstraints {

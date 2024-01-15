@@ -54,7 +54,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
         let label = NanumLabel(weightType: .L, size: 13)
         label.textColor = .BaseGray700
         label.numberOfLines = 0
-        label.textAlignment = .justified
 
         return label
     }()
@@ -154,8 +153,8 @@ private extension HomeCollectionViewCell {
         profileImageBackgroundView.addSubview(profileImageView)
 
         profileImageBackgroundView.snp.makeConstraints {
-            $0.width.equalTo(135)
-            $0.height.equalTo(148)
+            $0.height.equalTo(self.frame.height - 11)
+            $0.width.equalTo(profileImageView.snp.height).multipliedBy(0.9)
             $0.leading.equalToSuperview().inset(18)
             $0.centerY.equalToSuperview()
         }
@@ -163,7 +162,6 @@ private extension HomeCollectionViewCell {
         profileImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
             $0.edges.equalToSuperview()
-//            $0.height.equalTo(61)
         }
         
         nicknameLabel.snp.makeConstraints {
