@@ -20,17 +20,14 @@ final class MyPageView: UIView {
         }
     }()
     
-    private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .EB, size: 34)
-        label.text = "마이페이지"
-        label.textColor = .BaseGray900
-        
-        return label
-    }()
+   private let scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+       return scrollView
+   }()
     
     // 마이페이지 상단에 사용자 닉네임과 프로필 이미지를 보여주는 View입니다.
     private lazy var profileCardView: ProfileCardView = {
-        let view = ProfileCardView()
+        let view = ProfileCardView(frame: frame)
         view.layer.cornerRadius = 20
         
         if uiStyle == .mento {
@@ -46,11 +43,7 @@ final class MyPageView: UIView {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        if uiStyle == .mento {
-            label.text = "소속 |"
-        } else {
-            label.text = "학교 |"
-        }
+        label.text = "학교 |"
         
         return label
     }()
@@ -58,7 +51,7 @@ final class MyPageView: UIView {
     private lazy var userOrganizationLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = .BaseGray900
-        label.text = "소속 or 학교"
+        label.text = "학교"
         
         return label
     }()
@@ -86,11 +79,7 @@ final class MyPageView: UIView {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        if uiStyle == .mento {
-            label.text = "분야 |"
-        } else {
-            label.text = "학과 |"
-        }
+        label.text = "분야 |"
         
         return label
     }()
@@ -98,7 +87,7 @@ final class MyPageView: UIView {
     private lazy var userFieldLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = .BaseGray900
-        label.text = "멘토링 분야 or -학과"
+        label.text = "멘토링 분야"
         
         return label
     }()
@@ -126,11 +115,7 @@ final class MyPageView: UIView {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        if uiStyle == .mento {
-            label.text = "연차 |"
-        } else {
-            label.text = "학년 |"
-        }
+        label.text = "학년 |"
         
         return label
     }()
@@ -138,7 +123,7 @@ final class MyPageView: UIView {
     private lazy var userGradeLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = .BaseGray900
-        label.text = "n년차 or n학년"
+        label.text = "n학년"
         
         return label
     }()
@@ -166,11 +151,7 @@ final class MyPageView: UIView {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        if uiStyle == .mento {
-            label.text = "학과 |"
-        } else {
-            label.text = "분야 |"
-        }
+        label.text = "학과 |"
         
         return label
     }()
@@ -178,7 +159,7 @@ final class MyPageView: UIView {
     private lazy var userfield2Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
         label.textColor = .BaseGray900
-        label.text = "x학과 졸업 or 희망 직무 분야"
+        label.text = "x학과"
         
         return label
     }()
@@ -202,31 +183,88 @@ final class MyPageView: UIView {
         return imageView
     }()
     
-    private lazy var introductionLabel: NanumLabel = {
+    private lazy var tagLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        label.text = "한 줄 소개"
+        label.text = "태그"
         
         return label
     }()
     
-    private lazy var introductionDescriptLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 10)
-        label.textColor = .BaseGray700
-        label.text = "10자 이상, 80자 이하 작성"
-        
-        return label
+    lazy var tagTextField1: TagTextField = {
+        let textField = TagTextField(isEnabled: false)
+        textField.textField.text = "#태그1"
+        return textField
     }()
     
-    private lazy var introductionStackView: UIStackView = {
+    lazy var tagTextField2: TagTextField = {
+        let textField = TagTextField(isEnabled: false)
+        textField.textField.text = "#태그2"
+        return textField
+    }()
+    
+    lazy var tagTextField3: TagTextField = {
+        let textField = TagTextField(isEnabled: false)
+        textField.textField.text = "#태그3"
+        return textField
+    }()
+    
+    private lazy var tagStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .bottom
+        stackView.axis = .vertical
+        stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.spacing = 5
+        stackView.spacing = 10
         
-        [introductionLabel, introductionDescriptLabel].forEach {stackView.addArrangedSubview($0)}
+        let subStackView = UIStackView()
+        subStackView.spacing = 5
+        subStackView.axis = .vertical
+        [tagTextField1, tagTextField2, tagTextField3].forEach {
+            subStackView.addArrangedSubview($0)
+        }
+        
+        [tagLabel, subStackView].forEach {stackView.addArrangedSubview($0)}
+        
+        return stackView
+    }()
+    
+    private lazy var dashedLine5ImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "DashedLineImg")
+        
+        return imageView
+    }()
+    
+    private lazy var methodLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .B, size: 15)
+        label.textColor = .BaseGray600
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.text = "멘토링 방식"
+        
+        return label
+    }()
+    
+    private lazy var methodTextView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .systemBackground
+        textView.textColor = .BaseGray900
+        textView.isEditable = false
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 16)
+        textView.layer.cornerRadius = 10
+        textView.isScrollEnabled = false
+        textView.textContainerInset = UIEdgeInsets(top: 13, left: 14, bottom: 13, right: 14)
+        textView.text = "기존 내용"
+        return textView
+    }()
+    
+    private lazy var methodStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        [methodLabel, methodTextView].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
@@ -236,32 +274,51 @@ final class MyPageView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
-        stackView.spacing = 21
+        stackView.spacing = 15
         
         [organizationStackView, dashedLine1ImageView,
          fieldStackView, dashedLine2ImageView,
          gradeStackView, dashedLine3ImageView,
-         field2StackView, dashedLine4ImageView].forEach { stackView.addArrangedSubview($0) }
+         field2StackView, dashedLine4ImageView,
+         tagStackView, dashedLine5ImageView,
+         methodStackView].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
     }()
     
-    private lazy var userIntroductionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 17)
-        label.textColor = .BaseGray900
-        label.text = "기존 내용"
-        
-        return label
+    lazy var logoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("로그아웃", for: .normal)
+        button.tintColor = .systemBackground
+        button.backgroundColor = .systemRed
+        button.layer.cornerRadius = 10
+        return button
     }()
     
-    // 마이페이지 하단에 차단 관리, 작성글 관리, 멘토링 방식, 계정 설정 버튼을 포함하고 있는 메뉴바 입니다.
-    lazy var menuBarView: MenuBarView = {
-        let view = MenuBarView()
-        view.layer.cornerRadius = 20
+    private lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
         
-        return view
+        let spaceView0 = UIView()
+        
+        let spaceView = UIView()
+        spaceView.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
+        
+        let spaceView2 = UIView()
+        spaceView2.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
+        [spaceView0,profileCardView, userInfoStackView, spaceView, logoutButton, spaceView2].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -269,7 +326,6 @@ final class MyPageView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
     }
     
     func setup() {
@@ -282,54 +338,23 @@ final class MyPageView: UIView {
 private extension MyPageView {
     
     func setupSubViews() {
-        [titleLabel, profileCardView, userInfoStackView, introductionStackView, userIntroductionLabel, menuBarView].forEach {addSubview($0)}
-        
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(15)
-            $0.top.equalToSuperview().offset(59)
+        addSubview(scrollView)
+        scrollView.addSubview(mainStackView)
+
+        scrollView.snp.makeConstraints {
+           $0.edges.equalTo(safeAreaLayoutGuide)
         }
         
+        mainStackView.snp.makeConstraints {
+            $0.edges.width.equalToSuperview()
+        }
+
         profileCardView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(30)
-            $0.height.equalTo(121)
+            $0.height.equalTo(profileCardView.frame.width * 0.34)
         }
-        
-        userInfoStackView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalTo(profileCardView.snp.bottom).offset(24)
-        }
-        
-        introductionStackView.snp.makeConstraints {
-            $0.leading.equalTo(userInfoStackView.snp.leading)
-            $0.top.equalTo(userInfoStackView.snp.bottom).offset(12)
-        }
-        
-        userIntroductionLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalTo(introductionLabel.snp.leading)
-            $0.top.equalTo(introductionLabel.snp.bottom).offset(15)
-        }
-        
-        menuBarView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.height.equalTo(96)
-            $0.bottom.equalToSuperview().offset(-124)
-        }
-        
     }
     
     func updateUI() {
         backgroundColor = .BaseGray100
-    }
-    
-}
-
-extension MyPageView {
-    
-
-    
+    }   
 }

@@ -33,6 +33,7 @@ class ProfileCardView: UIView {
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         if uiStyle == .mento {
             imageView.image = UIImage(named: "MenteeProfileBaseImg")
@@ -71,7 +72,13 @@ class ProfileCardView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        profileImageBackgroundView.snp.makeConstraints {
+            $0.width.equalTo(profileImageBackgroundView.snp.height).multipliedBy(0.9)
+        }
     }
     
     func setup() {
@@ -88,12 +95,8 @@ private extension ProfileCardView {
         
         profileImageBackgroundView.addSubview(profileImageView)
  
-        
-        profileImageBackgroundView.snp.makeConstraints {
-            $0.width.equalTo(77.5)
-            $0.height.equalTo(85)
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-13.43)
+        profileImageBackgroundView.snp.makeConstraints {            $0.top.bottom.equalToSuperview().inset(16)
+            $0.trailing.equalToSuperview().inset(13)
         }
         
         profileImageView.snp.makeConstraints {
@@ -102,15 +105,15 @@ private extension ProfileCardView {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(18)
+            $0.leading.equalToSuperview().inset(18)
             $0.top.equalToSuperview().offset(28)
+            $0.trailing.equalTo(profileImageBackgroundView.snp.leading)
         }
         
         nickNameLabel.snp.makeConstraints {
             $0.leading.equalTo(titleLabel.snp.leading)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.trailing.equalTo(titleLabel.snp.trailing)
         }
-        
     }
-
 }
