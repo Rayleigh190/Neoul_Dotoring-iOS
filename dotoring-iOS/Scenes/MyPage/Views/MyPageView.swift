@@ -39,7 +39,7 @@ final class MyPageView: UIView {
         return view
     }()
     
-    private lazy var organizationLabel: NanumLabel = {
+    private lazy var schoolLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -48,22 +48,22 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userOrganizationLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = .BaseGray900
-        label.text = "학교"
-        
-        return label
+    private lazy var schoolTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "기존 학교"
+        textField.isEnabled = false
+        textField.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 20)
+        return textField
     }()
     
-    private lazy var organizationStackView: UIStackView = {
+    private lazy var schoolStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.spacing = 8
         
-        [organizationLabel, userOrganizationLabel].forEach {stackView.addArrangedSubview($0)}
+        [schoolLabel, schoolTextField].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
@@ -84,12 +84,17 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userFieldLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = .BaseGray900
-        label.text = "멘토링 분야"
-        
-        return label
+    lazy var fieldTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "멘토링 분야"
+        textField.isEnabled = false
+        textField.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 20)
+        return textField
+    }()
+    
+    lazy var fieldButton: UIButton = {
+        let button = UIButton()
+        return button
     }()
     
     private lazy var fieldStackView: UIStackView = {
@@ -99,7 +104,7 @@ final class MyPageView: UIView {
         stackView.distribution = .fill
         stackView.spacing = 8
         
-        [fieldLabel, userFieldLabel].forEach {stackView.addArrangedSubview($0)}
+        [fieldLabel, fieldTextField].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
@@ -120,12 +125,13 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userGradeLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = .BaseGray900
-        label.text = "n학년"
-        
-        return label
+    private lazy var gradeTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "n학년"
+        textField.isEnabled = false
+        textField.keyboardType = .numberPad
+        textField.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 20)
+        return textField
     }()
     
     private lazy var gradeStackView: UIStackView = {
@@ -135,7 +141,7 @@ final class MyPageView: UIView {
         stackView.distribution = .fill
         stackView.spacing = 8
         
-        [gradeLabel, userGradeLabel].forEach {stackView.addArrangedSubview($0)}
+        [gradeLabel, gradeTextField].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
@@ -147,7 +153,7 @@ final class MyPageView: UIView {
         return imageView
     }()
     
-    private lazy var field2Label: NanumLabel = {
+    private lazy var departmentLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 15)
         label.textColor = .BaseGray600
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -156,22 +162,27 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var userfield2Label: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        label.textColor = .BaseGray900
-        label.text = "x학과"
-        
-        return label
+    lazy var departmentTextField: UITextField = {
+        let textField = UITextField()
+        textField.text = "X학과"
+        textField.isEnabled = false
+        textField.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 20)
+        return textField
     }()
     
-    private lazy var field2StackView: UIStackView = {
+    lazy var departmentButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    private lazy var departmentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.distribution = .fill
         stackView.spacing = 8
         
-        [field2Label, userfield2Label].forEach {stackView.addArrangedSubview($0)}
+        [departmentLabel, departmentTextField].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
@@ -276,10 +287,10 @@ final class MyPageView: UIView {
         stackView.distribution = .equalSpacing
         stackView.spacing = 15
         
-        [organizationStackView, dashedLine1ImageView,
+        [schoolStackView, dashedLine1ImageView,
          fieldStackView, dashedLine2ImageView,
          gradeStackView, dashedLine3ImageView,
-         field2StackView, dashedLine4ImageView,
+         departmentStackView, dashedLine4ImageView,
          tagStackView, dashedLine5ImageView,
          methodStackView].forEach { stackView.addArrangedSubview($0) }
         
@@ -318,9 +329,45 @@ final class MyPageView: UIView {
         }
         return stackView
     }()
+    
+    lazy var cancelButton: BaseButton = {
+        let button = BaseButton(style: .gray)
+        button.setTitle("수정 취소", for: .normal)
+        return button
+    }()
+    
+    lazy var doneButton: BaseButton = {
+        let button = BaseButton(style: .gray)
+        button.setTitle("완료", for: .normal)
+        return button
+    }()
+    
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
+        stackView.isHidden = true
+        [cancelButton, doneButton].forEach { stackView.addArrangedSubview($0) }
+        return stackView
+    }()
+    
+    let editSpaceView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
+    
+    init(isEditable: Bool = true) {
+        super.init(frame: .zero)
+        setup()
+        setupEditable()
+        backgroundColor = .systemBackground
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .BaseGray100
         setup()
     }
     
@@ -328,9 +375,20 @@ final class MyPageView: UIView {
         super.init(coder: coder)
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        buttonStackView.snp.makeConstraints {
+            $0.height.equalTo(buttonStackView.frame.width * 0.28)
+        }
+        
+        editSpaceView.snp.makeConstraints {
+            $0.height.equalTo(buttonStackView.frame.height)
+        }
+        mainStackView.addArrangedSubview(editSpaceView)
+    }
+    
     func setup() {
         setupSubViews()
-        updateUI()
     }
     
 }
@@ -338,7 +396,9 @@ final class MyPageView: UIView {
 private extension MyPageView {
     
     func setupSubViews() {
-        addSubview(scrollView)
+        [scrollView, buttonStackView, fieldButton, departmentButton].forEach {
+            addSubview($0)
+        }
         scrollView.addSubview(mainStackView)
 
         scrollView.snp.makeConstraints {
@@ -352,9 +412,32 @@ private extension MyPageView {
         profileCardView.snp.makeConstraints {
             $0.height.equalTo(profileCardView.frame.width * 0.34)
         }
+        
+        buttonStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(17)
+        }
+        
+        fieldButton.snp.makeConstraints {
+            $0.edges.equalTo(fieldTextField)
+        }
+        
+        departmentButton.snp.makeConstraints {
+            $0.edges.equalTo(departmentTextField)
+        }
     }
     
-    func updateUI() {
-        backgroundColor = .BaseGray100
-    }   
+    func setupEditable() {
+        profileCardView.isHidden = true
+        logoutButton.isHidden = true
+        methodStackView.isHidden = true
+        dashedLine5ImageView.isHidden = true
+        gradeTextField.isEnabled = true
+        schoolTextField.isEnabled = true
+        [tagTextField1, tagTextField2, tagTextField3].forEach {
+            $0.setEnabled()
+        }
+        buttonStackView.isHidden = false
+        editSpaceView.isHidden = false
+    }
 }

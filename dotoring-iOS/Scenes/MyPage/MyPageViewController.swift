@@ -36,7 +36,7 @@ class MyPageViewController: UIViewController {
         let infoEditAction = UIAction(
             title: "내 정보 수정", 
             image: UIImage(systemName: "pencil"),
-            handler: mentorignMethodButtonTapped
+            handler: myInfoEditdButtonTapped
         )
         let methodEditAction = UIAction(
             title: "멘토링 방식 수정", 
@@ -93,8 +93,9 @@ extension MyPageViewController {
         myPageView.logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
     
-    func mentorignMethodButtonTapped(sender: UIAction!) {
-        let vc = MentoringMethodSetViewController()
+    func myInfoEditdButtonTapped(sender: UIAction!) {
+        let vc = MyInfoEditViewController()
+        vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     

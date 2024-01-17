@@ -11,6 +11,7 @@
 		F10689322B542BA800D652B5 /* BusinessDetailAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */; };
 		F10689342B542BAE00D652B5 /* BusinessDetailAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */; };
 		F10689382B550B2300D652B5 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689372B550B2300D652B5 /* UIImageView.swift */; };
+		F106893C2B56AF5E00D652B5 /* MyInfoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106893B2B56AF5E00D652B5 /* MyInfoEditViewController.swift */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -147,6 +148,7 @@
 		F10689312B542BA800D652B5 /* BusinessDetailAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailAlertViewController.swift; sourceTree = "<group>"; };
 		F10689332B542BAE00D652B5 /* BusinessDetailAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailAlertView.swift; sourceTree = "<group>"; };
 		F10689372B550B2300D652B5 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		F106893B2B56AF5E00D652B5 /* MyInfoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditViewController.swift; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				F10689392B56679A00D652B5 /* tempVC */,
 				F1FCE78D2AC7D5E30024AE60 /* Views */,
 				F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */,
+				F106893B2B56AF5E00D652B5 /* MyInfoEditViewController.swift */,
 				F1FCE7962AC902F00024AE60 /* MentoringMethodSetViewController.swift */,
 				F1FCE7A02ACB00C40024AE60 /* UploadDocumentsViewController.swift */,
 				F1FCE7982AC909270024AE60 /* AccountSetViewController.swift */,
@@ -818,6 +821,7 @@
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
+				F106893C2B56AF5E00D652B5 /* MyInfoEditViewController.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,

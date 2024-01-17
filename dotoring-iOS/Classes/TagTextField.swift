@@ -64,6 +64,14 @@ class TagTextField: UIView {
     
 }
 
+extension TagTextField {
+    func setEnabled() {
+        textField.isEnabled = true
+        button.isHidden = false
+        self.backgroundColor = .BaseGray100
+    }
+}
+
 private extension TagTextField {
     
     func setupSubViews() {
