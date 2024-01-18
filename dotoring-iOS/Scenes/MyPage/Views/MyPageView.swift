@@ -48,7 +48,7 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var schoolTextField: UITextField = {
+    lazy var schoolTextField: UITextField = {
         let textField = UITextField()
         textField.text = "기존 학교"
         textField.isEnabled = false
@@ -125,9 +125,9 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var gradeTextField: UITextField = {
+    lazy var gradeTextField: UITextField = {
         let textField = UITextField()
-        textField.text = "n학년"
+        textField.text = "0"
         textField.isEnabled = false
         textField.keyboardType = .numberPad
         textField.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 20)
@@ -339,6 +339,7 @@ final class MyPageView: UIView {
     lazy var doneButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("완료", for: .normal)
+        button.isEnabled = false
         return button
     }()
     
