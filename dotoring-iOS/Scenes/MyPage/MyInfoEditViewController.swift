@@ -39,6 +39,7 @@ class MyInfoEditViewController: UIViewController {
     func setAddTarget() {
         myPageView.fieldButton.addTarget(self, action: #selector(selectTextFieldTapped), for: .touchUpInside)
         myPageView.departmentButton.addTarget(self, action: #selector(selectTextFieldTapped), for: .touchUpInside)
+        myPageView.doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
     }
 
 }
@@ -47,6 +48,20 @@ extension MyInfoEditViewController: SelectViewControllerDelegate {
     func didSelectViewControllerDismiss(elements: [String], selectedElements: [Int], sender: UIButton) {
         print(selectedElements)
         return
+    }
+    
+    @objc func doneButtonTapped(sender: UIButton) {
+        showAlert(
+            alertType: .canCancel,
+            alertText: "학교, 분야, 학년 학과 수정 시\n새로운 증빙서류가 요청됩니다.\n계속하시겠습니까?",
+            highlightText: "새로운 증빙서류",
+            contentFontSieze: .small,
+            hasSecondaryText: true,
+            secondaryText: "승인에 최대 3일의 시간이 소요됩니다.",
+            cancelButtonText: "아니오",
+            confirmButtonText: "네",
+            confirmButtonHighlight: true
+        )
     }
     
     @objc func selectTextFieldTapped(sender: UIButton) {
@@ -76,4 +91,16 @@ extension MyInfoEditViewController: SelectViewControllerDelegate {
        }
        present(vc, animated: true)
     }
+}
+
+extension MyInfoEditViewController: CustomAlertDelegate {
+    func action() {
+        print("네")
+    }
+    
+    func exit() {
+        print("아니오")
+    }
+    
+    
 }
