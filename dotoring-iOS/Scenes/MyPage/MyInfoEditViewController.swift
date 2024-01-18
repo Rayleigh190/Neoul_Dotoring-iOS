@@ -95,11 +95,12 @@ extension MyInfoEditViewController: SelectViewControllerDelegate {
 
 extension MyInfoEditViewController: CustomAlertDelegate {
     func action() {
-        print("네")
+        let vc = UploadDocumentsViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func exit() {
-        print("아니오")
+        return
     }
     
     

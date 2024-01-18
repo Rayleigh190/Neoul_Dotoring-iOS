@@ -12,10 +12,9 @@ import UIKit
  * 계정 정보 수정 후 서류를 제출하는 View입니다.
  */
 class UploadDocumentsView: UIView {
-    
-    var groupCertificateUploadButtonActionHandler: (() -> Void)?
-    var graduateCertificateUploadButtonActionHandler: (() -> Void)?
-    var nextButtonActionHandler: (() -> Void)?
+    // 뷰 전체 높이 길이
+    let screenHeight = UIScreen.main.bounds.size.height
+    var certificateUploadButtonActionHandler: (() -> Void)?
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -28,7 +27,7 @@ class UploadDocumentsView: UIView {
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 28)
         label.numberOfLines = 0
-        var text = "수정된 직무에 맞는\n서류를 업로드해 주세요."
+        var text = "수정된 내용에 맞는\n서류를 업로드해 주세요."
         var attrRangeText = "서류"
         var attrStrColor = UIColor.label
         
@@ -49,19 +48,8 @@ class UploadDocumentsView: UIView {
     
     private lazy var content1Label: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 20)
-        var text = ""
-        var attrRangeText = ""
-        var attrStrColor = UIColor.label
-        
-        if uiStyle == .mento {
-            text = "A. 재적증명서 업로드하기"
-            attrRangeText = "재적증명서"
-            attrStrColor = .BaseGreen!
-        } else {
-            text = "A. 재학증명서 업로드하기"
-            attrRangeText = "재학증명서"
-            attrStrColor = .BaseNavy!
-        }
+        var text = "A. 재학증명서 업로드하기"
+        var attrRangeText = "재학증명서"
         
         let attributedStr = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: attrRangeText))
@@ -75,64 +63,26 @@ class UploadDocumentsView: UIView {
         return label
     }()
     
-    lazy var groupCertificateUploadButton: UIButton = {
+    lazy var certificateUploadButton: UIButton = {
         let button = UIButton()
         button.setTitle("PDF 또는 이미지", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.setBackgroundImage(UIImage(named: "FileSelectBtnImg"), for: .normal)
         button.tag = 0
-        button.addTarget(self, action: #selector(groupCertificateUploadButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(certificateUploadButtonTapped), for: .touchUpInside)
         
         return button
     }()
     
-    private lazy var content2Label: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 20)
-        let text = "A. 졸업증명서 업로드하기"
-        
-        let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.font, value: UIFont.nanumSquare(style: .NanumSquareOTFB, size: 20), range: (text as NSString).range(of: "졸업증명서"))
-        
-        let spacing: CGFloat = 2
-        attributedStr.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: (text as NSString).range(of: "졸업증명서"))
-        attributedStr.addAttribute(.baselineOffset, value: spacing, range: (text as NSString).range(of: "졸업증명서"))
-        
-        label.attributedText = attributedStr
-        
-        return label
-    }()
-    
-    lazy var graduateCertificateUploadButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("PDF 또는 이미지", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.setBackgroundImage(UIImage(named: "FileSelectBtnImg"), for: .normal)
-        button.tag = 1
-        button.addTarget(self, action: #selector(graduateCertificateUploadButtonTapped), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    private lazy var saveButton: BaseButton = {
-//        let button: BaseButton = {
-//            if uiStyle == .mento {
-//                return BaseButton(style: .green)
-//            } else {
-//                return BaseButton(style: .navy)
-//            }
-//        }()
+    lazy var saveButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("완료", for: .normal)
-//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        
         return button
     }()
     
-    private lazy var cancelButton: BaseButton = {
+    lazy var cancelButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("수정 취소", for: .normal)
-//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        
         return button
     }()
     
@@ -158,67 +108,42 @@ private extension UploadDocumentsView {
     func setupSubViews() {
         [titleLabel, saveButton, cancelButton].forEach {addSubview($0)}
         
-        [content1Label, groupCertificateUploadButton,  content2Label, graduateCertificateUploadButton].forEach {addSubview($0)}
+        [content1Label, certificateUploadButton].forEach {addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(178)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            if screenHeight <= 568 {
+                $0.top.equalToSuperview().inset(70)
+            } else {
+                $0.top.equalToSuperview().offset(178).priority(.low)
+                $0.top.greaterThanOrEqualToSuperview().inset(30).priority(.required)
+            }
         }
         
         content1Label.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.trailing.equalTo(titleLabel)
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
         }
         
-        groupCertificateUploadButton.snp.makeConstraints {
+        certificateUploadButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(content1Label.snp.leading)
             $0.top.equalTo(content1Label.snp.bottom).offset(18)
             $0.height.equalTo(86)
         }
         
-        if uiStyle == .mento {
-            content2Label.snp.makeConstraints {
-                $0.leading.equalTo(content1Label.snp.leading)
-                $0.top.equalTo(groupCertificateUploadButton.snp.bottom).offset(58)
-            }
-            
-            graduateCertificateUploadButton.snp.makeConstraints {
-                $0.centerX.equalToSuperview()
-                $0.leading.equalTo(content2Label.snp.leading)
-                $0.top.equalTo(content2Label.snp.bottom).offset(18)
-                $0.height.equalTo(86)
-            }
-            
-        } else {
-            // 멘티 회원가입에서는 안 보이게 함
-            content2Label.snp.makeConstraints {
-                $0.leading.equalTo(content1Label.snp.leading)
-                $0.top.equalTo(groupCertificateUploadButton.snp.bottom).offset(0)
-                $0.height.equalTo(0)
-            }
-            
-            graduateCertificateUploadButton.snp.makeConstraints {
-                $0.centerX.equalToSuperview()
-                $0.leading.equalTo(content2Label.snp.leading)
-                $0.top.equalTo(content2Label.snp.bottom).offset(0)
-                $0.height.equalTo(0)
-            }
-            graduateCertificateUploadButton.isHidden = true
+        saveButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(17)
+            $0.height.equalTo(saveButton.snp.width).multipliedBy(0.14)
         }
         
         cancelButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().inset(94)
-            $0.height.equalTo(48)
-        }
-        
-        saveButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.bottom.equalTo(cancelButton.snp.top).offset(-5)
-            $0.height.equalTo(48)
+            $0.leading.equalTo(saveButton.snp.leading)
+            $0.bottom.equalTo(saveButton.snp.top).offset(-5)
+            $0.height.equalTo(saveButton.snp.height)
         }
         
     }
@@ -226,12 +151,8 @@ private extension UploadDocumentsView {
 
 extension UploadDocumentsView {
     
-    @objc func groupCertificateUploadButtonTapped(sender: UIButton!) {
-        groupCertificateUploadButtonActionHandler?()
-    }
-    
-    @objc func graduateCertificateUploadButtonTapped(sender: UIButton!) {
-        graduateCertificateUploadButtonActionHandler?()
+    @objc func certificateUploadButtonTapped(sender: UIButton!) {
+                certificateUploadButtonActionHandler?()
     }
     
 }
