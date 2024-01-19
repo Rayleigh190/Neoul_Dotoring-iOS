@@ -203,22 +203,44 @@ final class MyPageView: UIView {
         return label
     }()
     
+    lazy var tagSubLabel: NanumLabel = {
+        let label = NanumLabel(weightType: .R, size: 10)
+        label.textColor = .BaseGray700
+        label.text = "#제외 6자 이하, 태그 3개 이하 작성, #은 자동으로 채워집니다."
+        label.isHidden = true
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        return label
+    }()
+    
     lazy var tagTextField1: TagTextField = {
         let textField = TagTextField(isEnabled: false)
         textField.textField.text = "#태그1"
+        textField.button.tag = 1
         return textField
     }()
     
     lazy var tagTextField2: TagTextField = {
         let textField = TagTextField(isEnabled: false)
         textField.textField.text = "#태그2"
+        textField.button.tag = 2
         return textField
     }()
     
     lazy var tagTextField3: TagTextField = {
         let textField = TagTextField(isEnabled: false)
         textField.textField.text = "#태그3"
+        textField.button.tag = 3
         return textField
+    }()
+    
+    private lazy var tagLabelStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 5
+        stackView.alignment = .bottom
+        [tagLabel, tagSubLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
     }()
     
     private lazy var tagStackView: UIStackView = {
@@ -233,9 +255,12 @@ final class MyPageView: UIView {
         subStackView.axis = .vertical
         [tagTextField1, tagTextField2, tagTextField3].forEach {
             subStackView.addArrangedSubview($0)
+            $0.snp.makeConstraints {
+                $0.width.greaterThanOrEqualTo(80)
+            }
         }
         
-        [tagLabel, subStackView].forEach {stackView.addArrangedSubview($0)}
+        [tagLabelStackView, subStackView].forEach {stackView.addArrangedSubview($0)}
         
         return stackView
     }()
@@ -440,5 +465,6 @@ private extension MyPageView {
         }
         buttonStackView.isHidden = false
         editSpaceView.isHidden = false
+        tagSubLabel.isHidden = false
     }
 }

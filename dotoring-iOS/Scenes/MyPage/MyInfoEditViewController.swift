@@ -58,6 +58,9 @@ class MyInfoEditViewController: UIViewController {
         myPageView.tagTextField1.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
         myPageView.tagTextField2.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
         myPageView.tagTextField3.textField.addTarget(self, action: #selector(textFieldDidChanacge), for: .editingChanged)
+        myPageView.tagTextField1.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
+        myPageView.tagTextField2.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
+        myPageView.tagTextField3.button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
     }
     
     func setDelegate() {
@@ -190,12 +193,47 @@ extension MyInfoEditViewController: UITextFieldDelegate {
         isChanged = true
     }
     
+    @objc func removeTag(sender: UIButton) {
+        isChanged = true
+        if sender.tag == 1 {
+            myPageView.tagTextField1.textField.text = ""
+            textFieldDidEndEditing(myPageView.tagTextField1.textField)
+        } else if sender.tag == 2 {
+            myPageView.tagTextField2.textField.text = ""
+            textFieldDidEndEditing(myPageView.tagTextField2.textField)
+        } else if sender.tag == 3 {
+            myPageView.tagTextField3.textField.text = ""
+            textFieldDidEndEditing(myPageView.tagTextField3.textField)
+        }
+    }
+    
+    // 태그 작성 시작 시 맨 앞에 #을 지워줍니다.
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == myPageView.tagTextField1.textField
+            || textField == myPageView.tagTextField2.textField
+            || textField == myPageView.tagTextField3.textField {
+            if let text = textField.text, text.hasPrefix("#") {
+                textField.text = NSMutableString(string: text).substring(from: 1)
+            }
+        }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == myPageView.schoolTextField
             || textField == myPageView.fieldTextField
             || textField == myPageView.gradeTextField
             || textField == myPageView.departmentTextField {
             isMyInfoChanged = true
+        }
+        
+        // 태그 작성 완료 시 맨 앞에 #을 붙여줍니다.
+        if textField == myPageView.tagTextField1.textField
+            || textField == myPageView.tagTextField2.textField
+            || textField == myPageView.tagTextField3.textField {
+            if textField.text?.first != "#" {
+                guard let text = textField.text else {return}
+                textField.text = "#" + text
+            }
         }
         
         if isChanged {
@@ -206,6 +244,26 @@ extension MyInfoEditViewController: UITextFieldDelegate {
             }
             myPageView.doneButton.isEnabled = true
         }
+    }
+    
+    // tag textField 글자수 제한
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == myPageView.tagTextField1.textField
+            || textField == myPageView.tagTextField2.textField
+            || textField == myPageView.tagTextField3.textField {
+            let inputString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard let oldString = textField.text, let newRange = Range(range, in: oldString) else { return true }
+            let newString = oldString.replacingCharacters(in: newRange, with: inputString).trimmingCharacters(in: .whitespacesAndNewlines)
+
+            let characterCount = newString.count
+            
+            guard characterCount <= 6 else {
+                print(characterCount)
+                self.view.makeToast("6자 이하까지 작성 가능합니다.", duration: 1, position: .top)
+                return false
+            }
+        }
+        return true
     }
 }
 
