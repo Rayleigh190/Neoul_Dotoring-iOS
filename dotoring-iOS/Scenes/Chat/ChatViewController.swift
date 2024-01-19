@@ -9,6 +9,7 @@ import UIKit
 import MessageKit
 import InputBarAccessoryView
 import Photos
+import IQKeyboardManagerSwift
 
 class ChatViewController: MessagesViewController {
     
@@ -32,19 +33,36 @@ class ChatViewController: MessagesViewController {
         fatalError()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         confirmDelegates()
         configure()
 //        setupMessageInputBar()
         configureMessageInputBar()
         removeOutgoingMessageAvatars()
         setNavigationItems()
+        
+        // 배경 누르면 키보드 내려가게함
+        let messagesCollectionViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didMessagesCollectionViewTapped))
+        messagesCollectionView.addGestureRecognizer(messagesCollectionViewTapGesture)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enable = true
     }
     
     deinit {
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    @objc private func didMessagesCollectionViewTapped() {
+        messageInputBar.inputTextView.resignFirstResponder()
     }
     
     private func setNavigationItems() {
@@ -93,7 +111,7 @@ class ChatViewController: MessagesViewController {
     
     private func configure() {
         updateTitleView(title: channel.name, subtitle: channel.major)
-        navigationController?.navigationBar.prefersLargeTitles = false
+        self.navigationItem.largeTitleDisplayMode = .never
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToLastItem(animated: false)
         

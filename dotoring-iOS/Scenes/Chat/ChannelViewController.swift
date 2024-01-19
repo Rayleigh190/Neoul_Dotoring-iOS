@@ -15,24 +15,16 @@ extension NSObject {
 }
 
 class ChannelViewController: UIViewController {
-    
-    private lazy var titleLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .EB, size: 34)
-        label.text = "채팅방"
-        label.textColor = .BaseGray900
-        
-        return label
-    }()
-
     lazy var channelTableView: UITableView = {
         let view = UITableView()
         view.register(ChannelTableViewCell.self, forCellReuseIdentifier: ChannelTableViewCell.className)
         view.delegate = self
         view.dataSource = self
-        
+        // tableView 최상단 separator 숨기기
+        view.tableHeaderView = UIView()
+        view.rowHeight = UITableView.automaticDimension
         return view
     }()
-    
     
     var channels = [
         Channel(id: "0", name: "홍길동", major: "경영학과", lastLetter: "우리 언제 만나요?", updateAt: "6월 19일 14시 55분"),
@@ -41,21 +33,21 @@ class ChannelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupNavigationController()
         configure()
     }
     
+    func setupNavigationController() {
+        navigationItem.title = "채팅방"
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func configure() {
-        
-        [titleLabel, channelTableView].forEach{view.addSubview($0)}
-        
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(15)
-            $0.top.equalToSuperview().offset(59)
-        }
+        [channelTableView].forEach{view.addSubview($0)}
         
         channelTableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(45)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(0)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
@@ -83,9 +75,9 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    // 셀 높이
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+    // 셀 높이 추정
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        90
     }
     
     // 셀 선택 됐을때

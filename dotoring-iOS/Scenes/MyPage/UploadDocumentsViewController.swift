@@ -12,15 +12,21 @@ import UniformTypeIdentifiers
 class UploadDocumentsViewController: UIViewController {
     
     var uploadDocumentsView: UploadDocumentsView!
-    
     var selectedFileURL: URL?
-    var selectedFileURL2: URL?
 
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         setNavigationItems()
+        setAddTarget()
     }
     
     override func loadView() {
@@ -28,15 +34,8 @@ class UploadDocumentsViewController: UIViewController {
         
         uploadDocumentsView = UploadDocumentsView(frame: self.view.frame)
         
-        // Set the button action handler
-        uploadDocumentsView.groupCertificateUploadButtonActionHandler = { [weak self] in
+        uploadDocumentsView.certificateUploadButtonActionHandler = { [weak self] in
             self?.certificateOfEmploymentUploadButtonTapped()
-        }
-        uploadDocumentsView.graduateCertificateUploadButtonActionHandler = { [weak self] in
-            self?.graduateCertificateUploadButtonActionHandler()
-        }
-        uploadDocumentsView.nextButtonActionHandler = { [weak self] in
-            self?.nextButtonTapped()
         }
 
         self.view = uploadDocumentsView
@@ -48,43 +47,55 @@ extension UploadDocumentsViewController {
     
     private func setNavigationItems() {
         navigationItem.title = "증빙서류 업로드"
-        navigationController?.navigationBar.topItem?.backButtonTitle = "마이페이지"
         navigationController?.navigationBar.tintColor = .label
-        
+    }
+    
+    func setAddTarget() {
+        uploadDocumentsView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        uploadDocumentsView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
     // sender : 0과 1
     func certificateOfEmploymentUploadButtonTapped() {
-        // 재직증명서 업로드
+        // 재학증명서 업로드
         openPdfOrImgFile(sender: 0)
     }
     
-    func graduateCertificateUploadButtonActionHandler() {
-        // 졸업증명서 업로드
-        openPdfOrImgFile(sender: 1)
+    @objc func cancelButtonTapped(sender: UIButton) {
+        let vc = self.navigationController!.viewControllers
+        self.navigationController?.popToViewController(vc[vc.count - 3 ], animated: true)
     }
     
-    func nextButtonTapped() {
-        let vc = Signup3ViewController()
-        navigationController?.pushViewController(vc, animated: false)
+    @objc func saveButtonTapped(sender: UIButton) {
+        
     }
     
+    func activeNextButton() {
+        // 다음버튼 활성화
+        uploadDocumentsView.saveButton.isEnabled = true
+        uploadDocumentsView.saveButton.setTitleColor(.white, for: .normal)
+        if uiStyle == .mento {
+            uploadDocumentsView.saveButton.backgroundColor = .BaseGreen
+        } else {
+            uploadDocumentsView.saveButton.backgroundColor = .BaseNavy
+        }
+    }
 }
 
 extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func openPdfOrImgFile(sender: Int) {
-        let actionSheet = UIAlertController(title: "Select File Type", message: "Choose a file type to import", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "파일 유형 선택", message: "파일 유형을 선택하세요", preferredStyle: .actionSheet)
         
         let pdfAction = UIAlertAction(title: "PDF", style: .default) { (action) in
             self.pickPDF(sender: sender)
         }
         
-        let imageAction = UIAlertAction(title: "Image", style: .default) { (action) in
+        let imageAction = UIAlertAction(title: "이미지", style: .default) { (action) in
             self.pickImage(sender: sender)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         actionSheet.addAction(pdfAction)
         actionSheet.addAction(imageAction)
@@ -97,49 +108,36 @@ extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationC
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.pdf], asCopy: true)
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
-        if sender == 0 {
-            documentPicker.view.tag = uploadDocumentsView.groupCertificateUploadButton.tag
-        } else {
-            documentPicker.view.tag = uploadDocumentsView.graduateCertificateUploadButton.tag
-        }
-        
+        documentPicker.view.tag = uploadDocumentsView.certificateUploadButton.tag
         present(documentPicker, animated: true, completion: nil)
     }
 
     func pickImage(sender: Int) {
+        self.view.makeToastActivity(.center)
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.sourceType = .photoLibrary
-        if sender == 0 { // 재직증명서 버튼일 경우
-            imagePicker.view.tag = uploadDocumentsView.groupCertificateUploadButton.tag
-        } else if sender == 1 { // 졸업증명서 버튼일 경우
-            imagePicker.view.tag = uploadDocumentsView.graduateCertificateUploadButton.tag
-        }
+        imagePicker.view.tag = uploadDocumentsView.certificateUploadButton.tag
         present(imagePicker, animated: true, completion: nil)
+        self.view.hideToastActivity()
     }
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedPDFURL = urls.first {
-            if controller.view.tag == uploadDocumentsView.groupCertificateUploadButton.tag {
-                selectedFileURL = selectedPDFURL
-                uploadDocumentsView.groupCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
-            } else if controller.view.tag == uploadDocumentsView.graduateCertificateUploadButton.tag {
-                selectedFileURL2 = selectedPDFURL
-                uploadDocumentsView.graduateCertificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
-            }
+            selectedFileURL = selectedPDFURL
+            uploadDocumentsView.certificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
+            // 다음버튼 활성화
+            activeNextButton()
         }
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-                if picker.view.tag == uploadDocumentsView.groupCertificateUploadButton.tag {
-                    selectedFileURL = imageURL
-                    uploadDocumentsView.groupCertificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
-                } else if picker.view.tag == uploadDocumentsView.graduateCertificateUploadButton.tag {
-                    selectedFileURL2 = imageURL
-                    uploadDocumentsView.graduateCertificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
-                }
+                selectedFileURL = imageURL
+                uploadDocumentsView.certificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
+                // 다음버튼 활성화
+                activeNextButton()
             }
         }
         

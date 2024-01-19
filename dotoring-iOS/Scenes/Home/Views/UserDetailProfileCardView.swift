@@ -116,12 +116,14 @@ private extension UserDetailProfileCardView {
         
         backgroundImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview()
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(-14)
+            $0.width.equalTo(frame.width * 0.85)
         }
         
         profileImageBackgroundView.snp.makeConstraints {
-            $0.width.equalTo(126.05)
-            $0.height.equalTo(138)
+            $0.width.equalTo(frame.width * 0.32)
+            $0.height.equalTo(profileImageBackgroundView.snp.width).multipliedBy(1.1)
+            $0.top.greaterThanOrEqualTo(safeAreaLayoutGuide)
             $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().inset(20)
         }

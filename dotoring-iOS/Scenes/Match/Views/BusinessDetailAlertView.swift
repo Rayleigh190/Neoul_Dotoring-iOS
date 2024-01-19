@@ -125,17 +125,6 @@ class BusinessDetailAlertView: UIView {
 private extension BusinessDetailAlertView {
     func updateUI() {
         textView.layer.cornerRadius = textView.frame.height * 0.164
-        
-        cancelButton.layer.cornerRadius = cancelButton.frame.height / 2
-        cancelButton.snp.makeConstraints {
-            $0.height.equalTo(cancelButton.snp.width).multipliedBy(0.309)
-        }
-        
-        sendButton.layer.cornerRadius = sendButton.frame.height / 2
-        sendButton.snp.makeConstraints {
-            $0.height.equalTo(sendButton.snp.width).multipliedBy(0.309)
-        }
-        
         windowStackView.layer.cornerRadius = windowStackView.frame.height * 0.059
     }
     
@@ -146,6 +135,14 @@ private extension BusinessDetailAlertView {
         
         textView.snp.makeConstraints {
             $0.height.lessThanOrEqualTo(screenHeight/2)
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.height.equalTo(cancelButton.snp.width).multipliedBy(0.309)
+        }
+        
+        sendButton.snp.makeConstraints {
+            $0.height.equalTo(sendButton.snp.width).multipliedBy(0.309)
         }
         
         windowStackView.snp.makeConstraints {

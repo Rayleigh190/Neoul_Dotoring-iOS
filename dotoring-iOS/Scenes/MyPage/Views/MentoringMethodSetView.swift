@@ -13,6 +13,7 @@ import UIKit
  * inputTextField에서 텍스트를 편집할 수 있습니다.
  */
 class MentoringMethodSetView: UIView {
+    var isChanged = false
     
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -20,6 +21,11 @@ class MentoringMethodSetView: UIView {
         } else {
             return UIStyle.mentee
         }
+    }()
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
     }()
     
     private lazy var titleLabel: NanumLabel = {
@@ -54,13 +60,23 @@ class MentoringMethodSetView: UIView {
         return label
     }()
     
+    private lazy var topStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        [titleLabel, infoLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
+    }()
+    
     lazy var inputTextField: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = UIColor(red: 0.958, green: 0.958, blue: 0.958, alpha: 1)
-        textView.textColor = .label
-        textView.text = "기존 멘토링 방식"
+        textView.textColor = .BaseGray600
+        textView.text = "a. 멘토링 목표\n멘토링을 통해 얻고 싶은 점, 목표하는 바에 대해 적어 주세요.\n\nb. 멘토링 계획\n멘토링을 어떻게 운영할지 적어 주세요.\nex) 주에 2번, 비대면 멘토링\n\nc. 멘토링 성과\n멘토링을 통해 달성하고자 하는 성과를 적어 주세요.\nex) 관련 과목의 성적, 자격증 취득, 경진대회 참가 등의 구체적인 성과\n"
         textView.isEditable = true
-        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 17)
+        textView.font = UIFont.nanumSquare(style: .NanumSquareOTFB, size: 16)
         textView.layer.cornerRadius = 20
         textView.isScrollEnabled = false
         textView.textContainerInset = UIEdgeInsets(top: 17, left: 13, bottom: 17, right: 13)
@@ -71,30 +87,61 @@ class MentoringMethodSetView: UIView {
     private lazy var inputCountLabel: NanumLabel = {
         let label = NanumLabel(weightType: .R, size: 14)
         label.text = "\(inputTextField.text.count)/250"
-        
+        label.textAlignment = .right
         return label
     }()
     
-    private lazy var cancelButton: BaseButton = {
+    private lazy var middleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        
+        [inputTextField, inputCountLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
+    }()
+    
+    private lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        
+        let spaceView1 = UIView()
+        spaceView1.snp.makeConstraints {
+            $0.height.equalTo(70)
+        }
+        [topStackView, middleStackView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
+    lazy var cancelButton: BaseButton = {
         let button = BaseButton(style: .gray)
-        button.setTitle("최소", for: .normal)
-//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        button.setTitle("취소", for: .normal)
         
         return button
     }()
     
-    private lazy var saveButton: BaseButton = {
-        let button: BaseButton = {
-            if uiStyle == .mento {
-                return BaseButton(style: .green)
-            } else {
-                return BaseButton(style: .navy)
-            }
-        }()
+    lazy var saveButton: BaseButton = {
+        let button = BaseButton(style: .gray)
         button.setTitle("저장하기", for: .normal)
-//        button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        
+        button.isEnabled = false
         return button
+    }()
+    
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 5
+        stackView.distribution = .fillEqually
+        [cancelButton, saveButton].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
     }()
 
     override init(frame: CGRect) {
@@ -109,7 +156,6 @@ class MentoringMethodSetView: UIView {
     
     func setup() {
         setupSubViews()
-//        updateUI()
     }
 
 }
@@ -117,44 +163,25 @@ class MentoringMethodSetView: UIView {
 private extension MentoringMethodSetView {
     
     func setupSubViews() {
+        [scrollView, buttonStackView].forEach {addSubview($0)}
         
-        [titleLabel, infoLabel, inputTextField, inputCountLabel, cancelButton, saveButton].forEach {addSubview($0)}
-        
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(178)
+        scrollView.addSubview(mainStackView)
+                
+        scrollView.snp.makeConstraints {
+            $0.top.trailing.leading.equalTo(safeAreaLayoutGuide)
+            $0.bottom.equalTo(buttonStackView.snp.top).offset(-10)
         }
         
-        infoLabel.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel.snp.leading)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+        mainStackView.snp.makeConstraints {
+            $0.edges.width.equalToSuperview()
         }
         
-        inputTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalTo(infoLabel.snp.leading)
-            $0.top.equalTo(infoLabel.snp.bottom).offset(20)
-        }
-        
-        inputCountLabel.snp.makeConstraints {
-            $0.trailing.equalTo(inputTextField.snp.trailing)
-            $0.top.equalTo(inputTextField.snp.bottom).offset(12)
-        }
-        
-        saveButton.snp.makeConstraints {
+        buttonStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
-            $0.bottom.equalToSuperview().inset(94)
-            $0.height.equalTo(48)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(17)
+            $0.height.equalTo(buttonStackView.snp.width).multipliedBy(0.28)
         }
-        
-        cancelButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.bottom.equalTo(saveButton.snp.top).offset(-5)
-            $0.height.equalTo(48)
-        }
-        
     }
     
 }

@@ -17,32 +17,26 @@ class UserDetailView: UIView {
         }
     }()
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     lazy var userDetailProfileCardView: UserDetailProfileCardView = {
-        let userDetailProfileCardView = UserDetailProfileCardView()
-        
+        let userDetailProfileCardView = UserDetailProfileCardView(frame: frame)
         return userDetailProfileCardView
     }()
     
     private lazy var userDetailProfileCardShadowView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
-        
         return view
     }()
     
     private lazy var hopeFieldLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
         label.text = "희망 멘토링 분야"
-        
         return label
-    }()
-    
-    private lazy var scrollerView: UIScrollView = {
-        let scrollerView = UIScrollView()
-        scrollerView.translatesAutoresizingMaskIntoConstraints = false
-        scrollerView.showsHorizontalScrollIndicator = false
-        
-        return scrollerView
     }()
     
     lazy var fieldStackView: UIStackView = {
@@ -51,7 +45,26 @@ class UserDetailView: UIView {
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
         stackView.spacing = 13
-        
+        return stackView
+    }()
+    
+    private lazy var fieldScrollerView: UIScrollView = {
+        let scrollerView = UIScrollView()
+        scrollerView.translatesAutoresizingMaskIntoConstraints = false
+        scrollerView.showsHorizontalScrollIndicator = false
+        scrollerView.addSubview(fieldStackView)
+        return scrollerView
+    }()
+    
+    private lazy var hopeFieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        [hopeFieldLabel, fieldScrollerView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
@@ -71,6 +84,18 @@ class UserDetailView: UIView {
         return label
     }()
     
+    private lazy var introductionStackView:UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        [introductionLabel, introductionContentLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
     private lazy var hopeMentoringLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
         label.text = "원하는 멘토링"
@@ -85,6 +110,44 @@ class UserDetailView: UIView {
         label.textAlignment = .left
         
         return label
+    }()
+    
+    private lazy var hopeMentoringStackView:UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        [hopeMentoringLabel, hopeMentoringContentLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
+    private lazy var middleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 30
+       
+        [hopeFieldStackView, introductionStackView, hopeMentoringStackView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
+    }()
+    
+    private lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        let spaceView1 = UIView()
+        let spaceView2 = UIView()
+        spaceView2.snp.makeConstraints {
+            $0.height.equalTo(20)
+        }
+        [spaceView1, middleStackView, spaceView2].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        return stackView
     }()
     
     private lazy var chatButton: UIButton = {
@@ -129,65 +192,38 @@ private extension UserDetailView {
     
     func setupSubViews() {
         
-        [userDetailProfileCardShadowView, userDetailProfileCardView, hopeFieldLabel, scrollerView, introductionLabel, introductionContentLabel, hopeMentoringLabel, hopeMentoringContentLabel, chatButton].forEach{addSubview($0)}
+        [userDetailProfileCardShadowView, userDetailProfileCardView, chatButton, scrollView].forEach{addSubview($0)}
+        scrollView.addSubview(mainStackView)
         
-        scrollerView.addSubview(fieldStackView)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(userDetailProfileCardView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(safeAreaLayoutGuide)
+        }
+        
+        mainStackView.snp.makeConstraints {
+           $0.edges.width.equalToSuperview()
+        }
+        
+        fieldStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.height.equalToSuperview()
+        }
         
         userDetailProfileCardView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.height.equalTo(289)
-            $0.top.equalToSuperview()
+            // iphone SE에서만 오류뜸
+            // safeLayoutGuide로 안 해서 오류뜨긴 하는데 작동은함..
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.equalTo(frame.height * 0.34)
         }
         
         userDetailProfileCardShadowView.snp.makeConstraints {
             $0.edges.equalTo(userDetailProfileCardView)
         }
         
-        hopeFieldLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalTo(userDetailProfileCardView.snp.bottom).offset(30)
-        }
-        
-        scrollerView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.top.equalTo(hopeFieldLabel.snp.bottom).offset(10)
-        }
-        
-        fieldStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.top.bottom.equalToSuperview()
-            $0.height.equalToSuperview()
-        }
-        
-        introductionLabel.snp.makeConstraints {
-            $0.leading.equalTo(hopeFieldLabel.snp.leading)
-            $0.top.equalTo(hopeFieldLabel.snp.bottom).offset(98)
-        }
-        
-        introductionContentLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalTo(introductionLabel.snp.leading)
-            $0.top.equalTo(introductionLabel.snp.bottom).offset(5)
-        }
-        
-        hopeMentoringLabel.snp.makeConstraints {
-            $0.leading.equalTo(introductionContentLabel.snp.leading)
-            $0.top.equalTo(introductionContentLabel.snp.bottom).offset(40)
-        }
-        
-        hopeMentoringContentLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.leading.equalTo(hopeMentoringLabel.snp.leading)
-            $0.top.equalTo(hopeMentoringLabel.snp.bottom).offset(5)
-        }
-        
         chatButton.snp.makeConstraints {
             $0.width.height.equalTo(61)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-32)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(20)
         }
         
     }

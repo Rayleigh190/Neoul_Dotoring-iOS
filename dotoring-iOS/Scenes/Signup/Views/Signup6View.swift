@@ -343,7 +343,7 @@ private extension Signup6View {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(questionLabel.snp.leading)
             $0.top.equalTo(authCodeWarningLabel.snp.bottom).offset(55)
-            $0.height.equalTo(45)
+            $0.height.equalTo(loginButton.snp.width).multipliedBy(0.14)
             $0.bottom.lessThanOrEqualToSuperview().inset(30)
         }
         

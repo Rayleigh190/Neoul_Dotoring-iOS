@@ -34,6 +34,20 @@ class TagTextField: UIView {
         
         return button
     }()
+    
+    init(isEnabled: Bool = true) {
+        super.init(frame: .zero)
+        self.layer.cornerRadius = 10
+        self.snp.makeConstraints{$0.height.equalTo(40)}
+        setupSubViews()
+        if !isEnabled {
+            textField.isEnabled = isEnabled
+            button.isHidden = true
+            self.backgroundColor = .systemBackground
+        } else {
+            self.backgroundColor = .BaseGray100
+        }
+    }
 
     override init(frame: CGRect){
         super.init(frame: frame)
@@ -48,6 +62,14 @@ class TagTextField: UIView {
     }
     
     
+}
+
+extension TagTextField {
+    func setEnabled() {
+        textField.isEnabled = true
+        button.isHidden = false
+        self.backgroundColor = .BaseGray100
+    }
 }
 
 private extension TagTextField {

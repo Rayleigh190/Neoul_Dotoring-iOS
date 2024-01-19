@@ -348,7 +348,7 @@ private extension MentoSignup1ViewController {
             $0.centerX.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
             $0.top.equalTo(departmentTextField.snp.bottom).offset(55)
-            $0.height.equalTo(48)
+            $0.height.equalTo(nextButton.snp.width).multipliedBy(0.14)
             $0.bottom.lessThanOrEqualToSuperview().inset(20).priority(.required)
         }
         

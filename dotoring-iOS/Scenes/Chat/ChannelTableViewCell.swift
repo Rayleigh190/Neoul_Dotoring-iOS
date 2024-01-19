@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class ChannelTableViewCell: UITableViewCell {
-    
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
             return UIStyle.mento
@@ -31,8 +30,6 @@ class ChannelTableViewCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .BaseGray100
         view.clipsToBounds = true
-        view.layer.cornerRadius = 30
-       
         return view
     }()
     
@@ -45,6 +42,7 @@ class ChannelTableViewCell: UITableViewCell {
         } else {
             imageView.image = UIImage(named: "MenteeProfileBaseImg")
         }
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         return imageView
     }()
@@ -77,6 +75,11 @@ class ChannelTableViewCell: UITableViewCell {
         return label
     }()
     
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        chatRoomImageBackgroundView.layer.cornerRadius = chatRoomImageBackgroundView.frame.height / 2
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -94,10 +97,10 @@ class ChannelTableViewCell: UITableViewCell {
         chatRoomImageBackgroundView.addSubview(chatRoomImageView)
         
         chatRoomImageBackgroundView.snp.makeConstraints {
-            $0.width.equalTo(60)
-            $0.height.equalTo(60)
-            $0.leading.equalToSuperview().offset(16)
-            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalTo(chatRoomNicknameLabel.snp.top)
+            $0.bottom.equalTo(chatRoomContentLabel.snp.bottom)
+            $0.width.equalTo(chatRoomImageBackgroundView.snp.height)
         }
         
         chatRoomImageView.snp.makeConstraints {
@@ -111,24 +114,27 @@ class ChannelTableViewCell: UITableViewCell {
         }
         
         chatRoomNicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(chatRoomImageView.snp.top).offset(1)
+            $0.top.equalToSuperview().inset(15)
             $0.leading.equalTo(chatRoomImageView.snp.trailing).offset(10)
+            $0.trailing.equalTo(chatRoomDateLabel.snp.leading).offset(-5)
         }
         
         chatRoomDepartmentLabel.snp.makeConstraints {
             $0.leading.equalTo(chatRoomNicknameLabel.snp.leading)
             $0.top.equalTo(chatRoomNicknameLabel.snp.bottom).offset(5)
+            $0.trailing.equalTo(chatRoomDateLabel.snp.trailing)
         }
         
         chatRoomContentLabel.snp.makeConstraints {
             $0.leading.equalTo(chatRoomDepartmentLabel.snp.leading)
             $0.top.equalTo(chatRoomDepartmentLabel.snp.bottom).offset(5)
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.trailing.equalTo(chatRoomDateLabel.snp.trailing)
+            $0.bottom.equalToSuperview().inset(15)
         }
         
         chatRoomDateLabel.snp.makeConstraints {
             $0.top.equalTo(chatRoomNicknameLabel.snp.top)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.trailing.equalToSuperview().inset(16)
         }
     }
 }

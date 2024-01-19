@@ -19,8 +19,8 @@ class LoginViewController: UIViewController {
         checkAutoLogin()
         view.backgroundColor = .systemBackground
         
-        self.hideKeyboardWhenTappedAround()
-        self.setKeyboardObserver()
+//        self.hideKeyboardWhenTappedAround()
+//        self.setKeyboardObserver()
         setDelegate()
     }
     

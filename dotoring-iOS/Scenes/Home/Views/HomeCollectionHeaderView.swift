@@ -206,7 +206,7 @@ private extension HomeCollectionHeaderView {
             $0.centerX.equalToSuperview()
             $0.leading.equalTo(subTitleLabel)
             $0.top.equalTo(searchButton.snp.bottom).offset(29.68)
-            $0.height.equalTo(39)
+            $0.height.equalTo(buttonStackView.snp.width).multipliedBy(0.119)
         }
         
     }
