@@ -41,7 +41,7 @@ class MyPageViewController: UIViewController {
         let methodEditAction = UIAction(
             title: "멘토링 방식 수정", 
             image: UIImage(systemName: "doc.text.magnifyingglass"),
-            handler: accountSetButtonTapped
+            handler: methodEditButtonTapped
         )
         button.showsMenuAsPrimaryAction = true
         button.menu = UIMenu(
@@ -99,8 +99,8 @@ extension MyPageViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func accountSetButtonTapped(sender: UIAction!) {
-        let vc = AccountSetViewController()
+    func methodEditButtonTapped(sender: UIAction!) {
+        let vc = MentoringMethodSetViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     

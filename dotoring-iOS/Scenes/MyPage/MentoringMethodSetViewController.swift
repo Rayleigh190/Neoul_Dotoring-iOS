@@ -8,14 +8,22 @@
 import UIKit
 
 class MentoringMethodSetViewController: UIViewController {
-    
+    var isChanged = false
     var mentoringSetView: MentoringMethodSetView!
+    let uiStyle: UIStyle = {
+        if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
+            return UIStyle.mento
+        } else {
+            return UIStyle.mentee
+        }
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         mentoringSetView.inputTextField.delegate = self
-        setNavigationItems()
+        mentoringSetView.cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        setupNavigationController()
         self.hideKeyboardWhenTappedAround()
     }
     
@@ -27,11 +35,15 @@ class MentoringMethodSetViewController: UIViewController {
         self.view = mentoringSetView
     }
     
-    private func setNavigationItems() {
+    private func setupNavigationController() {
         navigationItem.title = "멘토링 방식 설정"
-        navigationController?.navigationBar.topItem?.backButtonTitle = "마이페이지"
         navigationController?.navigationBar.tintColor = .label
+        navigationItem.largeTitleDisplayMode = .never
         
+    }
+    
+    @objc func cancelButtonTapped(sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 
 }
@@ -49,6 +61,29 @@ extension MentoringMethodSetViewController: UITextViewDelegate {
         mentoringSetView.updateCountLabel(characterCount: characterCount)
 
         return true
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if !isChanged {
+            textView.text = ""
+            textView.textColor = .BaseGray900
+            textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 17)
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        isChanged = true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if isChanged {
+            if uiStyle == .mento {
+                mentoringSetView.saveButton.setupButton(style: .green)
+            } else {
+                mentoringSetView.saveButton.setupButton(style: .navy)
+            }
+            mentoringSetView.saveButton.isEnabled = true
+        }
     }
     
 }
