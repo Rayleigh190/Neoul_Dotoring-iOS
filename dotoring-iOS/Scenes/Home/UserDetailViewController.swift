@@ -73,9 +73,12 @@ class UserDetailViewController: UIViewController {
     }
     
     private func setNavigationItems() {
-        navigationController?.navigationBar.topItem?.backButtonTitle = "추천 멘티"
+        if uiStyle == .mento {
+            navigationController?.navigationBar.topItem?.backButtonTitle = "추천 멘티"
+        } else {
+            navigationController?.navigationBar.topItem?.backButtonTitle = "추천 멘토"
+        }
         navigationController?.navigationBar.tintColor = .white
-        
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     

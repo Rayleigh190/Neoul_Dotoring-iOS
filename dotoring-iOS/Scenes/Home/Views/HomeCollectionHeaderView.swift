@@ -133,7 +133,11 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     
     func setup() {
         nicknameLabel.text = "닉네임"
-        subTitleLabel.text = "추천멘티"
+        if uiStyle == .mento {
+            subTitleLabel.text = "추천멘티"
+        } else {
+            subTitleLabel.text = "추천멘토"
+        }
         
         setupViews()
         self.bringSubviewToFront(searchButton) // searchButton을 최상단으로 올림
