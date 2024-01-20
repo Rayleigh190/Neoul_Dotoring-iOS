@@ -113,7 +113,7 @@ extension MyInfoEditViewController {
         
         if let gradeStr =  myPageView.gradeTextField.text {
             let gradeInt = Int(gradeStr)!
-            if gradeInt > 4 || gradeInt < 1 {
+            if gradeInt > 4 || gradeInt < 1 || gradeStr.count > 1 {
                 Alert.showAlert(title: "안내", message: "학년은 1~4만 입력 가능합니다.")
             }
         }
