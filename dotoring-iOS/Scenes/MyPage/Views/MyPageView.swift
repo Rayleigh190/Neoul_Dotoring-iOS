@@ -371,10 +371,12 @@ final class MyPageView: UIView {
     private lazy var buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
         stackView.spacing = 5
+        stackView.backgroundColor = .systemBackground
         stackView.isHidden = true
         [cancelButton, doneButton].forEach { stackView.addArrangedSubview($0) }
+        stackView.layoutMargins = UIEdgeInsets(top: 17, left: 16, bottom: 17, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     
@@ -403,10 +405,6 @@ final class MyPageView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        buttonStackView.snp.makeConstraints {
-            $0.height.equalTo(buttonStackView.frame.width * 0.28)
-        }
-        
         editSpaceView.snp.makeConstraints {
             $0.height.equalTo(buttonStackView.frame.height)
         }
@@ -436,12 +434,20 @@ private extension MyPageView {
         }
 
         profileCardView.snp.makeConstraints {
-            $0.height.equalTo(profileCardView.frame.width * 0.34)
+            $0.height.equalTo(profileCardView.snp.width).multipliedBy(0.34)
         }
         
         buttonStackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(17)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide)
+        }
+        
+        cancelButton.snp.makeConstraints {
+            $0.height.equalTo(cancelButton.snp.width).multipliedBy(0.14)
+        }
+        
+        doneButton.snp.makeConstraints {
+            $0.height.equalTo(doneButton.snp.width).multipliedBy(0.14)
         }
         
         fieldButton.snp.makeConstraints {
