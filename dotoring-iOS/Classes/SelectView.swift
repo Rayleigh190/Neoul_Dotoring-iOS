@@ -8,13 +8,12 @@
 import UIKit
 
 class SelectView: UIView {
-    
     var uiColor: UIColor = UIColor.BaseGray200!
     var elements: [String] = ["선택항목 1", "선택항목 2", "선택항목 3", "선택항목 4", "선택항목 5", "선택항목 6", "선택항목 7", "선택항목 8", "선택항목 9", "선택항목 10"]
     var selectedElements: [Int] = [] // 선택한 항목 cell의 indexPath를 저장
-    var previousSelectedElements: [Int] = []
+    var previousSelectedElements: [Int]
     
-    lazy var titleLabel: NanumLabel = {
+    private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
         label.textColor = .white
         label.text = "타이틀"
@@ -46,12 +45,16 @@ class SelectView: UIView {
         table.backgroundColor = uiColor
         table.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         table.separatorColor = .white
+        table.allowsMultipleSelection = true
         
         return table
     }()
     
-    init(frame: CGRect, title: String, style:UIStyle) {
+    init(frame: CGRect, titleText: String, style:UIStyle, elements: [String], previousSelectedElements: [Int]) {
+        self.elements = elements
+        self.previousSelectedElements = previousSelectedElements
         super.init(frame: frame)
+        titleLabel.text = titleText
         
         switch style {
         case .mento:
@@ -63,22 +66,16 @@ class SelectView: UIView {
             clearButton.layer.borderColor = UIColor(red: 0.349, green: 0.475, blue: 0.62, alpha: 1).cgColor
             clearButton.setTitleColor(UIColor(red: 0.349, green: 0.475, blue: 0.62, alpha: 1), for: .normal)
         }
-        
-        titleLabel.text = title
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.allowsMultipleSelection = true
         setup()
-    }
+        setPreviousSelectedElement()    }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setup() {
-//        updateUI()
+        tableView.dataSource = self
+        tableView.delegate = self
         setupSubViews()
     }
 
@@ -169,13 +166,8 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
         cell.selectionStyle = .none
         
         // 커스텀 뷰를 생성하고 accessoryView로 설정
-        let customAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        customAccessoryView.layer.cornerRadius = 10
-        customAccessoryView.layer.borderWidth = 1.5 // 테두리 추가
-        customAccessoryView.layer.borderColor = UIColor.white.cgColor
-        
+        let customAccessoryView = createCircleAccView(isSelected: false)
         cell.accessoryView = customAccessoryView
-        
         return cell
     }
     
@@ -192,14 +184,10 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
         }
         
         if let cell = tableView.cellForRow(at: indexPath) {
-            // 선택 해제된 셀에서 커스텀 accessoryView를 다시 큰 원으로 변경
-            let customAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            customAccessoryView.layer.cornerRadius = 10
-            customAccessoryView.layer.borderWidth = 1.5
-            customAccessoryView.layer.borderColor = UIColor.white.cgColor
-
-            cell.accessoryView = customAccessoryView
-        }
+           // 선택 해제된 셀에서 커스텀 accessoryView를 다시 큰 원으로 변경
+           let customAccessoryView = createCircleAccView(isSelected: false)
+           cell.accessoryView = customAccessoryView
+       }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -219,19 +207,7 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
         selectedStackView.addArrangedSubview(selectedElementView)
         
         if let cell = tableView.cellForRow(at: indexPath) {
-            let customAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20)) // 큰 원 추가
-            customAccessoryView.layer.cornerRadius = 10
-            customAccessoryView.layer.borderWidth = 1.5
-            customAccessoryView.layer.borderColor = UIColor.white.cgColor
-            customAccessoryView.backgroundColor = .clear
-            
-            // 선택된 셀에서 커스텀 accessoryView에 작은 원 추가
-            let smallCustomAccessoryView = UIView(frame: CGRect(x: 3, y: 3, width: 14, height: 14)) // Autolayout을 적용하면 안 나타나서 x,y를 적용함
-            smallCustomAccessoryView.backgroundColor = .systemBackground
-            smallCustomAccessoryView.layer.cornerRadius = 7
-            
-            customAccessoryView.addSubview(smallCustomAccessoryView)
-
+            let customAccessoryView = createCircleAccView(isSelected: true)
             cell.accessoryView = customAccessoryView
         }
     }
@@ -241,21 +217,23 @@ extension SelectView: UITableViewDataSource, UITableViewDelegate {
      */
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell.isSelected {
-            let customAccessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20)) // 큰 원 추가
-            customAccessoryView.layer.cornerRadius = 10
-            customAccessoryView.layer.borderWidth = 1.5
-            customAccessoryView.layer.borderColor = UIColor.white.cgColor
-            customAccessoryView.backgroundColor = .clear
-            
-            // 선택된 셀에서 커스텀 accessoryView에 작은 원 추가
-            let smallCustomAccessoryView = UIView(frame: CGRect(x: 3, y: 3, width: 14, height: 14)) // Autolayout을 적용하면 안 나타나서 x,y를 적용함
-            smallCustomAccessoryView.backgroundColor = .systemBackground
-            smallCustomAccessoryView.layer.cornerRadius = 7
-            customAccessoryView.addSubview(smallCustomAccessoryView)
-            
+            let customAccessoryView = createCircleAccView(isSelected: true)
             cell.accessoryView = customAccessoryView
         }
     }
 
-
+    func createCircleAccView(isSelected: Bool) -> UIView {
+        let largeCircleView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        largeCircleView.layer.cornerRadius = 10
+        largeCircleView.layer.borderWidth = 1.5
+        largeCircleView.layer.borderColor = UIColor.systemBackground.cgColor
+        largeCircleView.backgroundColor = .clear
+        if isSelected {
+            let smallCircleView = UIView(frame: CGRect(x: 3, y: 3, width: 14, height: 14))
+            smallCircleView.backgroundColor = .systemBackground
+            smallCircleView.layer.cornerRadius = 7
+            largeCircleView.addSubview(smallCircleView)
+        }
+        return largeCircleView
+    }
 }

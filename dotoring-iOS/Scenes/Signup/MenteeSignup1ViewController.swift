@@ -437,25 +437,16 @@ extension MenteeSignup1ViewController: UITextFieldDelegate {
 extension MenteeSignup1ViewController: SelectViewControllerDelegate {
     
     @objc private func selectTextFieldTapped(sender: UIButton) {
-        let vc = SelectViewController()
         if sender == fieldTextFieldButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "멘토링 분야 선택"
-            vc.style = .mentee
-            vc.elements = fieldList.fields
-            vc.previousSelectedElements = selectedFieldElements
-        } else if sender == departmentTextFieldButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "학과 선택"
-            vc.style = .mentee
-            vc.elements = majorList.majors
-            vc.previousSelectedElements = selectedMajorElements
+            let vc = SelectViewController(titleText: "멘토링 분야 선택", style: .mentee, sender: sender, elements: fieldList.fields, previousSelectedElements: selectedFieldElements, delegate: self)
+            presentSheetPresentationController(vc: vc)
         } else {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "필터"
+            let vc = SelectViewController(titleText: "학과 선택", style: .mentee, sender: sender, elements: majorList.majors, previousSelectedElements: selectedMajorElements, delegate: self)
+            presentSheetPresentationController(vc: vc)
         }
-        vc.sender = sender
-        
+    }
+    
+    func presentSheetPresentationController(vc: UIViewController) {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.preferredCornerRadius = 30

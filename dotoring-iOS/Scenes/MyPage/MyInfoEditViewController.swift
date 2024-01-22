@@ -160,25 +160,16 @@ extension MyInfoEditViewController: SelectViewControllerDelegate {
     }
     
     @objc func selectTextFieldTapped(sender: UIButton) {
-        let vc = SelectViewController()
         if sender == myPageView.fieldButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "멘토링 분야 선택"
-            vc.style = uiStyle
-            vc.elements = ["1", "2"]
-            vc.previousSelectedElements = []
+            let vc = SelectViewController(titleText: "멘토링 분야 선택", style: uiStyle, sender: sender, elements: ["1", "2"], previousSelectedElements: [], delegate: self)
+            presentSheetPresentationController(vc: vc)
         } else if sender == myPageView.departmentButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "학과 선택"
-            vc.style = uiStyle
-            vc.elements = ["1", "2"]
-            vc.previousSelectedElements = []
-        } else {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "필터"
+            let vc = SelectViewController(titleText: "학과 선택", style: uiStyle, sender: sender, elements: ["1", "2"], previousSelectedElements: [], delegate: self)
+            presentSheetPresentationController(vc: vc)
         }
-        vc.sender = sender
-        
+    }
+    
+    func presentSheetPresentationController(vc: UIViewController) {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.preferredCornerRadius = 30
