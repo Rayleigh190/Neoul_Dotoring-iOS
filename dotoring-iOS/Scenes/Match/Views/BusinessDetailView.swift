@@ -99,7 +99,7 @@ class BusinessDetailView: UIView {
         let textView = UITextView()
         textView.backgroundColor = .BaseGray200
         textView.textColor = .BaseGray900
-        textView.isEditable = true
+        textView.isEditable = false
         textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 16)
         textView.layer.cornerRadius = 20
         textView.isScrollEnabled = false
@@ -116,7 +116,7 @@ class BusinessDetailView: UIView {
         let textView = UITextView()
         textView.backgroundColor = .BaseGray200
         textView.textColor = .BaseGray900
-        textView.isEditable = true
+        textView.isEditable = false
         textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 16)
         textView.layer.cornerRadius = 20
         textView.isScrollEnabled = false
@@ -133,7 +133,7 @@ class BusinessDetailView: UIView {
         let textView = UITextView()
         textView.backgroundColor = .BaseGray200
         textView.textColor = .BaseGray900
-        textView.isEditable = true
+        textView.isEditable = false
         textView.font = UIFont.nanumSquare(style: .NanumSquareOTFR, size: 16)
         textView.layer.cornerRadius = 20
         textView.isScrollEnabled = false

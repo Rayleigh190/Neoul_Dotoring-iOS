@@ -145,25 +145,17 @@ private extension MatchViewController {
 extension MatchViewController: SelectViewControllerDelegate {
     
     @objc private func searchFilterButtonTapped(sender: UIButton) {
-        let vc = SelectViewController()
-        if sender == searchSectionView.businessNameFilterButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "지원사업명"
-            vc.style = uiStyle
-            vc.elements = businessNameList
-            vc.previousSelectedElements = selectedBusinessNameElements
-        } else if sender == searchSectionView.pjtGoalFilterButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "프로젝트 목표"
-            vc.style = uiStyle
-            vc.elements = pjtGoalList
-            vc.previousSelectedElements = selectedPjtGoalElements
-        } else {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "필터"
-        }
-        vc.sender = sender
         
+        if sender == searchSectionView.businessNameFilterButton {
+            let vc = SelectViewController(titleText: "지원사업명", style: uiStyle, sender: sender, elements: businessNameList, previousSelectedElements: selectedBusinessNameElements, delegate: self)
+            presentSheetPresentationController(vc: vc)
+        } else if sender == searchSectionView.pjtGoalFilterButton {
+            let vc = SelectViewController(titleText: "프로젝트 목표", style: uiStyle, sender: sender, elements: pjtGoalList, previousSelectedElements: selectedPjtGoalElements, delegate: self)
+            presentSheetPresentationController(vc: vc)
+        }
+    }
+    
+    func presentSheetPresentationController(vc: UIViewController) {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.preferredCornerRadius = 30

@@ -133,7 +133,11 @@ class HomeCollectionHeaderView: UICollectionReusableView {
     
     func setup() {
         nicknameLabel.text = "닉네임"
-        subTitleLabel.text = "추천멘티"
+        if uiStyle == .mento {
+            subTitleLabel.text = "추천멘티"
+        } else {
+            subTitleLabel.text = "추천멘토"
+        }
         
         setupViews()
         self.bringSubviewToFront(searchButton) // searchButton을 최상단으로 올림
@@ -288,27 +292,21 @@ extension HomeCollectionHeaderView {
 extension HomeCollectionHeaderView: SelectViewControllerDelegate {
     
     @objc private func filterButtonTapped(sender: UIButton) {
-        let vc = SelectViewController()
         if sender == departmentFilterButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "학과 필터"
-            vc.style = uiStyle
+            let vc = SelectViewController(titleText: "학과 필터", style: uiStyle, sender: sender, elements: ["1", "2"], previousSelectedElements: [], delegate: self)
+            presentSheetPresentationController(vc: vc)
         } else if sender == hopeMentoringFilterButton {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "희망 분야 필터"
-            vc.style = uiStyle
-        } else {
-            vc.selectViewControllerDelegate = self
-            vc.titleText = "필터"
+            let vc = SelectViewController(titleText: "희망 분야 필터", style: uiStyle, sender: sender, elements: ["1", "2"], previousSelectedElements: [], delegate: self)
+            presentSheetPresentationController(vc: vc)
         }
-        vc.sender = sender
-
+    }
+    
+    func presentSheetPresentationController(vc: UIViewController) {
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium(), .large()]
             sheet.preferredCornerRadius = 30
             sheet.prefersGrabberVisible = true
-        }
-
+       }
         // 부모 뷰 컨트롤러에서 뷰 컨트롤러를 표시합니다.
         parentViewController?.present(vc, animated: true, completion: nil)
     }

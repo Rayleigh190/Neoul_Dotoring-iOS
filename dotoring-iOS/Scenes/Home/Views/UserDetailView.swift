@@ -33,6 +33,36 @@ class UserDetailView: UIView {
         return view
     }()
     
+    lazy var tagSubStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
+        return stackView
+    }()
+    
+    private lazy var tagScrollerView: UIScrollView = {
+        let scrollerView = UIScrollView()
+        scrollerView.translatesAutoresizingMaskIntoConstraints = false
+        scrollerView.showsHorizontalScrollIndicator = false
+        scrollerView.addSubview(tagSubStackView)
+        return scrollerView
+    }()
+    
+    private lazy var tagStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        [tagScrollerView].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        return stackView
+    }()
+    
     private lazy var hopeFieldLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 20)
         label.text = "희망 멘토링 분야"
@@ -64,34 +94,6 @@ class UserDetailView: UIView {
             stackView.addArrangedSubview($0)
         }
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        return stackView
-    }()
-    
-    private lazy var introductionLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .EB, size: 20)
-        label.text = "한 줄 소개"
-        
-        return label
-    }()
-    
-    lazy var introductionContentLabel: NanumLabel = {
-        let label = NanumLabel(weightType: .R, size: 17)
-        label.text = "내용"
-        label.numberOfLines = 0
-        label.textAlignment = .natural
-        
-        return label
-    }()
-    
-    private lazy var introductionStackView:UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        [introductionLabel, introductionContentLabel].forEach {
-            stackView.addArrangedSubview($0)
-        }
-        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
@@ -129,7 +131,7 @@ class UserDetailView: UIView {
         stackView.axis = .vertical
         stackView.spacing = 30
        
-        [hopeFieldStackView, introductionStackView, hopeMentoringStackView].forEach {
+        [tagStackView, hopeFieldStackView, hopeMentoringStackView].forEach {
             stackView.addArrangedSubview($0)
         }
         return stackView
@@ -205,6 +207,11 @@ private extension UserDetailView {
         }
         
         fieldStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.height.equalToSuperview()
+        }
+        
+        tagSubStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.height.equalToSuperview()
         }
