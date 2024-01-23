@@ -119,7 +119,7 @@ private extension UserDetailViewController {
         
         userDetailView.userDetailProfileCardView.gradeLabel.text = "\(userInfo.grade) 학년"
         userDetailView.userDetailProfileCardView.nicknameLabel.text = userInfo.nickname
-        userDetailView.introductionContentLabel.text = userInfo.introduction
+//        userDetailView.introductionContentLabel.text = userInfo.introduction
         userDetailView.userDetailProfileCardView.departmentLabel.text = userInfo.majors.joined(separator: ", ")
         
         if uiStyle == .mento {
@@ -133,11 +133,19 @@ private extension UserDetailViewController {
         userDetailView.userDetailProfileCardView.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)
         
         let userFieldCount =  userInfo.fields.count
-        
         for i in 0..<userFieldCount {
             let fieldRectView = FieldRectView()
             fieldRectView.contentLabel.text = "\(userInfo.fields[i])"
             userDetailView.fieldStackView.addArrangedSubview(fieldRectView)
+        }
+        
+        let userTagCount = 3
+        for i in 0..<userTagCount {
+            let tagView = TagTextField(isEnabled: false)
+            tagView.textField.text = "#태그\(i+1)"
+            tagView.backgroundColor = .BaseGray100
+            userDetailView.tagSubStackView.addArrangedSubview(tagView)
+            print("#태그\(i+1)")
         }
     }
     
