@@ -218,6 +218,20 @@ final class LoginView: UIView {
         return switchButton
     }()
     
+    private lazy var launchScreenCoverLogoImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "LaunchScreenLogoImg")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    lazy var launchScreenCover: UIView = {
+        let view = UIView()
+        view.backgroundColor = .BaseGreen
+        view.addSubview(launchScreenCoverLogoImage)
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -331,6 +345,16 @@ private extension LoginView {
         uiStyleSelectSwitch.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(accountStack.snp.bottom).offset(20)
+        }
+        
+        addSubview(launchScreenCover)
+        launchScreenCover.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        launchScreenCoverLogoImage.snp.makeConstraints {
+            $0.centerY.equalTo(safeAreaInsets)
+            $0.leading.trailing.equalToSuperview().inset(168)
         }
         
     }
