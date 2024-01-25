@@ -13,6 +13,7 @@ import Toast
 class LoginViewController: UIViewController {
     
     var loginView: LoginView!
+    var isAutoLogin = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +65,11 @@ extension LoginViewController {
         print("LoginVC - checkAutoLogin() called")
         if let userID = KeyChain.read(key: KeyChainKey.userID),
            let userPW = KeyChain.read(key: KeyChainKey.userPW) {
+            isAutoLogin = true
             getLogin(userID: userID, userPW: userPW, setAutoLogin: false)
             print("LoginViewController - checkAutoLogin() : 자동 로그인 성공")
+        } else {
+            loginView.launchScreenCover.isHidden = true
         }
     }
     
@@ -88,10 +92,10 @@ extension LoginViewController {
     }
     
     func getLogin(userID: String, userPW: String, setAutoLogin: Bool) {
-        self.view.makeToastActivity(.center)
+        if !isAutoLogin {self.view.makeToastActivity(.center)}
         CommonNetworkService.getLogin(userID: userID, userPW: userPW, setAutoLogin: setAutoLogin) { response, error in
             if error != nil {
-                self.view.hideToastActivity()
+                if !self.isAutoLogin {self.view.hideToastActivity()}
                 // 로그인 요청 에러 발생
                 print("로그인 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
                 if let statusCode = error?.asAFError?.responseCode {
