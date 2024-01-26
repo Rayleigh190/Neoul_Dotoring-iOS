@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "response": {
+      "notificationDTOS": [
+          {
+              "id": 1,
+              "notificationName": "이름이름",
+              "writer": "작가작가",
+              "createAt": "날짜날짜",
+              "applicantsNum": "숫자숮자",
+              "isClose": false
+          },
+      ]
+  },
+  "error": null
+}

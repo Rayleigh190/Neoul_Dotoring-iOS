@@ -90,6 +90,7 @@ class MatchViewController: UIViewController {
         setupNavigationController()
         setupAddTarget()
         setupLayout()
+//        fetchNotificationList()
     }
 
 }
@@ -188,4 +189,19 @@ extension MatchViewController: SelectViewControllerDelegate {
         
     }
     
+}
+
+// Network
+extension MatchViewController {
+    func fetchNotificationList() {
+        MatchNetworkService.fetchNotificationList() { response, error in
+            
+            if error != nil {
+                debugPrint(error!)
+            } else {
+                debugPrint(response!)
+            }
+            
+        }
+    }
 }
