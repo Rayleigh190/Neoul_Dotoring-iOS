@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-// Home API Router
+// Match API Router
 enum MatchRouter: URLRequestConvertible {
     
     case notification(goal: String, title: String, isClose: Bool)
@@ -20,7 +20,7 @@ enum MatchRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
         case .notification:
-            return .get
+            return .post
         }
     }
 
@@ -31,10 +31,10 @@ enum MatchRouter: URLRequestConvertible {
         }
     }
     
-    var parameters : Dictionary<String, AnyCodable>  {
+    var parameters : Parameters {
         switch self {
         case let .notification(goal, title, isClose):
-            return ["goal" : AnyCodable(goal), "title" : AnyCodable(title), "isClose" : AnyCodable(isClose)]
+            return ["goal": goal, "title": title, "isClose": isClose]
         default:
             return [:]
         }
@@ -52,22 +52,10 @@ enum MatchRouter: URLRequestConvertible {
 
         switch self {
         case .notification:
-            request.httpBody = try JSONEncoder().encode(parameters)
-        default: break
+            request = try URLEncoding.httpBody.encode(request, with: parameters)
+        default:
+            break
         }
-
         return request
-    }
-}
-
-struct AnyCodable: Encodable {
-    private let value: Encodable
-
-    init(_ value: Encodable) {
-        self.value = value
-    }
-
-    func encode(to encoder: Encoder) throws {
-        try value.encode(to: encoder)
     }
 }

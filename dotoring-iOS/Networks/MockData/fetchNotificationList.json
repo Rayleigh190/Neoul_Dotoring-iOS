@@ -3,13 +3,29 @@
   "response": {
       "notificationDTOS": [
           {
-              "id": 1,
-              "notificationName": "이름이름",
-              "writer": "작가작가",
-              "createAt": "날짜날짜",
-              "applicantsNum": "숫자숮자",
+              "id": 0,
+              "notificationName": "지원사업명1",
+              "writer": "닉네임1",
+              "createAt": "2012-01-26T13:51:50.417-07:00",
+              "applicantsNum": 3,
               "isClose": false
           },
+          {
+              "id": 1,
+              "notificationName": "지원사업명2",
+              "writer": "닉네임2",
+              "createAt": "2012-01-26T13:51:50.417-07:00",
+              "applicantsNum": 4,
+              "isClose": true
+          },
+          {
+              "id": 2,
+              "notificationName": "지원사업명3",
+              "writer": "닉네임3",
+              "createAt": "2012-01-26T13:51:50.417-07:00",
+              "applicantsNum": 5,
+              "isClose": false
+          }
       ]
   },
   "error": null

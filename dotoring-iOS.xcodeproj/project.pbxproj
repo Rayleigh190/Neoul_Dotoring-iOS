@@ -16,6 +16,8 @@
 		F10689462B63CA2B00D652B5 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689452B63CA2B00D652B5 /* MatchModel.swift */; };
 		F10689482B63CC2700D652B5 /* MatchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689472B63CC2700D652B5 /* MatchRouter.swift */; };
 		F106894A2B63D19400D652B5 /* fetchNotificationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F10689492B63D19400D652B5 /* fetchNotificationList.json */; };
+		F106894C2B6497CA00D652B5 /* MockAPINetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */; };
+		F106894E2B6497EA00D652B5 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -157,6 +159,8 @@
 		F10689452B63CA2B00D652B5 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
 		F10689472B63CC2700D652B5 /* MatchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchRouter.swift; sourceTree = "<group>"; };
 		F10689492B63D19400D652B5 /* fetchNotificationList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchNotificationList.json; sourceTree = "<group>"; };
+		F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPINetworkManager.swift; sourceTree = "<group>"; };
+		F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -523,7 +527,9 @@
 			children = (
 				F1CA7E532AFCE056002D733E /* BaseNetworkManager.swift */,
 				F1CA7E6F2AFFD487002D733E /* APINetworkManager.swift */,
+				F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */,
 				F1C3A32D2B4011CB0041907B /* MultipartNetworkManager.swift */,
+				F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */,
 			);
 			path = NetworksManagers;
 			sourceTree = "<group>";
@@ -841,6 +847,7 @@
 				F126B1D42AA6F6CF0035E499 /* SelectView.swift in Sources */,
 				F10689442B63C7D600D652B5 /* MatchNetworkService.swift in Sources */,
 				F1FCE7B92ADA5FA00024AE60 /* ReportReasonAlertView.swift in Sources */,
+				F106894C2B6497CA00D652B5 /* MockAPINetworkManager.swift in Sources */,
 				F1CA7E582AFCE7AB002D733E /* BaseLogger.swift in Sources */,
 				F1FCE7AF2AD1358F0024AE60 /* UserDetailViewController.swift in Sources */,
 				F1CA7E562AFCE127002D733E /* BaseInterceptor.swift in Sources */,
@@ -857,6 +864,7 @@
 				F1DD2C922A95E81200EE9711 /* HomeCollectionViewCell.swift in Sources */,
 				F1FCE7952AC902D90024AE60 /* MentoringMethodSetView.swift in Sources */,
 				F1CA7E9C2B117F95002D733E /* ImageMediaItem.swift in Sources */,
+				F106894E2B6497EA00D652B5 /* MockURLProtocol.swift in Sources */,
 				F10689322B542BA800D652B5 /* BusinessDetailAlertViewController.swift in Sources */,
 				F14D0DD62B4BC13200B2B62D /* BusinessEditViewController.swift in Sources */,
 				F1FCE78C2AC7D5610024AE60 /* MyPageViewController.swift in Sources */,

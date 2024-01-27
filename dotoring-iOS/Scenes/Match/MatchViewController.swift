@@ -90,7 +90,7 @@ class MatchViewController: UIViewController {
         setupNavigationController()
         setupAddTarget()
         setupLayout()
-//        fetchNotificationList()
+        fetchNotificationList()
     }
 
 }
@@ -195,13 +195,11 @@ extension MatchViewController: SelectViewControllerDelegate {
 extension MatchViewController {
     func fetchNotificationList() {
         MatchNetworkService.fetchNotificationList() { response, error in
-            
             if error != nil {
-                debugPrint(error!)
+                debugPrint("오류 : \(error!)")
             } else {
-                debugPrint(response!)
+                debugPrint("정상 : \(response!)")
             }
-            
         }
     }
 }
