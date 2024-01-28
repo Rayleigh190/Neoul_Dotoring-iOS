@@ -13,6 +13,7 @@ class SearchSectionView: UIView {
     var cellHeight = 120.0
     let numOfCell = 5
     var parentViewController: UIViewController?
+    var matchNotis: [MatchNoti] = []
 
     private lazy var titleLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 17)
@@ -70,7 +71,7 @@ class SearchSectionView: UIView {
         return button
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 5.0
@@ -129,7 +130,7 @@ extension SearchSectionView: UICollectionViewDelegateFlowLayout {
 
 extension SearchSectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        numOfCell
+        matchNotis.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -138,7 +139,10 @@ extension SearchSectionView: UICollectionViewDataSource {
             for: indexPath
         ) as? SearchSectionCollectionViewCell
         cell?.setup()
-        if indexPath.row == 1 { // 마감된 사업이라면
+        cell?.businessNameLabel.text = matchNotis[indexPath.row].notificationName
+        cell?.nicknameLabel.text = matchNotis[indexPath.row].writer
+        cell?.participantsCountLabel.text = String(matchNotis[indexPath.row].applicantsNum)
+        if matchNotis[indexPath.row].isClose {
             cell?.shutterView.isHidden = false
             cell?.isUserInteractionEnabled = false
         }

@@ -20,7 +20,7 @@ enum MatchRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
         case .notification:
-            return .post
+            return .get
         }
     }
 
@@ -52,7 +52,7 @@ enum MatchRouter: URLRequestConvertible {
 
         switch self {
         case .notification:
-            request = try URLEncoding.httpBody.encode(request, with: parameters)
+            request = try URLEncoding().encode(request, with: parameters)
         default:
             break
         }

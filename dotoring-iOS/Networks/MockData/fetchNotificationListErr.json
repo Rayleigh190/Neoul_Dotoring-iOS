@@ -1,0 +1,9 @@
+{
+    "success": false,
+    "response": null,
+    "error": {
+        "code": "4009",
+        "message": "중복된 닉네임이 존재합니다.",
+        "status": "409 CONFLICT"
+    }
+}

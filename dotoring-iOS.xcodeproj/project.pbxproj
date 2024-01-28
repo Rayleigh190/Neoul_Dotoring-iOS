@@ -18,6 +18,7 @@
 		F106894A2B63D19400D652B5 /* fetchNotificationList.json in Resources */ = {isa = PBXBuildFile; fileRef = F10689492B63D19400D652B5 /* fetchNotificationList.json */; };
 		F106894C2B6497CA00D652B5 /* MockAPINetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */; };
 		F106894E2B6497EA00D652B5 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */; };
+		F10689522B65F93200D652B5 /* fetchNotificationListErr.json in Resources */ = {isa = PBXBuildFile; fileRef = F10689512B65F93200D652B5 /* fetchNotificationListErr.json */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -161,6 +162,7 @@
 		F10689492B63D19400D652B5 /* fetchNotificationList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchNotificationList.json; sourceTree = "<group>"; };
 		F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPINetworkManager.swift; sourceTree = "<group>"; };
 		F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		F10689512B65F93200D652B5 /* fetchNotificationListErr.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchNotificationListErr.json; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				F10689492B63D19400D652B5 /* fetchNotificationList.json */,
+				F10689512B65F93200D652B5 /* fetchNotificationListErr.json */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1DD2C9B2A95F82C00EE9711 /* NanumSquareOTF_acL.otf in Resources */,
+				F10689522B65F93200D652B5 /* fetchNotificationListErr.json in Resources */,
 				F1CA7E5F2AFD2620002D733E /* Secrets.plist in Resources */,
 				F1DD2C9F2A95F82C00EE9711 /* NanumSquareR.otf in Resources */,
 				F106894A2B63D19400D652B5 /* fetchNotificationList.json in Resources */,
