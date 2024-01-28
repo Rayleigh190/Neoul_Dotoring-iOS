@@ -16,7 +16,7 @@ struct UserDetailInfo: Codable {
     let mentoringSystem: String? // 멘토
     let fields: [String]
     let majors: [String]
-    let introduction: String
+    let tags: [String]
     let grade: Int
 }
 

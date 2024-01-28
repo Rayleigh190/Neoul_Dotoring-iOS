@@ -139,13 +139,12 @@ private extension UserDetailViewController {
             userDetailView.fieldStackView.addArrangedSubview(fieldRectView)
         }
         
-        let userTagCount = 3
+        let userTagCount = userInfo.tags.count
         for i in 0..<userTagCount {
             let tagView = TagTextField(isEnabled: false)
-            tagView.textField.text = "#태그\(i+1)"
+            tagView.textField.text = userInfo.tags[i]
             tagView.backgroundColor = .BaseGray100
             userDetailView.tagSubStackView.addArrangedSubview(tagView)
-            print("#태그\(i+1)")
         }
     }
     

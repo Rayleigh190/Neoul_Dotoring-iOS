@@ -15,7 +15,7 @@ struct HomeUser: Codable {
     let mentoringSystem: String?
     let fields: [String]
     let majors: [String]
-    let introduction: String
+    let tags: [String]
 }
 
 struct HomePageable: Codable {
