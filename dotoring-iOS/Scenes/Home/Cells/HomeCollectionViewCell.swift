@@ -153,7 +153,7 @@ private extension HomeCollectionViewCell {
         profileImageBackgroundView.addSubview(profileImageView)
 
         profileImageBackgroundView.snp.makeConstraints {
-            $0.height.equalTo(self.frame.height - 11)
+            $0.height.equalTo(self.frame.height - 20)
             $0.width.equalTo(profileImageView.snp.height).multipliedBy(0.9)
             $0.leading.equalToSuperview().inset(18)
             $0.centerY.equalToSuperview()

@@ -90,6 +90,7 @@ class MatchViewController: UIViewController {
         setupNavigationController()
         setupAddTarget()
         setupLayout()
+        fetchNotificationList()
     }
 
 }
@@ -188,4 +189,28 @@ extension MatchViewController: SelectViewControllerDelegate {
         
     }
     
+}
+
+// Network
+extension MatchViewController {
+    func fetchNotificationList() {
+        MatchNetworkService.fetchNotificationList() { response, error in
+            if error != nil {
+                print("매칭 공고 요청 오류 발생: \(error?.asAFError?.responseCode ?? 0)")
+                if let statusCode = error?.asAFError?.responseCode {
+                    Alert.showAlert(title: "매칭 공고 요청 오류 발생", message: "\(statusCode)")
+                } else {
+                    Alert.showAlert(title: "매칭 공고 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+                }
+            } else {
+                if response?.success == true {
+                    guard let notificationDTOS = response?.response?.notificationDTOS else {return}
+                    self.searchSectionView.matchNotis = notificationDTOS
+                    self.searchSectionView.collectionView.reloadData()
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                }
+            }
+        }
+    }
 }

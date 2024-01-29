@@ -18,7 +18,7 @@ final class SearchSectionCollectionViewCell: UICollectionViewCell {
         }
     }()
 
-    private lazy var businessNameLabel: NanumLabel = {
+    lazy var businessNameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 20)
         label.textColor = .label
         label.numberOfLines = 1
@@ -27,7 +27,7 @@ final class SearchSectionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var nicknameLabel: NanumLabel = {
+    lazy var nicknameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 15)
         label.text = "닉네임"
         if uiStyle == .mento {
@@ -39,7 +39,7 @@ final class SearchSectionCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    private lazy var dateLabel: NanumLabel = {
+    lazy var dateLabel: NanumLabel = {
         let label = NanumLabel(weightType: .L, size: 13)
         label.textColor = .BaseGray600
         label.text = "00월 00일"
@@ -55,9 +55,9 @@ final class SearchSectionCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var participantsCountLabel: NanumLabel = {
+    lazy var participantsCountLabel: NanumLabel = {
         let label = NanumLabel(weightType: .B, size: 13)
-        label.text = "10"
+        label.text = "0"
         label.textColor = .BaseGray600
         
         return label

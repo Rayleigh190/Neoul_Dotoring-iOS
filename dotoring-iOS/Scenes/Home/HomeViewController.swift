@@ -108,10 +108,10 @@ extension HomeViewController: UICollectionViewDataSource {
             cell?.departmentLabel.text = users[indexPath.row].majors.joined(separator: ", ")
             cell?.jobFieldLabel.text = users[indexPath.row].fields.joined(separator: ", ")
             if uiStyle == .mento {
-                cell?.introductionLabel.text = users[indexPath.row].preferredMentoringSystem
+                cell?.introductionLabel.text = users[indexPath.row].tags.joined(separator: ", ")
                 profilePlaceholdImage = UIImage(named: "MenteeProfileBaseImg")!
             } else {
-                cell?.introductionLabel.text = users[indexPath.row].mentoringSystem
+                cell?.introductionLabel.text = users[indexPath.row].tags.joined(separator: ", ")
                 profilePlaceholdImage = UIImage(named: "MentoProfileBaseImg")!
             }
             cell?.profileImageView.kf.setImage(with: profileImageURL, placeholder: profilePlaceholdImage)

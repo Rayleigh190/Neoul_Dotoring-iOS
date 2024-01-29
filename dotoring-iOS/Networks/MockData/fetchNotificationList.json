@@ -1,0 +1,32 @@
+{
+  "success": true,
+  "response": {
+      "notificationDTOS": [
+          {
+              "id": 0,
+              "notificationName": "지원사업명1",
+              "writer": "닉네임1",
+              "createAt": "2012-01-26T13:51:50.417-07:00",
+              "applicantsNum": 3,
+              "isClose": false
+          },
+          {
+              "id": 1,
+              "notificationName": "지원사업명2",
+              "writer": "닉네임2",
+              "createAt": "2012-01-26T13:51:50.417-07:00",
+              "applicantsNum": 4,
+              "isClose": true
+          },
+          {
+              "id": 2,
+              "notificationName": "지원사업명3",
+              "writer": "닉네임3",
+              "createAt": "2012-01-26T13:51:50.417-07:00",
+              "applicantsNum": 5,
+              "isClose": false
+          }
+      ]
+  },
+  "error": null
+}
