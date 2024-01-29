@@ -10,6 +10,7 @@ import UIKit
 class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
+    var myInfo: MyPage?
     
     private let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -106,6 +107,10 @@ extension MyPageViewController {
     
     func methodEditButtonTapped(sender: UIAction!) {
         let vc = MentoringMethodSetViewController()
+        guard let mentoringSystem = myInfo?.mentoringSystem else {return}
+        if mentoringSystem.count > 0 {
+            vc.previousMentoringMethod = mentoringSystem
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -188,6 +193,7 @@ extension MyPageViewController {
             } else{
                 if response?.success == true {
                     guard let resData = response?.response else {return}
+                    self.myInfo = resData
                     let profileImageURL = URL(string: resData.profileImage)
                     
                     self.myPageView.profileCardView.nickNameLabel.text = resData.nickname

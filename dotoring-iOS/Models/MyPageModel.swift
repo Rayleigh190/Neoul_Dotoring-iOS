@@ -17,7 +17,7 @@ struct MyPage: Codable {
     let tags: [String]
     let grade: Int
     let mentoringSystem: String
-    let school: String
+    let school: String?
 }
 
 struct MyPageResponse: Codable {

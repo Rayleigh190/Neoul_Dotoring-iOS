@@ -37,4 +37,33 @@ class MyPageNetworkService {
                 }
             }
     }
+    
+    
+    class func patchMentoringMethod(uiStyle: UIStyle, text: String, _ completion: @escaping (MyPageResponse?, Error?) -> Void) {
+               
+        var urlToCall: MyPageRouter {
+            switch uiStyle {
+            case .mento:
+                return MyPageRouter.editMentoMentoringSys(text: text)
+            case .mentee:
+                return MyPageRouter.editMentiMentoringSys(text: text)
+            }
+        }
+        
+        APINetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: MyPageResponse.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    print("MyPageNetworkService - patchMentoringMethod() called()")
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("MyPageNetworkService - patchMentoringMethod() failed()")
+                    return completion(nil, error)
+                }
+            }
+    }
 }
