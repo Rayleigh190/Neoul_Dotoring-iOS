@@ -66,4 +66,33 @@ class MyPageNetworkService {
                 }
             }
     }
+    
+    
+    class func patchTags(uiStyle: UIStyle, tags: [String], _ completion: @escaping (MyPageResponse?, Error?) -> Void) {
+               
+        var urlToCall: MyPageRouter {
+            switch uiStyle {
+            case .mento:
+                return MyPageRouter.editMentoTags(tags: tags)
+            case .mentee:
+                return MyPageRouter.editMentiTags(tags: tags)
+            }
+        }
+        
+        APINetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: MyPageResponse.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    print("MyPageNetworkService - patchTags() called()")
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("MyPageNetworkService - patchTags() failed()")
+                    return completion(nil, error)
+                }
+            }
+    }
 }

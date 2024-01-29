@@ -214,7 +214,7 @@ final class MyPageView: UIView {
     
     lazy var tagTextField1: TagTextField = {
         let textField = TagTextField(isEnabled: false)
-        textField.textField.text = "#태그1"
+        textField.textField.text = "#"
         textField.button.tag = 1
         textField.isHidden = true
         return textField
@@ -222,7 +222,7 @@ final class MyPageView: UIView {
     
     lazy var tagTextField2: TagTextField = {
         let textField = TagTextField(isEnabled: false)
-        textField.textField.text = "#태그2"
+        textField.textField.text = "#"
         textField.button.tag = 2
         textField.isHidden = true
         return textField
@@ -230,7 +230,7 @@ final class MyPageView: UIView {
     
     lazy var tagTextField3: TagTextField = {
         let textField = TagTextField(isEnabled: false)
-        textField.textField.text = "#태그3"
+        textField.textField.text = "#"
         textField.button.tag = 3
         textField.isHidden = true
         return textField

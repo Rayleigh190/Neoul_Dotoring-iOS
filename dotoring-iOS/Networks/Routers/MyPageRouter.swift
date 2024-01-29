@@ -15,6 +15,8 @@ enum MyPageRouter: URLRequestConvertible {
     case mentiMyPage
     case editMentoMentoringSys(text: String)
     case editMentiMentoringSys(text: String)
+    case editMentoTags(tags: [String])
+    case editMentiTags(tags: [String])
     
     var baseURL: URL {
         return URL(string: API.BASE_URL + "api")!
@@ -24,7 +26,7 @@ enum MyPageRouter: URLRequestConvertible {
         switch self {
         case .mentoMyPage, .mentiMyPage:
             return .get
-        case .editMentoMentoringSys, .editMentiMentoringSys:
+        case .editMentoMentoringSys, .editMentiMentoringSys, .editMentoTags, .editMentiTags:
             return .patch
         }
     }
@@ -39,15 +41,23 @@ enum MyPageRouter: URLRequestConvertible {
             return "mento/mentoring-system"
         case .editMentiMentoringSys:
             return "menti/preferred-mentoring"
+        case .editMentoTags:
+            return "mento/tags"
+        case .editMentiTags:
+            return "menti/tags"
         }
     }
     
-    var parameters : [String: String] {
+    var parameters: [String: AnyEncodable] {
         switch self {
         case let .editMentoMentoringSys(text):
-            return ["mentoringSystem": text]
+            return ["mentoringSystem": AnyEncodable(text)]
         case let .editMentiMentoringSys(text):
-            return ["preferredMentoringSystem": text]
+            return ["preferredMentoringSystem": AnyEncodable(text)]
+        case let .editMentoTags(tags):
+            return ["tags": AnyEncodable(tags)]
+        case let .editMentiTags(tags):
+            return ["tags": AnyEncodable(tags)]
         default:
             return [:]
         }
@@ -64,11 +74,23 @@ enum MyPageRouter: URLRequestConvertible {
         request.method = method
 
         switch self {
-        case .editMentoMentoringSys, .editMentiMentoringSys:
+        case .editMentoMentoringSys, .editMentiMentoringSys, .editMentoTags, .editMentiTags:
             request.httpBody = try JSONEncoder().encode(parameters)
         default:
             break
         }
         return request
+    }
+}
+
+struct AnyEncodable: Encodable {
+    private let value: Encodable
+
+    init(_ value: Encodable) {
+        self.value = value
+    }
+
+    func encode(to encoder: Encoder) throws {
+        try value.encode(to: encoder)
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 class MyInfoEditViewController: UIViewController {
     var myPageView: MyPageView!
+    var myInfo: MyPage?
     
     // Data
     var fieldList = Fields(fields: [])
@@ -32,6 +33,7 @@ class MyInfoEditViewController: UIViewController {
         setupNavigationController()
         setAddTarget()
         setDelegate()
+        updateUI()
     }
     
     override func loadView() {
@@ -44,6 +46,22 @@ class MyInfoEditViewController: UIViewController {
         navigationItem.title = "내 정보 수정"
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = .BaseGray900
+    }
+    
+    func updateUI() {
+        for tagTextField in myPageView.tagTextFields {
+            tagTextField.isHidden = false
+        }
+        guard let myInfo = myInfo else {return}
+        myPageView.schoolTextField.text = myInfo.school
+        myPageView.fieldTextField.text = myInfo.fields.joined(separator: ", ")
+        myPageView.gradeTextField.text = String(myInfo.grade)
+        myPageView.departmentTextField.text = myInfo.majors.joined(separator: ", ")
+        for (i, tag) in myInfo.tags.enumerated() {
+            let tagTextField = myPageView.tagTextFields[i]
+            tagTextField.textField.text = tag
+        }
+        
     }
     
     func setAddTarget() {
@@ -96,7 +114,31 @@ extension MyInfoEditViewController {
             )
         } else {
             // 태그만 수정 했을때
-            navigationController?.popViewController(animated: true)
+            var tags: [String] = []
+            for tagTextField in myPageView.tagTextFields {
+                guard let text = tagTextField.textField.text else {return}
+                if text.first == "#" && text.count > 1 {
+                    tags.append(text)
+                }
+            }
+            print("입력 태그 : \(tags)")
+            MyPageNetworkService.patchTags(uiStyle: uiStyle, tags: tags) { response, error in
+                if error != nil {
+                    print("태그 수정 요청 오류 발생: \(error?.asAFError?.responseCode ?? 0)")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "태그 수정 요청 오류 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "태그 수정 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+                    }
+                } else{
+                    if response?.success == true {
+                        print(response!)
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                    }
+                }
+            }
         }
         
     }

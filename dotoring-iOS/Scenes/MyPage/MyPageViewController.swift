@@ -101,6 +101,7 @@ extension MyPageViewController {
     
     func myInfoEditdButtonTapped(sender: UIAction!) {
         let vc = MyInfoEditViewController()
+        vc.myInfo = myInfo
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
