@@ -30,7 +30,7 @@ class ProfileCardView: UIView {
         return view
     }()
     
-    private lazy var profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -56,7 +56,7 @@ class ProfileCardView: UIView {
         return label
     }()
     
-    private lazy var nickNameLabel: NanumLabel = {
+    lazy var nickNameLabel: NanumLabel = {
         let label = NanumLabel(weightType: .EB, size: 26)
         label.textColor = .white
         label.text = "닉네임"

@@ -77,6 +77,7 @@ class UploadDocumentsView: UIView {
     lazy var saveButton: BaseButton = {
         let button = BaseButton(style: .gray)
         button.setTitle("완료", for: .normal)
+        button.isEnabled = false
         return button
     }()
     

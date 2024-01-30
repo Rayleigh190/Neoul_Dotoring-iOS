@@ -19,6 +19,9 @@
 		F106894C2B6497CA00D652B5 /* MockAPINetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */; };
 		F106894E2B6497EA00D652B5 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */; };
 		F10689522B65F93200D652B5 /* fetchNotificationListErr.json in Resources */ = {isa = PBXBuildFile; fileRef = F10689512B65F93200D652B5 /* fetchNotificationListErr.json */; };
+		F10689542B674B9700D652B5 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689532B674B9700D652B5 /* MyPageModel.swift */; };
+		F10689572B674EE400D652B5 /* MyPageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689562B674EE400D652B5 /* MyPageNetworkService.swift */; };
+		F10689592B674F2000D652B5 /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689582B674F2000D652B5 /* MyPageRouter.swift */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -163,6 +166,9 @@
 		F106894B2B6497CA00D652B5 /* MockAPINetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPINetworkManager.swift; sourceTree = "<group>"; };
 		F106894D2B6497EA00D652B5 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		F10689512B65F93200D652B5 /* fetchNotificationListErr.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fetchNotificationListErr.json; sourceTree = "<group>"; };
+		F10689532B674B9700D652B5 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
+		F10689562B674EE400D652B5 /* MyPageNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetworkService.swift; sourceTree = "<group>"; };
+		F10689582B674F2000D652B5 /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -366,6 +372,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		F10689552B674EC300D652B5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F10689562B674EE400D652B5 /* MyPageNetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		F11FCBA82B3452C400CED2A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +524,7 @@
 				F1CA7E772B024B0D002D733E /* HomeModel.swift */,
 				F1CA7E792B04F163002D733E /* UserDetailModel.swift */,
 				F10689452B63CA2B00D652B5 /* MatchModel.swift */,
+				F10689532B674B9700D652B5 /* MyPageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -521,6 +536,7 @@
 				F1CA7E6C2AFFD17E002D733E /* HomeRouter.swift */,
 				F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */,
 				F10689472B63CC2700D652B5 /* MatchRouter.swift */,
+				F10689582B674F2000D652B5 /* MyPageRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -702,6 +718,7 @@
 		F1FCE78A2AC7D4AD0024AE60 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				F10689552B674EC300D652B5 /* Services */,
 				F10689392B56679A00D652B5 /* tempVC */,
 				F1FCE78D2AC7D5E30024AE60 /* Views */,
 				F1FCE78B2AC7D5610024AE60 /* MyPageViewController.swift */,
@@ -845,6 +862,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1CA7E542AFCE056002D733E /* BaseNetworkManager.swift in Sources */,
+				F10689592B674F2000D652B5 /* MyPageRouter.swift in Sources */,
 				F10689462B63CA2B00D652B5 /* MatchModel.swift in Sources */,
 				F126B1CE2AA41D7A0035E499 /* SignupStepBar.swift in Sources */,
 				F126B1C52AA0AFB60035E499 /* IntroViewController.swift in Sources */,
@@ -937,6 +955,7 @@
 				F1DD2CBC2A9A53AC00EE9711 /* UIFont.swift in Sources */,
 				F1DD2CB22A99EE9C00EE9711 /* BaseButton.swift in Sources */,
 				F1CA7E6D2AFFD17E002D733E /* HomeRouter.swift in Sources */,
+				F10689572B674EE400D652B5 /* MyPageNetworkService.swift in Sources */,
 				F1CA7E752B00E83E002D733E /* OAuthCredential.swift in Sources */,
 				F1CA7E7D2B0854B3002D733E /* CommonNetworkService.swift in Sources */,
 				F18E50DD2B2C0B3300D427A0 /* TagTextField.swift in Sources */,
@@ -954,6 +973,7 @@
 				F14D0DC82B439B1D00B2B62D /* BannerSectionView.swift in Sources */,
 				F1DD2CC02A9AEDDC00EE9711 /* UIViewController.swift in Sources */,
 				F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */,
+				F10689542B674B9700D652B5 /* MyPageModel.swift in Sources */,
 				F1CA7E872B0F4033002D733E /* HomeNetworkService.swift in Sources */,
 				F14D0DD42B4BBFE900B2B62D /* BusinessDetailViewController.swift in Sources */,
 				F1FCE7B52AD3C73F0024AE60 /* FieldRectView.swift in Sources */,

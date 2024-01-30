@@ -10,6 +10,7 @@ import UIKit
 class MyPageViewController: UIViewController {
     
     var myPageView: MyPageView!
+    var myInfo: MyPage?
     
     private let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -53,6 +54,11 @@ class MyPageViewController: UIViewController {
         )
         return button
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchMyInfo()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,12 +101,17 @@ extension MyPageViewController {
     
     func myInfoEditdButtonTapped(sender: UIAction!) {
         let vc = MyInfoEditViewController()
+        vc.myInfo = myInfo
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func methodEditButtonTapped(sender: UIAction!) {
         let vc = MentoringMethodSetViewController()
+        guard let mentoringSystem = myInfo?.mentoringSystem else {return}
+        if mentoringSystem.count > 0 {
+            vc.previousMentoringMethod = mentoringSystem
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -165,4 +176,43 @@ extension MyPageViewController: CustomAlertDelegate {
     }
     
     
+}
+
+// Network
+extension MyPageViewController {
+    
+    func fetchMyInfo() {
+        MyPageNetworkService.fetchMyInfo(uiStyle: uiStyle) { response, error in
+            
+            if error != nil {
+                print("마이페이지 요청 오류 발생: \(error?.asAFError?.responseCode ?? 0)")
+                if let statusCode = error?.asAFError?.responseCode {
+                    Alert.showAlert(title: "마이페이지 요청 오류 발생", message: "\(statusCode)")
+                } else {
+                    Alert.showAlert(title: "마이페이지 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+                }
+            } else{
+                if response?.success == true {
+                    guard let resData = response?.response else {return}
+                    self.myInfo = resData
+                    let profileImageURL = URL(string: resData.profileImage)
+                    
+                    self.myPageView.profileCardView.nickNameLabel.text = resData.nickname
+                    self.myPageView.profileCardView.profileImageView.kf.setImage(with: profileImageURL)
+                    self.myPageView.schoolTextField.text = resData.school
+                    self.myPageView.fieldTextField.text = resData.fields.joined(separator: ", ")
+                    self.myPageView.gradeTextField.text = String(resData.grade)
+                    self.myPageView.departmentTextField.text = resData.majors.joined(separator: ", ")
+                    for (i, tag) in resData.tags.enumerated() {
+                        let tagTextField = self.myPageView.tagTextFields[i]
+                        tagTextField.isHidden = false
+                        tagTextField.textField.text = tag
+                    }
+                    self.myPageView.methodTextView.text = resData.mentoringSystem
+                } else {
+                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                }
+            }
+        }
+    }
 }

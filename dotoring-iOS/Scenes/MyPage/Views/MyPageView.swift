@@ -26,7 +26,7 @@ final class MyPageView: UIView {
    }()
     
     // 마이페이지 상단에 사용자 닉네임과 프로필 이미지를 보여주는 View입니다.
-    private lazy var profileCardView: ProfileCardView = {
+    lazy var profileCardView: ProfileCardView = {
         let view = ProfileCardView(frame: frame)
         view.layer.cornerRadius = 20
         
@@ -214,24 +214,29 @@ final class MyPageView: UIView {
     
     lazy var tagTextField1: TagTextField = {
         let textField = TagTextField(isEnabled: false)
-        textField.textField.text = "#태그1"
+        textField.textField.text = "#"
         textField.button.tag = 1
+        textField.isHidden = true
         return textField
     }()
     
     lazy var tagTextField2: TagTextField = {
         let textField = TagTextField(isEnabled: false)
-        textField.textField.text = "#태그2"
+        textField.textField.text = "#"
         textField.button.tag = 2
+        textField.isHidden = true
         return textField
     }()
     
     lazy var tagTextField3: TagTextField = {
         let textField = TagTextField(isEnabled: false)
-        textField.textField.text = "#태그3"
+        textField.textField.text = "#"
         textField.button.tag = 3
+        textField.isHidden = true
         return textField
     }()
+    
+    lazy var tagTextFields = [tagTextField1, tagTextField2, tagTextField3]
     
     private lazy var tagLabelStackView: UIStackView = {
         let stackView = UIStackView()
@@ -281,7 +286,7 @@ final class MyPageView: UIView {
         return label
     }()
     
-    private lazy var methodTextView: UITextView = {
+    lazy var methodTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .systemBackground
         textView.textColor = .BaseGray900

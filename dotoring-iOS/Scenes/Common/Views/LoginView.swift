@@ -353,7 +353,7 @@ private extension LoginView {
         }
         
         launchScreenCoverLogoImage.snp.makeConstraints {
-            $0.centerY.equalTo(safeAreaInsets)
+            $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(168)
         }
         
