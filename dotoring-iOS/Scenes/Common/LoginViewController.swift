@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     
     var loginView: LoginView!
     var isAutoLogin = false
+    var isFromMyPage = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,9 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIView.setAnimationsEnabled(true)
+        if isFromMyPage {
+            Alert.showAlert(title: "알림", message: "로그아웃 되었습니다. 서류 승인 후 로그인 가능합니다.")
+        }
     }
     
     override func loadView() {

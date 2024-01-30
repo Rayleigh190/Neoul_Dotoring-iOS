@@ -7,6 +7,17 @@
 
 import Foundation
 
+struct SignupData {
+    var school: String?
+    var grade: Int?
+    var fields: [String]?
+    var majors: [String]?
+    var certificationsFileURL: URL?
+    var nickname: String?
+    var tags: [String]?
+    var isDoc = false
+}
+
 struct Fields: Codable {
     let fields: [String]
 }

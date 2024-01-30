@@ -95,4 +95,32 @@ class MyPageNetworkService {
                 }
             }
     }
+    
+    
+    class func putMyInfo(uiStyle: UIStyle, myData: SignupData, _ completion: @escaping (MyPageResponse?, Error?) -> Void) {
+        var urlToCall: MyPageRouter {
+            switch uiStyle {
+            case .mento:
+                return MyPageRouter.editMentoInfo(data: myData)
+            case .mentee:
+                return MyPageRouter.editMentiInfo(data: myData)
+            }
+        }
+        
+        APINetworkManager
+            .shared
+            .session
+            .request(urlToCall)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: MyPageResponse.self) { response in
+                switch response.result {
+                case .success(let successData):
+                    print("MyPageNetworkService - putMyInfo() called()")
+                    return completion(successData, nil)
+                case .failure(let error):
+                    print("MyPageNetworkService - putMyInfo() failed()")
+                    return completion(nil, error)
+                }
+            }
+    }
 }

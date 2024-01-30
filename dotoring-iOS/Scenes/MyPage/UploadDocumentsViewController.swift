@@ -10,9 +10,8 @@ import MobileCoreServices
 import UniformTypeIdentifiers
 
 class UploadDocumentsViewController: UIViewController {
-    
+    var myData: SignupData = SignupData()
     var uploadDocumentsView: UploadDocumentsView!
-    var selectedFileURL: URL?
 
     let uiStyle: UIStyle = {
         if UserDefaults.standard.string(forKey: "UIStyle") == "mento" {
@@ -61,13 +60,65 @@ extension UploadDocumentsViewController {
         openPdfOrImgFile(sender: 0)
     }
     
+    func deleteUserAccountInfo() {
+        // 자동 로그인 id, pw 삭제
+        if let _ = KeyChain.read(key: KeyChainKey.userID) {
+            KeyChain.delete(key: KeyChainKey.userID)
+            KeyChain.delete(key: KeyChainKey.userPW)
+            print("UploadDocumentsViewController - deleteUserAccountInfo() : ID, PW 삭제 완료")
+        }
+        // 인증, 재인증 토큰 삭제
+        if let _ = KeyChain.read(key: KeyChainKey.accessToken) {
+            KeyChain.delete(key: KeyChainKey.accessToken)
+            print("UploadDocumentsViewController - deleteUserAccountInfo() : accessToken 삭제 완료")
+        }
+    }
+    
     @objc func cancelButtonTapped(sender: UIButton) {
         let vc = self.navigationController!.viewControllers
         self.navigationController?.popToViewController(vc[vc.count - 3 ], animated: true)
     }
     
     @objc func saveButtonTapped(sender: UIButton) {
+        print("UploadDocumentsViewController - saveButtonTapped() called")
+        self.deleteUserAccountInfo()
         
+        let loginVC = LoginViewController()
+        loginVC.isFromMyPage = true
+
+        let vc = UINavigationController(rootViewController: loginVC)
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+        
+        // 내 정보 수정 요청
+//        self.navigationController?.popToRootViewController(animated: true)
+//        MyPageNetworkService.putMyInfo(uiStyle: uiStyle, myData: myData) { response, error in
+//            if error != nil {
+//                print("내 정보 수정 요청 오류 발생: \(error?.asAFError?.responseCode ?? 0)")
+//                if let statusCode = error?.asAFError?.responseCode {
+//                    Alert.showAlert(title: "내 정보 수정 요청 오류 발생", message: "\(statusCode)")
+//                } else {
+//                    Alert.showAlert(title: "내 정보 수정 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+//                }
+//            } else{
+//                if response?.success == true {
+//                    print(response!)
+//                    // 로그아웃 및 로그인 화면으로 이동, 승인 대기
+//                    self.deleteUserAccountInfo()
+//                    
+//                    let loginVC = LoginViewController()
+//                    loginVC.isFromMyPage = true
+//
+//                    let vc = UINavigationController(rootViewController: loginVC)
+//                    vc.modalTransitionStyle = .crossDissolve
+//                    vc.modalPresentationStyle = .fullScreen
+//                    self.present(vc, animated: true)
+//                } else {
+//                    Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+//                }
+//            }
+//        }
     }
     
     func activeNextButton() {
@@ -124,8 +175,9 @@ extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationC
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if let selectedPDFURL = urls.first {
-            selectedFileURL = selectedPDFURL
+            myData.certificationsFileURL = selectedPDFURL
             uploadDocumentsView.certificateUploadButton.setTitle(selectedPDFURL.lastPathComponent, for: .normal)
+            myData.isDoc = true
             // 다음버튼 활성화
             activeNextButton()
         }
@@ -134,8 +186,9 @@ extension UploadDocumentsViewController: UIDocumentPickerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-                selectedFileURL = imageURL
+                myData.certificationsFileURL = imageURL
                 uploadDocumentsView.certificateUploadButton.setTitle(imageURL.lastPathComponent, for: .normal)
+                myData.isDoc = false
                 // 다음버튼 활성화
                 activeNextButton()
             }

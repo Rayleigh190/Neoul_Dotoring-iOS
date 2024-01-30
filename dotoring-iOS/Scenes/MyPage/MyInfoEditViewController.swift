@@ -33,6 +33,7 @@ class MyInfoEditViewController: UIViewController {
         setupNavigationController()
         setAddTarget()
         setDelegate()
+        setData()
         updateUI()
     }
     
@@ -46,6 +47,23 @@ class MyInfoEditViewController: UIViewController {
         navigationItem.title = "내 정보 수정"
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.tintColor = .BaseGray900
+    }
+    
+    func setData() {
+        guard let myInfo = myInfo else {return}
+        
+        fetchFieldList() {
+            for field in myInfo.fields {
+                guard let seletedIdx = self.fieldList.fields.firstIndex(of: field) else {return}
+                self.selectedFieldElements.append(seletedIdx)
+            }
+        }
+        fetchMajorList() {
+            for major in myInfo.majors {
+                guard let seledIdx = self.majorList.majors.firstIndex(of: major) else {return}
+                self.selectedMajorElements.append(seledIdx)
+            }
+        }
     }
     
     func updateUI() {
@@ -203,10 +221,10 @@ extension MyInfoEditViewController: SelectViewControllerDelegate {
     
     @objc func selectTextFieldTapped(sender: UIButton) {
         if sender == myPageView.fieldButton {
-            let vc = SelectViewController(titleText: "멘토링 분야 선택", style: uiStyle, sender: sender, elements: ["1", "2"], previousSelectedElements: [], delegate: self)
+            let vc = SelectViewController(titleText: "멘토링 분야 선택", style: uiStyle, sender: sender, elements: fieldList.fields, previousSelectedElements: selectedFieldElements, delegate: self)
             presentSheetPresentationController(vc: vc)
         } else if sender == myPageView.departmentButton {
-            let vc = SelectViewController(titleText: "학과 선택", style: uiStyle, sender: sender, elements: ["1", "2"], previousSelectedElements: [], delegate: self)
+            let vc = SelectViewController(titleText: "학과 선택", style: uiStyle, sender: sender, elements: majorList.majors, previousSelectedElements: selectedMajorElements, delegate: self)
             presentSheetPresentationController(vc: vc)
         }
     }
@@ -302,7 +320,23 @@ extension MyInfoEditViewController: UITextFieldDelegate {
 
 extension MyInfoEditViewController: CustomAlertDelegate {
     func action() {
+        var tags: [String] = []
+        for tagTextField in myPageView.tagTextFields {
+            guard let text = tagTextField.textField.text else {return}
+            if text.count > 2 {
+                tags.append(text)
+            }
+        }
+        let myData = SignupData(
+            school: myPageView.schoolTextField.text,
+            grade: Int(myPageView.gradeTextField.text!),
+            fields: myPageView.fieldTextField.text?.components(separatedBy: ", "),
+            majors: myPageView.departmentTextField.text?.components(separatedBy: ", "),
+            tags: tags
+        )
+        print("내 데이터 : \(myData)")
         let vc = UploadDocumentsViewController()
+        vc.myData = myData
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -311,4 +345,55 @@ extension MyInfoEditViewController: CustomAlertDelegate {
     }
     
     
+}
+
+// Network
+extension MyInfoEditViewController {
+    func fetchFieldList(completion: @escaping () -> ()) {
+        SignupNetworkService
+            .fetchFieldList() { response, error in
+                if error != nil {
+                    // 멘토링 분야 요청 에러 발생
+                    print("멘토링 분야 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "멘토링 분야 요청 에러 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "멘토링 분야 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                    }
+                } else {
+                    if response?.success == true {
+                        debugPrint(response!)
+                        guard let fields = response?.response else {return}
+                        self.fieldList = fields
+                        completion()
+                    } else {
+                        Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                    }
+                }
+            }
+    }
+    
+    func fetchMajorList(completion: @escaping () -> ()) {
+        SignupNetworkService
+            .fetchMajorList() { response, error in
+                if error != nil {
+                    // 학과 요청 에러 발생
+                    print("학과 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "학과 요청 에러 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "학과 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
+                    }
+                } else {
+                    if response?.success == true {
+                        debugPrint(response!)
+                        guard let majors = response?.response else {return}
+                        self.majorList = majors
+                        completion()
+                    } else {
+                        Alert.showAlert(title: "오류", message: "알 수 없는 오류입니다. 다시 시도해 주세요. code : \(response?.error?.code ?? "0")")
+                    }
+                }
+            }
+    }
 }

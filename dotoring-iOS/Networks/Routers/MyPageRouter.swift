@@ -17,6 +17,8 @@ enum MyPageRouter: URLRequestConvertible {
     case editMentiMentoringSys(text: String)
     case editMentoTags(tags: [String])
     case editMentiTags(tags: [String])
+    case editMentoInfo(data: SignupData)
+    case editMentiInfo(data: SignupData)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL + "api")!
@@ -28,14 +30,16 @@ enum MyPageRouter: URLRequestConvertible {
             return .get
         case .editMentoMentoringSys, .editMentiMentoringSys, .editMentoTags, .editMentiTags:
             return .patch
+        case .editMentoInfo, .editMentiInfo:
+            return .put
         }
     }
 
     var endPoint: String {
         switch self {
-        case .mentoMyPage:
+        case .mentoMyPage, .editMentoInfo:
             return "mento/my-page"
-        case .mentiMyPage:
+        case .mentiMyPage, .editMentiInfo:
             return "menti/my-page"
         case .editMentoMentoringSys:
             return "mento/mentoring-system"
@@ -61,6 +65,22 @@ enum MyPageRouter: URLRequestConvertible {
         default:
             return [:]
         }
+    }
+    
+    var multipartFormData: MultipartFormData {
+        let multipartFormData = MultipartFormData()
+        switch self {
+        case let .editMentoInfo(data), let .editMentiInfo(data):
+            multipartFormData.append(data.certificationsFileURL!, withName: "certifications")
+            multipartFormData.append(Data(data.school!.utf8), withName: "school")
+            multipartFormData.append(Data(String(data.grade!).utf8), withName: "grade")
+            multipartFormData.append(Data(data.majors!.joined(separator: ",").utf8), withName: "majors")
+            multipartFormData.append(Data(data.fields!.joined(separator: ",").utf8), withName: "fields")
+            multipartFormData.append(Data(data.tags!.joined(separator: ",").utf8), withName: "tags")
+        default: ()
+        }
+
+        return multipartFormData
     }
 
     func asURLRequest() throws -> URLRequest {
