@@ -1,0 +1,9 @@
+{
+    "success" : false,
+    "response" : null,
+    "error" : {
+            "message" : "심사중인 회원입니다. :WAIT",
+            "code" : null,
+            "status" : 403
+        }
+}

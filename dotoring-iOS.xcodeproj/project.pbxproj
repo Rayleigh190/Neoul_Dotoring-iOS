@@ -22,6 +22,10 @@
 		F10689542B674B9700D652B5 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689532B674B9700D652B5 /* MyPageModel.swift */; };
 		F10689572B674EE400D652B5 /* MyPageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689562B674EE400D652B5 /* MyPageNetworkService.swift */; };
 		F10689592B674F2000D652B5 /* MyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10689582B674F2000D652B5 /* MyPageRouter.swift */; };
+		F106895B2B69F41B00D652B5 /* StandbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F106895A2B69F41A00D652B5 /* StandbyViewController.swift */; };
+		F106895F2B69F5AC00D652B5 /* getLoginStandby.json in Resources */ = {isa = PBXBuildFile; fileRef = F106895E2B69F5AC00D652B5 /* getLoginStandby.json */; };
+		F10689622B69FDF000D652B5 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = F10689612B69FDF000D652B5 /* Lottie */; };
+		F10689652B69FEAD00D652B5 /* StandbyAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = F10689642B69FEAD00D652B5 /* StandbyAnimation.json */; };
 		F11FCBAA2B3452E500CED2A0 /* SignupNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */; };
 		F11FCBAC2B34544C00CED2A0 /* SignupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */; };
 		F11FCBAE2B3455F600CED2A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */; };
@@ -169,6 +173,9 @@
 		F10689532B674B9700D652B5 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
 		F10689562B674EE400D652B5 /* MyPageNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNetworkService.swift; sourceTree = "<group>"; };
 		F10689582B674F2000D652B5 /* MyPageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageRouter.swift; sourceTree = "<group>"; };
+		F106895A2B69F41A00D652B5 /* StandbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandbyViewController.swift; sourceTree = "<group>"; };
+		F106895E2B69F5AC00D652B5 /* getLoginStandby.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = getLoginStandby.json; sourceTree = "<group>"; };
+		F10689642B69FEAD00D652B5 /* StandbyAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StandbyAnimation.json; sourceTree = "<group>"; };
 		F11FCBA92B3452E500CED2A0 /* SignupNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkService.swift; sourceTree = "<group>"; };
 		F11FCBAB2B34544C00CED2A0 /* SignupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRouter.swift; sourceTree = "<group>"; };
 		F11FCBAD2B3455F600CED2A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
@@ -307,6 +314,7 @@
 				F1CA7E8F2B117D1D002D733E /* MessageKit in Frameworks */,
 				F1CA7E822B0CA51B002D733E /* Toast in Frameworks */,
 				F1DD2C902A95E26600EE9711 /* SnapKit in Frameworks */,
+				F10689622B69FDF000D652B5 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,6 +368,7 @@
 			children = (
 				F10689492B63D19400D652B5 /* fetchNotificationList.json */,
 				F10689512B65F93200D652B5 /* fetchNotificationListErr.json */,
+				F106895E2B69F5AC00D652B5 /* getLoginStandby.json */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -378,6 +387,25 @@
 				F10689562B674EE400D652B5 /* MyPageNetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F10689632B69FE6900D652B5 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F1A560672A949E6900FD2E91 /* Assets.xcassets */,
+				F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */,
+				F10689662B6A086C00D652B5 /* Animation */,
+				F10689412B63C76100D652B5 /* MockData */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		F10689662B6A086C00D652B5 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				F10689642B69FEAD00D652B5 /* StandbyAnimation.json */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		F11FCBA82B3452C400CED2A0 /* Services */ = {
@@ -459,10 +487,9 @@
 				F1FCE77D2AC316F40024AE60 /* Protocols */,
 				F1DD2C8A2A95DDD500EE9711 /* Scenes */,
 				F1CA7E4F2AFCC29B002D733E /* Utils */,
+				F10689632B69FE6900D652B5 /* Resource */,
 				F1A5605E2A949E6800FD2E91 /* AppDelegate.swift */,
 				F1A560602A949E6800FD2E91 /* SceneDelegate.swift */,
-				F1A560672A949E6900FD2E91 /* Assets.xcassets */,
-				F1A560692A949E6900FD2E91 /* LaunchScreen.storyboard */,
 				F1A5606C2A949E6900FD2E91 /* Info.plist */,
 				F1CA7E5E2AFD2620002D733E /* Secrets.plist */,
 			);
@@ -506,7 +533,6 @@
 		F1CA7E522AFCDE94002D733E /* Networks */ = {
 			isa = PBXGroup;
 			children = (
-				F10689412B63C76100D652B5 /* MockData */,
 				F1CA7E762B00FDFC002D733E /* OAuths */,
 				F1CA7E6E2AFFD46C002D733E /* NetworksManagers */,
 				F1CA7E6B2AFFD16B002D733E /* Routers */,
@@ -646,6 +672,7 @@
 				F1DD2CC52A9D7AE700EE9711 /* FindIdCheckViewController.swift */,
 				F1DD2CCF2A9F616D00EE9711 /* FindPwViewController.swift */,
 				F126B1C42AA0AFB60035E499 /* IntroViewController.swift */,
+				F106895A2B69F41A00D652B5 /* StandbyViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -786,6 +813,7 @@
 				F1CA7E812B0CA51B002D733E /* Toast */,
 				F1CA7E8E2B117D1D002D733E /* MessageKit */,
 				F17F0D712B4FB0800002323B /* IQKeyboardManagerSwift */,
+				F10689612B69FDF000D652B5 /* Lottie */,
 			);
 			productName = "dotoring-iOS";
 			productReference = F1A5605B2A949E6800FD2E91 /* dotoring-iOS.app */;
@@ -823,6 +851,7 @@
 				F1CA7E802B0CA51B002D733E /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				F1CA7E8D2B117D1D002D733E /* XCRemoteSwiftPackageReference "MessageKit" */,
 				F17F0D702B4FB0800002323B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				F10689602B69FDF000D652B5 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = F1A5605C2A949E6800FD2E91 /* Products */;
 			projectDirPath = "";
@@ -850,6 +879,8 @@
 				F1DD2C9D2A95F82C00EE9711 /* NanumSquareB.otf in Resources */,
 				F1DD2C9E2A95F82C00EE9711 /* NanumSquareOTF_acR.otf in Resources */,
 				F1A560682A949E6900FD2E91 /* Assets.xcassets in Resources */,
+				F106895F2B69F5AC00D652B5 /* getLoginStandby.json in Resources */,
+				F10689652B69FEAD00D652B5 /* StandbyAnimation.json in Resources */,
 				F1DD2C9C2A95F82C00EE9711 /* NanumSquareL.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -880,6 +911,7 @@
 				F126B1D72AA6FB780035E499 /* SelectedElementView.swift in Sources */,
 				F1FCE76D2ABE8E370024AE60 /* Signup4View.swift in Sources */,
 				F1FCE7B72ADA5A280024AE60 /* DashedLineView.swift in Sources */,
+				F106895B2B69F41B00D652B5 /* StandbyViewController.swift in Sources */,
 				F1FCE7892AC318B00024AE60 /* NanumFamily.swift in Sources */,
 				F106893C2B56AF5E00D652B5 /* MyInfoEditViewController.swift in Sources */,
 				F1DD2CB72A9A05D900EE9711 /* UIColor.swift in Sources */,
@@ -1196,6 +1228,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F10689602B69FDF000D652B5 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
 		F17F0D702B4FB0800002323B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
@@ -1255,6 +1295,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F10689612B69FDF000D652B5 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F10689602B69FDF000D652B5 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		F17F0D712B4FB0800002323B /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F17F0D702B4FB0800002323B /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;

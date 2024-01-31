@@ -18,9 +18,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkAutoLogin()
         view.backgroundColor = .systemBackground
-        
+        navigationController?.navigationBar.topItem?.title = "로그인"
 //        self.hideKeyboardWhenTappedAround()
 //        self.setKeyboardObserver()
         setDelegate()
@@ -28,10 +27,17 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkAutoLogin()
         UIView.setAnimationsEnabled(true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
         if isFromMyPage {
             Alert.showAlert(title: "알림", message: "로그아웃 되었습니다. 서류 승인 후 로그인 가능합니다.")
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func loadView() {
@@ -74,6 +80,7 @@ extension LoginViewController {
             print("LoginViewController - checkAutoLogin() : 자동 로그인 성공")
         } else {
             loginView.launchScreenCover.isHidden = true
+            isAutoLogin = false
         }
     }
     
@@ -98,39 +105,41 @@ extension LoginViewController {
     func getLogin(userID: String, userPW: String, setAutoLogin: Bool) {
         if !isAutoLogin {self.view.makeToastActivity(.center)}
         CommonNetworkService.getLogin(userID: userID, userPW: userPW, setAutoLogin: setAutoLogin) { response, error in
-            if error != nil {
-                if !self.isAutoLogin {self.view.hideToastActivity()}
-                // 로그인 요청 에러 발생
-                print("로그인 요청 에러 발생 : \(error?.asAFError?.responseCode ?? 0)")
-                if let statusCode = error?.asAFError?.responseCode {
-                    Alert.showAlert(title: "로그인 요청 에러 발생", message: "\(statusCode)")
-                } else {
-                    Alert.showAlert(title: "로그인 요청 에러 발생", message: "네트워크 연결을 확인하세요.")
-                }
+
+            if response?.success == true {
+                // 로그인 성공
+                // 홈 화면으로 이동
+                let vc = MainTapBarController()
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+                self.view.hideToastActivity()
             } else {
-                if response?.success == true {
-                    // 로그인 성공
-                    // 홈 화면으로 이동
-                    let vc = MainTapBarController()
-                    vc.modalTransitionStyle = .crossDissolve
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
-                    self.view.hideToastActivity()
+                // 로그인 실패
+                self.view.hideToastActivity()
+                if error != nil {
+                    if !self.isAutoLogin {self.view.hideToastActivity()}
+                    // 로그인 요청 에러 발생
+                    print("로그인 요청 오류 발생 : \(error?.asAFError?.responseCode ?? 0)")
+                    if let statusCode = error?.asAFError?.responseCode {
+                        Alert.showAlert(title: "로그인 요청 오류 발생", message: "\(statusCode)")
+                    } else {
+                        Alert.showAlert(title: "로그인 요청 오류 발생", message: "네트워크 연결을 확인하세요.")
+                    }
                 } else {
-                    // 로그인 실패
-                    self.view.hideToastActivity()
                     switch response?.error?.status {
                     case 400:
                         Alert.showAlert(title: "로그인 실패", message: "존재하지 않는 아이디입니다.")
                         self.loginView.warningLabel.isHidden = false
                     case 403:
-                        Alert.showAlert(title: "로그인 실패", message: "심사중인 회원입니다.")
+    //                        Alert.showAlert(title: "로그인 실패", message: "심사중인 회원입니다.")
+                        let vc = StandbyViewController()
+                        self.navigationController?.pushViewController(vc, animated: true)
                     default:
                         Alert.showAlert(title: "로그인 실패", message: "알 수 없는 오류입니다. code : \(response?.error?.status ?? 0)")
                     }
                 }
             }
-            
         }
     }
     
